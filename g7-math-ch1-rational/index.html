@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七年级上册 · 第一章 有理数 · 复习</title>
+<!--
+  直接内容模式：所有教学内容（定义/公式/例题/答案）由 GPT Image 2 生成的图片承载。
+  本 HTML 仅作为图片播放/导航容器，不含任何教育文字内容。
+  导航：← / → 或 空格翻页，F 全屏，Home/End 跳首尾，点缩略图跳转。
+-->
+<style>
+:root{
+  --bg:#0f1115;
+  --bg-soft:#171a21;
+  --ink:#e8e6e1;
+  --accent:#d4a24c;
+  --accent-soft:#6b8f7a;
+  --muted:#8a8f9a;
+  --radius:10px;
+  --thumb-h:clamp(34px,4.6vh,52px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);
+  font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;}
+
+/* === 舞台：单图全屏 === */
+#stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(120% 120% at 50% 0%,#1b1f27 0%,#0f1115 70%);}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .45s ease;pointer-events:none;}
+.slide.active{opacity:1;pointer-events:auto;}
+.slide img{max-width:100%;max-height:100%;width:auto;height:auto;
+  object-fit:contain;border-radius:6px;
+  box-shadow:0 18px 60px rgba(0,0,0,.55);}
+
+/* === 顶栏 === */
+#topbar{position:fixed;top:0;left:0;right:0;height:46px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 18px;z-index:20;
+  background:linear-gradient(180deg,rgba(15,17,21,.92),rgba(15,17,21,0));
+  pointer-events:none;opacity:.85;}
+.brand{font-size:13px;letter-spacing:.04em;color:var(--ink);}
+.brand b{color:var(--accent);font-weight:600;}
+.counter{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;}
+.counter b{color:var(--ink);}
+
+/* === 底部控制 === */
+#controls{position:fixed;bottom:0;left:0;right:0;z-index:20;
+  background:linear-gradient(0deg,rgba(15,17,21,.94),rgba(15,17,21,0));
+  padding:10px 16px calc(var(--thumb-h) + 26px);display:flex;align-items:center;
+  justify-content:center;gap:14px;transition:opacity .3s,transform .3s;}
+.nav-btn{width:40px;height:40px;border-radius:50%;border:1px solid #2a2f3a;
+  background:rgba(255,255,255,.04);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:.2s;}
+.nav-btn:hover{background:var(--accent);color:#15130c;border-color:var(--accent);}
+.nav-btn:disabled{opacity:.3;cursor:not-allowed;}
+.progress{flex:0 0 180px;height:3px;background:#262b35;border-radius:2px;overflow:hidden;}
+.progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .35s;}
+
+/* === 缩略图条 === */
+#thumbs{position:fixed;bottom:10px;left:0;right:0;z-index:21;display:flex;
+  justify-content:center;gap:6px;padding:0 12px;height:var(--thumb-h);
+  transition:opacity .3s;}
+.thumb{height:100%;aspect-ratio:16/9;border-radius:5px;overflow:hidden;cursor:pointer;
+  border:2px solid transparent;opacity:.5;transition:.2s;background:#222;}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.thumb:hover{opacity:.9;}
+.thumb.active{opacity:1;border-color:var(--accent);}
+
+/* === 帮助提示 === */
+#hint{position:fixed;left:18px;bottom:calc(var(--thumb-h) + 60px);z-index:19;
+  font-size:11px;color:var(--muted);line-height:1.7;background:rgba(20,23,30,.7);
+  padding:8px 12px;border-radius:8px;border:1px solid #232833;opacity:0;
+  transition:opacity .4s;pointer-events:none;}
+body:hover #hint{opacity:1;}
+kbd{background:#2a2f3a;border-radius:3px;padding:1px 5px;font-size:10px;
+  font-family:ui-monospace,monospace;color:var(--ink);}
+
+@media (max-height:560px){#topbar{height:34px}#hint{display:none}}
+</style>
+</head>
+<body>
+
+<div id="stage"></div>
+
+<div id="topbar">
+  <div class="brand">七上数学复习 · <b>第一章 有理数</b></div>
+  <div class="counter"><b id="cur">1</b> / <span id="total">12</span></div>
+</div>
+
+<div id="controls">
+  <button class="nav-btn" id="prev" title="上一页 ←">‹</button>
+  <div class="progress"><span id="bar"></span></div>
+  <button class="nav-btn" id="next" title="下一页 →">›</button>
+</div>
+
+<div id="thumbs"></div>
+
+<div id="hint">
+  <kbd>←</kbd><kbd>→</kbd> / <kbd>Space</kbd> 翻页 &nbsp; <kbd>F</kbd> 全屏 &nbsp; <kbd>Home</kbd><kbd>End</kbd> 首尾
+</div>
+
+<script>
+const SLIDES = [
+  {img:"assets/teaching-visuals/01-cover.png",                 title:"封面"},
+  {img:"assets/teaching-visuals/02-chapter-map.png",           title:"本章地图"},
+  {img:"assets/teaching-visuals/03-positive-negative-def.png", title:"正数和负数"},
+  {img:"assets/teaching-visuals/04-opposite-quantities-example.png", title:"相反意义的量·例题"},
+  {img:"assets/teaching-visuals/05-rational-classification.png", title:"有理数的分类"},
+  {img:"assets/teaching-visuals/06-number-line-elements.png",  title:"数轴三要素"},
+  {img:"assets/teaching-visuals/07-number-line-example.png",   title:"数轴表示数"},
+  {img:"assets/teaching-visuals/08-opposite-number.png",       title:"相反数"},
+  {img:"assets/teaching-visuals/09-absolute-value.png",        title:"绝对值"},
+  {img:"assets/teaching-visuals/10-compare-size.png",          title:"大小比较"},
+  {img:"assets/teaching-visuals/11-mistake-table.png",         title:"易错总表"},
+  {img:"assets/teaching-visuals/12-self-check.png",            title:"自检"},
+];
+let cur = 0;
+const stage = document.getElementById('stage');
+const thumbs = document.getElementById('thumbs');
+
+// 构建 slide 层 + 缩略图
+SLIDES.forEach((s,i)=>{
+  const div=document.createElement('div'); div.className='slide'; div.dataset.i=i;
+  const im=document.createElement('img'); im.src=s.img; im.alt=s.title; im.loading='lazy';
+  div.appendChild(im); stage.appendChild(div);
+
+  const t=document.createElement('div'); t.className='thumb'; t.dataset.i=i;
+  const ti=document.createElement('img'); ti.src=s.img; ti.alt=s.title;
+  t.appendChild(ti); t.onclick=()=>go(i); thumbs.appendChild(t);
+});
+document.getElementById('total').textContent=SLIDES.length;
+
+function go(i){
+  cur=Math.max(0,Math.min(SLIDES.length-1,i));
+  document.querySelectorAll('.slide').forEach((el,k)=>el.classList.toggle('active',k===cur));
+  document.querySelectorAll('.thumb').forEach((el,k)=>el.classList.toggle('active',k===cur));
+  document.getElementById('cur').textContent=cur+1;
+  document.getElementById('bar').style.width=((cur)/(SLIDES.length-1)*100)+'%';
+  document.getElementById('prev').disabled=cur===0;
+  document.getElementById('next').disabled=cur===SLIDES.length-1;
+  // 当前缩略图滚入视野
+  const at=document.querySelectorAll('.thumb')[cur];
+  if(at) at.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+}
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=()=>go(cur+1);
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(cur+1);}
+  else if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1);}
+  else if(e.key==='Home'){go(0);}
+  else if(e.key==='End'){go(SLIDES.length-1);}
+  else if(e.key==='f'||e.key==='F'){
+    if(!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+});
+
+// 触屏滑动
+let sx=0;
+stage.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+stage.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-sx;
+  if(Math.abs(dx)>50) go(cur+(dx<0?1:-1));
+},{passive:true});
+
+go(0);
+</script>
+</body>
+</html>
