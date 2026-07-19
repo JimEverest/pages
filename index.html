@@ -5,15 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JimEverest Pages</title>
 <style>
-  body{font-family:-apple-system,Segoe UI,sans-serif;max-width:680px;margin:60px auto;padding:0 20px;color:#222;line-height:1.6}
-  h1{font-size:1.6rem}
+  body{font-family:-apple-system,Segoe UI,sans-serif;max-width:760px;margin:50px auto;padding:0 20px;color:#222;line-height:1.6}
+  h1{font-size:1.6rem;margin-bottom:.2em}
   .muted{color:#888;font-size:.9rem}
+  ul#content-list{list-style:none;padding:0}
+  ul#content-list li.entry{padding:14px 0;border-bottom:1px solid #eee}
+  ul#content-list li.entry a{font-size:1.1rem;font-weight:600;text-decoration:none;color:#0969da}
+  ul#content-list li.entry a:hover{text-decoration:underline}
+  ul#content-list time{display:block;color:#888;font-size:.8rem;margin-top:2px}
+  ul#content-list .desc{display:block;margin-top:4px;color:#444}
 </style>
 </head>
 <body>
   <h1>JimEverest / pages</h1>
-  <p>GitHub Pages site. Sub-pages live under their own folders, e.g.
-  <code>/pages/&lt;folder&gt;/index.html</code>.</p>
-  <p class="muted">Migrated from Azure Static Web Apps (200 MB limit).</p>
+  <p class="muted">GitHub Pages site. Newest entries first.</p>
+  <ul id="content-list">
+  </ul>
 </body>
 </html>
