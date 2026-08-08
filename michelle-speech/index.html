@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michelle's Speech · 视觉记忆卡片</title>
+<style>
+  :root{
+    --bg:#0f1419; --card:#1a2028; --accent:#ffd166; --accent2:#06d6a0;
+    --text:#e8eef2; --muted:#9aa7b2; --line:#2a3540;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.6; padding:24px 16px 80px;
+  }
+  .wrap{max-width:1100px; margin:0 auto;}
+  header{text-align:center; margin-bottom:36px; padding-bottom:24px; border-bottom:1px solid var(--line);}
+  header h1{font-size:1.9rem; color:var(--accent); margin-bottom:8px;}
+  header p{color:var(--muted); font-size:0.95rem;}
+  .legend{
+    display:inline-flex; gap:10px; flex-wrap:wrap; justify-content:center;
+    margin-top:14px; font-size:0.82rem; color:var(--muted);
+  }
+  .legend span{background:var(--card); padding:5px 12px; border-radius:20px; border:1px solid var(--line);}
+  .legend b{color:var(--accent2);}
+
+  .card{
+    display:grid; grid-template-columns:1.15fr 1fr; gap:0;
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    overflow:hidden; margin-bottom:24px; transition:transform .2s, box-shadow .2s;
+  }
+  .card:hover{transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,.4);}
+  .card img{width:100%; height:100%; min-height:240px; object-fit:cover; display:block; background:#000;}
+  .info{padding:22px 24px; display:flex; flex-direction:column; gap:10px;}
+  .num{
+    display:inline-flex; align-items:center; gap:10px; font-size:0.8rem;
+    color:var(--accent); font-weight:700; letter-spacing:1px;
+  }
+  .num .dot{
+    width:30px; height:30px; border-radius:50%; background:var(--accent); color:#1a1208;
+    display:flex; align-items:center; justify-content:center; font-size:1rem;
+  }
+  .anchor{
+    font-size:1.15rem; font-weight:700; color:var(--text);
+    background:rgba(6,214,160,.1); border-left:3px solid var(--accent2);
+    padding:8px 12px; border-radius:4px;
+  }
+  .anchor small{display:block; font-size:0.78rem; color:var(--muted); font-weight:400; margin-top:2px;}
+  .en{
+    font-family:"Georgia","Times New Roman",serif; font-size:0.98rem;
+    color:#d7e3ea; border-top:1px dashed var(--line); padding-top:10px; margin-top:4px;
+  }
+  .en .key{color:var(--accent); font-weight:700; background:rgba(255,209,102,.12); padding:0 3px; border-radius:3px;}
+  .cn{font-size:0.85rem; color:var(--muted); font-style:italic;}
+
+  footer{text-align:center; color:var(--muted); font-size:0.85rem; margin-top:30px; padding-top:20px; border-top:1px solid var(--line);}
+  footer b{color:var(--accent2);}
+
+  @media(max-width:700px){
+    .card{grid-template-columns:1fr;}
+    .card img{min-height:200px;}
+    header h1{font-size:1.5rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>🌍 Michelle's Speech — 视觉记忆卡片</h1>
+    <p>看一张图 → 想一个锚点 → 顺出一段话 · 8 幅漫画串起整篇演讲</p>
+    <div class="legend">
+      <span><b>记忆线</b>：提问 → 答案(US) → 经历 → 细节 → 反差 → 升华 → 行动 → 点题</span>
+    </div>
+  </header>
+
+  <!-- 1 -->
+  <div class="card">
+    <img src="images/01-01-intro-question.png" alt="开场提问">
+    <div class="info">
+      <div class="num"><span class="dot">1</span> 开场 · 提问</div>
+      <div class="anchor">🙋‍♀️ 大问号
+        <small>Michelle 举起发光问号，背景科技齿轮/矿石淡出</small></div>
+      <div class="en">Hello everyone, my name is Michelle. I'd like to start with a single question: what is the <span class="key">most important factor</span> to our world's development? Is that technology? Abundant resources?</div>
+      <div class="cn">什么最重要？科技？资源？</div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <img src="images/02-02-answer-is-us.png" alt="答案 US">
+    <div class="info">
+      <div class="num"><span class="dot">2</span> 答案</div>
+      <div class="anchor">✨ 巨大的发光 "US"
+        <small>各色人种围成圈，US 在中心发光</small></div>
+      <div class="en">My answer is <span class="key">us — human beings ourselves.</span></div>
+      <div class="cn">答案是我们自己。</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <img src="images/03-03-tanzania-volunteer.png" alt="坦桑尼亚志愿">
+    <div class="info">
+      <div class="num"><span class="dot">3</span> 经历</div>
+      <div class="anchor">🌱 烈日下种树盖房
+        <small>汗水飞溅 + 充实微笑 + 发光的心</small></div>
+      <div class="en">During an exchange program in <span class="key">Tanzania</span>, we volunteered… grow plants, build farms, even construct houses. Every day was <span class="key">exhausting, yet deeply fulfilling.</span></div>
+      <div class="cn">在坦桑尼亚两周志愿劳动，累却充实。</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <img src="images/04-04-community-teaching.png" alt="社区学习精神">
+    <div class="info">
+      <div class="num"><span class="dot">4</span> 细节</div>
+      <div class="anchor">📖 邻居教读书、大孩子带小孩子
+        <small>每个人头上发光的灯泡 = 学习</small></div>
+      <div class="en">…witnessing the community's incredible <span class="key">spirit toward learning and education.</span> Neighbors regularly volunteered to teach children to read; older students helped younger ones.</div>
+      <div class="cn">社区对学习和教育的精神令人惊叹。</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <img src="images/05-05-resilience-not-scarcity.png" alt="韧性而非匮乏">
+    <div class="info">
+      <div class="num"><span class="dot">5</span> 反差</div>
+      <div class="anchor">🌱 破旧教室里一颗发光的种子
+        <small>匮乏包围，但中心有顽强的光</small></div>
+      <div class="en">…what struck me most was not <span class="key">scarcity, but resilience</span>: the quiet, ordinary effort of ordinary people keeping something meaningful alive.</div>
+      <div class="cn">震撼我的不是匮乏，而是韧性。</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <img src="images/06-06-yearning-universal.png" alt="知识渴望普遍">
+    <div class="info">
+      <div class="num"><span class="dot">6</span> 升华</div>
+      <div class="anchor">🌍 光芒跨越国界连成地球
+        <small>知识的光连接世界各地</small></div>
+      <div class="en">The educational gap between regions is vast and may persist. Yet our <span class="key">yearning for knowledge is universal.</span> It transcends borders and environment.</div>
+      <div class="cn">地区差距巨大，但对知识的渴望是普遍的。</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <img src="images/07-07-active-responsibility.png" alt="主动的责任">
+    <div class="info">
+      <div class="num"><span class="dot">7</span> 行动</div>
+      <div class="anchor">🤝 现代教室里伸手把人托起
+        <small>向上箭头 = 主动托举彼此</small></div>
+      <div class="en">Today I study at an international school… But gratitude alone isn't enough. "Us" is not a passive answer. It's an <span class="key">active responsibility.</span></div>
+      <div class="cn">"我们"不是被动答案，是主动责任。</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <img src="images/08-08-finale-always-us.png" alt="永远是我们">
+    <div class="info">
+      <div class="num"><span class="dot">8</span> 点题</div>
+      <div class="anchor">🌍🤝 众人手拉手围成地球，US 在中心发光
+        <small>宏大收尾，回扣开场</small></div>
+      <div class="en">…the resilience I witnessed isn't unique to that village. It lives in every community… we become the very force that drives it. That is why, for the development of our world, the most important thing will <span class="key">always be us.</span></div>
+      <div class="cn">发展最重要的事，永远是我们。</div>
+    </div>
+  </div>
+
+  <footer>
+    <p>💡 <b>背诵方法</b>：先只看 8 张图，说出每张图代表的英文句子；连起来就是整篇稿子。</p>
+    <p style="margin-top:6px;">熟练后，把图盖住，只看左边「🚦 锚点」复述。</p>
+  </footer>
+
+</div>
+</body>
+</html>
