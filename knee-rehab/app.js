@@ -9,6 +9,12 @@
   function render(zone){
     current = zone;
     [...tabsEl.children].forEach(b=>b.classList.toggle('active', b.dataset.k===zone));
+    if(zone==='plan'){
+      gridEl.classList.add('plan-mode');
+      gridEl.innerHTML = PLAN_HTML;
+      return;
+    }
+    gridEl.classList.remove('plan-mode');
     const list = zone==='all' ? EXERCISES : EXERCISES.filter(e=>e.zones.includes(zone));
     const zoneLabel = k => (ZONES.find(z=>z.key===k)||{}).label || k;
     gridEl.innerHTML = list.map(e=>`
