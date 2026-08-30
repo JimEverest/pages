@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>比例单元 · 教学小册（六年级下册）</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --panel:#ffffff; --ink:#1f2933; --sub:#6b7280;
+    --blue:#1e40af; --blue2:#2563eb; --orange:#ea580c; --border:#e5e7eb;
+    --green:#16a34a;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;padding:0 20px 60px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.7;
+  }
+  .wrap{max-width:1080px;margin:0 auto}
+  header{
+    text-align:center;padding:40px 20px 22px;
+  }
+  header .crumb{
+    display:inline-block;font-size:.8rem;font-weight:600;color:var(--blue2);
+    background:#eef2ff;border:1px solid #dbe4ff;padding:5px 14px;border-radius:999px;margin-bottom:14px;
+  }
+  header h1{font-size:2.2rem;margin:.1em 0 .25em;font-weight:800;letter-spacing:.02em}
+  header .sub{color:var(--sub);font-size:1.02rem;margin:0}
+  .toc{
+    background:var(--panel);border:1px solid var(--border);border-radius:16px;
+    padding:22px 26px;margin:18px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  .toc h2{font-size:1.05rem;margin:0 0 14px;color:var(--blue)}
+  .toc ol{margin:0;padding-left:22px}
+  .toc li{padding:7px 0;font-size:.98rem}
+  .toc li a{text-decoration:none;color:var(--ink);font-weight:600}
+  .toc li a:hover{color:var(--blue2)}
+  .toc li .tag{font-size:.78rem;color:var(--sub);margin-left:8px;font-weight:400}
+  section.slide{
+    background:var(--panel);border:1px solid var(--border);border-radius:18px;
+    padding:24px;margin:26px 0;box-shadow:0 2px 14px rgba(0,0,0,.05);
+  }
+  section.slide .num{
+    display:inline-block;background:var(--blue);color:#fff;font-weight:700;
+    width:28px;height:28px;border-radius:8px;text-align:center;line-height:28px;
+    font-size:.9rem;margin-right:10px;
+  }
+  section.slide h2{display:inline-block;font-size:1.35rem;font-weight:800;margin:0;vertical-align:middle}
+  .img-card{
+    border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;
+    margin-top:16px;box-shadow:0 4px 20px rgba(0,0,0,.06);
+  }
+  .img-card img{width:100%;display:block;height:auto}
+  .img-card .cap{
+    padding:12px 16px;font-size:.9rem;color:var(--sub);border-top:1px solid var(--border);background:#fafbfc;
+  }
+  .points{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px;
+  }
+  .points .p{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+  .points .p .t{font-size:.82rem;color:var(--sub);margin-bottom:3px}
+  .points .p .v{font-weight:700;font-size:.95rem}
+  .formula{
+    text-align:center;background:#fefce8;border:1px solid #fde68a;border-radius:12px;
+    padding:16px;margin-top:16px;font-size:1.05rem;font-weight:700;color:#854d0e;
+  }
+  .formula code{background:transparent;border:none;font-size:1.15rem;color:#854d0e}
+  .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .badge{
+    font-size:.8rem;font-weight:600;padding:4px 12px;border-radius:999px;
+  }
+  .badge.blue{background:#dbeafe;color:#1e40af}
+  .badge.green{background:#dcfce7;color:#15803d}
+  .badge.orange{background:#ffedd5;color:#c2410c}
+  footer{text-align:center;color:var(--sub);font-size:.85rem;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="crumb">人教版六年级下册 · 比例单元 · GPT Image 2 教学小册</div>
+    <h1>比例 · 单元教学小册</h1>
+    <p class="sub">四张教学 Slide 组成完整单元：意义 → 基本性质 → 解比例 → 正反比例</p>
+  </header>
+
+  <nav class="toc">
+    <h2>📋 目录</h2>
+    <ol>
+      <li><a href="#s1">比例的意义</a><span class="tag">两个比相等 · 比值</span></li>
+      <li><a href="#s2">比例的基本性质</a><span class="tag">内项积 = 外项积</span></li>
+      <li><a href="#s3">解比例</a><span class="tag">交叉相乘求未知项</span></li>
+      <li><a href="#s4">正比例与反比例</a><span class="tag">直线 vs 双曲线</span></li>
+    </ol>
+  </nav>
+
+  <section class="slide" id="s1">
+    <span class="num">1</span><h2>比例的意义</h2>
+    <div class="img-card">
+      <img src="01-bili-yiyi.webp" alt="比例的意义">
+      <div class="cap">两个比相等的式子叫作比例。如 2:3 与 4:6 比值相同（均为 2/3），可组成比例。</div>
+    </div>
+    <div class="points">
+      <div class="p"><div class="t">关键概念</div><div class="v">前项 · 后项</div></div>
+      <div class="p"><div class="t">结论</div><div class="v">2:3 = 4:6</div></div>
+      <div class="p"><div class="t">判断方法</div><div class="v">化简比 / 求比值</div></div>
+    </div>
+    <div class="formula">两个比相等 ⟺ 比值相同 ⟹ 可写成 <code>a:b = c:d</code></div>
+  </section>
+
+  <section class="slide" id="s2">
+    <span class="num">2</span><h2>比例的基本性质</h2>
+    <div class="img-card">
+      <img src="02-bili-jibenxingzhi.webp" alt="比例的基本性质">
+      <div class="cap">在比例里，两个内项的积等于两个外项的积（交叉相乘法则）。</div>
+    </div>
+    <div class="points">
+      <div class="p"><div class="t">a:b = c:d</div><div class="v">b、c 是内项 a、d 是外项</div></div>
+      <div class="p"><div class="t">核心公式</div><div class="v">内项积 = 外项积</div></div>
+      <div class="p"><div class="t">验证 2:3=4:6</div><div class="v">3×4 = 2×6 = 12</div></div>
+    </div>
+    <div class="formula"><code>a : b = c : d</code>&nbsp;&nbsp;⟹&nbsp;&nbsp;<code>b · c = a · d</code></div>
+  </section>
+
+  <section class="slide" id="s3">
+    <span class="num">3</span><h2>解比例</h2>
+    <div class="img-card">
+      <img src="03-bili-jiebili.webp" alt="解比例">
+      <div class="cap">根据比例的基本性质，求出比例中的未知项。例题：2:3 = x:6 → x=4。</div>
+    </div>
+    <div class="points">
+      <div class="p"><div class="t">步骤</div><div class="v">交叉相乘 → 解方程</div></div>
+      <div class="p"><div class="t">例题</div><div class="v">2×6 = 3×x → x=4</div></div>
+      <div class="p"><div class="t">key 方法</div><div class="v">a:b=c:d ⟺ axd=bxc</div></div>
+    </div>
+    <div class="formula"><code>2 : 3 = x : 6</code>&nbsp;⟹&nbsp;<code>3x = 12</code>&nbsp;⟹&nbsp;<code>x = 4</code></div>
+  </section>
+
+  <section class="slide" id="s4">
+    <span class="num">4</span><h2>正比例与反比例</h2>
+    <div class="img-card">
+      <img src="04-bili-zhengfanbili.webp" alt="正比例与反比例">
+      <div class="cap">正比例：比值一定，图像是过原点的直线；反比例：乘积一定，图像是双曲线。</div>
+    </div>
+    <div class="badges">
+      <span class="badge blue">正比例 y/x = k → 直线</span>
+      <span class="badge orange">反比例 xy = k → 双曲线</span>
+      <span class="badge green">比值一定 vs 乘积一定</span>
+    </div>
+    <div class="formula"><code>y = kx</code>&nbsp;（正比例）&nbsp;&nbsp;|&nbsp;&nbsp;<code>y = k/x</code>&nbsp;（反比例）</div>
+  </section>
+
+  <footer>WorkBuddy · GPT Image 2 Relay 批量生图 + GH Pages 部署 · 比例单元教学小册 · 2026-08-31</footer>
+</div>
+</body>
+</html>
