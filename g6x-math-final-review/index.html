@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>六年级下册数学期末复习 · 人教版</title>
+<style>
+  :root{
+    --c-neg:#3b82f6;      /* 负数 蓝 */
+    --c-pct:#10b981;      /* 百分数 绿 */
+    --c-cyl:#f59e0b;      /* 圆柱圆锥 橙 */
+    --c-bili:#8b5cf6;     /* 比例 紫 */
+    --c-ge:#ef4444;       /* 鸽巢 红 */
+    --c-rev:#0ea5e9;      /* 总复习 天蓝 */
+    --c-ink:#1e293b;
+    --c-soft:#64748b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden;background:#0f172a;font-family:"Microsoft YaHei","PingFang SC",sans-serif}
+  .deck{height:100dvh;position:relative}
+  .slide{
+    position:absolute;inset:0;height:100dvh;overflow:hidden;
+    display:none;flex-direction:column;
+    padding:4.5vh 5vw;
+    background:linear-gradient(160deg,#f8fafc 0%,#eef2f7 100%);
+  }
+  .slide.active{display:flex;animation:fadeIn .45s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .slide .kicker{font-size:1.6vh;letter-spacing:.3em;color:var(--c-soft);margin-bottom:1vh;font-weight:700}
+  .slide h1{font-size:5.2vh;line-height:1.2;color:var(--c-ink);margin-bottom:1.2vh;font-weight:800}
+  .slide h2{font-size:3.6vh;color:var(--c-ink);margin-bottom:2vh;font-weight:800}
+  .sub{font-size:2vh;color:var(--c-soft);margin-bottom:2.5vh}
+  .content{flex:1;min-height:0;display:flex;flex-direction:column}
+  .cols{display:flex;gap:2.5vw;flex:1;min-height:0}
+  .col{flex:1;min-width:0;overflow:hidden}
+  .col.img{display:flex;align-items:center;justify-content:center;background:#fff;border-radius:2vh;padding:1.5vh;box-shadow:0 8px 30px rgba(15,23,42,.08)}
+  .col.img img{max-width:100%;max-height:100%;object-fit:contain;border-radius:1vh}
+
+  .card{background:#fff;border-radius:1.6vh;padding:2.2vh 1.6vw;box-shadow:0 4px 18px rgba(15,23,42,.06);margin-bottom:1.8vh}
+  .card h3{font-size:2.3vh;margin-bottom:1vh;font-weight:700}
+  .card p,.card li{font-size:1.95vh;line-height:1.65;color:#334155}
+  .card ul{padding-left:1.2em}
+  .accent{border-left:.8vh solid var(--ac,#3b82f6)}
+  .formula{font-size:2.6vh;font-weight:800;color:var(--ac,#3b82f6);background:#f1f5f9;border-radius:1vh;padding:1.2vh 1vw;display:inline-block;margin:.6vh 0}
+  .why{background:#eff6ff;border-radius:1vh;padding:1.4vh 1.2vw;font-size:1.9vh;color:#1e40af;line-height:1.6}
+  .warn{background:#fef2f2;border-radius:1vh;padding:1.4vh 1.2vw;font-size:1.9vh;color:#b91c1c;line-height:1.6}
+  .tag{display:inline-block;font-size:1.6vh;font-weight:700;color:#fff;background:var(--ac,#3b82f6);border-radius:2vh;padding:.3vh 1.4vh;margin-right:.8vh}
+  .practicelist{font-size:1.9vh;color:#334155;line-height:1.9}
+
+  table{width:100%;border-collapse:collapse;font-size:1.85vh;background:#fff;border-radius:1vh;overflow:hidden}
+  th{background:#1e293b;color:#fff;padding:1.2vh .8vw;text-align:left;font-weight:700}
+  td{padding:1.1vh .8vw;border-bottom:1px solid #e2e8f0;color:#334155}
+  tr:last-child td{border-bottom:none}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.8vh;flex:1;min-height:0}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.8vh;flex:1;min-height:0}
+
+  .footer{position:absolute;bottom:2.2vh;left:5vw;right:5vw;display:flex;justify-content:space-between;font-size:1.5vh;color:#94a3b8;z-index:5}
+  .progress{position:absolute;bottom:0;left:0;height:.5vh;background:linear-gradient(90deg,#3b82f6,#8b5cf6);z-index:10;transition:width .3s}
+
+  /* nav */
+  .nav{position:fixed;bottom:2vh;right:2vw;display:flex;gap:.6vw;z-index:20}
+  .nav button{border:none;background:#1e293b;color:#fff;font-size:2.2vh;padding:1vh 1.6vw;border-radius:1.2vh;cursor:pointer;opacity:.85}
+  .nav button:hover{opacity:1}
+  .pageno{position:fixed;bottom:2.6vh;left:50%;transform:translateX(-50%);font-size:1.7vh;color:#94a3b8;z-index:20}
+
+  /* cover */
+  .cover{background:linear-gradient(150deg,#0f172a 0%,#1e3a8a 55%,#312e81 100%);justify-content:center;align-items:flex-start}
+  .cover h1{color:#fff;font-size:8.5vh;margin-bottom:2vh}
+  .cover .sub{color:#cbd5e1;font-size:2.6vh}
+  .chiprow{display:flex;gap:1vw;margin-top:4vh;flex-wrap:wrap}
+  .chip{color:#fff;font-size:2vh;padding:1.2vh 2vw;border-radius:3vh;font-weight:700}
+  .toc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2vh;flex:1;min-height:0}
+  .toc-card{border-radius:2vh;padding:2.5vh 1.8vw;color:#fff;display:flex;flex-direction:column;justify-content:center;box-shadow:0 10px 26px rgba(15,23,42,.18)}
+  .toc-card .n{font-size:4.5vh;font-weight:800;opacity:.9}
+  .toc-card .t{font-size:2.8vh;font-weight:800;margin:.6vh 0}
+  .toc-card .d{font-size:1.8vh;opacity:.92;line-height:1.55}
+
+  .big-num{font-size:9vh;font-weight:800;line-height:1;color:var(--ac)}
+  .ans{color:#059669;font-weight:700}
+  .q{font-size:2vh;line-height:1.8;color:#334155}
+  .q b{color:var(--c-ink)}
+  .map-node{border-radius:1.4vh;padding:1.6vh 1.2vw;color:#fff;text-align:center;font-size:2vh;font-weight:700;box-shadow:0 6px 16px rgba(15,23,42,.12)}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 1 封面 -->
+<section class="slide cover">
+  <div class="kicker" style="color:#93c5fd">MICHELLE · 期末冲刺</div>
+  <h1>六年级下册数学<br>期末总复习</h1>
+  <div class="sub">人教版 · 负数 / 百分数 / 圆柱圆锥 / 比例 / 鸽巢问题 / 小学总复习</div>
+  <div class="chiprow">
+    <span class="chip" style="background:var(--c-neg)">负数</span>
+    <span class="chip" style="background:var(--c-pct)">百分数(二)</span>
+    <span class="chip" style="background:var(--c-cyl)">圆柱与圆锥 ★</span>
+    <span class="chip" style="background:var(--c-bili)">比例 ★</span>
+    <span class="chip" style="background:var(--c-ge)">鸽巢问题</span>
+    <span class="chip" style="background:var(--c-rev)">小学总复习</span>
+  </div>
+  <div class="footer" style="color:#64748b"><span>复习讲义 · 配套 practice.md</span><span>↑↓ / ←→ 翻页</span></div>
+</section>
+
+<!-- 2 知识地图 -->
+<section class="slide">
+  <div class="kicker">知识地图</div>
+  <h2>六下新知 5 单元 + 小学总复习</h2>
+  <div class="sub">期末卷 ≈ 六下新知 60% + 小学综合 40%；圆柱圆锥、比例是最大得分板块</div>
+  <div class="content">
+    <div class="grid3">
+      <div class="map-node" style="background:var(--c-neg)">1 负数<br><span style="font-weight:400;font-size:1.7vh">相反意义的量 · 数轴</span></div>
+      <div class="map-node" style="background:var(--c-pct)">2 百分数(二)<br><span style="font-weight:400;font-size:1.7vh">折扣 · 成数 · 税率 · 利率</span></div>
+      <div class="map-node" style="background:var(--c-cyl)">3 圆柱与圆锥 ★<br><span style="font-weight:400;font-size:1.7vh">表面积 · 体积 · 切割/削</span></div>
+      <div class="map-node" style="background:var(--c-bili)">4 比例 ★<br><span style="font-weight:400;font-size:1.7vh">正反比例 · 比例尺 · 解比例</span></div>
+      <div class="map-node" style="background:var(--c-ge)">5 鸽巢问题<br><span style="font-weight:400;font-size:1.7vh">最不利原则 · 至少数</span></div>
+      <div class="map-node" style="background:var(--c-rev)">6 总复习<br><span style="font-weight:400;font-size:1.7vh">数与代数 · 图形 · 统计</span></div>
+    </div>
+    <div class="card accent" style="--ac:#f59e0b;margin-top:2vh">
+      <h3>地基自查（旧知识回补）</h3>
+      <p>圆柱圆锥 ← 六上<b>圆的周长/面积</b>（C=2πr、S=πr²，平方要熟）；比例 ← 六上<b>比与分数除法</b>；百分数 ← <b>单位1</b> 的识别。哪条链卡住，先补哪条。</p>
+    </div>
+  </div>
+  <div class="footer"><span>知识地图</span><span>02</span></div>
+</section>
+
+<!-- 3 诊断 -->
+<section class="slide">
+  <div class="kicker">诊断</div>
+  <h2>为什么复习要"新旧打通"？</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="card accent" style="--ac:#3b82f6">
+          <h3>现象</h3>
+          <p>圆柱体积题算错，往往不是"圆柱"不会，而是 <b>πr² 里 r² 算错</b>、周长面积公式混用。</p>
+        </div>
+        <div class="card accent" style="--ac:#8b5cf6">
+          <h3>现象</h3>
+          <p>解比例出错，多半是 <b>分数除法（倒数）</b> 不熟、内项外项位置看错。</p>
+        </div>
+        <div class="card accent" style="--ac:#10b981">
+          <h3>现象</h3>
+          <p>折扣利率题卡壳，根子常在 <b>单位1 是谁</b>、乘与除的方向不清。</p>
+        </div>
+      </div>
+      <div class="col" style="display:flex;flex-direction:column;justify-content:center">
+        <div class="card accent" style="--ac:#ef4444">
+          <h3>复习策略</h3>
+          <ul>
+            <li>每个新知识点先做<b>地基检查</b>，不过关先回补</li>
+            <li>每个概念问三个问题：<b>是什么 · 为什么 · 什么时候错</b></li>
+            <li>计算题限时练（速度），应用题说思路（建模）</li>
+            <li>错题不是抄一遍，是<b>重做同类题 2 道</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>诊断</span><span>03</span></section>
+
+<!-- 4 负数：意义 -->
+<section class="slide" style="--ac:var(--c-neg)">
+  <div class="kicker" style="color:var(--c-neg)">单元 1 · 负数</div>
+  <h2>正负数：表示<b style="color:var(--c-neg)">相反意义</b>的量</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col img"><img data-src="assets/teaching-visuals/01-fushu-numberline.webp" alt="负数数轴与温度计"></div>
+      <div class="col">
+        <div class="card accent">
+          <h3>一句话目标</h3>
+          <p>能用正负数记录相反意义的量，会在数轴上表示并比较大小。</p>
+        </div>
+        <div class="why" style="margin-bottom:1.8vh"><b>为什么：</b>零上/零下、收入/支出方向相反，只有 0 和正数不够用 → 比 0 低的记作负数。<b>0 既不是正数也不是负数</b>，它是分界线。</div>
+        <div class="warn"><b>易错：</b>−3℃ 与 −18℃ 谁冷？离 0 越远的负数越冷 → <b>−18℃ 更冷</b>。判断题："0 是正数" ✗。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>负数</span><span>04</span></div>
+</section>
+
+<!-- 5 负数：数轴 -->
+<section class="slide" style="--ac:var(--c-neg)">
+  <div class="kicker" style="color:var(--c-neg)">单元 1 · 负数</div>
+  <h2>数轴：从左到右越来越大</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="card accent">
+          <h3>规则</h3>
+          <ul>
+            <li>0 右边是正数，0 左边是负数</li>
+            <li><b>正数 > 0 > 负数</b></li>
+            <li>两个负数，离 0 越远的<b>越小</b></li>
+          </ul>
+        </div>
+        <div class="card accent">
+          <h3>走多远 vs 到哪里</h3>
+          <p>蜗牛从 0 出发：+4、−2、+5、−7、+8</p>
+          <p>"到了哪里" → 求和：4−2+5−7+8 = <b class="ans">+8</b></p>
+          <p>"走了多远" → 绝对值相加：4+2+5+7+8 = <b class="ans">26</b></p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card accent">
+          <h3>马上练</h3>
+          <p class="q">① 在数轴上标出 −2.5、+1、−0.5<br>② −7 ○ −5.2　③ −3℃ ○ −18℃（谁低）<br>④ 向东 5m 记 +5，先 +5 再 −4，终点？</p>
+          <p style="margin-top:1.2vh"><span class="tag">答案</span>② &lt;　③ −18℃ 低　④ +1m</p>
+        </div>
+        <div class="why"><b>生活原型：</b>海拔（海平面=0）、警戒水位、净重 ±3g、电梯楼层。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>负数</span><span>05</span></div>
+</section>
+
+<!-- 6 百分数：折扣成数 -->
+<section class="slide" style="--ac:var(--c-pct)">
+  <div class="kicker" style="color:var(--c-pct)">单元 2 · 百分数(二)</div>
+  <h2>折扣与成数</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col img"><img data-src="assets/teaching-visuals/02-zhekou-gouwu.webp" alt="折扣与满减对比"></div>
+      <div class="col">
+        <div class="card accent">
+          <h3>概念</h3>
+          <p><b>几折</b> = 十分之几 = 百分之几十：八五折 = 85%；<b>几成</b>：三成五 = 35%。</p>
+          <div class="formula">现价 = 原价 × 折数</div>
+        </div>
+        <div class="why" style="margin-bottom:1.8vh"><b>为什么：</b>折扣是"现价占原价的百分率"，单位1 是<b>原价</b>。已知现价求原价 → <b>除以</b>折数。</div>
+        <div class="warn"><b>易错：</b>"打九折"是 ×90% 不是 −90%；一折出售 = ×10% = 降价 90%；折上折 = 原价×90%×85%，≠ 七五折。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>百分数</span><span>06</span></div>
+</section>
+
+<!-- 7 百分数：税率利率 -->
+<section class="slide" style="--ac:var(--c-pct)">
+  <div class="kicker" style="color:var(--c-pct)">单元 2 · 百分数(二)</div>
+  <h2>税率与利率</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="card accent">
+          <h3>税率</h3>
+          <div class="formula">应纳税额 = 应纳税部分 × 税率</div>
+          <p>例：营业额 40 万 × 5% = <b class="ans">2 万</b></p>
+        </div>
+        <div class="card accent">
+          <h3>利率</h3>
+          <div class="formula">利息 = 本金 × 利率 × 存期</div>
+          <p>例：5000 元存 2 年，年利率 2.10% → 利息 5000×2.10%×2=<b class="ans">210 元</b>，共取 <b class="ans">5210 元</b></p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card accent">
+          <h3>马上练</h3>
+          <p class="q">50000 元存三年，年利率 1.30%，到期共取回多少？</p>
+          <p style="margin-top:.8vh"><span class="tag">解</span>50000×1.30%×3 = 1950 → 50000+1950 = <b class="ans">51950 元</b></p>
+        </div>
+        <div class="warn"><b>易错：</b>①忘乘存期；②利率是<b>年</b>利率，存几年乘几；③"取回多少" = 本金+利息，别只答利息。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>百分数</span><span>07</span></div>
+</section>
+
+<!-- 8 百分数：方案比较 -->
+<section class="section slide" style="--ac:var(--c-pct)">
+  <div class="kicker" style="color:var(--c-pct)">单元 2 · 解决问题</div>
+  <h2>选方案：分别算，再比较</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="card accent">
+          <h3>教材例题：230 元的书包</h3>
+          <p>A 商场：打 55 折 → 230×55% = <b class="ans">126.5 元</b></p>
+          <p>B 商场：每满 100 减 50 → 230−50×2 = <b class="ans">130 元</b></p>
+          <p>结论：A 更省（打折是<b>全部</b>生效，满减只对"凑满"部分生效）</p>
+        </div>
+        <div class="card accent">
+          <h3>马上练：480 元商品</h3>
+          <p>A 店每满 100 减 40：480÷100=4.8 → 减 4 次 → 480−160=<b class="ans">320 元</b></p>
+          <p>B 店七五折：480×75%=<b class="ans">360 元</b> → <b class="ans">A 店便宜 40 元</b></p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="warn" style="margin-bottom:1.8vh"><b>易错：</b>满减必须看"够不够减"——只有 130 元时，每满 100 减 50 只能减一次；先算"能减几次"再算总价。</div>
+        <div class="why"><b>方法总结：</b>方案比较题三步——①列出每种方案的总价算式；②分别算出结果；③比较后<b>用一句话回答</b>（"到哪家买便宜"）。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>百分数</span><span>08</span></div>
+</section>
+
+<!-- 9 圆柱认识 -->
+<section class="slide" style="--ac:var(--c-cyl)">
+  <div class="kicker" style="color:var(--c-cyl)">单元 3 · 圆柱与圆锥 ★</div>
+  <h2>圆柱的认识与侧面展开</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col img"><img data-src="assets/teaching-visuals/03-yuanzhu-side.webp" alt="圆柱侧面展开"></div>
+      <div class="col">
+        <div class="card accent">
+          <h3>结构</h3>
+          <p>3 个面：2 个<b>完全相同</b>的底面圆 + 1 个侧面（曲面）</p>
+        </div>
+        <div class="why" style="margin-bottom:1.8vh"><b>为什么：</b>沿高剪开摊平，底面圆滚一圈的长度 = 长方形的长 → <b>长 = 底面周长 C，宽 = 高 h</b>。斜着剪是平行四边形（面积不变）。</div>
+        <div class="warn"><b>易错：</b>展开图的长是"周长 πd"，不是直径 d！底面周长=高时，展开图是正方形。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>圆柱圆锥</span><span>09</span></div>
+</section>
+
+<!-- 10 圆柱表面积 -->
+<section class="slide" style="--ac:var(--c-cyl)">
+  <div class="kicker" style="color:var(--c-cyl)">单元 3 · 圆柱与圆锥 ★</div>
+  <h2>表面积：先数"有几个面"</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="card accent">
+          <div class="formula">S表 = 侧面积 + 2底面积 = 2πrh + 2πr²</div>
+          <p style="margin-top:.8vh">例：r=4、h=6 → 侧 150.72，表 <b class="ans">251.2 cm²</b></p>
+        </div>
+        <div class="card accent">
+          <h3>审题分类（最坑）</h3>
+          <table>
+            <tr><td>无盖水桶/水杯</td><td>侧面 + 1 底</td></tr>
+            <tr><td>通风管/油管/压路机</td><td>只算侧面</td></tr>
+            <tr><td>商标纸</td><td>只算侧面</td></tr>
+            <tr><td>水池抹水泥</td><td>侧面 + 底面</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card accent">
+          <h3>马上练：厨师帽</h3>
+          <p class="q">圆柱形厨师帽（无底），底面半径 10cm，高 30cm，做一顶至少用布多少？</p>
+          <p style="margin-top:.8vh"><span class="tag">解</span>侧 2×3.14×10×30=1884，顶 3.14×10²=314 → <b class="ans">2198 cm²</b></p>
+        </div>
+        <div class="why"><b>为什么先数面：</b>表面积是"所有露在外面的面之和"，实际物体常常少一个底或只要侧面——先想实物，再套公式。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>圆柱圆锥</span><span>10</span></div>
+</section>
+
+<!-- 11 圆柱体积 -->
+<section class="slide" style="--ac:var(--c-cyl)">
+  <div class="kicker" style="color:var(--c-cyl)">单元 3 · 圆柱与圆锥 ★</div>
+  <h2>圆柱体积：切拼成长方体</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col img"><img data-src="assets/teaching-visuals/04-yuanzhu-volume.webp" alt="圆柱体积切拼推导"></div>
+      <div class="col">
+        <div class="card accent">
+          <div class="formula">V = πr²h = 底面积 × 高</div>
+          <p style="margin-top:.8vh">例：r=4、h=6 → 3.14×16×6 = <b class="ans">301.44 cm³</b></p>
+        </div>
+        <div class="why" style="margin-bottom:1.8vh"><b>为什么：</b>把圆柱切成 16 等份拼成<b>近似长方体</b>——形状变了、体积没变；底面变成长方形（长≈πr、宽≈r），所以 V = πr×r×h。</div>
+        <div class="warn"><b>易错：</b>r=1.5 时 r²=2.25 别算错；求高 → h = V÷S底；单位 dm³=L、cm³=mL。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>圆柱圆锥</span><span>11</span></div>
+</section>
+
+<!-- 12 圆锥 -->
+<section class="slide" style="--ac:var(--c-cyl)">
+  <div class="kicker" style="color:var(--c-cyl)">单元 3 · 圆柱与圆锥 ★</div>
+  <h2>圆锥体积：为什么要 ÷3</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col img"><img data-src="assets/teaching-visuals/05-yuantui-third.webp" alt="圆锥体积是圆柱三分之一"></div>
+      <div class="col">
+        <div class="card accent">
+          <div class="formula">V锥 = ⅓ πr²h = ⅓ × 底面积 × 高</div>
+        </div>
+        <div class="why" style="margin-bottom:1.8vh"><b>为什么：</b>等底等高的圆锥装满水，倒 <b>3 次</b>正好装满圆柱。前提是<b>等底等高</b>！</div>
+        <div class="warn"><b>易错：</b>①不等底等高时<b>不是</b> 1/3（判断题陷阱）；②漏乘 ⅓；③圆锥的高是顶点到底面圆心，不是斜边。</div>
+        <div class="card accent">
+          <h3>马上练</h3>
+          <p>r=3、h=2 → 3.14×9×2÷3 = <b class="ans">18.84 m³</b>；等底等高圆柱 18dm³ → 圆锥 <b class="ans">6dm³</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>圆柱圆锥</span><span>12</span></div>
+</section>
+
+<!-- 13 切割削 -->
+<section class="slide" style="--ac:var(--c-cyl)">
+  <div class="kicker" style="color:var(--c-cyl)">单元 3 · 提优专项</div>
+  <h2>切割与"削"：先问增加了哪几个面</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <table>
+          <tr><th>操作</th><th>表面积变化</th><th>体积</th></tr>
+          <tr><td>沿直径<b>竖切</b>1刀</td><td>+2 个矩形面 = 2dh</td><td>不变</td></tr>
+          <tr><td><b>横切</b>1刀</td><td>+2 个底面圆 = 2πr²</td><td>不变</td></tr>
+          <tr><td><b>削</b>成最大圆锥</td><td>—</td><td>→ 原来的 ⅓</td></tr>
+          <tr><td>切拼成长方体</td><td>+2 个 r×h 面</td><td>不变</td></tr>
+        </table>
+      </div>
+      <div class="col">
+        <div class="card accent">
+          <h3>例（教辅 P32）</h3>
+          <p>竖切 2 块增 48cm²，h=6 → 2dh=48 → d=8，r=4 → V=3.14×16×6=<b class="ans">301.44cm³</b></p>
+          <p>截 3 段增 50.24cm² → +4 个底面圆 → r=2；长 2m=200cm → V=<b class="ans">2512cm³</b></p>
+        </div>
+        <div class="warn"><b>方法：</b>先画"新增面"长什么样（矩形 d×h？圆 πr²？），再列差值算式。横截 n 段增 2(n−1) 个底面。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>圆柱圆锥</span><span>13</span></div>
+</section>
+
+<!-- 14 圆柱圆锥比 -->
+<section class="slide" style="--ac:var(--c-cyl)">
+  <div class="kicker" style="color:var(--c-cyl)">单元 3 · 提优专项</div>
+  <h2>圆柱圆锥 + 比：先平方再分配</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="card accent">
+          <h3>两条规则</h3>
+          <ul>
+            <li>半径比 → <b>面积比要平方</b>：r₁:r₂=2:1 → S₁:S₂=4:1</li>
+            <li>等底等高：V柱:V锥 = <b>3:1</b></li>
+          </ul>
+        </div>
+        <div class="card accent">
+          <h3>例（教辅 P32）</h3>
+          <p>圆柱圆锥半径比 2:1、高比 1:3，体积和 31.4cm³</p>
+          <p>体积比 = (4×1):(1×3×⅓) = <b>4:1</b></p>
+          <p>圆柱 = 31.4×⅘ = <b class="ans">25.12</b>　圆锥 = <b class="ans">6.28 cm³</b></p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card accent">
+          <h3>马上练</h3>
+          <p class="q">①等高等体积的圆柱圆锥，底面积比？<br>②体积相等、底面积相等，圆柱高 4cm，圆锥高？<br>③半径比 3:2、高比 2:3 的两圆柱体积比？</p>
+          <p style="margin-top:1vh"><span class="tag">答案</span>①1:3　②12cm　③(9×2):(4×3)=18:12=<b class="ans">3:2</b></p>
+        </div>
+        <div class="why"><b>为什么平方：</b>S=πr²，r 扩大 2 倍，r² 扩大 2×2=4 倍——面积是"两个维度"的乘积。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>圆柱圆锥</span><span>14</span></div>
+</section>
+
+<!-- 15 比例意义 -->
+<section class="slide" style="--ac:var(--c-bili)">
+  <div class="kicker" style="color:var(--c-bili)">单元 4 · 比例 ★</div>
+  <h2>比例的意义与基本性质</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col img"><img data-src="assets/teaching-visuals/06-bili-balance.webp" alt="比例基本性质天平"></div>
+      <div class="col">
+        <div class="card accent">
+          <p><b>比例</b>：两个比相等的式子，如 2.4:1.6 = 60:40（比值都是 1.5）</p>
+          <div class="formula">外项积 = 内项积：a:b = c:d ⟺ ad = bc</div>
+        </div>
+        <div class="why" style="margin-bottom:1.8vh"><b>为什么：</b>a/b = c/d 两边同乘 bd → ad = bc。这就是解比例的依据。</div>
+        <div class="warn"><b>易错：</b>比（两个数相除，一个值）≠ 比例（四个数的等式）。判断 4 个数能否组比例：最大×最小 是否 = 另两数之积。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>比例</span><span>15</span></div>
+</section>
+
+<!-- 16 解比例 -->
+<section class="slide" style="--ac:var(--c-bili)">
+  <div class="kicker" style="color:var(--c-bili)">单元 4 · 比例 ★</div>
+  <h2>解比例：转化为乘积式</h2>
+  <div class="content">
+    <div class="grid3">
+      <div class="card accent">
+        <h3>类型 1</h3>
+        <p class="q">3 : 8 = x : 32</p>
+        <p>8x = 3×32 → x = 96÷8</p>
+        <p class="ans" style="font-size:2.6vh">x = 12</p>
+      </div>
+      <div class="card accent">
+        <h3>类型 2（分数形式）</h3>
+        <p class="q">x / 9 = 4 / 6</p>
+        <p>交叉相乘：6x = 36</p>
+        <p class="ans" style="font-size:2.6vh">x = 6</p>
+      </div>
+      <div class="card accent">
+        <h3>类型 3</h3>
+        <p class="q">1.5 : 2.5 = 6 : x</p>
+        <p>1.5x = 15 → x = 15÷1.5</p>
+        <p class="ans" style="font-size:2.6vh">x = 10</p>
+      </div>
+    </div>
+    <div class="warn" style="margin-top:2vh"><b>易错：</b>先看 x 在内项还是外项，再决定乘谁除谁；解完<b>代回检验</b>两个比值是否相等。</div>
+  </div>
+  <div class="footer"><span>比例</span><span>16</span></div>
+</section>
+
+<!-- 17 正比例 -->
+<section class="slide" style="--ac:var(--c-bili)">
+  <div class="kicker" style="color:var(--c-bili)">单元 4 · 正反比例 ★★</div>
+  <h2>正比例：比值一定</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col img"><img data-src="assets/teaching-visuals/07-zhengfan-graph.webp" alt="正比例与反比例图像"></div>
+      <div class="col">
+        <div class="card accent">
+          <div class="formula">y ÷ x = k（一定）</div>
+          <p><b>判断三步</b>：①相关联？②同向变化？③比值一定？</p>
+          <p>例：速度一定，路程÷时间 = 定值 → <b>正比例</b>；图像是过原点的直线</p>
+        </div>
+        <div class="warn"><b>反例：</b>正方形面积与边长（比值=边长，在变）<b>不成比例</b>；人的年龄与身高不成比例。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>比例</span><span>17</span></div>
+</section>
+
+<!-- 18 反比例 -->
+<section class="slide" style="--ac:var(--c-bili)">
+  <div class="kicker" style="color:var(--c-bili)">单元 4 · 正反比例 ★★</div>
+  <h2>反比例：乘积一定</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="card accent">
+          <div class="formula">x × y = k（一定）</div>
+          <p style="margin-top:.8vh">例：路程一定，速度×时间 = 定值 → <b>反比例</b></p>
+        </div>
+        <table>
+          <tr><th>数量关系</th><th>一定量</th><th>类型</th></tr>
+          <tr><td>速度 × 时间</td><td>路程</td><td>反比例</td></tr>
+          <tr><td>总价 ÷ 数量</td><td>单价</td><td>正比例</td></tr>
+          <tr><td>每天烧煤量 × 天数</td><td>煤总量</td><td>反比例</td></tr>
+          <tr><td>长一定，面积与宽</td><td>长</td><td>正比例</td></tr>
+          <tr><td>周长一定，长与宽</td><td>—</td><td><b>不成比例</b></td></tr>
+        </table>
+      </div>
+      <div class="col">
+        <div class="card accent">
+          <h3>马上练（判断）</h3>
+          <p class="q">①比例尺一定，图上距离与实际距离？<br>②长方形面积一定，长与宽？<br>③圆锥体积一定，底面积与高？<br>④全班人数一定，出勤人数与出勤率？</p>
+          <p style="margin-top:1vh"><span class="tag">答案</span>①正　②反　③反　④正</p>
+        </div>
+        <div class="why"><b>口诀背后：</b>找"哪两个量在变、哪个量不变"，把关系写成乘法或除法，不变的是积就是反比例，不变的是商就是正比例。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>比例</span><span>18</span></div>
+</section>
+
+<!-- 19 比例尺 -->
+<section class="slide" style="--ac:var(--c-bili)">
+  <div class="kicker" style="color:var(--c-bili)">单元 4 · 比例的应用</div>
+  <h2>比例尺：单位要统一</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="card accent">
+          <div class="formula">比例尺 = 图上距离 : 实际距离</div>
+          <p style="margin-top:.8vh">1:1000000 → 图上 1cm = 实际 10km（km→cm 要 ×100000）</p>
+        </div>
+        <div class="card accent">
+          <h3>马上练</h3>
+          <p class="q">①图上 5cm 表示实际 250km，比例尺？<br>②1:6000000 图上 4.5cm，实际多少 km？<br>③线段比例尺 1cm 代表 40km，写成数值比例尺？</p>
+          <p style="margin-top:1vh"><span class="tag">答案</span>①1:5000000　②4.5×6000000=27000000cm=<b class="ans">270km</b>　③1:4000000</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="warn" style="margin-bottom:1.8vh"><b>易错：</b>①先统一单位再化简；②比例尺不带单位；③放大比例尺前项&gt;1（2:1 = 图上是实际的 2 倍，精密零件图）。</div>
+        <div class="why"><b>为什么：</b>比例尺就是"图与实的比"，比的前后项必须同单位——这就是为什么 km 要换算成 cm。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>比例</span><span>19</span></div>
+</section>
+
+<!-- 20 用比例解决问题 -->
+<section class="slide" style="--ac:var(--c-bili)">
+  <div class="kicker" style="color:var(--c-bili)">单元 4 · 比例的应用 ★★</div>
+  <h2>用比例解决问题：四步路线图</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="card accent">
+          <h3>路线图</h3>
+          <p><span class="tag">1</span>找不变量 → <span class="tag">2</span>判正/反比例 → <span class="tag">3</span>列比例 → <span class="tag">4</span>解+检验</p>
+        </div>
+        <div class="card accent">
+          <h3>正比例例</h3>
+          <p>3 小时行 420km，5 小时行多少？速度一定：<br>420/3 = x/5 → x = <b class="ans">700 km</b></p>
+        </div>
+        <div class="card accent">
+          <h3>反比例例</h3>
+          <p>每天运 30t 需 8 天，每天运 40t 几天？总量一定：<br>30×8 = 40x → x = <b class="ans">6 天</b></p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card accent">
+          <h3>提优：顺风逆风（教辅 P55）</h3>
+          <p class="q">燃料最多飞 7 小时，去时顺风 800km/h，返回逆风 600km/h，最远飞出多少就要返回？</p>
+          <p>路程一定 → 反比例：800×t = 600×(7−t)</p>
+          <p>1400t = 4200 → t = 3 → 800×3 = <b class="ans">2400 km</b></p>
+        </div>
+        <div class="why"><b>为什么要用比例：</b>当"每天产量一定""总量一定"时，比例是更自然的等量关系——它直接表达"不变的量"。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>比例</span><span>20</span></div>
+</section>
+
+<!-- 21 鸽巢 -->
+<section class="slide" style="--ac:var(--c-ge)">
+  <div class="kicker" style="color:var(--c-ge)">单元 5 · 数学广角</div>
+  <h2>鸽巢问题：最不利原则</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col img"><img data-src="assets/teaching-visuals/08-gechao-pencils.webp" alt="鸽巢问题铅笔笔筒"></div>
+      <div class="col">
+        <div class="card accent">
+          <h3>为什么总有 1 个筒至少 2 支？</h3>
+          <p>用<b>最不利</b>想：让每个筒都尽量少——先各放 1 支（3 支用完），第 4 支只能再进某筒。</p>
+          <div class="formula">物体数 ÷ 鸽巢数 = 商……余数 → 至少数 = 商 + 1</div>
+        </div>
+        <div class="warn"><b>易错：</b>有余数时至少数是<b>商+1</b>，不是商+余数：25÷8=3…1 → 至少 <b>4 只</b>，不是 5。摸球题先"拿光"其他种类：4 红 3 蓝保证同色 → 2+1+1=4。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>鸽巢问题</span><span>21</span></div>
+</section>
+
+<!-- 22 总复习：数与代数 -->
+<section class="slide" style="--ac:var(--c-rev)">
+  <div class="kicker" style="color:var(--c-rev)">单元 6 · 整理和复习</div>
+  <h2>数与代数：过一遍全网</h2>
+  <div class="content">
+    <div class="grid2">
+      <div class="card accent">
+        <h3>数的认识</h3>
+        <ul>
+          <li>大数读写、改写"万/亿"（精确）vs 四舍五入（近似）</li>
+          <li>小数/分数/百分数互化；负数</li>
+          <li>2/3/5 倍数特征、质数合数、奇偶</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h3>数的运算</h3>
+        <ul>
+          <li>运算律：交换/结合/分配：(a+b)×c</li>
+          <li>简算：a−b−c = a−(b+c)</li>
+          <li>先乘除后加减，括号优先</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h3>式与方程</h3>
+        <ul>
+          <li>a² ≠ 2a；0.5a = a/2</li>
+          <li>等式性质解方程，解完检验</li>
+          <li>列方程解应用题：设、列、解、验、答</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h3>比和比例</h3>
+        <ul>
+          <li>化简比（仍是比）≠ 求比值（一个数）</li>
+          <li>a:b = a/b = a÷b（后项≠0）</li>
+          <li>按比分配、正反比例</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>总复习</span><span>22</span></div>
+</section>
+
+<!-- 23 总复习：图形几何 -->
+<section class="slide" style="--ac:var(--c-rev)">
+  <div class="kicker" style="color:var(--c-rev)">单元 6 · 整理和复习</div>
+  <h2>图形与几何：公式一张网</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <table>
+          <tr><th>图形</th><th>面积/体积</th></tr>
+          <tr><td>平行四边形</td><td>S = ah</td></tr>
+          <tr><td>三角形</td><td>S = ah÷2</td></tr>
+          <tr><td>梯形</td><td>S = (a+b)h÷2</td></tr>
+          <tr><td>圆</td><td>C=2πr, S=πr²</td></tr>
+          <tr><td>长方体</td><td>V = abh</td></tr>
+          <tr><td>圆柱</td><td>V = πr²h</td></tr>
+          <tr><td>圆锥</td><td>V = ⅓πr²h</td></tr>
+        </table>
+      </div>
+      <div class="col">
+        <div class="card accent">
+          <h3>转化思想（公式的来源）</h3>
+          <p>平行四边形→割补成长方形；三角形→两个拼成平行四边形；圆→剪拼成近似长方形；圆柱→切拼成长方体。 <b>新图形都变成学过的图形</b>。</p>
+        </div>
+        <div class="card accent">
+          <h3>运动与位置</h3>
+          <p>平移（方向+距离）、旋转（中心+方向+角度）、轴对称；数对(列,行)；北偏东 30° 定位置。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>总复习</span><span>23</span></div>
+</section>
+
+<!-- 24 统计与数学思考 -->
+<section class="slide" style="--ac:var(--c-rev)">
+  <div class="kicker" style="color:var(--c-rev)">单元 6 · 整理和复习</div>
+  <h2>统计与概率 · 数学思考</h2>
+  <div class="content">
+    <div class="grid2">
+      <div class="card accent">
+        <h3>统计图怎么选</h3>
+        <ul>
+          <li><b>条形</b>：比多少</li>
+          <li><b>折线</b>：看变化趋势</li>
+          <li><b>扇形</b>：部分占整体的百分比</li>
+          <li>平均数 = 总量 ÷ 总份数</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h3>可能性</h3>
+        <p>扑克 54 张抽 1 张：黑桃概率 13/54；梅花+方块 = 26/54 = 13/27。可能性 = 符合结果数 ÷ 总结果数。</p>
+      </div>
+      <div class="card accent">
+        <h3>找规律</h3>
+        <p>9×9−1=80，98×9−2=880，987×9−3=8880 → 规律外推：98765×9−5 = <b class="ans">888880</b></p>
+      </div>
+      <div class="card accent">
+        <h3>逻辑推理</h3>
+        <p>等量代换：△+□=10，△=□+2 → □=4，△=6。列表枚举不重不漏。</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>总复习</span><span>24</span></div>
+</section>
+
+<!-- 25 易错对比 -->
+<section class="slide">
+  <div class="kicker">综合易错</div>
+  <h2>规则对比表：考前 10 分钟看这页</h2>
+  <div class="content">
+    <table style="font-size:1.75vh">
+      <tr><th>易混点</th><th>正确</th><th>易错</th></tr>
+      <tr><td>0 的地位</td><td>既非正数也非负数</td><td>"0 是正数" ✗</td></tr>
+      <tr><td>负数比大小</td><td>−3 &gt; −18</td><td>−3 &lt; −18 ✗</td></tr>
+      <tr><td>打九折</td><td>×90%</td><td>−90% ✗</td></tr>
+      <tr><td>涨 10% 再降 10%</td><td>1×1.1×0.9=0.99，降了</td><td>"不变" ✗</td></tr>
+      <tr><td>圆锥 1/3</td><td>前提：等底等高</td><td>任意圆柱圆锥 ✗</td></tr>
+      <tr><td>侧面展开</td><td>沿高剪→长方形</td><td>"一定是长方形" ✗（斜剪是平行四边形）</td></tr>
+      <tr><td>化简比 vs 比值</td><td>2:3 vs 1.5</td><td>混为一谈 ✗</td></tr>
+      <tr><td>正方形边长与面积</td><td>不成比例</td><td>"正比例" ✗</td></tr>
+      <tr><td>比例尺</td><td>同单位比</td><td>km 不化成 cm ✗</td></tr>
+      <tr><td>鸽巢至少数</td><td>商+1</td><td>商+余数 ✗</td></tr>
+    </table>
+  </div>
+  <div class="footer"><span>综合易错</span><span>25</span></div>
+</section>
+
+<!-- 26 练习总览 -->
+<section class="slide">
+  <div class="kicker">分层练习</div>
+  <h2>practice.md 使用路线</h2>
+  <div class="content">
+    <div class="grid2">
+      <div class="card accent" style="--ac:#3b82f6">
+        <h3>A 练速度 · 基础识别 16 题</h3>
+        <p>每题 30 秒。目标：概念零失误。错一题回对应概念页。</p>
+      </div>
+      <div class="card accent" style="--ac:#10b981">
+        <h3>B 练准确率 · 计算 15 题</h3>
+        <p>π=3.14 全程笔算。目标：圆柱圆锥/解比例计算零失误。</p>
+      </div>
+      <div class="card accent" style="--ac:#f59e0b">
+        <h3>C 练应用 · 建模 12 题</h3>
+        <p>先说思路再动笔：单位1 是谁？不变量是什么？几个面？</p>
+      </div>
+      <div class="card accent" style="--ac:#ef4444">
+        <h3>D 练思维 · 提优 10 题 + E 易错辨析 + F 模拟</h3>
+        <p>切割/削/比专项、蜡烛反比例、顺风逆风、鸽巢最不利。答案全部经脚本校验。</p>
+      </div>
+    </div>
+    <div class="why" style="margin-top:2vh"><b>节奏建议</b>（两周）：第1-2天 负数+地基 → 第3-4天 百分数 → 第5-7天 圆柱圆锥★ → 第8-10天 比例★ → 第11天 鸽巢 → 第12-13天 总复习+F模拟 → 第14天 错题重做。</div>
+  </div>
+  <div class="footer"><span>分层练习</span><span>26</span></div>
+</section>
+
+<!-- 27 结尾 -->
+<section class="slide cover">
+  <div class="kicker" style="color:#93c5fd">考试策略</div>
+  <h1 style="font-size:6.5vh">考场上，先想"为什么"，<br>再写"怎么办"</h1>
+  <div class="sub" style="margin-top:2vh">①审题先数"几个面"、找"单位1"、判"正反比例"<br>②计算慢一点，π=3.14 抄对数<br>③做完代回检验：比例代回去、方程代回去、单位别忘写<br>④遇到难题：先做会做的，最后用"最不利""设未知数"碰一碰</div>
+  <div class="chiprow"><span class="chip" style="background:#059669">祝 Michelle 考出好成绩！</span></div>
+  <div class="footer" style="color:#64748b"><span>复习完成 · 保持手感</span><span>27</span></div>
+</section>
+
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="pageno" id="pageno"></div>
+<div class="nav">
+  <button onclick="go(-1)">←</button>
+  <button onclick="go(1)">→</button>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+function show(i){
+  cur=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach((s,idx)=>{
+    s.classList.toggle('active',idx===cur);
+    // lazy-load images on first show
+    if(idx===cur){s.querySelectorAll('img[data-src]').forEach(img=>{
+      if(!img.src){img.src=img.dataset.src;img.removeAttribute('data-src');}
+    });}
+  });
+  document.getElementById('progress').style.width=((cur+1)/slides.length*100)+'%';
+  document.getElementById('pageno').textContent=(cur+1)+' / '+slides.length;
+}
+function go(d){show(cur+d)}
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(1)}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(-1)}
+  if(e.key==='Home')show(0); if(e.key==='End')show(slides.length-1);
+});
+document.getElementById('deck').addEventListener('click',e=>{
+  if(e.target.closest('.nav'))return;
+  (e.clientX > innerWidth/2)?go(1):go(-1);
+});
+show(0);
+</script>
+</body>
+</html>
