@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>比例 2:3 = 4:6 — GPT Image 2 闭环测试</title>
+<style>
+  :root{
+    --bg:#f5f7fb; --panel:#ffffff; --ink:#1f2933; --sub:#6b7280;
+    --blue:#2563eb; --orange:#f97316; --border:#e5e7eb; --accent:#111827;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;padding:0 20px 60px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.7;
+  }
+  .wrap{max-width:960px;margin:0 auto}
+  header{
+    text-align:center;padding:38px 20px 24px;
+  }
+  header .badge{
+    display:inline-block;font-size:.78rem;font-weight:600;letter-spacing:.02em;
+    color:var(--blue);background:#eef2ff;border:1px solid #dbe4ff;
+    padding:5px 14px;border-radius:999px;margin-bottom:14px;
+  }
+  header h1{font-size:1.9rem;margin:.1em 0 .3em;font-weight:800}
+  header p.sub{color:var(--sub);font-size:1rem;margin:0}
+  .panel{
+    background:var(--panel);border:1px solid var(--border);border-radius:18px;
+    padding:26px;margin:20px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  .panel h2{font-size:1.15rem;margin:0 0 14px;display:flex;align-items:center;gap:8px}
+  .panel h2 .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  .img-card{
+    border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;
+    box-shadow:0 4px 20px rgba(0,0,0,.06);
+  }
+  .img-card img{width:100%;display:block}
+  .img-card .caption{
+    padding:12px 16px;font-size:.9rem;color:var(--sub);
+    border-top:1px solid var(--border);background:#fafbfc;
+  }
+  .meta{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:16px;margin-top:16px;
+  }
+  .meta .item{
+    background:#f8fafc;border:1px solid var(--border);border-radius:12px;
+    padding:14px 16px;text-align:center;
+  }
+  .meta .item .k{font-size:.78rem;color:var(--sub);text-transform:uppercase;letter-spacing:.04em}
+  .meta .item .v{font-size:1.05rem;font-weight:700;margin-top:4px}
+  .steps{list-style:none;padding:0;margin:0}
+  .steps li{
+    display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--border);
+  }
+  .steps li:last-child{border-bottom:none}
+  .steps .n{
+    flex:0 0 28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;
+  }
+  .steps .body b{color:var(--accent)}
+  .steps .body span{color:var(--sub);font-size:.9rem}
+  .note{
+    background:#fffbeb;border:1px solid #fde68a;border-radius:12px;
+    padding:14px 18px;font-size:.92rem;color:#92400e;margin-top:18px;
+  }
+  code{
+    background:#f1f5f9;border:1px solid var(--border);border-radius:6px;
+    padding:2px 7px;font-size:.85rem;font-family:ui-monospace,Consolas,monospace;color:#0f172a;
+  }
+  .dots{display:flex;gap:8px}
+  .dots .b{width:10px;height:10px;border-radius:50%;background:var(--blue)}
+  .dots .o{width:10px;height:10px;border-radius:50%;background:var(--orange)}
+  footer{text-align:center;color:var(--sub);font-size:.85rem;margin-top:26px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="badge">GPT Image 2 · GitHub Pages 闭环测试 ✅</div>
+    <h1>比例 2 : 3 = 4 : 6</h1>
+    <p class="sub">用 GPT Image 2 生成教学海报 → 部署到 GitHub Pages → 在线访问验证</p>
+  </header>
+
+  <section class="panel">
+    <h2><span class="dot" style="background:var(--blue)"></span> 生成的图片</h2>
+    <div class="img-card">
+      <img src="poster.png" alt="比例 2:3 = 4:6 教学海报">
+      <div class="caption">由 GPT Image 2 生成（1920×1088，quality=high）—— 两组比例对比、比值计算、内项×外项结论</div>
+    </div>
+    <div class="meta">
+      <div class="item"><div class="k">模型</div><div class="v">gpt-image-2</div></div>
+      <div class="item"><div class="k">尺寸</div><div class="v">1920×1088</div></div>
+      <div class="item"><div class="k">质量</div><div class="v">high</div></div>
+      <div class="item"><div class="k">耗时</div><div class="v">52 秒</div></div>
+      <div class="item"><div class="k">成本</div><div class="v">$0.0455</div></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2><span class="dot" style="background:var(--orange)"></span> 闭环流程</h2>
+    <ol class="steps">
+      <li>
+        <div class="n">1</div>
+        <div class="body"><b>生成图片</b><br><span>调用 <code>gpt_image2_client.py</code>，异步提交→轮询→下载到本地</span></div>
+      </li>
+      <li>
+        <div class="n">2</div>
+        <div class="body"><b>组装页面</b><br><span>把图片嵌入一个自包含的 <code>index.html</code> 展示页</span></div>
+      </li>
+      <li>
+        <div class="n">3</div>
+        <div class="body"><b>部署上线</b><br><span>用 <code>deploy.py</code> 一次性提交到 <code>JimEverest/pages</code>（GitHub Pages）</span></div>
+      </li>
+      <li>
+        <div class="n">4</div>
+        <div class="body"><b>在线验证</b><br><span>访问 Pages 域名，确认 HTTP 200 + 内容可打开</span></div>
+      </li>
+    </ol>
+    <div class="note">
+      <b>部署子目录：</b><code>gpt2-ratio-closedloop/</code>（本次测试首页，索引项已自动同步到站点根目录）
+    </div>
+  </section>
+
+  <footer>WorkBuddy · GPT Image 2 Relay + GH Pages Deploy 技能联动闭环测试 · 2026-08-31</footer>
+</div>
+</body>
+</html>
