@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 银行 AI 机会地图 · Banking AI Opportunity Ledger</title>
+<meta name="description" content="从 Chatbot 到 Agentic AI：跨国银行 2026 年最值得立项的 10 个 Agentic AI 方向，含成熟度 × 价值优先级矩阵。基于 BIS / Bank of England 2025 公开研究整理。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231D5C43'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='16' fill='%23F5EFE3' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Noto+Serif+SC:wght@400;600;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5EFE2;
+  --paper-2:#EDE5D2;
+  --card:#FBF7EC;
+  --ink:#221B0E;
+  --ink-soft:#5A5140;
+  --ink-faint:#8A8069;
+  --line:#D9CFB6;
+  --line-strong:#B8AB8C;
+  --green:#1D5C43;
+  --green-deep:#0E3A29;
+  --ox:#963A2B;
+  --gold:#A07A2C;
+  --navy:#31517A;
+  --plum:#6B3A5E;
+  --bronze:#8A6A2F;
+  --slate:#4E5A52;
+  --teal:#3D6B6B;
+  --charcoal:#33322C;
+  --serif:"Noto Serif SC","Songti SC","SimSun",Georgia,serif;
+  --display:"Fraunces","Noto Serif SC","Songti SC",Georgia,serif;
+  --mono:"IBM Plex Mono","Courier New",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    linear-gradient(rgba(120,105,70,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120,105,70,.055) 1px, transparent 1px);
+  background-size:56px 56px;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.45 0 0 0 0 0.35 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection{background:var(--green);color:var(--paper)}
+a{color:var(--green);text-decoration:none;border-bottom:1px solid rgba(29,92,67,.35)}
+a:hover{border-bottom-color:var(--green)}
+
+/* ---------- progress ---------- */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--green);z-index:1001;transition:width .1s linear}
+
+/* ---------- masthead ---------- */
+.masthead{max-width:1240px;margin:0 auto;padding:26px 28px 0}
+.mast-top{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);padding-bottom:12px;border-bottom:2.5px solid var(--ink)}
+.mast-top .dot{color:var(--ox)}
+.mast-rule{height:1px;background:var(--ink);margin-top:3px}
+.hero{padding:64px 0 40px;text-align:left}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--ox);display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.kicker::after{content:"";flex:0 0 90px;height:1px;background:var(--ox)}
+.hero h1{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(46px,7.2vw,104px);line-height:1.04;letter-spacing:-.015em;
+}
+.hero h1 .en{display:block;font-size:.52em;font-weight:600;font-style:italic;color:var(--green);margin-top:14px;letter-spacing:0}
+.standfirst{max-width:820px;margin-top:34px;font-size:19px;line-height:1.9;color:var(--ink-soft)}
+.standfirst strong{color:var(--ink)}
+.hero-meta{margin-top:30px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--ink-faint);display:flex;gap:26px;flex-wrap:wrap}
+
+/* ---------- ticker ---------- */
+.ticker-wrap{border-top:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);background:var(--card);overflow:hidden;margin-top:34px}
+.ticker{display:flex;width:max-content;animation:tick 46s linear infinite;will-change:transform}
+.ticker-wrap:hover .ticker{animation-play-state:paused}
+.ticker span{font-family:var(--mono);font-size:12px;letter-spacing:.08em;white-space:nowrap;padding:11px 0;color:var(--ink)}
+.ticker b{color:var(--green);font-weight:500}
+.ticker i{font-style:normal;color:var(--ox);padding:0 18px}
+.ticker .st{color:var(--gold);letter-spacing:.15em}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- layout ---------- */
+.layout{max-width:1240px;margin:0 auto;padding:70px 28px 0;display:grid;grid-template-columns:216px minmax(0,1fr);gap:56px}
+aside nav{position:sticky;top:36px;align-self:start;font-family:var(--mono);font-size:11.5px}
+aside nav .toc-title{letter-spacing:.26em;text-transform:uppercase;color:var(--ink-faint);padding-bottom:12px;border-bottom:1px solid var(--line-strong);margin-bottom:14px}
+aside nav a{display:block;color:var(--ink-soft);padding:5.5px 0;border-bottom:none;border-left:2px solid transparent;padding-left:12px;margin-left:-14px;transition:all .18s}
+aside nav a:hover{color:var(--ink)}
+aside nav a.on{color:var(--green);border-left-color:var(--green);font-weight:500}
+aside nav a b{font-weight:400;color:var(--ink-faint);margin-right:8px}
+main{min-width:0}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px)}
+.reveal.on{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
+
+/* ---------- section ---------- */
+section{margin-bottom:104px;scroll-margin-top:30px}
+.sec-head{display:flex;align-items:baseline;gap:22px;border-bottom:2.5px solid var(--ink);padding-bottom:18px;margin-bottom:30px}
+.sec-num{font-family:var(--display);font-weight:900;font-size:64px;line-height:1;color:var(--green);font-variant-numeric:tabular-nums}
+.sec-head h2{font-family:var(--display);font-weight:900;font-size:clamp(26px,3vw,36px);line-height:1.25;letter-spacing:-.01em}
+.sec-head h2 small{display:block;font-size:.5em;font-weight:600;font-style:italic;color:var(--ink-faint);margin-top:6px;letter-spacing:.02em}
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--line-strong);padding:4px 10px;border-radius:2px;color:var(--ink-soft);white-space:nowrap}
+.chip.green{border-color:var(--green);color:var(--green)}
+.chip.ox{border-color:var(--ox);color:var(--ox)}
+section p{margin-bottom:18px;max-width:76ch}
+section p b,section li b{color:var(--ink)}
+.muted{color:var(--ink-soft)}
+em{font-style:normal;background:linear-gradient(transparent 62%, rgba(160,122,44,.28) 62%)}
+
+/* flow */
+.flow{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--green);padding:20px 22px;margin:26px 0;border-radius:2px}
+.flow .fl-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+.flow .fl-label.legacy{color:var(--ox)}
+.flow .chips{display:flex;flex-wrap:wrap;align-items:center;gap:8px 6px;font-family:var(--mono);font-size:12px}
+.flow .chips .c{border:1px solid var(--line-strong);background:var(--paper);padding:3px 9px;border-radius:2px;white-space:nowrap}
+.flow .chips .a{color:var(--gold);padding:0 2px}
+.flow.legacy .chips .c{color:var(--ink-faint);text-decoration:line-through;text-decoration-color:rgba(150,58,43,.5)}
+.flow.next{border-left-color:var(--green)}
+.flow.next .chips .c{color:var(--green-deep);border-color:var(--green);text-decoration:none;font-weight:500}
+
+/* quote */
+.chat{max-width:640px;margin:26px 0 26px auto;background:var(--green-deep);color:#EDE6D4;padding:18px 22px 16px;border-radius:3px 14px 3px 14px;position:relative;box-shadow:4px 5px 0 rgba(34,27,14,.14)}
+.chat .who{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#9DB8A8;margin-bottom:8px}
+.chat .msg{font-size:15.5px;line-height:1.7}
+.chat .msg code{font-family:var(--mono);color:#F0D9A0;background:rgba(255,255,255,.07);padding:1px 6px;border-radius:2px}
+.chat.warn{background:#3E1B13;color:#F2E3D8}
+.chat.warn .who{color:#C99A8B}
+.chat.warn .msg code{color:#F2C4AE}
+
+/* tag rows */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.tags .t{font-family:var(--mono);font-size:12px;background:var(--paper-2);border:1px solid var(--line);padding:4px 11px;border-radius:2px;color:var(--ink-soft)}
+
+/* agent cards (sec2) */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:26px 0}
+.agent{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--ox);padding:18px 20px;border-radius:2px}
+.agent h4{font-family:var(--display);font-weight:600;font-size:17px;margin-bottom:8px}
+.agent h4 code{font-family:var(--mono);font-size:.72em;color:var(--ox);font-weight:400;margin-right:6px}
+.agent p{font-size:14.5px;line-height:1.75;margin:0;color:var(--ink-soft)}
+
+/* timeline */
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:44px 0 10px;position:relative}
+.timeline::before{content:"";position:absolute;top:9px;left:4%;right:4%;height:1.5px;background:var(--line-strong)}
+.tl{padding:0 16px 0 0;position:relative}
+.tl::before{content:"";width:13px;height:13px;border-radius:50%;background:var(--paper);border:2.5px solid var(--ink);position:absolute;top:3px;left:0}
+.tl.now::before{background:var(--green);border-color:var(--green);box-shadow:0 0 0 4px rgba(29,92,67,.18)}
+.tl .yr{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-faint);margin:30px 0 4px}
+.tl h4{font-family:var(--display);font-weight:900;font-size:21px;margin-bottom:6px}
+.tl.now h4{color:var(--green)}
+.tl .say{font-size:14px;color:var(--ink-soft);font-style:italic}
+.tl.now .say{color:var(--ink)}
+
+/* pull quote */
+.pull{background:var(--green-deep);color:#EFE9D8;padding:74px 30px;margin:110px 0;text-align:center;position:relative;overflow:hidden}
+.pull::before,.pull::after{content:"“";font-family:var(--display);position:absolute;font-size:220px;color:rgba(239,233,216,.08);line-height:1}
+.pull::before{top:-20px;left:30px}
+.pull::after{bottom:-140px;right:30px;transform:rotate(180deg)}
+.pull p{max-width:880px;margin:0 auto;font-family:var(--display);font-weight:600;font-size:clamp(21px,2.6vw,30px);line-height:1.7}
+.pull .sub{margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#9DB8A8}
+
+/* ---------- matrix ---------- */
+.matrix-wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:stretch;margin:34px 0 10px}
+.matrix{position:relative;background:var(--card);border:1.5px solid var(--ink);aspect-ratio:1/0.86}
+.matrix .mline{position:absolute;background:var(--line)}
+.matrix .mline.v{top:0;bottom:34px;width:1px}
+.matrix .mline.h{left:0;right:0;height:1px}
+.matrix .ax{position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-faint);transform:translate(-50%,0)}
+.matrix .ay{position:absolute;font-family:var(--mono);font-size:10px;color:var(--ink-faint);transform:translate(0,50%);left:6px}
+.matrix .zone{position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(160,122,44,.75)}
+.dot{position:absolute;width:27px;height:27px;border-radius:50%;color:#F5EFE2;font-family:var(--mono);font-size:11px;display:flex;align-items:center;justify-content:center;transform:translate(calc(-50% + var(--dx,0px)),calc(50% + var(--dy,0px)));box-shadow:0 2px 5px rgba(34,27,14,.3);cursor:default;transition:transform .18s;scroll-margin:0}
+.dot:hover{transform:translate(calc(-50% + var(--dx,0px)),calc(50% + var(--dy,0px))) scale(1.24);z-index:5}
+.legend{display:grid;grid-template-columns:1fr;gap:2px;font-size:13.5px;align-content:start}
+.legend .li{display:flex;gap:10px;align-items:baseline;padding:4.5px 0;border-bottom:1px dotted var(--line)}
+.legend .sw{width:11px;height:11px;border-radius:50%;flex:none;transform:translateY(1px)}
+.legend b{font-family:var(--mono);font-size:11px;color:var(--ink-faint);font-weight:400}
+.matrix-note{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-top:12px;letter-spacing:.06em}
+
+/* ---------- table ---------- */
+.tbl-wrap{overflow-x:auto;margin:30px 0 8px;border:1.5px solid var(--ink);background:var(--card)}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);text-align:left;padding:14px 16px;border-bottom:2px solid var(--ink);background:var(--paper-2);white-space:nowrap}
+td{padding:13px 16px;border-bottom:1px solid var(--line);font-size:15px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(29,92,67,.05)}
+.pg{font-family:var(--mono);font-size:12px;color:var(--ink-faint)}
+td.prog{font-weight:600}
+.st-on{color:var(--gold);letter-spacing:2px}
+.st-off{color:var(--line-strong);letter-spacing:2px}
+tr.hot td{background:rgba(160,122,44,.07)}
+
+/* platform */
+.platform{margin:30px 0}
+.pl-flow{display:flex;flex-wrap:wrap;gap:10px 8px;align-items:center;font-family:var(--mono);font-size:12.5px}
+.pl-flow .step{border:1.5px solid var(--green);color:var(--green-deep);background:var(--card);padding:8px 14px;border-radius:2px;font-weight:500;white-space:nowrap}
+.pl-flow .step:first-child{background:var(--green);color:var(--paper)}
+.pl-flow .step:last-child{border-style:dashed}
+.pl-flow .ar{color:var(--gold);font-size:15px}
+.rename{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;margin:30px 0}
+.rename .bad,.rename .good{border:1px solid var(--line-strong);padding:18px 20px;background:var(--card);border-radius:2px}
+.rename .bad{border-left:3px solid var(--ox)}
+.rename .good{border-left:3px solid var(--green)}
+.rename .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.rename .bad .lab{color:var(--ox)}
+.rename .good .lab{color:var(--green)}
+.rename p{margin:0;font-size:14.5px;line-height:1.7}
+.rename .arr{font-size:26px;color:var(--gold)}
+
+/* governance tags + references + footer */
+.gov{background:var(--paper-2);border:1px solid var(--line-strong);padding:24px 26px;margin:30px 0;border-radius:2px}
+.gov h4{font-family:var(--display);font-size:17px;font-weight:600;margin-bottom:12px}
+.refs{margin-top:16px}
+.refs li{font-size:13.5px;color:var(--ink-soft);margin-bottom:9px;line-height:1.7}
+footer{border-top:2.5px solid var(--ink);margin-top:90px;padding:34px 28px 46px;text-align:center;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--ink-faint);line-height:2.2}
+footer .fm{color:var(--ink-soft)}
+
+@media (max-width:1000px){
+  .layout{grid-template-columns:1fr;gap:0;padding-top:50px}
+  aside nav{display:none}
+  .timeline{grid-template-columns:1fr 1fr;gap:26px}
+  .timeline::before{display:none}
+  .matrix-wrap{grid-template-columns:1fr}
+  .rename{grid-template-columns:1fr}
+  .rename .arr{transform:rotate(90deg);justify-self:center}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .timeline{grid-template-columns:1fr}
+  .sec-num{font-size:44px}
+  .masthead,.layout{padding-left:18px;padding-right:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ticker{animation:none}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- ================= MASTHEAD ================= -->
+<header class="masthead">
+  <div class="mast-top">
+    <span>The Opportunity Ledger <span class="dot">◆</span> 银行 AI 特刊</span>
+    <span>Vol.2026 · No.09 · September 2026</span>
+  </div>
+  <div class="mast-rule"></div>
+
+  <div class="hero">
+    <div class="kicker">Banking AI · 2026 立项地图</div>
+    <h1>从「帮我找资料」<br>到「帮我完成这个流程」
+      <span class="en">— The 2026 Banking Agentic AI Opportunity Map</span>
+    </h1>
+    <p class="standfirst">行业主线已从 <strong>GenAI Copilot</strong> 明显转向 <strong>Agentic AI + Workflow Automation</strong>。最有价值的 AI 项目，不再是让大模型「回答问题」，而是让它<strong>理解非结构化信息 → 调用银行内部数据与系统 → 做判断 → 生成证据 → 在 Human-in-the-loop 下执行操作</strong>。本刊按 Global Markets / CIB / Risk / FCC / Operations / Finance / Technology 条线，梳理十个最值得立项的方向，并给出成熟度 × 价值的优先级矩阵。</p>
+    <div class="hero-meta">
+      <span>基于 BIS · Bank of England · MAS 2025 公开研究整理</span>
+      <span>10 个方向 · 13 个候选项目</span>
+      <span>阅读约 18 分钟</span>
+    </div>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker" id="ticker"></div>
+  </div>
+</header>
+
+<!-- ================= BODY ================= -->
+<div class="layout">
+  <aside>
+    <nav id="toc">
+      <div class="toc-title">本期目录 · Contents</div>
+      <a href="#s0"><b>00</b>范式转移</a>
+      <a href="#s1"><b>01</b>Trade Lifecycle Agent</a>
+      <a href="#s2"><b>02</b>Financial Crime Investigation</a>
+      <a href="#s3"><b>03</b>Corporate / Credit Intelligence</a>
+      <a href="#s4"><b>04</b>Portfolio Risk Intelligence</a>
+      <a href="#s5"><b>05</b>Payment / Liquidity Agent</a>
+      <a href="#s6"><b>06</b>Regulatory Change Agent</a>
+      <a href="#s7"><b>07</b>Continuous Assurance</a>
+      <a href="#s8"><b>08</b>Legacy Modernisation</a>
+      <a href="#s9"><b>09</b>SRE / Incident Agent</a>
+      <a href="#s10"><b>10</b>Enterprise Process Agent</a>
+      <a href="#matrix"><b>◆</b>机会矩阵与优先级</a>
+      <a href="#platform"><b>◆</b>提案的正确写法</a>
+      <a href="#refs"><b>◆</b>参考来源</a>
+    </nav>
+  </aside>
+
+  <main>
+
+  <!-- ===== 00 paradigm ===== -->
+  <section id="s0" class="reveal">
+    <div class="sec-head"><div class="sec-num">00</div><h2>范式转移：2023 → 2026<small>From Chatbot to Multi-Agent Business Process</small></h2></div>
+    <p>如果把 2023 → 2026 的变化总结成一条线，银行 AI 的形态正沿着四个台阶向上走。监管机构的讨论重点，也已经从单纯的 GenAI 转向 <b>agentic AI 的自主性（autonomy）与护栏（guardrails）</b>——MAS 2025 年的公开材料明确提出：autonomy 必须伴随足够的 controls。</p>
+    <div class="timeline">
+      <div class="tl"><div class="yr">2023 – 24</div><h4>Chatbot</h4><div class="say">"帮我找资料。"</div></div>
+      <div class="tl"><div class="yr">2024 – 25</div><h4>Copilot</h4><div class="say">"帮我分析资料。"</div></div>
+      <div class="tl now"><div class="yr">2025 – 26 · 现在</div><h4>Agent</h4><div class="say">"帮我完成这个业务流程。"</div></div>
+      <div class="tl"><div class="yr">下一阶段</div><h4>Multi-Agent Process</h4><div class="say">"你负责完成整个 Trade / KYC / Credit / Payment workflow，只有关键风险点需要 Human Approval。"</div></div>
+    </div>
+    <p class="muted" style="margin-top:26px">BIS / Fed 2025 年的公开讨论指出：金融机构目前 AI 最集中的领域仍是<em>文本分析、分类、内部搜索和运营效率</em>，但已经开始实验 <b>agentic AI 用于复杂金融流程和核心金融模型</b>；BIS/FSB 同时提示了第三方依赖、模型风险、数据质量、网络安全与共同模型导致的市场相关性等风险。<sup style="font-family:var(--mono)">[1][5][6]</sup></p>
+  </section>
+
+  <!-- ===== 01 ===== -->
+  <section id="s1" class="reveal">
+    <div class="sec-head"><div class="sec-num">01</div><h2>Trade Lifecycle Agent<small>从 Trade Capture 走向真正的 Operations Agent · Global Markets Ops</small></h2></div>
+    <p>Trade Booking 是最好的切入点。今天的流程靠人工理解多模态输入、逐环节流转；下一代则是<em>多模态摄取 → 智能提取 → 校验 → Booking Agent → Exception Agent</em> 的自动化流水线。</p>
+    <div class="flow legacy">
+      <div class="fl-label legacy">现在 · As-Is</div>
+      <div class="chips"><span class="c">Email / Bloomberg Chat / Voice / Excel / PDF</span><span class="a">→</span><span class="c">Operator 理解</span><span class="a">→</span><span class="c">Booking</span><span class="a">→</span><span class="c">Validation</span><span class="a">→</span><span class="c">Confirmation</span><span class="a">→</span><span class="c">Settlement</span></div>
+    </div>
+    <div class="flow next">
+      <div class="fl-label">下一代 · To-Be</div>
+      <div class="chips"><span class="c">Multimodal Intake</span><span class="a">→</span><span class="c">Trade Extraction</span><span class="a">→</span><span class="c">Validation</span><span class="a">→</span><span class="c">Booking Agent</span><span class="a">→</span><span class="c">Exception Agent</span><span class="a">→</span><span class="c">Confirmation / Reconciliation</span></div>
+    </div>
+    <div class="chat">
+      <div class="who">Bloomberg Chat · Trader · 09:42:17</div>
+      <div class="msg">"Buy 20m <code>USDJPY</code> 3M forward @ xxx…"</div>
+    </div>
+    <p>AI 不只做 extraction，而是识别完整交易要素，并与 <b>Reference Data / Static Data / Limits / Booking Rules</b> 做校验：</p>
+    <div class="tags"><span class="t">Counterparty</span><span class="t">Product</span><span class="t">Direction</span><span class="t">Notional</span><span class="t">Currency</span><span class="t">Tenor</span><span class="t">Price</span><span class="t">Settlement Date</span><span class="t">SSI</span><span class="t">Book</span><span class="t">Trader</span></div>
+    <p>正常交易生成 <b>booking proposal</b>；异常交易自动形成 exception case：</p>
+    <div class="chat warn">
+      <div class="who">Exception Case · Auto-generated</div>
+      <div class="msg">"Cannot auto-book: settlement instruction inconsistent with counterparty <code>SSI</code>."</div>
+    </div>
+    <p>真正有价值的其实不是 NLP，而是 <b><em>AI + Workflow + Bank APIs + Rules Engine + Audit Trail</em></b> 的组合。</p>
+    <p><b>再往前一步：Trade Lifecycle Exception Management Agent。</b>很多银行 Operations 最大的人力成本不是正常交易，而是 exception——Failed Trade、Booking Mismatch、Confirmation Mismatch、Settlement Failure、SSI Issue、Late Booking、Break。Agent 可以自动收集上下文、分析 root cause、匹配相似历史 case、推荐 remediation，甚至调用允许的系统完成修复。这很可能是未来几年 Global Markets Operations <em>最有 ROI 的 AI 方向之一</em>。</p>
+  </section>
+
+  <!-- ===== 02 ===== -->
+  <section id="s2" class="reveal">
+    <div class="sec-head"><div class="sec-num">02</div><h2>Financial Crime Investigation Agent<small>KYC · AML · Sanctions · Transaction Monitoring · Adverse Media · FCC</small></h2></div>
+    <p>传统流程是：Alert → Analyst 在大量系统间查证（Google / World-Check / 内部数据库）→ 拼凑 evidence → 判断 False Positive / True Positive → 撰写 rationale → Escalate。AI Agent 可以把 investigation 拆成多个 specialist agents：</p>
+    <div class="grid2">
+      <div class="agent"><h4><code>A-01</code>Entity Resolution Agent</h4><p>判断「系统里的 ABC Trading Ltd 和新闻里的 ABC Trading Limited 是不是同一家公司」。</p></div>
+      <div class="agent"><h4><code>A-02</code>Adverse Media Agent</h4><p>分析新闻、法院文件、监管公告等负面信息来源。</p></div>
+      <div class="agent"><h4><code>A-03</code>Transaction Investigation Agent</h4><p>分析账户交易 pattern、counterparty network、geography、amount、frequency。</p></div>
+      <div class="agent"><h4><code>A-04</code>Sanctions Agent</h4><p>解释 sanction hit 究竟是 name similarity 还是 actual entity match。</p></div>
+      <div class="agent"><h4><code>A-05</code>Case Reasoning Agent</h4><p>综合证据形成 False Positive / Potential True Positive / Escalation Recommended 结论，并自动生成 <b>evidence-backed investigation narrative</b>。</p></div>
+    </div>
+    <p>这类项目特别适合银行，因为 Financial Crime Operations 的工作本质就是 <b><em>Search + Read + Compare + Reason + Document</em></b>——恰恰是 LLM/Agent 最适合增强的工作类型。英国央行调查亦显示，未来三年金融机构 AI 的主要方向包括 internal process optimization、customer support 和 combating financial crime。<sup style="font-family:var(--mono)">[2]</sup></p>
+  </section>
+
+  <!-- ===== 03 ===== -->
+  <section id="s3" class="reveal">
+    <div class="sec-head"><div class="sec-num">03</div><h2>Corporate / Credit Intelligence Agent<small>比普通 RAG 深四层 · Credit &amp; Relationship Management</small></h2></div>
+    <p>「分析同行企业财报」可以做得比普通 RAG 深得多。Agent 自动摄取 <b>Annual Report · 10-K/20-F · Earnings Call · Rating Agency Report · News · Industry Report · 内部 Credit Memo · Exposure Data</b>，然后建立四层分析结构：</p>
+    <div class="flow next">
+      <div class="fl-label">分析层级</div>
+      <div class="chips"><span class="c">Company</span><span class="a">→</span><span class="c">Peer Group</span><span class="a">→</span><span class="c">Industry</span><span class="a">→</span><span class="c">Portfolio</span></div>
+    </div>
+    <p>例如针对一家航空公司，Agent 自动维护并比较以下指标：</p>
+    <div class="tags"><span class="t">Revenue growth vs peers</span><span class="t">EBITDA margin</span><span class="t">Debt / EBITDA</span><span class="t">Interest coverage</span><span class="t">Fuel cost sensitivity</span><span class="t">FX exposure</span><span class="t">Aircraft financing</span><span class="t">Liquidity runway</span><span class="t">Covenant headroom</span></div>
+    <div class="chat">
+      <div class="who">Credit Analyst · 问</div>
+      <div class="msg">"What has materially deteriorated compared with peers during the last 12 months?"</div>
+    </div>
+    <p>再进一步就是 <b>Early Warning System (EWS)</b>：AI 持续监控企业的 Financial + News + Market + Transaction 信号，捕捉<em>信用质量开始恶化、但传统 Rating 尚未 downgrade</em> 的窗口期——对 Corporate Banking / Credit Risk / Portfolio Risk 都极有价值。</p>
+  </section>
+
+  <!-- ===== 04 ===== -->
+  <section id="s4" class="reveal">
+    <div class="sec-head"><div class="sec-num">04</div><h2>Portfolio Risk Intelligence<small>在 Dashboard 之上加一层 Risk Reasoning · Risk</small></h2></div>
+    <p>传统 Risk Dashboard 给你 Exposure、VaR、RWA、Limit、Concentration；AI 在其上加一层 <b><em>Risk Narrative / Risk Reasoning Layer</em></b>。</p>
+    <div class="chat">
+      <div class="who">CRO · 问</div>
+      <div class="msg">"Why did our APAC Commercial Real Estate portfolio risk increase this month?"</div>
+    </div>
+    <p>Agent 自动组合<b>内部 exposure、limit utilisation、PD/LGD、market data、利率、FX、news、country risk、sector risk</b>，生成解释：</p>
+    <div class="chat warn">
+      <div class="who">Risk Narrative · 答</div>
+      <div class="msg">主要不是 exposure 增加，而是 Singapore / HK CRE 抵押物估值下调，同时 refinancing risk 上升……</div>
+    </div>
+    <p>更进一步是 <b>Portfolio Scenario Agent</b>：</p>
+    <div class="chat">
+      <div class="who">Scenario Query</div>
+      <div class="msg">"If oil falls <code>-30%</code>, USD strengthens <code>+10%</code>, and China demand weakens — identify the 20 corporate clients most vulnerable."</div>
+    </div>
+    <p>这比传统 dashboard 更接近真正的 <em>Risk Intelligence</em>。</p>
+  </section>
+
+  <!-- ===== 05 ===== -->
+  <section id="s5" class="reveal">
+    <div class="sec-head"><div class="sec-num">05</div><h2>Payment / Liquidity Agent<small>2025–2026 值得关注的新方向 · Treasury &amp; Payment Ops</small></h2></div>
+    <p>AI Agent 可以协助 <b>Intraday Liquidity · Payment Prioritisation · Nostro Management · Liquidity Buffer · Settlement Queue · Funding Recommendation</b>。典型场景：</p>
+    <div class="chat">
+      <div class="who">Payment Ops · 16:05 · 截止前</div>
+      <div class="msg">当前 USD Nostro 流动性不足，有 <code>300</code> 个 payment 等待 settlement——哪些应该优先？</div>
+    </div>
+    <p>这已不只是概念：BIS 在 2025 年专门研究了 <b>AI agents for cash management in payment systems</b>，实验发现 GenAI agent 可以在模拟 RTGS 环境中<em>维持 liquidity buffer、动态确定付款优先级，并在 liquidity cost 与 settlement delay 之间进行权衡</em>。<sup style="font-family:var(--mono)">[3]</sup> 在 Global Bank 里可形成 <b>Intraday Liquidity Management Agent</b>，Treasury / Payment Ops / Liquidity Risk 都是使用方。</p>
+  </section>
+
+  <!-- ===== 06 ===== -->
+  <section id="s6" class="reveal">
+    <div class="sec-head"><div class="sec-num">06</div><h2>Regulatory Change → Control Implementation Agent<small>银行 IT 最值得做、却经常被低估 · Compliance</small></h2></div>
+    <p>跨国银行每天面对 <b>FCA · PRA · MAS · HKMA · EBA · ECB · SEC · CFTC</b> 及各地央行的法规变化。现在的链条完全靠人力：</p>
+    <div class="flow legacy">
+      <div class="fl-label legacy">现在 · As-Is</div>
+      <div class="chips"><span class="c">Regulation</span><span class="a">→</span><span class="c">Legal/Compliance 阅读</span><span class="a">→</span><span class="c">Interpretation</span><span class="a">→</span><span class="c">Impact Assessment</span><span class="a">→</span><span class="c">Policy Change</span><span class="a">→</span><span class="c">Control Change</span><span class="a">→</span><span class="c">Tech Requirement</span><span class="a">→</span><span class="c">Implementation</span><span class="a">→</span><span class="c">Evidence</span></div>
+    </div>
+    <p><b>Regulatory Change Intelligence Agent</b> 自动识别：哪条 regulation 变了？影响哪些 legal entities、products、existing controls、policies、applications、data fields、reporting requirements？甚至自动生成完整的 traceability graph：</p>
+    <div class="flow next">
+      <div class="fl-label">自动生成的追溯链</div>
+      <div class="chips"><span class="c">Regulation</span><span class="a">→</span><span class="c">Obligation</span><span class="a">→</span><span class="c">Policy</span><span class="a">→</span><span class="c">Control</span><span class="a">→</span><span class="c">System</span><span class="a">→</span><span class="c">Evidence</span></div>
+    </div>
+    <p>对 HSBC / 渣打这类在几十个国家运营的银行，这类项目的<em>潜在价值非常大</em>。</p>
+  </section>
+
+  <!-- ===== 07 ===== -->
+  <section id="s7" class="reveal">
+    <div class="sec-head"><div class="sec-num">07</div><h2>AI Control Testing / Continuous Assurance<small>从年度抽样到持续监控 · Operational Risk</small></h2></div>
+    <p>传统 Control Testing：抽 50 个 sample → 人工检查 → 写 testing evidence。AI 可以把它变成 <b>Continuous Control Monitoring</b>——不是一年/季度抽样，而是持续检查海量 transaction / case：</p>
+    <div class="grid2">
+      <div class="agent" style="border-top-color:var(--slate)"><h4><code>C-1</code>EDD 完整性</h4><p>是否所有 High Risk Customer 都完成 Enhanced Due Diligence？</p></div>
+      <div class="agent" style="border-top-color:var(--slate)"><h4><code>C-2</code>修订授权</h4><p>是否所有 Trade Amendment 都有正确 approval？</p></div>
+      <div class="agent" style="border-top-color:var(--slate)"><h4><code>C-3</code>Maker-Checker</h4><p>是否所有 Manual Booking 都满足 maker-checker？</p></div>
+      <div class="agent" style="border-top-color:var(--slate)"><h4><code>C-4</code>绕行检测</h4><p>是否存在 bypass control？</p></div>
+    </div>
+    <p>AI 再自动生成 <b>Control Effectiveness · Exceptions · Evidence · Root Cause · Trend</b>。这是一次 <em>Periodic Sampling → Continuous Assurance</em> 的范式转变，将影响 Operational Risk、Compliance、Internal Audit、SOX / Control Testing 等众多团队。</p>
+  </section>
+
+  <!-- ===== 08 ===== -->
+  <section id="s8" class="reveal">
+    <div class="sec-head"><div class="sec-num">08</div><h2>Technology Modernisation Agent<small>银行 IT 里最容易算出实际 ROI 的项目 · Technology</small></h2></div>
+    <p>大型银行最大的痛点之一是 <b>Legacy System</b>：几十年的 COBOL、Java、Mainframe、Stored Procedure、Shell、ETL、旧 API，几乎没有 documentation。AI 可以两层切入：</p>
+    <div class="flow legacy">
+      <div class="fl-label legacy">Layer 1 · Legacy Code Understanding Agent</div>
+      <div class="chips"><span class="c">Code</span><span class="a">→</span><span class="c">Business Logic</span><span class="a">→</span><span class="c">Documentation</span><span class="a">→</span><span class="c">Dependency Graph</span><span class="a">→</span><span class="c">Test Cases</span></div>
+    </div>
+    <div class="flow next">
+      <div class="fl-label">Layer 2 · Migration Agent</div>
+      <div class="chips"><span class="c">Legacy → Modern Service</span><span class="c">Generate Unit Tests</span><span class="c">API Specification</span><span class="c">Data Mapping</span><span class="c">Regression Test</span><span class="c">Cloud Migration Assessment</span></div>
+    </div>
+    <p>2025 年 Fed 公开提到，他们已把 GenAI 用于 technology modernization，包括 <em>legacy code translation、unit test generation 和 cloud migration acceleration</em>。<sup style="font-family:var(--mono)">[4]</sup> 在银行 IT 里，这类项目往往比「员工 Chatbot」更容易算出实际 ROI。</p>
+  </section>
+
+  <!-- ===== 09 ===== -->
+  <section id="s9" class="reveal">
+    <div class="sec-head"><div class="sec-num">09</div><h2>Production Incident / SRE Agent<small>从「疯狂搜索上次怎么解决」到闭环修复 · Technology</small></h2></div>
+    <p>银行每天产生大量 <b>ServiceNow Incident · Splunk Log · AppDynamics/Dynatrace Alert · Email · Teams/Slack Message · Runbook · Previous Incident · Change Record</b>。Sev1/Sev2 出问题时，很多工程师其实在做同一件事：</p>
+    <div class="chat warn">
+      <div class="who">凌晨 2:47 · Sev1 群</div>
+      <div class="msg">"上一次<code>是不是发生过</code>？怎么解决的？"</div>
+    </div>
+    <p><b>AI Incident Commander / SRE Agent</b> 自动关联 Alert → Log → Recent Change → Similar Incident → Known Error → Runbook，然后输出：</p>
+    <div class="chat">
+      <div class="who">Incident Agent · 建议卡片</div>
+      <div class="msg">Likely root cause: <code>DB connection pool exhaustion</code><br>Confidence: <code>82%</code> · Similar incidents: <code>INC123 / INC456</code><br>Recommended: restart X / rollback Y · Evidence: …</div>
+    </div>
+    <p>再进一步，让 Agent 自动执行经过批准的 runbook，形成完整闭环：</p>
+    <div class="flow next">
+      <div class="fl-label">闭环</div>
+      <div class="chips"><span class="c">Detect</span><span class="a">→</span><span class="c">Diagnose</span><span class="a">→</span><span class="c">Recommend</span><span class="a">→</span><span class="c">Approve</span><span class="a">→</span><span class="c">Remediate</span><span class="a">→</span><span class="c">Verify</span><span class="a">→</span><span class="c">RCA</span></div>
+    </div>
+  </section>
+
+  <!-- ===== 10 ===== -->
+  <section id="s10" class="reveal">
+    <div class="sec-head"><div class="sec-num">10</div><h2>Enterprise Knowledge / Process Agent<small>不是「内部 ChatGPT」，而是 Bank Process Agent · Enterprise</small></h2></div>
+    <p>真正有价值的演进路径是 <b><em>Knowledge Assistant → Process Assistant → Process Agent</em></b>。员工问的不只是 policy，而是一个完整流程：</p>
+    <div class="chat">
+      <div class="who">RM · 新加坡</div>
+      <div class="msg">"How do I onboard a Singapore hedge fund trading FX options through our London entity?"</div>
+    </div>
+    <p>Agent 应该完整知道：<b>KYC Requirement · Product Eligibility · Legal Entity · Credit Approval · Documentation · ISDA · CSA · Booking Model · Tax · Regulatory Reporting · Settlement Setup</b>，然后给出 Step 1 → Step 2 → Step 3，甚至自动创建 workflow / ticket / request。</p>
+    <div class="flow next">
+      <div class="fl-label">演进</div>
+      <div class="chips"><span class="c">Knowledge Assistant</span><span class="a">→</span><span class="c">Process Assistant</span><span class="a">→</span><span class="c">Process Agent</span></div>
+    </div>
+  </section>
+
+  <!-- ===== PULL QUOTE ===== -->
+  <div class="pull reveal">
+    <p>最有价值的项目，已经不是「LLM 能不能回答这个问题」，而是「LLM 能不能<em style="background:linear-gradient(transparent 62%, rgba(240,217,160,.45) 62%)">安全地参与一个银行业务流程</em>」。</p>
+    <div class="sub">— The Common Thread · 13 个候选项目的共同点</div>
+  </div>
+
+  <!-- ===== MATRIX ===== -->
+  <section id="matrix" class="reveal">
+    <div class="sec-head"><div class="sec-num">◆</div><h2>2026 机会矩阵与优先级<small>成熟度（实现难度低的在前）× 潜在价值 · 13 个候选项目</small></h2></div>
+
+    <div class="matrix-wrap">
+      <div class="matrix" id="mx">
+        <span class="zone" style="top:8px;right:12px">★ 高价值 · 高成熟 — 优先立项</span>
+        <span class="zone" style="bottom:44px;left:14px">观察 / 能力储备</span>
+      </div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div class="matrix-note">横轴 = 成熟度（★★★★★ = 技术路径已验证，最易落地）· 纵轴 = 潜在价值 · 颜色 = 业务条线 · 编号见右侧图例</div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>#</th><th>AI Program</th><th>Business Area</th><th>AI 的核心能力</th><th>成熟度</th><th>潜在价值</th></tr></thead>
+        <tbody id="tbl"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== PLATFORM ===== -->
+  <section id="platform" class="reveal">
+    <div class="sec-head"><div class="sec-num">◆</div><h2>提案的正确写法<small>从「LLM 小工具」到 Banking AI Platform · 附 AI Governance 议程</small></h2></div>
+    <p>如果要做银行内部 AI 项目 Proposal / Hackathon / PoC / 2026 Technology Strategy，不要把题目写成「Use GenAI to analyse KYC alerts」，而要写成平台级的命题，并画出完整链路：</p>
+    <div class="rename">
+      <div class="bad"><div class="lab">✕ 工具级命题</div><p>Use GenAI to analyse KYC alerts.</p></div>
+      <div class="arr">→</div>
+      <div class="good"><div class="lab">✓ 平台级命题</div><p><b>Agentic KYC Investigation &amp; Decision Support Platform</b></p></div>
+    </div>
+    <div class="platform">
+      <div class="pl-flow">
+        <span class="step">Data Sources</span><span class="ar">→</span>
+        <span class="step">AI Agents</span><span class="ar">→</span>
+        <span class="step">Reasoning / Evidence</span><span class="ar">→</span>
+        <span class="step">Bank Systems</span><span class="ar">→</span>
+        <span class="step">Human Approval</span><span class="ar">→</span>
+        <span class="step">Action</span><span class="ar">→</span>
+        <span class="step">Audit</span>
+      </div>
+    </div>
+    <p>这样项目层级一下就从「LLM 小工具」变成了真正的 <b>Banking AI Platform / Business Process Transformation</b>。</p>
+    <p>同时，对 G-SIB 级跨国银行而言，<b>AI Governance 本身就是一个巨大的 Technology Program</b>：</p>
+    <div class="gov">
+      <h4>AI Governance Program · 议程清单</h4>
+      <div class="tags" style="margin:0"><span class="t">Model Inventory</span><span class="t">Prompt / Agent Registry</span><span class="t">Entitlement</span><span class="t">Data Leakage Prevention</span><span class="t">Hallucination Testing</span><span class="t">Explainability</span><span class="t">Human Approval</span><span class="t">Agent Action Audit</span><span class="t">Model Monitoring</span><span class="t">Third-party Model Risk</span><span class="t">AI Red Team</span></div>
+    </div>
+    <p class="muted">BIS/FSB 特别提示的风险面：第三方依赖、模型风险、数据质量、网络安全，以及共同模型导致的市场相关性。<sup style="font-family:var(--mono)">[6]</sup></p>
+  </section>
+
+  <!-- ===== REFS ===== -->
+  <section id="refs" class="reveal">
+    <div class="sec-head"><div class="sec-num">※</div><h2>参考来源<small>References · 公开演讲与研究</small></h2></div>
+    <ol class="refs">
+      <li><sup style="font-family:var(--mono)">[1]</sup> BIS — <a href="https://www.bis.org/speeches/20250409-ai-fintechs-and-banks.htm" target="_blank" rel="noopener">AI, fintechs, and banks</a> (April 2025)</li>
+      <li><sup style="font-family:var(--mono)">[2]</sup> Bank of England — <a href="https://www.bankofengland.co.uk/financial-stability-in-focus/2025/april-2025" target="_blank" rel="noopener">Financial Stability in Focus: Artificial intelligence in the financial system</a> (April 2025)</li>
+      <li><sup style="font-family:var(--mono)">[3]</sup> BIS Working Paper No.1310 — <a href="https://www.bis.org/publ/work1310.htm" target="_blank" rel="noopener">AI agents for cash management in payment systems</a> (2025)</li>
+      <li><sup style="font-family:var(--mono)">[4]</sup> BIS — <a href="https://www.bis.org/speeches/20251114-ai-and-central-banking.htm" target="_blank" rel="noopener">AI and central banking</a> (November 2025)</li>
+      <li><sup style="font-family:var(--mono)">[5]</sup> BIS — <a href="https://www.bis.org/speeches/20251120-creating-future-finance-journey-innovation-and-collaboration.htm" target="_blank" rel="noopener">Creating the future of finance — a journey of innovation and collaboration</a> (November 2025)</li>
+      <li><sup style="font-family:var(--mono)">[6]</sup> BIS FSI — <a href="https://www.bis.org/fsi/fsisummaries/finstabai.htm" target="_blank" rel="noopener">Financial stability implications of artificial intelligence — Executive Summary</a></li>
+    </ol>
+  </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="fm">THE OPPORTUNITY LEDGER · 银行 AI 特刊</div>
+  <div>2026-09-06 · 观点与数据整理自 BIS / Bank of England / MAS 公开材料 · 生成于 ZCode</div>
+</footer>
+
+<script>
+/* ---------- data ---------- */
+const P = [
+  {n:1, name:"Trade Lifecycle Agent",    area:"Markets Ops",     cap:"Extraction + Reasoning + Action",  m:4, v:5, c:"#1D5C43", dx:0,  dy:0},
+  {n:2, name:"Trade Exception Agent",    area:"Markets Ops",     cap:"Root Cause + Remediation",         m:4, v:5, c:"#1D5C43", dx:26, dy:26},
+  {n:3, name:"KYC Investigation Agent",  area:"FCC",             cap:"Research + Reasoning",             m:5, v:5, c:"#963A2B", dx:-6, dy:0},
+  {n:4, name:"AML / Sanctions Agent",    area:"FCC",             cap:"Entity Resolution + Investigation",m:4, v:5, c:"#963A2B", dx:-26, dy:26},
+  {n:5, name:"Corporate Intelligence",   area:"Credit / RM",     cap:"Document + Financial Analysis",    m:5, v:4, c:"#31517A", dx:0,  dy:0},
+  {n:6, name:"Credit Early Warning",     area:"Credit Risk",     cap:"Signal Detection + Reasoning",     m:4, v:5, c:"#31517A", dx:0,  dy:26},
+  {n:7, name:"Portfolio Risk Agent",     area:"Risk",            cap:"Scenario + Explanation",           m:3, v:5, c:"#6B3A5E", dx:0,  dy:0},
+  {n:8, name:"Liquidity / Payment Agent",area:"Treasury",        cap:"Optimisation + Agent",             m:3, v:4, c:"#8A6A2F", dx:0,  dy:0},
+  {n:9, name:"Regulatory Change Agent",  area:"Compliance",      cap:"Regulation → Control Mapping",     m:4, v:5, c:"#4E5A52", dx:26, dy:-26},
+  {n:10,name:"Continuous Control Agent", area:"Operational Risk",cap:"Testing + Evidence",               m:3, v:5, c:"#A07A2C", dx:0,  dy:26},
+  {n:11,name:"Legacy Modernisation",     area:"Technology",      cap:"Code Reasoning",                   m:5, v:5, c:"#33322C", dx:22, dy:-6},
+  {n:12,name:"SRE / Incident Agent",     area:"Technology",      cap:"Diagnosis + Action",               m:5, v:5, c:"#33322C", dx:-22,dy:-30},
+  {n:13,name:"Enterprise Process Agent", area:"Enterprise",      cap:"Knowledge + Workflow",             m:4, v:4, c:"#3D6B6B", dx:0,  dy:0},
+];
+const stars = k => `<span class="st-on">${"★".repeat(k)}</span><span class="st-off">${"☆".repeat(5-k)}</span>`;
+
+/* ---------- ticker ---------- */
+const tick = P.map(p=>`<b>${String(p.n).padStart(2,"0")}</b>&nbsp;${p.name}&nbsp;<span class="st">${"★".repeat(p.v)}</span><i>◆</i>`).join("");
+document.getElementById("ticker").innerHTML = tick + tick;
+
+/* ---------- matrix ---------- */
+const mx = document.getElementById("mx");
+const W = 100, H = 86, PAD = 34;           /* % box coords, bottom pad for axis */
+function plot(p){
+  const x = 8 + (p.m-1)/4 * 84;            /* maturity 1..5 → 8%..92% */
+  const y = 12 + (5-p.v)/4 * 62;           /* value 5 top → 12%, value 1 bottom */
+  const d = document.createElement("div");
+  d.className = "dot"; d.textContent = p.n;
+  d.style.cssText = `left:${x}%;top:${y}%;background:${p.c};--dx:${p.dx||0}px;--dy:${p.dy||0}px`;
+  d.title = `${String(p.n).padStart(2,"0")} ${p.name} · 成熟度 ${p.m}★ / 潜在价值 ${p.v}★`;
+  mx.appendChild(d);
+}
+P.forEach(plot);
+/* gridlines + axis labels */
+for(let i=1;i<=5;i++){
+  const v=document.createElement("div");v.className="mline v";v.style.left=(8+(i-1)/4*84)+"%";v.style.bottom=PAD+"px";v.style.top="8px";mx.appendChild(v);
+  const h=document.createElement("div");h.className="mline h";h.style.top=(12+(5-i)/4*62)+"%";mx.appendChild(h);
+  const xl=document.createElement("span");xl.className="ax";xl.style.left=(8+(i-1)/4*84)+"%";xl.style.bottom="10px";xl.textContent="★".repeat(i);mx.appendChild(xl);
+  const yl=document.createElement("span");yl.className="ay";yl.style.top=(12+(5-i)/4*62)+"%";yl.textContent="★".repeat(i);mx.appendChild(yl);
+}
+const xl2=document.createElement("span");xl2.className="ax";xl2.style.cssText="left:50%;bottom:-4px;transform:translate(-50%,0);letter-spacing:.2em";xl2.textContent="成熟度 MATURITY →";mx.appendChild(xl2);
+const yl2=document.createElement("span");yl2.className="ay";yl2.style.cssText="left:-8px;top:38%;transform:translate(0,-50%) rotate(-90deg);transform-origin:left;letter-spacing:.2em";yl2.textContent="← 潜在价值 VALUE";mx.appendChild(yl2);
+
+/* ---------- legend + table ---------- */
+document.getElementById("legend").innerHTML = P.map(p=>
+  `<div class="li"><span class="sw" style="background:${p.c}"></span><b>${String(p.n).padStart(2,"0")}</b><span>${p.name}</span><span class="pg" style="margin-left:auto;white-space:nowrap">${p.area}</span></div>`).join("");
+document.getElementById("tbl").innerHTML = P.map(p=>
+  `<tr${p.m===5&&p.v===5?' class="hot"':""}><td class="pg">${String(p.n).padStart(2,"0")}</td><td class="prog">${p.name}</td><td class="pg">${p.area}</td><td>${p.cap}</td><td>${stars(p.m)}</td><td>${stars(p.v)}</td></tr>`).join("");
+
+/* ---------- reveal + toc + progress ---------- */
+const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target);}}),{threshold:.06});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+const links=[...document.querySelectorAll("#toc a")];
+const secs=links.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);
+const io2=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    links.forEach(l=>l.classList.toggle("on", l.getAttribute("href")==="#"+e.target.id));
+  }});
+},{rootMargin:"-15% 0px -70% 0px"});
+secs.forEach(s=>io2.observe(s));
+addEventListener("scroll",()=>{
+  const h=document.documentElement;
+  document.getElementById("progress").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%";
+},{passive:true});
+</script>
+</body>
+</html>
