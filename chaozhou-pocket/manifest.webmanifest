@@ -1,1 +1,1 @@
-{"name": "潮州慢假期 · 随身路书", "short_name": "潮州路书", "start_url": "./", "scope": "./", "display": "standalone", "background_color": "#f5f1e8", "theme_color": "#214a3b", "icons": [{"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]}
+{"name": "潮汕后半程 · 手机随身路书", "short_name": "潮汕路书", "start_url": "./", "scope": "./", "display": "standalone", "background_color": "#f5f1e8", "theme_color": "#214a3b", "icons": [{"src": "icon.svg?v=20261002-r5", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]}
