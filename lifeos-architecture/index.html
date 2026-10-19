@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Life OS 架构与进度</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: single reading column (~72ch) with wide diagram panels; left-aligned, section labels as margin eyebrows */
+:root{
+  --bg:#f3f5f4; --surface:#ffffff; --fg:#17201d; --muted:#5a6863; --line:#d5ddda;
+  --accent:#1f6b52; --accent-soft:#e1efe9; --warn:#a15c07; --warn-soft:#fbefdc; --bad:#a23a2a;
+  --display:"Noto Serif SC","Songti SC",serif; --body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111816; --surface:#18221f; --fg:#e4ebe8; --muted:#97a6a0; --line:#2b3934;
+  --accent:#5fc49c; --accent-soft:#1d3a30; --warn:#e3a54f; --warn-soft:#3a2c17; --bad:#ef8a78; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111816; --surface:#18221f; --fg:#e4ebe8; --muted:#97a6a0; --line:#2b3934;
+  --accent:#5fc49c; --accent-soft:#1d3a30; --warn:#e3a54f; --warn-soft:#3a2c17; --bad:#ef8a78; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15.5px;line-height:1.75;padding:0 16px}
+.wrap{max-width:920px;margin:0 auto;padding-block:40px 80px}
+.col{max-width:72ch}
+header{display:grid;gap:10px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(28px,5vw,42px);line-height:1.2;margin:0;text-wrap:balance}
+h2{font-family:var(--display);font-weight:600;font-size:24px;margin:0;text-wrap:balance}
+h3{font-size:16px;font-weight:700;margin:14px 0 2px}
+section{display:grid;gap:14px;padding-block:36px;border-bottom:1px solid var(--line)}
+p{margin:0}
+ul,ol{margin:0;padding-left:1.3em}
+li+li{margin-top:4px}
+code,.mono{font-family:var(--mono);font-size:.86em}
+.lede{font-size:17px}
+.answer{background:var(--accent-soft);border-left:3px solid var(--accent);padding:14px 18px;border-radius:2px}
+.answer strong{color:var(--accent)}
+.note{background:var(--warn-soft);border-left:3px solid var(--warn);padding:12px 16px;border-radius:2px}
+.diagram{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px;overflow-x:auto}
+.diagram pre.mermaid{margin:0;min-width:640px;background:transparent}
+.cap{font-size:13px;color:var(--muted)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;color:var(--muted);font-weight:500;background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td code{white-space:nowrap}
+.pill{display:inline-block;font-family:var(--mono);font-size:11.5px;padding:1px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.pill.off{color:var(--warn);border-color:var(--warn);background:var(--warn-soft)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted)}
+.mail{font-family:var(--mono);font-size:13.5px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;overflow-x:auto;line-height:1.7;white-space:pre-wrap}
+.mail b{color:var(--accent);font-weight:600}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.grid2>div{min-width:0}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Life OS · 架构与进度 · 2026-10-19 凌晨版</div>
+  <h1>Life OS 现在是怎样运转的</h1>
+  <p class="lede col">一句话：思源是你写字的地方，Git 快照是可信的知识底座，一组定时任务把“随手采集”变成有结构的知识，再通过晨报、邮件命令和任务板把注意力引到真正重要的事上。</p>
+  <div class="meta"><span>版本 <code>e201409</code>（分支 feat/lifeos-p0）</span><span>测试 1630 项通过</span><span>运行在开发 VM，生产思源只读</span></div>
+</header>
+
+<section>
+  <div class="eyebrow">全景</div>
+  <h2>一张图看完</h2>
+  <div class="diagram"><pre class="mermaid">
+flowchart LR
+  subgraph 你
+    SY[思源笔记]
+    W[手表 Dinox 录音]
+    FS[Fastshot 截图]
+    M[邮件]
+  end
+  SY --> PUB[发布器<br/>每30分钟]
+  W --> SY
+  FS --> SY
+  PUB --> GIT[(GitHub 快照<br/>可信来源)]
+  CAP[图片说明<br/>DeepSeek 视觉] -->|排队，由发布器提交| PUB
+  GIT --> IDX[索引<br/>全文+向量]
+  GIT --> TR[语音转写<br/>Gemini+本地核对]
+  GIT --> ING[采集流整理<br/>类型/项目/标签/人物]
+  TR -->|写入收件箱| SY
+  ING -->|属性+每日整理页| SY
+  IDX --> BR[晨报/周报<br/>语义重点]
+  IDX --> TB[任务板<br/>路由给执行者]
+  M -->|问：/任务：/回复命令| TB
+  M --> BR
+  BR -->|HTML 邮件| M
+  TB -->|任务交付| SY
+  IDX --> WK[Wiki 项目页<br/>+人物索引]
+  WK --> SY
+</pre></div>
+  <p class="cap">只有发布器写 GitHub；Life OS 对思源只写「Life OS 收件箱」「Life OS Wiki」和 custom-lifeos-* 属性，其余全部只读。</p>
+</section>
+
+<section>
+  <div class="eyebrow">怎么用</div>
+  <h2>你只需要邮件和思源</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>想做的事</th><th>怎么做</th><th>结果在哪</th></tr></thead>
+    <tbody>
+      <tr><td>看今天该关注什么</td><td>每天 07:30 收晨报，周日 20:00 收周报</td><td>邮件（排版好的 HTML）</td></tr>
+      <tr><td>说某件事做完了／不重要／晚点</td><td>回复晨报：<code>完成 2</code>　<code>忽略 3</code>　<code>延后 1 周五</code>　<code>撤销 2</code></td><td>确认邮件；以后不再出现</td></tr>
+      <tr><td>问知识库</td><td>邮件主题 <code>问：……</code></td><td>带出处的回信</td></tr>
+      <tr><td>交代一件事</td><td>邮件主题 <code>任务：……</code></td><td>思源「Life OS 收件箱/任务交付」</td></tr>
+      <tr><td>随手记</td><td>普通邮件，可带图片</td><td>收件箱，自动整理</td></tr>
+      <tr><td>看录音和截图整理成什么样</td><td>打开思源</td><td>「采集整理/日期」、「语音转写」</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="eyebrow">晨报 v2</div>
+  <h2>晨报怎么编出来</h2>
+  <div class="col"><p>不再数 <code>- [ ]</code>。模型逐篇阅读最近 3 天改过的笔记（会议记录、Dinox 录音、截图文字），找出需要你本人去做或关注的事，再排序、合并、限量。每篇笔记的每个版本只读一次，结果缓存。</p></div>
+  <div class="diagram"><pre class="mermaid">
+flowchart LR
+  N[最近3天的笔记<br/>不含 Life OS 自己写的] --> X[逐篇识别<br/>待办/承诺/截止/决定/风险]
+  X --> R[排序<br/>截止日 + 重要度 + 项目活跃度]
+  R --> F[过滤<br/>已完成/已忽略/延后中]
+  F --> D[合并说同一件事的条目]
+  D --> C[取前5条，每篇最多2条]
+  C --> MAIL[晨报邮件]
+  MAIL -->|你回复 完成 2| F
+</pre></div>
+  <div class="mail">## 今日重点
+1. <b>待办</b>（今天） 审阅周一的项目汇报稿并反馈意见 ——【周一汇报｜项目 A】
+2. <b>截止</b> 在架构评审前敲定技术方案 ——【评审准备｜项目 B】
+3. <b>决定</b> 确认下周家长会的时间 ——【家庭日程｜家庭】【班级群截图｜家庭】
+> 回复本邮件即可更新：完成 2／忽略 3／延后 1 周五／撤销 2
+
+## 回顾与提醒
+- 第 3 项已连续 3 期出现：可以拆成一个更小的下一步，或回复「忽略 3」</div>
+  <p class="cap">上面是示意样例（内容为虚构）。“说同一件事”的两条笔记已合并为一条，两个出处都保留。</p>
+</section>
+
+<section>
+  <div class="eyebrow">随身采集是一等公民</div>
+  <h2>录音、截图、随手记会被怎样处理</h2>
+  <div class="grid2">
+    <div>
+      <h3>语音转写</h3>
+      <p>Dinox 转写失败的录音，由 Life OS 接手：Gemini 3.8 Flash 写正文，本地 SenseVoice 兜底，并用本地模型核对每个数字（实测 Gemini 会把你说的 3.8 改成 1.5）。空录音不生成笔记。</p>
+    </div>
+    <div>
+      <h3>采集流整理</h3>
+      <p>每 30 分钟一轮。每条得到类型、重要度、最多 3 个项目、标签、人物、摘要、未命名录音的标题和相关笔记，写成属性，原文不动。每天一页「采集整理」可以点进每条。</p>
+    </div>
+    <div>
+      <h3>图片说明</h3>
+      <p>截图和图片的文字与内容说明由 DeepSeek 视觉模型生成（Gemini 兜底，MinerU 可选），先校验图片字节，再交给发布器提交。</p>
+    </div>
+    <div>
+      <h3>人物索引</h3>
+      <p>从整理结果汇总谁在什么项目里出现、最近几次提到他的笔记，生成 Wiki「人物索引」。你改过的页面不会被覆盖。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Agent 层</div>
+  <h2>任务板：任务和执行者松耦合</h2>
+  <div class="col"><p>Life OS 只定义“任务合同”：目标、上下文、技能、输出要求、优先级、复杂度、隐私、风险。由谁来做交给路由决定；换执行者或换模型只改注册表。</p></div>
+  <div class="diagram"><pre class="mermaid">
+flowchart TB
+  T[任务合同<br/>P1–P4 · C1–C4 · T0–T3 · L0–L2] --> H{硬过滤}
+  H -->|隐私/风险/能力/截止| TIER{能力档覆盖复杂度?}
+  TIER --> ORD[按优先级排序<br/>P1 看速度 · P2 看能力 · P3/P4 看成本]
+  ORD --> CH[备选链]
+  CH --> A[内嵌执行者<br/>DeepSeek / DeepSeek Agent / Gemini]
+  CH --> B[你机器上的 Agent<br/>经 SSH 的 MCP 领任务]
+  CH --> C[云端 bot<br/>邮件任务卡转交]
+  A --> V[验收<br/>格式 + 引用真实存在]
+  B --> V
+  C --> V
+  V -->|通过| L[写入 任务交付]
+  V -->|不通过/超时| CH
+</pre></div>
+  <div class="tbl"><table>
+    <thead><tr><th>执行者</th><th>类型</th><th>能力档</th><th>能看的最高隐私</th><th>状态</th></tr></thead>
+    <tbody>
+      <tr><td>内嵌 DeepSeek（单次调用）</td><td>内嵌</td><td>标准</td><td>T3 工作</td><td><span class="pill on">启用</span></td></tr>
+      <tr><td>内嵌 DeepSeek Agent（检索笔记）</td><td>内嵌</td><td>标准</td><td>T3 工作</td><td><span class="pill on">启用</span></td></tr>
+      <tr><td>内嵌 Gemini 3.8 Flash（中转）</td><td>内嵌</td><td>资深</td><td>T1 不敏感</td><td><span class="pill on">启用</span></td></tr>
+      <tr><td>Windows 上的 Claude Code</td><td>领任务</td><td>旗舰</td><td>T2 私人</td><td><span class="pill off">待你接入</span></td></tr>
+      <tr><td>VM 上的 Claude Code</td><td>领任务</td><td>旗舰</td><td>T3 工作</td><td><span class="pill off">待你接入</span></td></tr>
+      <tr><td>云端 bot（任务卡）</td><td>转交</td><td>资深</td><td>T1 不敏感</td><td><span class="pill off">待你启用</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="answer"><strong>规则要点：</strong>P1（重要且紧急）只在内嵌执行，不等外部；P1/P2 的备选链最后一环一定是内嵌执行者；工作内容（T3）不会交给第三方；新执行者先试用，只接 P4。技能来自你的 Jim-skills 仓库，逐文件核对 sha256，运维类技能标为受限。</div>
+  <p class="cap">实测：「为孩子准备六年级百分率复习练习」自动匹配到你写的数学复习技能，由内嵌 DeepSeek 生成 10 道题并交付。</p>
+</section>
+
+<section>
+  <div class="eyebrow">节奏</div>
+  <h2>每天在后台发生什么</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>时间</th><th>任务</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">每 30 分钟</td><td>发布器（思源 → Git，顺带提交新图片说明）；重建索引；采集流整理；图片说明</td></tr>
+      <tr><td class="mono">每 20 分钟</td><td>语音转写</td></tr>
+      <tr><td class="mono">每 1–2 分钟</td><td>任务板调度；收件投递；邮件收取（问答、任务、回复命令）</td></tr>
+      <tr><td class="mono">03:30</td><td>项目 Wiki、人物索引、夜间批量整理</td></tr>
+      <tr><td class="mono">07:30</td><td>晨报（同时为 1 天内的会议建立会前准备任务）</td></tr>
+      <tr><td class="mono">周日 20:00</td><td>周报 + 项目活跃度</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="eyebrow">进度</div>
+  <h2>做完了什么，还差什么</h2>
+  <div class="grid2">
+    <div>
+      <h3>今晚上线</h3>
+      <ul>
+        <li>晨报 v2、回复命令、回顾与提醒、HTML 邮件</li>
+        <li>语音转写（双引擎 + 数字核对）</li>
+        <li>采集流整理、每日整理页、人物索引</li>
+        <li>图片说明恢复</li>
+        <li>任务板、执行者注册表、路由、MCP 领任务、任务卡</li>
+        <li>Codex 审查的全部恢复缺陷已修</li>
+      </ul>
+    </div>
+    <div>
+      <h3>等你决定或参与</h3>
+      <ul>
+        <li>试用回复命令和 <code>任务：</code> 邮件</li>
+        <li>接入你机器上的 Claude Code，或启用云端 bot</li>
+        <li>是否提供更强模型的 API key（工作类复杂任务目前标为“能力档不足”）</li>
+        <li>测试 Outlook「发布日历」</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">还没做的：家庭技能的内容规范（阅读/听力材料格式、试卷评分标准；朗读音频和看图任务已经上线）、家庭聊天界面、日历接入、撤销的完全原子化（内核补丁）。</div>
+</section>
+</div>
+
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+const dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+mermaid.initialize({ startOnLoad: true, theme: dark ? 'dark' : 'neutral' });
+</script>
+</body>
+</html>
