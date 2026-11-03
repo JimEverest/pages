@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七上语文期中复习 Atlas · Michelle 专属</title>
+<style>
+:root{
+  --bg:#faf7f0; --paper:#ffffff; --ink:#2e2a24; --sub:#6f675a; --line:#e8e1d3;
+  --u1:#3a9d6e; --u1bg:#eaf5ee;
+  --u2:#d4763a; --u2bg:#fbf0e6;
+  --u3:#7c6bb0; --u3bg:#f1eef8;
+  --po:#b03a2e; --pobg:#f9eeec;
+  --tk:#2f7f8f; --tkbg:#e9f4f5;
+  --ex:#c0574f; --exbg:#faefee;
+  --gold:#c9a227;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:16px}
+a{color:var(--tk);text-decoration:none}
+a:hover{text-decoration:underline}
+/* ---------- topbar ---------- */
+.topbar{position:fixed;top:0;left:0;right:0;height:52px;background:rgba(250,247,240,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 18px;z-index:50}
+.topbar .logo{font-weight:700;font-size:15px;color:var(--ink)}
+.topbar .logo em{font-style:normal;color:var(--gold)}
+.topbar .btns{margin-left:auto;display:flex;gap:8px}
+.topbar button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 12px;font-size:13px;cursor:pointer;color:var(--sub)}
+.topbar button:hover{border-color:var(--tk);color:var(--tk)}
+/* ---------- layout ---------- */
+.wrap{display:flex;max-width:1240px;margin:64px auto 0;padding:0 16px;gap:22px}
+nav.side{width:212px;flex:none;position:sticky;top:64px;align-self:flex-start;max-height:calc(100vh - 80px);overflow:auto;font-size:13.5px}
+nav.side .cap{font-weight:700;color:var(--sub);margin:12px 0 4px;font-size:12px;letter-spacing:1px}
+nav.side a{display:block;padding:4px 10px;border-left:2px solid transparent;color:var(--sub);border-radius:0 6px 6px 0}
+nav.side a:hover,nav.side a.on{background:#fff;border-left-color:var(--gold);color:var(--ink);text-decoration:none}
+main{flex:1;min-width:0;padding-bottom:60px}
+section{margin-bottom:34px}
+@media(max-width:920px){nav.side{display:none}}
+/* ---------- headings ---------- */
+h2.sec{display:flex;align-items:center;gap:10px;font-size:22px;padding:10px 14px;border-radius:12px;margin-bottom:14px;color:#fff}
+h2.sec .tag{font-size:12px;font-weight:400;background:rgba(255,255,255,.25);padding:1px 10px;border-radius:99px}
+h3{font-size:17.5px;margin:22px 0 10px;display:flex;align-items:center;gap:8px}
+h3::before{content:"";width:6px;height:18px;border-radius:3px;background:currentColor;opacity:.75}
+h4{font-size:15.5px;margin:14px 0 6px;color:var(--sub)}
+.c-u1 h2.sec{background:linear-gradient(90deg,var(--u1),#5cb487)} .c-u1 h3{color:var(--u1)}
+.c-u2 h2.sec{background:linear-gradient(90deg,var(--u2),#e09556)} .c-u2 h3{color:var(--u2)}
+.c-u3 h2.sec{background:linear-gradient(90deg,var(--u3),#9a8cc6)} .c-u3 h3{color:var(--u3)}
+.c-po h2.sec{background:linear-gradient(90deg,#8c352b,#b03a2e)} .c-po h3{color:var(--po)}
+.c-tk h2.sec{background:linear-gradient(90deg,#25707e,var(--tk))} .c-tk h3{color:var(--tk)}
+.c-ex h2.sec{background:linear-gradient(90deg,#a5463f,var(--ex))} .c-ex h3{color:var(--ex)}
+/* ---------- cards & tables ---------- */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 3px rgba(60,50,20,.05)}
+.t{width:100%;border-collapse:collapse;font-size:14.5px;background:#fff}
+.t th{background:#f3eee2;color:#5a5245;font-weight:600}
+.t th,.t td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+.t tr:nth-child(even) td{background:#fcfaf5}
+.t td b{color:var(--po)}
+.kao{border-left:4px solid var(--gold);background:#fdf8e9;border-radius:0 10px 10px 0;padding:10px 14px;margin:12px 0;font-size:14.5px}
+.kao b:first-child{color:#8a6d00}
+.tips{border-left:4px solid var(--tk);background:var(--tkbg);border-radius:0 10px 10px 0;padding:10px 14px;margin:12px 0;font-size:14.5px}
+.warn{border-left:4px solid var(--ex);background:var(--exbg);border-radius:0 10px 10px 0;padding:10px 14px;margin:12px 0;font-size:14.5px}
+/* ---------- mindmap ---------- */
+.map{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:12px 0}
+.map .node{background:#fff;border:2px solid var(--line);border-radius:12px;padding:10px 14px;font-size:14px;flex:1;min-width:150px}
+.map .node b{display:block;font-size:15px;margin-bottom:4px}
+.map .node.root{background:var(--ink);color:#fff;border-color:var(--ink)}
+.map .arrow{align-self:center;color:#b7ad98;font-size:20px;flex:none}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.flow .step{background:#fff;border:1.5px solid var(--line);border-radius:99px;padding:5px 14px;font-size:14px}
+.flow .arr{color:#b7ad98}
+/* ---------- poem ---------- */
+.poem-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:18px;box-shadow:0 1px 3px rgba(60,50,20,.05)}
+.poem-card .pic{position:relative;height:230px;overflow:hidden}
+.poem-card .pic img{width:100%;height:100%;object-fit:cover;display:block}
+.poem-card .pic .ptitle{position:absolute;left:0;bottom:0;right:0;padding:26px 18px 12px;background:linear-gradient(transparent,rgba(20,15,8,.72));color:#fff}
+.poem-card .pic .ptitle b{font-size:19px;font-family:"Noto Serif SC","STSong","SimSun",serif}
+.poem-card .pic .ptitle span{margin-left:10px;font-size:13px;opacity:.9}
+.poem-card .body{padding:16px 18px}
+.vtext{font-family:"Noto Serif SC","STSong","SimSun",serif;font-size:17px;letter-spacing:1px;background:#faf8f2;border:1px dashed #d8cfb8;border-radius:10px;padding:12px 16px;margin:8px 0;white-space:pre-line}
+.trline{color:var(--sub);font-size:14px;margin-top:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.pill{display:inline-block;background:#f3eee2;border-radius:99px;padding:1px 10px;font-size:12.5px;margin:2px 3px 2px 0;color:#6a6152}
+.pill.hot{background:#fbe3df;color:var(--po)}
+/* ---------- misc ---------- */
+details{border:1px solid var(--line);border-radius:10px;background:#fff;margin:8px 0;overflow:hidden}
+details summary{cursor:pointer;padding:9px 14px;font-size:14px;font-weight:600;color:var(--sub);list-style:none;background:#faf8f2}
+details summary::before{content:"▸ ";color:var(--gold)}
+details[open] summary::before{content:"▾ "}
+details .inner{padding:10px 16px;border-top:1px solid var(--line)}
+.hero{position:relative;border-radius:18px;overflow:hidden;margin-bottom:22px;box-shadow:0 4px 18px rgba(60,50,20,.12)}
+.hero img{width:100%;display:block}
+.hero .htxt{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:30px 34px;background:linear-gradient(rgba(20,15,8,0) 30%,rgba(20,15,8,.72))}
+.hero .htxt h1{color:#fff;font-size:30px;font-family:"Noto Serif SC","STSong",serif;letter-spacing:2px}
+.hero .htxt p{color:#f2ecdd;font-size:14px;margin-top:6px}
+figure.info img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:12.5px;color:var(--sub);text-align:center;margin-top:6px}
+.blank{color:var(--ex);font-weight:700;letter-spacing:2px}
+.q{margin:14px 0;padding:12px 16px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.q .qh{font-weight:700;margin-bottom:6px}
+.q .qh .no{display:inline-block;background:var(--ink);color:#fff;border-radius:6px;padding:0 8px;font-size:13px;margin-right:6px}
+.opts{padding-left:10px;font-size:14.5px}
+.ansline{color:var(--u1);font-weight:700}
+.small{font-size:13px;color:var(--sub)}
+.unit-banner{border-radius:14px;padding:14px 18px;margin:26px 0 14px;color:#fff;display:flex;gap:14px;align-items:center}
+.ub-u1{background:linear-gradient(100deg,#2e7d57,#5cb487)} .ub-u2{background:linear-gradient(100deg,#b8602c,#e09556)}
+.ub-u3{background:linear-gradient(100deg,#5f5091,#9a8cc6)} .ub-po{background:linear-gradient(100deg,#7d2d25,#b03a2e)}
+.ub-tk{background:linear-gradient(100deg,#1f5f6c,#4b9aa6)} .ub-ex{background:linear-gradient(100deg,#93413b,#c0574f)}
+.unit-banner .big{font-size:20px;font-weight:700}
+.unit-banner .desc{font-size:13px;opacity:.92}
+.backtop{position:fixed;right:18px;bottom:18px;width:42px;height:42px;border-radius:50%;background:var(--ink);color:#fff;border:none;font-size:18px;cursor:pointer;opacity:.75;z-index:60}
+.backtop:hover{opacity:1}
+@media print{
+  .topbar,nav.side,.backtop,.hero .htxt p{display:none}
+  body{background:#fff} .wrap{margin:0;max-width:100%}
+  .card,.poem-card{break-inside:avoid;box-shadow:none}
+  details{page-break-inside:avoid}
+  details:not([open]) .inner{display:block}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo">📖 七上语文·期中复习 <em>Atlas</em></div>
+  <div class="btns">
+    <button onclick="toggleAll(true)">展开全部答案</button>
+    <button onclick="toggleAll(false)">收起答案</button>
+    <button onclick="window.print()">🖨 打印练习卷</button>
+  </div>
+</div>
+<div class="wrap">
+<nav class="side" id="side">
+  <div class="cap">🧭 总览</div>
+  <a href="#hero">封面·使用说明</a>
+  <a href="#map">知识总览地图</a>
+  <div class="cap">🌱 第一单元</div>
+  <a href="#chun">《春》朱自清</a>
+  <a href="#jinan">《济南的冬天》老舍</a>
+  <a href="#poems">古代诗歌四首</a>
+  <a href="#duibi">★四诗对比专题</a>
+  <div class="cap">🍂 第二单元</div>
+  <a href="#qiutian">《秋天的怀念》</a>
+  <a href="#sanbu">《散步》</a>
+  <div class="cap">📚 第三单元</div>
+  <a href="#bainao">《从百草园到三味书屋》</a>
+  <a href="#zhhx">《朝花夕拾》名著</a>
+  <div class="cap">🗂 同步拓展</div>
+  <a href="#more">其余篇目速览</a>
+  <a href="#lunyu">《论语》十二章</a>
+  <a href="#shishuo">《世说新语》二则</a>
+  <a href="#kewai">课外古诗四首</a>
+  <div class="cap">🛠 工具箱</div>
+  <a href="#common">文学常识总表</a>
+  <a href="#yicuo">字音字形易错</a>
+  <a href="#moxie">默写易错清单</a>
+  <a href="#muban">答题模板</a>
+  <div class="cap">🎯 冲刺</div>
+  <a href="#plan">考前 7 天计划</a>
+  <a href="#exam">期中模拟练习卷</a>
+  <a href="#answers">答案与解析</a>
+</nav>
+<main>
+<!-- ============ HERO ============ -->
+<div class="hero" id="hero">
+  <img src="images/01-cover.jpg" alt="复习Atlas封面" loading="eager">
+  <div class="htxt">
+    <h1>七年级上册 · 语文期中复习 Atlas</h1>
+    <p>Michelle 专属 ｜ 2026 年 11 月 ｜ 覆盖第一～三单元 + 名著《朝花夕拾》｜ 含四诗对比专题 · 模拟练习卷 · 7 天冲刺计划</p>
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">🧭 怎么用这份 Atlas（先读这里）</h3>
+  <div class="flow">
+    <span class="step">① 先看「知识总览地图」</span><span class="arr">→</span>
+    <span class="step">② 逐篇过重点（★★为老师强调）</span><span class="arr">→</span>
+    <span class="step">③ 背「默写易错清单」</span><span class="arr">→</span>
+    <span class="step">④ 做「模拟练习卷」</span><span class="arr">→</span>
+    <span class="step">⑤ 对答案·回看错处</span><span class="arr">→</span>
+    <span class="step">⑥ 按「7 天计划」滚动复习</span>
+  </div>
+  <p class="small">📌 说明：本 Atlas 依据统编版（2024）七年级上册教材整理，并覆盖老师圈画的重点篇目；如学校进度或老师补充与本文有出入，<b>一律以老师课上讲的为准</b>。古诗四首的「对比」是老师特别提示的考点，已单独做成一个专题（见目录 ★）。</p>
+</div>
+
+<!-- ============ MAP ============ -->
+<section id="map" class="c-tk">
+  <h2 class="sec">🗺 知识总览地图 <span class="tag">上半学期考点一张图</span></h2>
+  <div class="card">
+    <div class="map">
+      <div class="node root" style="flex:100%"><b>七上语文 · 期中考试</b>三大板块：积累运用（约 25 分）＋ 阅读理解（约 45 分）＋ 作文（约 50 分）</div>
+    </div>
+    <div class="map">
+      <div class="node" style="border-color:var(--u1)"><b>🌱 第一单元 · 四季美景</b>《春》★★<br>《济南的冬天》★★<br>《雨的四季》（自读）<br>古代诗歌四首★★★<br><span class="pill">借景抒情</span><span class="pill">比喻拟人排比</span><span class="pill">多感官写景</span></div>
+      <div class="arrow">＋</div>
+      <div class="node" style="border-color:var(--u2)"><b>🍂 第二单元 · 至爱亲情</b>《秋天的怀念》★★<br>《散步》★★<br>《散文诗二首》（自读）<br>《世说新语》二则<br><span class="pill">细节描写</span><span class="pill">以小见大</span><span class="pill">文言启蒙</span></div>
+      <div class="arrow">＋</div>
+      <div class="node" style="border-color:var(--u3)"><b>📚 第三单元 · 学习生活</b>《从百草园到三味书屋》★★★<br>《往事依依》《再塑生命的人》（自读）<br>《论语》十二章★★★<br>名著《朝花夕拾》★★★<br><span class="pill">对比结构</span><span class="pill">动词准确</span><span class="pill">名著常识</span></div>
+    </div>
+    <div class="kao"><b>🎯 考点提示：</b>期中卷常见题型——①古诗文<b>理解性默写</b>（必考）②古诗<b>对比鉴赏</b>（老师已提示！）③课内文言（《论语》/《世说新语》）字词翻译④课内散文<b>句子赏析</b>⑤名著《朝花夕拾》选择/简答⑥记事写人<b>作文</b>。</div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h4>⭐ 重点星级（按老师提示 + 考频）</h4>
+      <table class="t">
+        <tr><th>篇目</th><th>星级</th><th>最可能考什么</th></tr>
+        <tr><td>古代诗歌四首</td><td>★★★</td><td>默写 + <b>四诗对比</b>（意象·情感·手法）</td></tr>
+        <tr><td>《论语》十二章</td><td>★★★</td><td>默写、字词、道理、成语</td></tr>
+        <tr><td>《从百草园到三味书屋》</td><td>★★★</td><td>捕鸟动词、写景句赏析、两处对比</td></tr>
+        <tr><td>《朝花夕拾》</td><td>★★★</td><td>篇目·人物·内容常识（选择+简答）</td></tr>
+        <tr><td>《春》</td><td>★★</td><td>五幅图、修辞赏析、盼春赞首尾</td></tr>
+        <tr><td>《济南的冬天》</td><td>★★</td><td>对比开头、雪景段赏析、"温晴"文眼</td></tr>
+        <tr><td>《秋天的怀念》</td><td>★★</td><td>细节描写、"好好儿活"、标题含义</td></tr>
+        <tr><td>《散步》</td><td>★★</td><td>结尾含义、以小见大、景物描写作用</td></tr>
+        <tr><td>《世说新语》二则</td><td>★★</td><td>文言字词、翻译、"信""礼"理解</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>📊 半学期能力清单（自查打勾）</h4>
+      <table class="t">
+        <tr><th>能力点</th><th>自查</th></tr>
+        <tr><td>四首古诗原文 + 理解性默写全对</td><td>☐</td></tr>
+        <tr><td>能背出四诗的作者、朝代、体裁</td><td>☐</td></tr>
+        <tr><td>能说清《春》"五幅图"顺序和结尾三个比喻</td><td>☐</td></tr>
+        <tr><td>能找出《济南的冬天》三组对比并说明作用</td><td>☐</td></tr>
+        <tr><td>《秋天的怀念》三次"看花"线索能复述</td><td>☐</td></tr>
+        <tr><td>《散步》结尾"整个世界"含义会写</td><td>☐</td></tr>
+        <tr><td>《论语》十二章默写 + 至少 6 个成语</td><td>☐</td></tr>
+        <tr><td>《朝花夕拾》10 篇篇名与对应人物能连线</td><td>☐</td></tr>
+        <tr><td>会套"赏析三步法"写句子赏析</td><td>☐</td></tr>
+        <tr><td>字音字形易错清单过 3 遍</td><td>☐</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+<div class="unit-banner ub-u1" id="unit1"><div class="big">🌱 第一单元 · 四季美景</div><div class="desc">单元主题：亲近自然，体会四季景物的情趣 ｜ 语文要素：重音停连朗读 · 比喻拟人 · 揣摩词语</div></div>
+
+<!-- ================= 春 ================= -->
+<section id="chun" class="c-u1">
+  <h2 class="sec">① 《春》 朱自清 <span class="tag">精读 ★★</span></h2>
+
+  <div class="card">
+    <h3>👤 作者名片</h3>
+    <p><b>朱自清</b>（1898—1948），字<b>佩弦</b>，江苏扬州人。<b>散文家、诗人、学者</b>（著名的民主战士，毛泽东赞其"表现了我们民族的英雄气概"）。代表作：散文《<b>背影</b>》《<b>荷塘月色</b>》《匆匆》，诗文集《踪迹》等。</p>
+  </div>
+
+  <div class="card">
+    <h3>🧠 结构图：盼春 → 绘春 → 赞春</h3>
+    <div class="flow">
+      <span class="step" style="border-color:var(--u1)"><b>盼春</b>（1段）盼望着，盼望着…</span><span class="arr">→</span>
+      <span class="step" style="border-color:var(--u1)"><b>绘春</b>（2–7段）总绘春色＋五幅图</span><span class="arr">→</span>
+      <span class="step" style="border-color:var(--u1)"><b>赞春</b>（8–10段）三个比喻句收束</span>
+    </div>
+    <div class="map">
+      <div class="node root"><b>绘春 · 五幅图</b>（按"草→花→风→雨→人"展开）</div>
+      <div class="arrow">↓</div>
+      <div class="node"><b>🌱春草图</b>偷偷地、钻<br>嫩嫩的、绿绿的<br><span class="pill hot">拟人·叠词</span>突出小草<b>顽强的生命力</b>和"嫩、绿、多"</div>
+      <div class="node"><b>🌸春花图</b>红的像火，粉的像霞，白的像雪<br>花下蜜蜂闹、蝴蝶飞<br><span class="pill hot">比喻·排比·虚实结合</span>花开多艳；"闭了眼，树上仿佛已满是桃儿杏儿梨儿"是<b>虚写（想象）</b></div>
+      <div class="node"><b>🍃春风图</b>"吹面不寒杨柳风"像母亲的手<br><span class="pill hot">引用·比喻·拟人·多感官</span>触觉（抚摸）＋嗅觉（泥土味、花香）＋视觉（繁花嫩叶）＋听觉（鸟鸣、笛声）</div>
+      <div class="node"><b>🌧春雨图</b>像牛毛，像花针，像细丝<br>密密地斜织着，一层薄烟<br><span class="pill hot">比喻·排比</span>雨细、密、亮、斜；雨中<b>静谧</b>的傍晚与黄晕的光</div>
+      <div class="node"><b>🪁迎春图</b>天上风筝多了，地上孩子多了<br>"一年之计在于春"<b>（引用）</b><br>由景及人，<b>颂扬奋发向上</b>，五幅图中最能体现"人勤春早"</div>
+    </div>
+    <div class="kao"><b>考点①：</b>结尾三个比喻为什么<b>不能调换顺序</b>？——"刚落地的娃娃"（<b>新</b>）→"小姑娘"（<b>美</b>）→"健壮的青年"（<b>力</b>），对应春天<b>生长的过程</b>：新 → 美 → 力，感情层层递进，表达对春天的赞美与"领着我们上前去"的进取精神。</div>
+    <div class="kao"><b>考点②：</b>首段"<b>盼望着，盼望着</b>"用了<b>反复</b>修辞，叠用表达<b>急切盼望</b>之情；"东风来了，春天的脚步近了"用<b>拟人</b>，宣告春天到来。</div>
+    <div class="kao"><b>考点③：</b>春花图中"花下成千成百的蜜蜂嗡嗡地<b>闹</b>着"——"闹"字能否换成"叫"？<b>不能</b>。"闹"不仅有声音，还有<b>嗡嗡飞动、争抢热闹</b>的动态画面，侧面写出花多、花香、春意浓（一说化用"红杏枝头春意闹"）。</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>✍ 修辞盘点</h3>
+      <table class="t">
+        <tr><th>修辞</th><th>例句</th><th>表达效果</th></tr>
+        <tr><td>比喻＋排比</td><td>红的像火，粉的像霞，白的像雪</td><td>写出花色艳丽缤纷，节奏感强</td></tr>
+        <tr><td>比喻＋排比</td><td>像牛毛，像花针，像细丝</td><td>春雨细、密、亮的特点</td></tr>
+        <tr><td>拟人</td><td>小草偷偷地从土里钻出来／欣欣然张开了眼</td><td>小草不经意间破土，生命力顽强</td></tr>
+        <tr><td>拟人</td><td>鸟儿…卖弄清脆的喉咙</td><td>"卖弄"贬词褒用，鸟儿活泼可爱</td></tr>
+        <tr><td>反复</td><td>盼望着，盼望着</td><td>强调盼春心切</td></tr>
+        <tr><td>引用</td><td>"吹面不寒杨柳风"（南宋·志南和尚《绝句》）／"一年之计在于春"</td><td>增添文化韵味</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🈶 重点词语（读读写写）</h3>
+      <p class="vtext">朗润　酝酿　卖弄　喉咙　应和　嘹亮　烘托　静默　风筝　抖擞　健壮　呼朋引伴　花枝招展　宛转　黄晕　舒活</p>
+      <p class="small">易读错：<b>应和 hè</b>（不读 hé）｜<b>黄晕 yùn</b>（不读 yūn）｜<b>酝酿 niàng</b>｜<b>嘹 liáo</b>亮<br>易写错：<b>朗润</b>（不写"郎润"）｜<b>酝酿</b>（偏旁都是"酉"）｜<b>花枝招展</b>、<b>呼朋引伴</b></p>
+      <div class="kao"><b>考点④：</b>"酝酿"原义是造酒的发酵过程，课文里指<b>春的气息在空气里越来越浓</b>（像发酵一样慢慢生成）。</div>
+    </div>
+  </div>
+
+  <figure class="info card">
+    <img src="images/02-chun.jpg" alt="春·五幅图意境" loading="lazy">
+    <figcaption>《春》意境图：春草嫩绿、春花似火如霞如雪、风筝与细雨——对应"春草图→春花图→春雨图→迎春图"</figcaption>
+  </figure>
+
+  <div class="card">
+    <h3>📝 主旨一句话</h3>
+    <p>通过描绘春草、春花、春风、春雨、迎春五幅图，抒发对春天的<b>热爱赞美</b>之情，表达<b>珍惜春光、积极进取</b>的生活态度。</p>
+  </div>
+</section>
+<!-- ================= 济南的冬天 ================= -->
+<section id="jinan" class="c-u1">
+  <h2 class="sec">② 《济南的冬天》 老舍 <span class="tag">精读 ★★</span></h2>
+
+  <div class="card">
+    <h3>👤 作者名片</h3>
+    <p><b>老舍</b>（1899—1966），原名<b>舒庆春</b>，字<b>舍予</b>，北京人，满族。现代著名作家，被授予"<b>人民艺术家</b>"称号。代表作：小说《<b>骆驼祥子</b>》《四世同堂》，话剧《<b>茶馆</b>》《龙须沟》。</p>
+  </div>
+
+  <div class="card">
+    <h3>🔑 文眼：「温晴」＋ 三组对比</h3>
+    <div class="map">
+      <div class="node root"><b>温晴</b>（温情）——济南冬天总特点，全文围绕它写</div>
+    </div>
+    <table class="t">
+      <tr><th>对比对象</th><th>对方特点</th><th>济南特点</th><th>作用</th></tr>
+      <tr><td>vs 北平</td><td>冬天多风</td><td>没有风声</td><td rowspan="3">三组对比突出济南冬天<b>温晴（响晴＋温情）</b>的宝地气质，这是<b>侧面烘托</b>，不直接写而特征更鲜明</td></tr>
+      <tr><td>vs 伦敦</td><td>多雾，见不着日光</td><td>响晴</td></tr>
+      <tr><td>vs 热带</td><td>日光毒得吓人</td><td>没有毒日</td></tr>
+    </table>
+    <div class="kao"><b>考点①：</b>开头三组对比的作用——<b>突出济南冬天"温晴"的特点</b>，为下文写山（慈善）、写雪（秀气）、写水（澄清）张本（做铺垫），抒发对济南的<b>喜爱、赞美</b>。</div>
+  </div>
+
+  <div class="card">
+    <h3>🧠 结构与画面</h3>
+    <div class="flow">
+      <span class="step">①段 三组对比→温晴</span><span class="arr">→</span>
+      <span class="step">②段 阳光下的小山（小摇篮）</span><span class="arr">→</span>
+      <span class="step">③段 雪后小山（最妙）★★</span><span class="arr">→</span>
+      <span class="step">④段 城外远山（小水墨画）</span><span class="arr">→</span>
+      <span class="step">⑤段 冬水（蓝水晶）</span>
+    </div>
+    <table class="t">
+      <tr><th>画面</th><th>名句</th><th>手法·赏析</th></tr>
+      <tr><td>阳光下<br>的小山</td><td>一个老城……暖和安适地<b>睡着</b>，只等春风来把它们<b>唤醒</b></td><td>拟人。老城像人一样安然入睡，写出济南的<b>暖和安适</b>，是"温晴"孕育的"理想的境界"</td></tr>
+      <tr><td>小山像<br>摇篮</td><td>这一圈小山……好像是把济南放在一个<b>小摇篮</b>里</td><td>比喻＋拟人（"低声地说：你们放心吧"）。小山围城如摇篮呵护婴儿，写出小山的<b>可爱慈善</b>，给人安全感、温暖感</td></tr>
+      <tr><td>雪后<br>小山★★</td><td>树尖上<b>顶</b>着一髻儿白花……给蓝天<b>镶</b>上一道银边……好像忽然<b>害了羞</b></td><td>"顶"写出雪小、松树顶雪的形态（拟人化的娇态）；"镶"写出白雪与蓝天相接的<b>界线分明、精致</b>；"害了羞"拟人，夕阳微黄斜射、薄雪微露粉色，写出雪的<b>娇美秀丽</b>与人的怜爱之情</td></tr>
+      <tr><td>城外<br>远山</td><td>小村庄的房顶上卧着点雪……这是张<b>小水墨画</b></td><td>比喻。"卧"字拟人，安适平静；水墨画写其<b>淡雅素净</b>（唐代名手画的）</td></tr>
+      <tr><td>冬水</td><td>整个的是块<b>空灵的蓝水晶</b></td><td>比喻。总结全文，写出济南冬天<b>清澈、明亮、蓝汪汪</b>的整体印象</td></tr>
+    </table>
+    <div class="kao"><b>考点②（雪后小山段·必背）：</b>写景顺序——<b>山上（矮松）→山尖→山坡→山腰</b>，空间顺序（自上而下）；色彩搭配：青黑、白、银、暗黄、微黄、粉色，像<b>着色水墨画</b>。"穿上带水纹的花衣"（比喻拟人）写雪色与草色相间；"看护妇"比喻写树尖顶雪如白帽。</div>
+    <div class="kao"><b>考点③：</b>标题能否改为"冬天的济南"？<b>不能</b>。原题强调的是"<b>冬天</b>"这一季节中的<b>济南</b>——重心在写"冬天"里济南的景色（温晴）；改后重心落在"济南"这一地方，与文章以季节特点为线索的写法不符。</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>🈶 重点词语</h3>
+      <p class="vtext">镶　单单　安适　着落　慈善　肌肤　秀气　宽敞　贮蓄　澄清　空灵　地毯　髻</p>
+      <p class="small">易读错：<b>髻 jì</b>｜<b>贮 zhù</b>蓄｜<b>着 zhuó</b>落｜<b>澄清 chéng</b>｜看（kān）护（文中"看护妇"读 kān）｜<b>薄 báo/bó</b>雪（文中"那点薄雪"读 báo）</p>
+    </div>
+    <div class="card">
+      <h3>📝 主旨一句话</h3>
+      <p>抓住"温晴"文眼，写济南冬天的山（阳光下的山、雪后山、远山）与水，绘出"理想的境界"，抒发对济南冬天的<b>喜爱与赞美</b>。（写景抒情散文，"温情"与"温晴"相映）</p>
+    </div>
+  </div>
+
+  <figure class="info card">
+    <img src="images/03-jinan.jpg" alt="济南的冬天·雪后小山" loading="lazy">
+    <figcaption>《济南的冬天》意境图：小山环城、树尖顶雪、银边蓝天、微露粉色——对应"最妙的是下点小雪呀"</figcaption>
+  </figure>
+</section>
+<!-- ================= 古代诗歌四首 ================= -->
+<section id="poems" class="c-po">
+  <h2 class="sec">③ 古代诗歌四首 <span class="tag">★★★ 必考 · 默写+鉴赏+对比</span></h2>
+
+  <!-- 观沧海 -->
+  <div class="poem-card">
+    <div class="pic"><img src="images/04-guancanghai.jpg" alt="观沧海意境图" loading="lazy">
+      <div class="ptitle"><b>观沧海</b><span>曹操〔东汉末〕· 四言乐府（古体诗）· 选自《步出夏门行》</span></div>
+    </div>
+    <div class="body">
+      <p class="vtext">东临碣石，以观沧海。水何澹澹，山岛竦峙。
+树木丛生，百草丰茂。秋风萧瑟，洪波涌起。
+日月之行，若出其中；星汉灿烂，若出其里。
+幸甚至哉，歌以咏志。</p>
+      <p class="trline">译：向东登上碣石山，来观赏大海。海水多么荡漾，山岛高高地挺立。树木葱茏生长，百草丰美茂盛。秋风吹动树木发出悲凉的声音，海上巨浪翻涌。太阳和月亮的运行，好像是从这浩瀚的海洋中出发的；银河星光灿烂，也好像是从这大海里产生出来的。（"幸甚至哉"两句为合乐套语，与正文内容无关）</p>
+      <div class="grid2">
+        <div>
+          <h4>实景 vs 虚景（高频考点）</h4>
+          <table class="t">
+            <tr><th></th><th>诗句</th><th>内容</th></tr>
+            <tr><td><b>实写</b></td><td>水何澹澹…洪波涌起</td><td>海水、山岛、树木、百草、秋风、洪波——壮阔苍茫的秋景</td></tr>
+            <tr><td><b>虚写</b><br>（想象）</td><td>日月之行…若出其里</td><td>想象大海吞吐日月、包容星汉——超越现实的宏伟境界</td></tr>
+          </table>
+        </div>
+        <div>
+          <h4>情感与手法</h4>
+          <p><span class="pill hot">借景抒情</span><span class="pill hot">虚实结合</span><span class="pill">动静结合</span></p>
+          <p>借大海<b>吞吐日月星辰的宏伟气象</b>，抒发诗人<b>统一天下的雄心壮志</b>和<b>博大胸襟</b>。基调苍凉慷慨、气势雄浑（"建安风骨"）。</p>
+        </div>
+      </div>
+      <div class="kao"><b>必考：</b>①"水何澹澹，山岛竦峙"——"何"（多么）写出大海摇荡的声势；②"日月之行"四句是<b>全诗高潮</b>，"若"字表明是<b>想象（虚写）</b>，最能体现"壮"与胸怀。③"秋风萧瑟"不觉悲凉反而雄浑，是因为诗人<b>胸怀壮志</b>。</div>
+      <details><summary>✍ 默写自测（点开前先默一遍）</summary><div class="inner">
+        ①东临碣石，<span class="blank">＿＿＿＿＿</span>。②水何澹澹，<span class="blank">＿＿＿＿＿</span>。③树木丛生，<span class="blank">＿＿＿＿＿</span>。④秋风萧瑟，<span class="blank">＿＿＿＿＿</span>。⑤日月之行，<span class="blank">＿＿＿＿</span>；星汉灿烂，<span class="blank">＿＿＿＿</span>。<br>
+        <span class="small">答案：以观沧海／山岛竦峙／百草丰茂／洪波涌起／若出其中／若出其里（易错字：<b>碣</b>石、<b>澹澹</b>、<b>竦</b>峙、萧<b>瑟</b>）</span>
+      </div></details>
+    </div>
+  </div>
+
+  <!-- 闻王昌龄 -->
+  <div class="poem-card">
+    <div class="pic"><img src="images/05-wenwangchangling.jpg" alt="闻王昌龄左迁龙标遥有此寄意境图" loading="lazy">
+      <div class="ptitle"><b>闻王昌龄左迁龙标遥有此寄</b><span>李白〔唐〕· 七言绝句</span></div>
+    </div>
+    <div class="body">
+      <p class="vtext">杨花落尽子规啼，闻道龙标过五溪。
+我寄愁心与明月，随君直到夜郎西。</p>
+      <p class="trline">译：杨花落尽、子规啼叫之时，听说您被贬为龙标尉，要经过五溪。我把满怀愁绪托付给明月，让它伴随您一直到夜郎以西。<br><span class="small">题解："左迁"＝贬官（古人以右为尊）；"龙标"＝王昌龄被贬之地（今湖南黔阳），诗中借"龙标"指代王昌龄。</span></p>
+      <div class="grid2">
+        <div>
+          <h4>首句意象的作用（高频）</h4>
+          <p><b>杨花</b>：漂泊无定（如友人漂泊远谪）；<b>子规（杜鹃）</b>：啼声哀切（"不如归去"）。两个意象①点明<b>暮春时节</b>，②渲染<b>凄凉哀愁</b>的氛围，③<code>融情于景</code>，暗含对友人被贬的飘零之感与同情。</p>
+        </div>
+        <div>
+          <h4>后两句·名句赏析</h4>
+          <p><b>拟人</b>：把明月当作知心人，让"愁心"随月<b>追随友人</b>直到偏远贬所。把无情月写得有情，抒发对友人<b>被贬远行的深切同情、牵挂与不舍</b>，想象奇特，富有<b>浪漫主义</b>色彩。</p>
+        </div>
+      </div>
+      <div class="kao"><b>必考：</b>①"过五溪"见迁谪之<b>荒远</b>、路途之<b>艰险</b>，含悲悯之意；②本诗感情基调：惆怅但不消沉，深情豪放（李白式的深情）。</div>
+      <details><summary>✍ 默写自测</summary><div class="inner">
+        ①杨花落尽子规啼，<span class="blank">＿＿＿＿＿＿＿＿</span>。②我寄愁心与明月，<span class="blank">＿＿＿＿＿＿＿＿</span>。<br>
+        <span class="small">答案：闻道龙标过五溪／随君直到夜郎西（易错字：<b>杨</b>花、子<b>规</b>、<b>夜郎</b>西——是"郎"不是"朗"）</span>
+      </div></details>
+    </div>
+  </div>
+
+  <!-- 次北固山下 -->
+  <div class="poem-card">
+    <div class="pic"><img src="images/06-cibeigushan.jpg" alt="次北固山下意境图" loading="lazy">
+      <div class="ptitle"><b>次北固山下</b><span>王湾〔唐〕· 五言律诗</span></div>
+    </div>
+    <div class="body">
+      <p class="vtext">客路青山外，行舟绿水前。
+潮平两岸阔，风正一帆悬。
+海日生残夜，江春入旧年。
+乡书何处达？归雁洛阳边。</p>
+      <p class="trline">译：旅途在青山之外，行船在绿水之间。潮水涨满，两岸与江面齐平，显得十分开阔；顺风行船，一帆高挂。夜还未消尽，一轮红日已从海上升起；旧年未过，江上已透露春的气息。家书寄到哪里？希望北归的大雁捎到洛阳那边。<br><span class="small">题解："次"＝停泊；北固山在今江苏镇江，临长江。</span></p>
+      <div class="grid2">
+        <div>
+          <h4>律诗知识</h4>
+          <p>五律<b>四联八句</b>：首联—颔联—颈联—尾联；<b>颔联、颈联必须对仗</b>（如"潮平"对"风正"，"海日"对"江春"）。</p>
+          <h4>炼字："平·阔·正·悬"</h4>
+          <p>"平"写潮水涨满与岸齐平，"阔"显江面开阔；"正"写风顺而和（不颠不斜），"悬"写帆端直高挂——画面<b>平野开阔、大江直流、波平浪静</b>，也暗含旅途<b>一帆风顺、心境开朗</b>。</p>
+        </div>
+        <div>
+          <h4>颈联·千古名句（必考）</h4>
+          <p>"海日生残夜，江春入旧年"——<b>"生""入"</b>两字用<b>拟人</b>，把"海日""江春"写活了：夜还未尽红日已升，旧年未过新春已来。<br><b>哲理：</b>时序交替匆匆而不可抗拒，<b>新事物必将取代旧事物</b>／旧事物中孕育着新事物。<br><b>情感：</b>身在江南、神驰故里，引出尾联<b>思乡</b>；同时透出<b>乐观向上、积极进取</b>（不是哀叹时光）。</p>
+        </div>
+      </div>
+      <div class="kao"><b>必考：</b>尾联"乡书何处达？归雁洛阳边"——借<b>雁足传书</b>的典故（反问句式），寄托<b>旅居在外的思乡之情</b>。"雁"＝思乡的传统意象。</div>
+      <details><summary>✍ 默写自测</summary><div class="inner">
+        ①潮平两岸阔，<span class="blank">＿＿＿＿＿＿</span>。②<span class="blank">＿＿＿＿＿＿＿＿</span>，江春入旧年。③乡书何处达？<span class="blank">＿＿＿＿＿＿＿＿</span>。<br>
+        <span class="small">答案：风正一帆悬／海日生残夜／归雁洛阳边（易错字：<b>残</b>夜、归<b>雁</b>是"雁"不是"燕"）</span>
+      </div></details>
+    </div>
+  </div>
+
+  <!-- 天净沙 -->
+  <div class="poem-card">
+    <div class="pic"><img src="images/07-tianjingsha.jpg" alt="天净沙·秋思意境图" loading="lazy">
+      <div class="ptitle"><b>天净沙·秋思</b><span>马致远〔元〕· 散曲·小令（"天净沙"是曲牌名，"秋思"是题目）</span></div>
+    </div>
+    <div class="body">
+      <p class="vtext">枯藤老树昏鸦，小桥流水人家，古道西风瘦马。
+夕阳西下，断肠人在天涯。</p>
+      <p class="trline">译：干枯的藤、苍老的树，栖息着黄昏归巢的乌鸦；小小的桥、潺潺的流水，近处坐落着几户人家；古老的道路上，萧瑟的西风里，走来一匹疲惫瘦弱的马。夕阳渐渐落下，肝肠寸断的游子还漂泊在天涯。</p>
+      <div class="grid2">
+        <div>
+          <h4>九个意象（前两句名词叠加）</h4>
+          <p class="vtext" style="font-size:15px">枯藤 · 老树 · 昏鸦 ｜ 小桥 · 流水 · 人家 ｜ 古道 · 西风 · 瘦马 ＋ 夕阳</p>
+          <p><span class="pill hot">白描</span><span class="pill hot">名词叠加·意象并置</span>：不加任何动词连缀，九种景物直接组合，勾勒出一幅苍凉的<b>秋郊夕照图</b>。</p>
+          <h4>"小桥流水人家"的反衬（高频）</h4>
+          <p>他人有家可归的<b>温馨画面</b>，反衬游子<b>有家难归</b>的孤苦——<b>以乐景衬哀情</b>，哀情倍增。</p>
+        </div>
+        <div>
+          <h4>主旨句</h4>
+          <p>"夕阳西下，断肠人在天涯"——<b>直抒胸臆</b>，点明时间（秋日黄昏）与主旨：<b>长期漂泊他乡的游子的孤寂愁苦与浓浓的思乡之情</b>。</p>
+          <h4>文体常识</h4>
+          <p>元曲分为<b>散曲</b>和杂剧；散曲又分<b>小令</b>和套数。本曲是<b>小令</b>，被誉为"<b>秋思之祖</b>"。"瘦马"之"瘦"既写马，也暗写人——长途跋涉、漂泊劳苦。</p>
+        </div>
+      </div>
+      <div class="kao"><b>必考：</b>①前三句景物的共同色调：萧瑟、苍凉（除"小桥流水人家"）；②"昏鸦"：黄昏的乌鸦，"昏"点时间；③全曲情景关系＝<b>借景抒情、景中含情</b>。</div>
+      <details><summary>✍ 默写自测</summary><div class="inner">
+        ①枯藤老树昏鸦，<span class="blank">＿＿＿＿＿＿＿＿</span>，古道西风瘦马。②夕阳西下，<span class="blank">＿＿＿＿＿＿＿＿</span>。<br>
+        <span class="small">答案：小桥流水人家／断肠人在天涯（易错字：枯<b>藤</b>、昏<b>鸦</b>、天<b>涯</b>——是"涯"不是"崖"）</span>
+      </div></details>
+    </div>
+  </div>
+</section>
+<!-- ================= 四诗对比专题 ================= -->
+<section id="duibi" class="c-po">
+  <h2 class="sec">★ 专题：四首古诗「对比」全攻略 <span class="tag">老师提示考点 · 必看</span></h2>
+
+  <div class="card">
+    <h3 style="margin-top:0">📊 一张表看懂四首诗</h3>
+    <div style="overflow-x:auto">
+    <table class="t">
+      <tr><th>维度</th><th>观沧海</th><th>闻王昌龄左迁龙标遥有此寄</th><th>次北固山下</th><th>天净沙·秋思</th></tr>
+      <tr><td><b>作者/朝代</b></td><td>曹操 / 东汉末</td><td>李白 / 唐</td><td>王湾 / 唐</td><td>马致远 / 元</td></tr>
+      <tr><td><b>体裁</b></td><td>四言乐府（古体诗）</td><td>七言绝句</td><td>五言律诗</td><td>散曲·小令</td></tr>
+      <tr><td><b>写的季节</b></td><td>秋</td><td>暮春（杨花落尽）</td><td>冬末春初（残夜、旧年）</td><td>秋（黄昏）</td></tr>
+      <tr><td><b>核心意象</b></td><td>沧海、山岛、洪波、<b>日月星汉</b></td><td>杨花、子规、<b>明月</b>、五溪</td><td>潮、帆、<b>海日、江春、归雁</b></td><td>枯藤老树昏鸦、小桥流水人家、古道西风瘦马、<b>夕阳</b></td></tr>
+      <tr><td><b>景色特点</b></td><td>雄浑壮阔、吞吐宇宙</td><td>凄清哀婉、朦胧辽远</td><td>开阔平远、明亮清新</td><td>萧瑟苍凉、孤寂冷落</td></tr>
+      <tr><td><b>主要手法</b></td><td>借景抒情、<b>虚实结合（想象）</b>、动静结合</td><td>借景抒情、<b>拟人</b>（寄情明月）</td><td>即景生情、<b>炼字拟人</b>、景中含理、对仗</td><td><b>白描、意象叠加</b>、以乐景衬哀情、直抒胸臆</td></tr>
+      <tr><td><b>思想情感</b></td><td>博大胸襟、<b>统一天下的雄心壮志</b></td><td>对友人被贬的<b>同情、牵挂、不舍</b>（友情）</td><td><b>思乡</b>＋对新旧交替的<b>乐观豁达</b>（乡情）</td><td>游子漂泊天涯的<b>孤寂愁苦、思乡断肠</b>（乡情）</td></tr>
+      <tr><td><b>基调</b></td><td>苍凉慷慨、豪迈</td><td>惆怅深情</td><td>开朗昂扬</td><td>凄苦悲凉</td></tr>
+      <tr><td><b>千古名句</b></td><td>日月之行，若出其中；星汉灿烂，若出其里</td><td>我寄愁心与明月，随君直到夜郎西</td><td>海日生残夜，江春入旧年</td><td>夕阳西下，断肠人在天涯</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔀 老师最可能这样对比出题（4 组高频组合）</h3>
+    <table class="t">
+      <tr><th>组合</th><th>比较点</th><th>答题要点</th></tr>
+      <tr><td><b>① 观沧海 ×<br>天净沙·秋思</b></td><td>同写<b>秋</b>景，情怀迥异</td><td>同：都写秋天景物，都借景抒情。<br>异：《观沧海》笔下的秋海<b>壮阔雄浑</b>，"洪波涌起""日月之行"气象宏大，抒发<b>雄心壮志</b>，读来豪迈振奋；《天净沙·秋思》的秋景<b>萧瑟凄凉</b>（枯藤、老树、瘦马、夕阳），抒发游子<b>孤苦思乡</b>之情，令人黯然。→ 景的基调不同，是因为<b>作者处境与胸襟不同</b>。</td></tr>
+      <tr><td><b>② 闻王昌龄 ×<br>次北固山下</b></td><td>都有"思念"，对象不同</td><td>《闻王昌龄》思<b>友人</b>：以明月拟人寄"愁心"，牵挂被贬的朋友；《次北固山下》思<b>故乡</b>：借"归雁传书"寄托乡情。<br>意象也不同：一用<b>月</b>（寄情），一用<b>雁</b>（传书）。</td></tr>
+      <tr><td><b>③ 次北固山下 ×<br>天净沙·秋思</b></td><td>同是<b>羁旅在外</b>，情调相反</td><td>《次》漂泊而<b>乐观开朗</b>——"海日生残夜，江春入旧年"在新旧交替中看到希望；《天》漂泊而<b>愁苦断肠</b>——"断肠人在天涯"尽显孤寂悲凉。</td></tr>
+      <tr><td><b>④ 意象横向对比</b></td><td>"月""雁""风""水"等</td><td><b>月</b>（闻王昌龄）：寄愁传情，深情浪漫；<b>雁</b>（次北固）：鸿雁传书，思乡；<b>秋风</b>（观沧海）：肃杀中见豪情；<b>西风</b>（天净沙）：羁旅萧瑟。同一种景物在不同诗中可以承载<b>完全不同</b>的情感。</td></tr>
+    </table>
+    <div class="tips"><b>💡 对比题答题三步：</b>①<b>分说</b>——各自"诗句＋景＋情"（先各打五十大板，分别概括）；②<b>找同</b>——题材/手法/意象的相同点；③<b>辨异</b>——情感基调、风格、写法的关键差异，<b>必须落到具体字词</b>（如"若出其中"的想象 vs "断肠人"的直白）。切忌只答"感情不同"四个字！</div>
+  </div>
+
+  <div class="card">
+    <h3>🧪 对比小卷（先自己说，再点开核对）</h3>
+    <details><summary>Q1：曹操和马致远都写了秋景，为什么一个读来豪迈、一个读来悲凉？</summary><div class="inner">曹操站在碣石之巅，眼里是"洪波涌起"的大海，心中装着统一天下的抱负，所以秋风萧瑟反添壮阔苍凉之豪情（壮景衬壮志）；马致远漂泊天涯，眼中尽是枯藤、老树、瘦马、夕阳等衰败景物，以乐景"小桥流水人家"反衬，愈显游子孤苦（哀景写哀情＋乐景衬哀情）。</div></details>
+    <details><summary>Q2："我寄愁心与明月"和"乡书何处达？归雁洛阳边"都表达思念，请比较。</summary><div class="inner">相同：都运用传统意象寄托思念，含蓄深婉。不同：①对象不同——前者思<b>友人</b>（王昌龄被贬），后者思<b>故乡亲人</b>；②方式不同——前者<b>拟人</b>，让明月携"愁心"随友远行，浪漫奇特；后者<b>设问＋用典</b>（雁足传书），托北归大雁捎家书，朴实恳切。</div></details>
+    <details><summary>Q3：《观沧海》哪两句是想象之景？《次北固山下》哪一联景中含理？各有什么表达效果？</summary><div class="inner">《观沧海》"日月之行，若出其中；星汉灿烂，若出其里"是虚写（"若"字标明想象），以大海吞吐日月星辰，写尽诗人博大胸襟与宏伟抱负；《次北固山下》"海日生残夜，江春入旧年"，"生""入"拟人，夜未尽头日已升、旧年未过春已来，蕴含"新事物必取代旧事物"的哲理，并引出思乡之情。</div></details>
+  </div>
+</section>
+<div class="unit-banner ub-u2" id="unit2"><div class="big">🍂 第二单元 · 至爱亲情</div><div class="desc">单元主题：感受亲情，珍视亲情 ｜ 语文要素：继续朗读 · 品味关键词句 · 了解记叙的线索</div></div>
+
+<!-- ================= 秋天的怀念 ================= -->
+<section id="qiutian" class="c-u2">
+  <h2 class="sec">④ 《秋天的怀念》 史铁生 <span class="tag">精读 ★★</span></h2>
+
+  <div class="card">
+    <h3>👤 作者名片</h3>
+    <p><b>史铁生</b>（1951—2010），北京人，当代作家。21 岁双腿瘫痪，代表作散文《<b>我与地坛</b>》《病隙碎笔》，小说《我的遥远的清平湾》《务虚笔记》等。自称"职业是生病，业余在写作"。</p>
+  </div>
+
+  <div class="card">
+    <h3>🧠 线索：「看花」三次推进</h3>
+    <div class="flow">
+      <span class="step" style="border-color:var(--u2)">第一次：母亲说"去北海看花吧"→<b>我</b>拒绝（暴怒无常）</span><span class="arr">→</span>
+      <span class="step" style="border-color:var(--u2)">第二次：母亲<b>央求</b>再看花→我勉强答应，<b>母亲却永远离开</b></span><span class="arr">→</span>
+      <span class="step" style="border-color:var(--u2)">第三次：妹妹推我去看菊花→<b>懂得"好好儿活"</b>，怀念母亲</span>
+    </div>
+    <div class="kao"><b>考点①（细节描写·高频）：</b>"母亲就<b>悄悄地</b>躲出去，在我看不见的地方<b>偷偷地</b>听着我的动静"——"悄悄""偷偷"细节：既给儿子<b>宣泄的空间</b>（理解、宽容），又不放心他（母亲的心提着），写出母亲的小心翼翼与深沉无私的爱。还有"又<b>悄悄地</b>进来""眼边红红的"（偷偷哭过）。</div>
+    <div class="kao"><b>考点②：</b>母亲"挡在窗前"——怕落叶勾起儿子悲观情绪（"看着窗外的树叶'唰唰啦啦'地飘落"），用心良苦；"央求般的神色""喜出望外"——一次次被拒绝仍不放弃，只盼儿子振作。</div>
+    <div class="kao"><b>考点③（插叙）：</b>"母亲喜欢花，可自从我的腿瘫痪后，她侍弄的那些花都死了"——插叙，补充交代母亲<b>为了儿子放弃自己的爱好</b>，无私付出；也是母亲病重、无暇顾及的暗示。</div>
+  </div>
+
+  <div class="card">
+    <h3>🌼 结尾菊花段的含义（必考）</h3>
+    <p class="vtext">黄色的花淡雅，白色的花高洁，紫红色的花热烈而深沉，泼泼洒洒，秋风中正开得烂漫。</p>
+    <ul style="padding-left:22px">
+      <li><b>排比</b>写菊花缤纷绚烂，象征<b>母爱的深沉与多彩</b>，也象征"我"终于走出阴霾、懂得"<b>好好儿活</b>"——活出个性、活出尊严、活出味道。</li>
+      <li>"我懂得母亲没有完结的话"＝"<b>你俩在一块儿，要好好儿活……</b>"——母亲临终仍惦记儿女，省略号包含无尽的牵挂。</li>
+      <li>结尾看花是<b>对母亲的深切怀念</b>，也是对母亲期望的回答：我们正在好好儿活。</li>
+    </ul>
+    <div class="kao"><b>考点④（标题含义）：</b>《秋天的怀念》——①故事发生在秋天，母亲在秋天离世；②"秋天"是"我"遭遇不幸、心境悲凉的人生之秋；③秋天里"我"懂得了母爱与"好好儿活"的意义，是对母亲的<b>怀念</b>。表层点明季节，深层寄托怀念与成长。</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>🈶 重点词语</h3>
+      <p class="vtext">瘫痪　暴怒　沉寂　侍弄　捶打　憔悴　央求　絮叨　诀别　淡雅　高洁　烂漫　翻来覆去　喜出望外　暴怒无常　絮絮叨叨</p>
+      <p class="small">易读错：<b>瘫 tān</b>痪 huàn｜<b>憔 qiáo</b>悴 cuì｜<b>侍 shì</b>弄｜<b>诀 jué</b>别｜<b>捶 chuí</b>打<br>易写错：<b>诀</b>别（不是"决"）｜<b>侍</b>弄｜翻来<b>覆</b>去（不是"复"）｜喜出<b>望</b>外</p>
+    </div>
+    <div class="card">
+      <h3>📝 主旨一句话</h3>
+      <p>通过"看花"三件事，写重病缠身的母亲<b>隐忍、无私</b>地爱着瘫痪暴怒的儿子直至去世，歌颂<b>伟大而深沉的母爱</b>；也写"我"的追悔与成长——懂得"<b>好好儿活</b>"，是对母亲最好的纪念。</p>
+    </div>
+  </div>
+
+  <figure class="info card">
+    <img src="images/08-qiutian.jpg" alt="秋天的怀念·北海菊花" loading="lazy">
+    <figcaption>《秋天的怀念》意境图：淡雅的黄花、高洁的白花、热烈深沉的紫红花在秋风中烂漫——"好好儿活"</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 散步 ================= -->
+<section id="sanbu" class="c-u2">
+  <h2 class="sec">⑤ 《散步》 莫怀戚 <span class="tag">精读 ★★</span></h2>
+
+  <div class="card">
+    <h3>👤 作者名片</h3>
+    <p><b>莫怀戚</b>（1951—2014），重庆人，当代作家。本文写于 1985 年，是一次真实的全家三辈四口散步。</p>
+    <h3>🧠 一件事 · 一次分歧 · 一个世界</h3>
+    <div class="map">
+      <div class="node root"><b>散步起因</b>母亲身体不好，又"熬过了一个严冬"，春天来了，全家散步</div>
+      <div class="arrow">↓</div>
+      <div class="node"><b>分歧</b>母亲要走<b>大路</b>（平顺）<br>儿子要走<b>小路</b>（有意思）</div>
+      <div class="arrow">→</div>
+      <div class="node"><b>我的决定</b>"我"决定<b>委屈儿子走大路</b><br>→ 尊老（伴随母亲的日子不多了）</div>
+      <div class="arrow">→</div>
+      <div class="node"><b>母亲改变主意</b>摸摸孙儿脑瓜："还是走小路吧"<br>→ 爱幼</div>
+      <div class="arrow">→</div>
+      <div class="node"><b>结尾（升华）</b>"我"背母亲，妻背儿子<br>"好像我背上的同她背上的加起来，就是整个世界"</div>
+    </div>
+    <div class="kao"><b>考点①（结尾名句·必考）：</b>"整个世界"——中年人<b>上承老一辈、下哺下一代</b>，肩上是<b>承前启后的责任与使命</b>（尊老爱幼的传统、家庭的分量）。"慢慢地，稳稳地，走得很仔细"——责任重大，走得郑重。</div>
+    <div class="kao"><b>考点②：</b>"我的母亲又<b>熬</b>过了一个严冬"——"熬"字写出母亲身体每况愈下、度过冬天的不易，也含"我"的庆幸与欣慰，为散步（让母亲多走走）作铺垫。</div>
+    <div class="kao"><b>考点③（景物描写作用）：</b>"这南方初春的田野，大块小块的新绿随意地铺着……这一切都使人想着一样东西——生命。"——初春景致生机勃勃，①烘托全家散步的<b>愉快心情</b>；②暗合母亲"又熬过一个冬天"，唤起对<b>生命</b>的珍视；③推动情节（母亲因此想走走）。</div>
+    <div class="kao"><b>考点④（以小见大）：</b>一件寻常小事（散步择路），折射<b>尊老爱幼、家庭和睦、中年责任</b>的大主题——这就是"以小见大"。大词小用的幽默（如"责任重大""决定委屈"）使文章庄重中见活泼。</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>🖊 语言特色：对称句</h3>
+      <p class="vtext">"前面也是妈妈和儿子，后面也是妈妈和儿子。"
+"我的母亲走在前面，我的妻子和儿子走在后面。"
+"我蹲下来，背起了我的母亲，妻子也蹲下来，背起了我们的儿子。"</p>
+      <p class="small">对称句式整齐、互相呼应，读来有<b>音乐美、画面感</b>，也暗示家庭成员间关系的和谐、责任的对称。</p>
+    </div>
+    <div class="card">
+      <h3>🈶 重点词语</h3>
+      <p class="vtext">信服　分歧　取决　一霎　两全　粼粼　各得其所</p>
+      <p class="small">易读错：<b>分岐 qí</b>｜一<b>霎 shà</b>｜<b>粼 lín</b>粼<br>易写错：<b>霎</b>（雨字头）｜各得<b>其所</b>｜<b>粼粼</b>（左边"米"右边"粦"结构勿错）<br>"各得其所"：每个人或事物都得到合适的安顿。</p>
+    </div>
+  </div>
+</section>
+<div class="unit-banner ub-u3" id="unit3"><div class="big">📚 第三单元 · 学习生活</div><div class="desc">单元主题：少年时代的学习生活与成长 ｜ 语文要素：默读训练 · 把握基本内容 · 名著导读《朝花夕拾》</div></div>
+
+<!-- ================= 从百草园到三味书屋 ================= -->
+<section id="bainao" class="c-u3">
+  <h2 class="sec">⑥ 《从百草园到三味书屋》 鲁迅 <span class="tag">精读 ★★★</span></h2>
+
+  <div class="card">
+    <h3>👤 作者名片</h3>
+    <p><b>鲁迅</b>（1881—1936），原名<b>周树人</b>，字<b>豫才</b>，浙江绍兴人。伟大的<b>文学家、思想家、革命家</b>。代表作：我国第一篇白话小说《狂人日记》，小说集《呐喊》《彷徨》，散文集《<b>朝花夕拾</b>》，散文诗集《野草》，杂文集《坟》《热风》《且介亭杂文》等。本文选自《朝花夕拾》。</p>
+  </div>
+
+  <div class="card">
+    <h3>🧠 结构：过渡段（第 9 段）一分为二</h3>
+    <div class="map">
+      <div class="node" style="border-color:var(--u3)"><b>百草园（1–8段）</b>自由快乐的乐园<br>·春夏秋景物（2段）<br>·美女蛇故事（3–6段，插叙）<br>·冬天雪地捕鸟（7–8段）</div>
+      <div class="arrow">⇄</div>
+      <div class="node root" style="max-width:230px"><b>过渡段</b>"我不知道为什么家里的人要将我送进书塾里去了……Ade，我的蟋蟀们！Ade，我的覆盆子们和木莲们！"</div>
+      <div class="arrow">⇄</div>
+      <div class="node" style="border-color:var(--u3)"><b>三味书屋（10–24段）</b>严肃而不乏趣味的书塾<br>·拜先生行礼、问"怪哉"<br>·后园折腊梅寻蝉蜕<br>·师生读书场面<br>·先生入神时"我们"画画、做戏</div>
+    </div>
+    <div class="kao"><b>考点①（过渡段作用·高频）：</b>三个"也许"猜测原因（拔何首乌毁泥墙、砖头抛梁家、石井栏跳下），"无从知道"含童年的困惑与无奈；"Ade"（德语"别了"）两个感叹句，<b>依依不舍</b>的童趣跃然纸上；结构上<b>承上启下</b>，从乐园到书塾，暗示成长中快乐与约束的转换。</div>
+  </div>
+
+  <div class="card">
+    <h3>🌿 第 2 段写景（背·默·赏析三合一）</h3>
+    <p class="vtext">不必说碧绿的菜畦，光滑的石井栏，高大的皂荚树，紫红的桑葚；也不必说鸣蝉在树叶里长吟，肥胖的黄蜂伏在菜花上，轻捷的叫天子忽然从草间直窜向云霄里去了。单是周围的短短的泥墙根一带，就有无限趣味。</p>
+    <table class="t">
+      <tr><th>考点</th><th>答案要点</th></tr>
+      <tr><td>句式结构</td><td>"<b>不必说……也不必说……单是……</b>"——先整体略写，再局部（泥墙根一带）详写；<b>由低到高</b>写静物，<b>由高到低</b>写动物，动静结合、详略得当</td></tr>
+      <tr><td>多感官</td><td>视觉（碧绿、紫红）、听觉（长吟）、味觉（又酸又甜的覆盆子）、触觉（光滑的石井栏）</td></tr>
+      <tr><td>修辞</td><td>拟人：油蛉<b>低唱</b>、蟋蟀们<b>弹琴</b>——童心童趣，乐园之"乐"</td></tr>
+      <tr><td>用词赏析</td><td>"<b>伏</b>"（黄蜂肥胖稳当）、"<b>窜</b>"/"<b>直窜</b>"（叫天子轻捷迅速）、"<b>低唱""弹琴</b>"（鸣声悦耳如乐）</td></tr>
+      <tr><td>美女蛇故事作用</td><td><b>插叙</b>，给百草园增添<b>神秘色彩</b>，符合儿童心理，使乐园更有趣（不是批判什么）</td></tr>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>❄ 雪地捕鸟：9 个动词（必背默写顺序）</h3>
+      <p class="vtext" style="font-size:15.5px">扫开 → 露出 → 支起 → 撒些 → 系 → 牵 → 看 → 拉 → 罩</p>
+      <p class="small">原文："扫开一块雪，露出地面，用一枝短棒支起一面大的竹筛来，下面撒些秕谷，棒上系一条长绳，人远远地牵着，看鸟雀下来啄食，走到竹筛底下的时候，将绳子一拉，便罩住了。"</p>
+      <div class="kao"><b>考点②：</b>九个动词<b>准确、生动、有条理</b>地写出捕鸟的全过程，表现儿童<b>捕鸟时的兴奋惊喜</b>与百草园冬天之乐。</div>
+    </div>
+    <div class="card">
+      <h3>🎓 三味书屋里的先生与"我"</h3>
+      <p><b>寿镜吾</b>先生——"极<b>方正，质朴，博学</b>"的人：对学生严而可亲（"我"很恭敬）；"怪哉"虫"不知道！似乎很不高兴"——不愿学生问无关课业的事，是旧式教育的一板一眼；读书入神"将头仰起，摇着，向后面拗过去，拗过去"——<b>细节（动作）描写</b>，可爱的书痴形象。</p>
+      <div class="kao"><b>考点③（主旨·重要）：</b>对百草园的眷恋＝对<b>自由快乐童年、亲近自然</b>的怀恋；写三味书屋并非"控诉"，其间也有后园之乐、画画之乐，<b>敬重先生</b>——表现儿童<b>热爱自然、追求快乐</b>的天性，及成长的必然。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>⚖ 两处对比一览</h3>
+    <table class="t">
+      <tr><th></th><th>百草园</th><th>三味书屋</th></tr>
+      <tr><td>生活</td><td>自由玩闹、无拘无束</td><td>读书习字对课、有规矩</td></tr>
+      <tr><td>乐趣</td><td>草木虫鸟、美女蛇、捕鸟</td><td>后园、画画、读书入神的先生</td></tr>
+      <tr><td>情感</td><td>无限留恋（"我的乐园"）</td><td>敬畏中也有趣味</td></tr>
+    </table>
+    <p class="small">🈶 读读写写：确凿　菜畦　皂荚树　桑葚　轻捷　臃肿　缠络　鉴赏　人迹罕至　无从　消释　宿儒　人声鼎沸　倜傥　淋漓　盔甲　幼稚　几乎　蝉蜕　恭敬　质朴　博学　渊博　隔断　相识　毫无　担忧　惩罚　拒绝　凄冷　可望而不可即<br>易读错：确<b>凿 záo</b>｜菜<b>畦 qí</b>｜桑<b>葚 shèn</b>｜<b>攒 cuán</b>｜<b>敛 liǎn</b>｜脑<b>髓 suǐ</b>｜蝉<b>蜕 tuì</b>｜秕<b> bǐ</b>谷｜<b>系 jì</b>一条长绳｜<b>宿 sù</b>儒｜<b>倜傥 tì tǎng</b>｜<b>拗 ǎo</b>过去</p>
+  </div>
+
+  <figure class="info card">
+    <img src="images/09-bainaoyuan.jpg" alt="百草园意境图" loading="lazy">
+    <figcaption>《从百草园到三味书屋》意境图：菜畦、石井栏、皂荚树、桑葚、泥墙根一带，还有冬天支起竹筛捕鸟的角落——"那时却是我的乐园"</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 朝花夕拾 ================= -->
+<section id="zhhx" class="c-u3">
+  <h2 class="sec">⑦ 名著导读：《朝花夕拾》 <span class="tag">★★★ 消除与经典的隔膜</span></h2>
+
+  <div class="card">
+    <h3>📖 基本信息</h3>
+    <p>《朝花夕拾》原名《<b>旧事重提</b>》，是鲁迅 1926 年所作的 <b>10 篇回忆性散文</b>集。"朝花夕拾"＝早晨的花到傍晚才拾起，比喻<b>晚年回忆青少年时期的往事</b>（成书时鲁迅 45 岁左右）。主题：<b>温馨的回忆与理性的批判</b>。散文中常以"我"的童年生活为线索，穿插议论与抒情。</p>
+  </div>
+
+  <div class="card">
+    <h3>🗂 十篇文章一句话记忆表</h3>
+    <table class="t">
+      <tr><th>篇目</th><th>一句话记忆（内容）</th><th>关键词</th></tr>
+      <tr><td>1.《狗·猫·鼠》</td><td>追忆童年救养的一只<b>隐鼠</b>被猫吃掉，"猫"暗讽当时的"正人君子"</td><td>隐鼠·讽刺</td></tr>
+      <tr><td>2.《阿长与〈山海经〉》</td><td>粗俗迷信的保姆<b>长妈妈</b>，却买来"我"念念不忘的《山海经》——"别人不肯做，或不能做的事，她却能够做成功"</td><td>长妈妈·欲扬先抑</td></tr>
+      <tr><td>3.《二十四孝图》</td><td>批判封建孝道的虚伪残酷（"老莱娱亲""<b>郭巨埋儿</b>"最令童年鲁迅反感）</td><td>批判封建孝道</td></tr>
+      <tr><td>4.《五猖会》</td><td>盼看迎神赛会，却被父亲逼着背完《鉴略》才准去——批判<b>封建教育对儿童天性的压制</b></td><td>背书·扫兴</td></tr>
+      <tr><td>5.《无常》</td><td>写迎神赛会上的"无常"鬼——"鬼而人，理而情"，人间没有公正，恶人得不到惩处（对"正人君子"的讽刺）</td><td>无常·公正</td></tr>
+      <tr><td>6.《从百草园到三味书屋》</td><td>童年乐园与书塾生活，对自然的热爱、童趣的怀恋</td><td>乐园·书塾</td></tr>
+      <tr><td>7.《父亲的病》</td><td>父亲被<b>庸医</b>（陈莲河等）耽误身故，揭露庸医故弄玄虚、勒索钱财</td><td>庸医误人</td></tr>
+      <tr><td>8.《琐记》</td><td><b>衍太太</b>自私奸猾（教孩子坏事、散布流言）；"我"去南京求学（雷电学堂→矿路学堂）</td><td>衍太太·求学</td></tr>
+      <tr><td>9.《藤野先生》</td><td>日本仙台学医，<b>藤野先生</b>正直严谨、没有民族偏见；"匿名信事件""看电影（幻灯片）事件"使鲁迅<b>弃医从文</b></td><td>恩师·弃医从文</td></tr>
+      <tr><td>10.《范爱农》</td><td>倔强耿直、潦倒一生的<b>爱国者</b>范爱农（革命前不满旧社会、革命后备受排挤，最终溺水而亡）</td><td>友人·惋惜</td></tr>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>👥 人物长廊（连线题常客）</h3>
+      <table class="t">
+        <tr><th>人物</th><th>身份</th><th>特点／相关情节</th></tr>
+        <tr><td><b>长妈妈</b></td><td>保姆</td><td>睡成"大"字、讲美女蛇、元旦吃福橘〈粗俗迷信〉；买《山海经》〈善良热心〉（先抑后扬）</td></tr>
+        <tr><td><b>藤野先生</b></td><td>日本医学教授</td><td>认真为"我"改讲义、纠正解剖图，关心"我"的解剖实习，毫无民族偏见</td></tr>
+        <tr><td><b>范爱农</b></td><td>留日同学、同乡</td><td>眼球白多黑少、看人总像渺视；正直倔强，穷困潦倒</td></tr>
+        <tr><td><b>衍太太</b></td><td>邻居太太</td><td>怂恿孩子吃冰、打旋子，散布流言——自私自利、心术不正</td></tr>
+        <tr><td><b>寿镜吾</b></td><td>三味书屋塾师</td><td>方正、质朴、博学；读书入神</td></tr>
+        <tr><td><b>陈莲河</b></td><td>"名医"</td><td>故弄玄虚的庸医（蟋蟀一对"要原配"）</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🎯 名著高频考点</h3>
+      <ul style="padding-left:20px;font-size:14.5px">
+        <li>书名含义与原名（选择题最爱）</li>
+        <li>《五猖会》中父亲让"我"背的书是<b>《鉴略》</b></li>
+        <li>鲁迅弃医从文的原因：①匿名信事件（民族歧视）；②看电影事件（国民麻木）——学医医不了精神</li>
+        <li>"她确有伟大的神力"出自《阿长与〈山海经〉》</li>
+        <li>评价性阅读："温馨的回忆"如百草园、长妈妈买书、藤野先生改讲义；"理性的批判"如《二十四孝图》《五猖会》《父亲的病》——简答题要<b>各举一例</b></li>
+      </ul>
+      <div class="kao"><b>答题示范：</b>《朝花夕拾》既有温馨的回忆，也有理性的批判。温馨如《从百草园到三味书屋》中百草园的自由快乐、《阿长与〈山海经〉》中长妈妈买来"三哼经"的质朴之爱；批判如《五猖会》中父亲逼"我"背书压抑儿童天性、《二十四孝图》对封建孝道的揭露、《父亲的病》对庸医的讽刺。</div>
+    </div>
+  </div>
+
+  <figure class="info card">
+    <img src="images/10-zhaohuaxishi.jpg" alt="朝花夕拾意境图" loading="lazy">
+    <figcaption>《朝花夕拾》：早晨的花，傍晚拾起——中年鲁迅回望童年与少年</figcaption>
+  </figure>
+</section>
+<!-- ================= 同步篇目速览 ================= -->
+<section id="more" class="c-u3">
+  <h2 class="sec">⑧ 同步篇目速览 <span class="tag">别遗漏 · 简答/选择可能考</span></h2>
+  <div class="card">
+    <table class="t">
+      <tr><th>篇目</th><th>作者</th><th>抓分要点</th></tr>
+      <tr><td>《雨的四季》<br><span class="small">（自读）</span></td><td>刘湛秋，被誉为"当代抒情诗之王"</td><td>写四季之雨的不同性格：春雨<b>娇媚清新</b>、夏雨<b>热烈粗犷</b>、秋雨<b>端庄沉静</b>、冬雨<b>自然平静</b>；通篇<b>拟人</b>化，抒发对生命、自然的热爱。爱"雨"＝爱"生活"。</td></tr>
+      <tr><td>《金色花》<br><span class="small">（自读）</span></td><td><b>泰戈尔</b>，印度文学家，诺贝尔文学奖得主（《吉檀迦利》）</td><td>儿童想象自己变成一朵<b>金色花</b>（印度圣树的花），与母亲<b>捉迷藏</b>：看她工作、祷告、读书，悄悄散发花香、投下影子——以儿童视角写<b>母子情深</b>，天真烂漫。</td></tr>
+      <tr><td>《荷叶·母亲》<br><span class="small">（自读）</span></td><td><b>冰心</b>，原名谢婉莹，代表作《繁星》《春水》</td><td>雨中荷叶<b>倾侧覆盖红莲</b>→想到母亲庇护儿女。"<b>母亲啊！你是荷叶，我是红莲。心中的雨点来了，除了你，谁是我在无遮拦天空下的荫蔽？</b>"——<b>借物喻人</b>，讴歌母爱；红莲＝我，荷叶＝母亲，雨点＝人生风雨。</td></tr>
+      <tr><td>《往事依依》<br><span class="small">（自读）</span></td><td><b>于漪</b>，语文特级教师，"人民教育家"国家荣誉称号获得者</td><td>回忆学生时代往事：看《评注图像水浒传》如身临其境、读《千家诗》沉醉四季美景（"万紫千红总是春"等）、听国文老师<b>入情入理讲课</b>（讲辛弃疾词"天下英雄谁敌手？曹刘"、田汉《南归》诗）——阐明<b>多读书读好书</b>能启迪智慧、滋养精神；"依依"＝萦绕胸怀、恋恋不舍。</td></tr>
+      <tr><td>《再塑生命的人》<br><span class="small">（自读）</span></td><td><b>海伦·凯勒</b>，美国盲聋女作家、教育家，选自《假如给我三天光明》</td><td>莎莉文老师来到"我"身边，在井房把水流拼写在"我"手上，让"我"领悟"<b>水</b>"的含义——唤醒"我"的灵魂，给予光明、希望、快乐和自由。"再塑生命"＝老师用<b>爱与智慧</b>重新塑造"我"的生命，表达对恩师的<b>感激敬爱</b>。</td></tr>
+      <tr><td>综合性学习：<br>有朋自远方来</td><td>—</td><td>名言成语积累："有朋自远方来，不亦乐乎"（论语）；"海内存知己，天涯若比邻"（王勃）；"桃花潭水深千尺，不及汪伦送我情"（李白）；益者三友：友直、友谅、友多闻。</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= 论语十二章 ================= -->
+<section id="lunyu" class="c-u3">
+  <h2 class="sec">⑨ 《论语》十二章 <span class="tag">课内文言 ★★★ 默写大户</span></h2>
+  <div class="card">
+    <h3>👤 文学常识</h3>
+    <p>《论语》——记录<b>孔子及其弟子言行</b>的语录体著作，由孔子弟子及再传弟子编纂，共 20 篇，是<b>儒家经典</b>（"四书"：《论语》《孟子》《大学》《中庸》）。<b>孔子</b>（前551—前479），名丘，字仲尼，春秋末期鲁国人，伟大的思想家、教育家，儒家学派创始人。</p>
+  </div>
+  <div class="card">
+    <h3>📜 十二章 · 原文＋翻译＋道理（按学习/修身分类）</h3>
+    <table class="t">
+      <tr><th>章</th><th>原文</th><th>关键词·道理</th></tr>
+      <tr><td rowspan="3"><b>学习篇</b></td><td>子曰："学而时习之，不亦<b>说</b>（悦）乎？有朋自远方来，不亦<b>乐</b>乎？人不知而不<b>愠</b>，不亦君子乎？"（《学而》）</td><td>学了知识按时温习；志同道合之乐；别人不了解我却不恼怒——君子风范</td></tr>
+      <tr><td>曾子曰："吾日<b>三省</b>吾身：为人谋而不<b>忠</b>乎？与朋友交而不<b>信</b>乎？<b>传</b>不习乎？"（《学而》）</td><td>每天多次自我反省：办事尽心、交友诚信、老师传授的知识复习了吗</td></tr>
+      <tr><td>子曰："温故而知新，可以为师矣。"（《为政》）<br>子曰："学而不思则<b>罔</b>，思而不学则<b>殆</b>。"（《为政》）<br>子曰："知之者不如<b>好</b>之者，好之者不如<b>乐</b>之者。"（《雍也》）<br>子曰："三人行，必有我师焉。择其善者而从之，其不善者而改之。"（《述而》）<br>子曰："博学而<b>笃</b>志，切问而近思，仁在其中矣。"（《子张》）</td><td>温习旧知识获新体会；学思结合（罔：迷惑；殆：疑惑）；以学为乐；虚心求教、择善而从；广泛学习坚定志向、恳切提问、多想当前的事</td></tr>
+      <tr><td rowspan="4"><b>修身篇</b></td><td>子曰："吾十有五而志于学，三十而立，四十而不惑，五十而知天命，六十而耳顺，七十而从心所欲，不逾矩。"（《为政》）</td><td>孔子自述人生进阶：立＝能自立于世；不惑＝能明辨是非；耳顺＝听得进不同意见；从心所欲不逾矩＝修养的最高境界</td></tr>
+      <tr><td>子曰："贤哉，回也！一<b>箪</b>食，一瓢饮，在陋巷，人不堪其忧，回也不改其乐。贤哉，回也！"（《雍也》）</td><td>颜回<b>安贫乐道</b>（物质贫乏却不改快乐），赞其贤</td></tr>
+      <tr><td>子曰："饭疏食，饮水，曲<b>肱</b>而枕之，乐亦在其中矣。不义而富且贵，于我如浮云。"（《述而》）</td><td>粗茶淡饭亦有乐；<b>不义之富贵如浮云</b>——重义轻利</td></tr>
+      <tr><td>子曰："三军可夺帅也，匹夫不可夺志也。"（《子罕》）</td><td>志向坚定，任何人不能强迫改变——志的力量</td></tr>
+      <tr><td><b>时间篇</b></td><td>子在川上曰："逝者如<b>斯</b>夫，不舍昼夜。"（《子罕》）</td><td>时光如河水日夜不停地流逝——<b>珍惜时间</b></td></tr>
+    </table>
+    <div class="kao"><b>成语收割：</b>温故知新／三十而立／四十不惑／从心所欲／不亦乐乎／三省吾身／箪食瓢饮（陋巷箪瓢）／三人行必有我师／择善而从／逝者如斯／匹夫不可夺志／富贵浮云／乐在其中／切问近思。</div>
+    <div class="kao"><b>通假字：</b>不亦<b>说</b>乎（"说"同"悦"，愉快）；<b>有</b>（"有"同"又"）／古今异义：水（冷水）／<b>三</b>（虚数，多次）／<b>匹夫</b>（平民百姓）。</div>
+  </div>
+</section>
+
+<!-- ================= 世说新语 ================= -->
+<section id="shishuo" class="c-u3">
+  <h2 class="sec">⑩ 《世说新语》二则 <span class="tag">课内文言 ★★</span></h2>
+  <div class="card">
+    <h3>👤 文学常识</h3>
+    <p>《世说新语》——南朝宋<b>刘义庆</b>组织编写的一部<b>志人笔记体小说</b>集，主要记载汉末至东晋士大夫的言谈逸事。语言简洁隽永。</p>
+    <div class="grid2">
+      <div>
+        <h3>❄《咏雪》</h3>
+        <p class="vtext">谢太傅寒雪日内集，与儿女讲论文义。俄而雪骤，公欣然曰："白雪纷纷何所似？"兄子胡儿曰："撒盐空中差可拟。"兄女曰："未若柳絮因风起。"公大笑乐。即公大兄无奕女，左将军王凝之妻也。</p>
+        <p class="trline">译：谢安在寒冷的雪天把家人聚在一起，跟子侄辈讲文章的义理。不久雪下急了，谢安高兴地说："纷纷白雪像什么？"侄子胡儿说："在空中撒盐差不多可以相比。"侄女说："不如比作柳絮乘风飞起。"谢安大笑起来。她就是谢安大哥谢无奕的女儿，左将军王凝之的妻子（谢道韫）。</p>
+        <div class="kao"><b>考点：</b>"柳絮"比"盐"好在哪里？——柳絮<b>形似（白色飘飞）更神似</b>：给人以春天即将到来的感觉，有丰富意趣和诗意；"撒盐"只重形似，颜色、下落姿态皆死板。体现谢道韫的<b>聪慧才气</b>（"咏絮之才"）。<br>重点字：<b>骤</b>（急）／差可<b>拟</b>（相比）／<b>未若</b>（不如）／<b>因</b>（趁、乘）。</div>
+      </div>
+      <div>
+        <h3>🤝《陈太丘与友期行》</h3>
+        <p class="vtext">陈太丘与友期行，期日中。过中不至，太丘舍去，去后乃至。元方时年七岁，门外戏。客问元方："尊君在不？"答曰："待君久不至，已去。"友人便怒曰："非人哉！与人期行，相委而去。"元方曰："君与家君期日中。日中不至，则是无信；对子骂父，则是无礼。"友人惭，下车引之。元方入门不顾。</p>
+        <p class="trline">译：陈太丘和朋友约定同行，约定正午。过了正午朋友没到，太丘丢下（他）离开，离开后朋友才到。元方七岁，在门外玩。客人问元方："你父亲在吗？"答："等您很久您没来，已经走了。"友人生气说："真不是人！和别人约好同行，却丢下我走了。"元方说："您与我父亲约在正午。到正午不来就是<b>无信</b>；对儿子骂他父亲就是<b>无礼</b>。"友人惭愧，下车拉他，元方进门头也不回。</p>
+        <div class="kao"><b>考点：</b>①主旨：<b>信</b>（守时守信）与<b>礼</b>（礼貌待人）；②元方"入门不顾"是否失礼？——答"不失礼"（友人无信无礼在先，七岁孩子率直有理）或"稍有失礼"（原谅别人才是大度）皆可，<b>要言之有理</b>；③重点字：<b>期</b>行（约定）／舍<b>去</b>（离开）／<b>乃</b>至（才）／尊君<b>不</b>（同"否"）／<b>委</b>（舍弃）／<b>引</b>（拉，牵拉）／<b>顾</b>（回头看）。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 课外古诗四首 ================= -->
+<section id="kewai" class="c-u3">
+  <h2 class="sec">⑪ 课外古诗词诵读（期中前四首） <span class="tag">视学校要求 · 默写/选择题</span></h2>
+  <div class="card">
+    <table class="t">
+      <tr><th>诗题·作者</th><th>原诗</th><th>理解要点</th></tr>
+      <tr><td>《峨眉山月歌》<br>李白〔唐〕</td><td>峨眉山月半轮秋，影入平羌江水流。夜发清溪向三峡，思君不见下渝州。</td><td>连用<b>五个地名</b>（峨眉山—平羌—清溪—三峡—渝州）织成千里蜀江行旅图；月影随江而流，<b>思念友人（一说故乡）</b>。</td></tr>
+      <tr><td>《江南逢李龟年》<br>杜甫〔唐〕</td><td>岐王宅里寻常见，崔九堂前几度闻。正是江南好风景，落花时节又逢君。</td><td>前两句忆<b>开元盛世</b>常相见闻，后两句安史之乱后江南重逢；"<b>落花时节</b>"一语双关（凋零暮春＋个人潦倒＋盛世凋落），感时伤世，语浅情深。</td></tr>
+      <tr><td>《行军九日思长安故园》<br>岑参〔唐〕</td><td>强欲登高去，无人送酒来。遥怜故园菊，应傍战场开。</td><td>重阳（九日）登高、菊、酒（用陶渊明白衣送酒典）；长安沦陷，怜惜"傍战场开"的故园菊——<b>惜花忧国</b>、渴望早日平定战乱。</td></tr>
+      <tr><td>《夜上受降城闻笛》<br>李益〔唐〕</td><td>回乐烽前沙似雪，受降城外月如霜。不知何处吹芦管，一夜征人尽望乡。</td><td>"沙似雪""月如霜"两个<b>比喻</b>写边塞寒夜（视觉）；悠悠芦管（听觉）触发<b>征人思乡</b>——"尽望乡"三字写尽万军乡愁。</td></tr>
+    </table>
+    <p class="small">注：《夜上受降城闻笛》中"回乐烽"教材作"烽"（烽火台），有版本作"峰"。</p>
+  </div>
+</section>
+<div class="unit-banner ub-tk" id="toolkit"><div class="big">🛠 复习工具箱</div><div class="desc">常识总表 · 字音字形 · 默写易错 · 修辞语法 · 答题模板 —— 考前一晚的"急救包"</div></div>
+
+<!-- ================= 文学常识总表 ================= -->
+<section id="common" class="c-tk">
+  <h2 class="sec">🧾 文学常识总表 <span class="tag">选择/填空 2–4 分</span></h2>
+  <div class="card">
+    <table class="t">
+      <tr><th>作者</th><th>朝代/国别</th><th>身份</th><th>代表作</th><th>关联课文</th></tr>
+      <tr><td><b>朱自清</b>（字佩弦）</td><td>现代</td><td>散文家、诗人、学者</td><td>《背影》《荷塘月色》《匆匆》</td><td>《春》</td></tr>
+      <tr><td><b>老舍</b>（舒庆春，字舍予，满族）</td><td>现代</td><td>作家，"人民艺术家"</td><td>《骆驼祥子》《四世同堂》《茶馆》</td><td>《济南的冬天》</td></tr>
+      <tr><td><b>刘湛秋</b></td><td>当代</td><td>诗人、翻译家，"当代抒情诗之王"</td><td>《无题抒情诗》</td><td>《雨的四季》</td></tr>
+      <tr><td><b>曹操</b>（字孟德）</td><td>东汉末</td><td>政治家、军事家、诗人</td><td>《龟虽寿》《短歌行》</td><td>《观沧海》（《步出夏门行》一章）</td></tr>
+      <tr><td><b>李白</b>（字太白，"诗仙"）</td><td>唐</td><td>浪漫主义诗人</td><td>《静夜思》《望庐山瀑布》</td><td>《闻王昌龄左迁龙标遥有此寄》《峨眉山月歌》</td></tr>
+      <tr><td><b>王湾</b></td><td>唐</td><td>诗人</td><td>《次北固山下》（《全唐诗》存录）</td><td>《次北固山下》</td></tr>
+      <tr><td><b>马致远</b>（"曲状元"）</td><td>元</td><td>戏曲作家、散曲家</td><td>《天净沙·秋思》（"秋思之祖"）</td><td>《天净沙·秋思》</td></tr>
+      <tr><td><b>史铁生</b></td><td>当代</td><td>作家</td><td>《我与地坛》《病隙碎笔》</td><td>《秋天的怀念》</td></tr>
+      <tr><td><b>莫怀戚</b></td><td>当代</td><td>作家（重庆）</td><td>《诗礼人家》</td><td>《散步》</td></tr>
+      <tr><td><b>泰戈尔</b></td><td>印度</td><td>文学家（亚洲首位诺奖得主）</td><td>《吉檀迦利》《新月集》《园丁集》</td><td>《金色花》</td></tr>
+      <tr><td><b>冰心</b>（谢婉莹）</td><td>现代</td><td>诗人、作家</td><td>《繁星》《春水》《寄小读者》</td><td>《荷叶·母亲》</td></tr>
+      <tr><td><b>鲁迅</b>（周树人，字豫才）</td><td>现代</td><td>文学家、思想家、革命家</td><td>《呐喊》《彷徨》《朝花夕拾》《野草》</td><td>《从百草园到三味书屋》</td></tr>
+      <tr><td><b>于漪</b></td><td>当代</td><td>语文特级教师，"人民教育家"</td><td>《于漪全集》</td><td>《往事依依》</td></tr>
+      <tr><td><b>海伦·凯勒</b></td><td>美国</td><td>盲聋女作家、教育家</td><td>《假如给我三天光明》</td><td>《再塑生命的人》</td></tr>
+      <tr><td><b>孔子</b>（名丘，字仲尼）</td><td>春秋末期</td><td>思想家、教育家，儒家创始人</td><td>言行录《论语》（弟子及再传弟子辑录）</td><td>《论语》十二章</td></tr>
+      <tr><td><b>刘义庆</b>（组织编写）</td><td>南朝宋</td><td>宗室、文学家</td><td>《世说新语》（志人笔记体小说集）</td><td>《咏雪》《陈太丘与友期行》</td></tr>
+    </table>
+    <div class="kao"><b>易混警示：</b>①曹操是<b>东汉末</b>年人（不写"三国"）；②《论语》是<b>语录体</b>，不是孔子亲自写的；③《天净沙·秋思》是<b>元曲（小令）</b>不是唐诗；④"曲状元"=马致远，"诗仙"=李白。</div>
+  </div>
+</section>
+
+<!-- ================= 字音字形 ================= -->
+<section id="yicuo" class="c-tk">
+  <h2 class="sec">🔊 字音字形易错清单 <span class="tag">基础题 4–8 分</span></h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>🔊 高频易错字音</h3>
+      <table class="t">
+        <tr><th>词</th><th>音</th><th>词</th><th>音</th></tr>
+        <tr><td>应<b>和</b></td><td>hè</td><td>黄<b>晕</b></td><td>yùn</td></tr>
+        <tr><td>发<b>髻</b></td><td>jì</td><td><b>贮</b>蓄</td><td>zhù</td></tr>
+        <tr><td><b>着</b>落</td><td>zhuó</td><td>看(kān)护<b>妇</b></td><td>kān</td></tr>
+        <tr><td>瘫<b>痪</b></td><td>huàn</td><td><b>憔</b>悴</td><td>qiáo</td></tr>
+        <tr><td><b>侍</b>弄</td><td>shì</td><td><b>诀</b>别</td><td>jué</td></tr>
+        <tr><td>分<b>歧</b></td><td>qí</td><td>一<b>霎</b></td><td>shà</td></tr>
+        <tr><td>确<b>凿</b></td><td>záo</td><td>菜<b>畦</b></td><td>qí</td></tr>
+        <tr><td>桑<b>葚</b></td><td>shèn</td><td><b>倜傥</b></td><td>tì tǎng</td></tr>
+        <tr><td>脑<b>髓</b></td><td>suǐ</td><td>蝉<b>蜕</b></td><td>tuì</td></tr>
+        <tr><td><b>系</b>绳子</td><td>jì</td><td><b>宿</b>儒</td><td>sù</td></tr>
+        <tr><td><b>秕</b>谷</td><td>bǐ</td><td>人声<b>鼎</b>沸</td><td>dǐng</td></tr>
+        <tr><td>不亦<b>说</b>乎</td><td>yuè</td><td>三省吾身</td><td>xǐng</td></tr>
+        <tr><td>学而不思则<b>罔</b></td><td>wǎng</td><td>思而不学则<b>殆</b></td><td>dài</td></tr>
+        <tr><td>曲<b>肱</b></td><td>gōng</td><td>一<b>箪</b>食</td><td>dān</td></tr>
+        <tr><td><b>笃</b>志</td><td>dǔ</td><td>逝者如<b>斯</b>夫</td><td>sī fú</td></tr>
+        <tr><td>雪<b>骤</b></td><td>zhòu</td><td>差可<b>拟</b></td><td>chā nǐ</td></tr>
+        <tr><td>尊君在<b>不</b></td><td>fǒu</td><td>谢道<b>韫</b></td><td>yùn</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>✏ 高频易错字形（括号内为正字）</h3>
+      <table class="t">
+        <tr><th>误写</th><th>正确</th><th>误写</th><th>正确</th></tr>
+        <tr><td>朗（郎）润</td><td>朗润</td><td>酝（温）酿</td><td>酝酿</td></tr>
+        <tr><td>翻来复去</td><td>翻来<b>覆</b>去</td><td>喜出忘外</td><td>喜出<b>望</b>外</td></tr>
+        <tr><td>决别</td><td><b>诀</b>别</td><td>烂慢</td><td><b>烂漫</b></td></tr>
+        <tr><td>水波鳞鳞</td><td>水波<b>粼粼</b></td><td>各得其所</td><td>各得其所</td></tr>
+        <tr><td>枯滕</td><td>枯<b>藤</b></td><td>昏鸭</td><td>昏<b>鸦</b></td></tr>
+        <tr><td>天崖</td><td>天<b>涯</b></td><td>夜朗西</td><td>夜<b>郎</b>西</td></tr>
+        <tr><td>归燕</td><td>归<b>雁</b></td><td>惨夜</td><td><b>残</b>夜</td></tr>
+        <tr><td>竦立/耸峙</td><td><b>竦峙</b></td><td>谈淡/淡淡</td><td><b>澹澹</b></td></tr>
+        <tr><td>人迹罕止</td><td>人迹罕<b>至</b></td><td>轻捷/清捷</td><td><b>轻捷</b></td></tr>
+        <tr><td>消（销）释</td><td>消释</td><td>盔（魁）甲</td><td><b>盔</b>甲</td></tr>
+        <tr><td>淋漓</td><td>淋漓</td><td>蝉脱</td><td>蝉<b>蜕</b></td></tr>
+      </table>
+      <div class="kao"><b>提醒：</b>古诗默写错一字整空不得分——"澹澹、竦峙、萧瑟、藤、鸦、涯、雁、残、郎"这 9 个字考前再写 3 遍。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 默写易错 ================= -->
+<section id="moxie" class="c-tk">
+  <h2 class="sec">✍ 理解性默写高频句（背＋写）</h2>
+  <div class="card">
+    <table class="t">
+      <tr><th>题干（试卷怎么问）</th><th>答案句</th></tr>
+      <tr><td>《观沧海》中交代观海地点与目的</td><td>东临碣石，以观沧海</td></tr>
+      <tr><td>《观沧海》中通过想象表现大海吞吐日月星辰气概（诗中最能体现"博大胸襟"）</td><td>日月之行，若出其中；星汉灿烂，若出其里</td></tr>
+      <tr><td>《观沧海》中详细描绘秋天大海萧瑟苍凉、洪波巨澜之景</td><td>秋风萧瑟，洪波涌起</td></tr>
+      <tr><td>《闻王昌龄》中借明月表达对友人牵挂（拟人）</td><td>我寄愁心与明月，随君直到夜郎西</td></tr>
+      <tr><td>《闻王昌龄》中点明时令、渲染凄凉氛围</td><td>杨花落尽子规啼</td></tr>
+      <tr><td>《次北固山下》中蕴含新事物孕育于旧事物之中哲理（时序交替）</td><td>海日生残夜，江春入旧年</td></tr>
+      <tr><td>《次北固山下》中表现江面开阔、行船平稳</td><td>潮平两岸阔，风正一帆悬</td></tr>
+      <tr><td>《次北固山下》中表达思乡（鸿雁传书）</td><td>乡书何处达？归雁洛阳边</td></tr>
+      <tr><td>《天净沙·秋思》中点明主旨（直抒胸臆）</td><td>夕阳西下，断肠人在天涯</td></tr>
+      <tr><td>《天净沙·秋思》中温情与孤寂对照（以乐景衬哀情）</td><td>小桥流水人家</td></tr>
+      <tr><td>《春》中描写春花色彩艳丽的比喻排比</td><td>红的像火，粉的像霞，白的像雪</td></tr>
+      <tr><td>《春》中描写春雨细密闪亮的比喻排比</td><td>像牛毛，像花针，像细丝</td></tr>
+      <tr><td>《论语》中谈学习与思考辩证关系</td><td>学而不思则罔，思而不学则殆</td></tr>
+      <tr><td>《论语》中温习旧知识而有新体会</td><td>温故而知新，可以为师矣</td></tr>
+      <tr><td>《论语》中珍惜时间（感叹时光流逝）</td><td>逝者如斯夫，不舍昼夜</td></tr>
+      <tr><td>《论语》中志向不可被强行改变</td><td>三军可夺帅也，匹夫不可夺志也</td></tr>
+      <tr><td>《论语》中虚心向他人学习</td><td>三人行，必有我师焉</td></tr>
+      <tr><td>《论语》中安贫乐道（对待富贵的态度）</td><td>不义而富且贵，于我如浮云／一箪食，一瓢饮……回也不改其乐</td></tr>
+      <tr><td>《夜上受降城闻笛》中以比喻写边塞夜景</td><td>回乐烽前沙似雪，受降城外月如霜</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= 修辞语法 + 答题模板 ================= -->
+<section id="muban" class="c-tk">
+  <h2 class="sec">📐 修辞·描写 + 答题模板 <span class="tag">现代文阅读抢分器</span></h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>修辞手法辨析</h3>
+      <table class="t">
+        <tr><th>修辞</th><th>标志</th><th>效果套话</th></tr>
+        <tr><td><b>比喻</b></td><td>本体喻体（像、似、仿佛；暗喻"是"）</td><td>生动形象地写出了＋对象＋特点＋情感</td></tr>
+        <tr><td><b>拟人</b></td><td>物有了人的动作情感</td><td>赋予××以人的情态，生动传神，富有情趣</td></tr>
+        <tr><td><b>排比</b></td><td>三个及以上结构相似句</td><td>增强语势，节奏感强，强调……，抒发强烈情感</td></tr>
+        <tr><td><b>反复</b></td><td>相同词句重复出现</td><td>强调……，突出强烈情感（盼望着，盼望着）</td></tr>
+        <tr><td><b>对偶</b></td><td>结构相同字数相等（律诗中联）</td><td>节奏匀称，音韵和谐</td></tr>
+      </table>
+      <h3>描写方式速查</h3>
+      <p class="small">按对象：人物（外貌·语言·动作·心理·<b>神态</b>）/环境（自然·社会）；按角度：正面（直接）/侧面（借他人他物烘托——蜂闹蝶飞写花香）；<b>细节描写</b>＝微小动作神情（"悄悄地""偷偷地"）。</p>
+    </div>
+    <div class="card">
+      <h3>🎯 模板一：句子／词语赏析（三步法）</h3>
+      <p class="vtext" style="font-size:15px">①手法（修辞/描写/用词角度）
+②内容：生动形象地写出了"谁＋怎么样＋什么特点"
+③情感：表达了作者……的情感（或"表达了……之情"）</p>
+      <h3>🎯 模板二：景物描写作用</h3>
+      <p class="vtext" style="font-size:15px">①交代时间地点，点明背景
+②渲染……气氛
+③烘托人物……心情
+④推动情节发展（为下文……铺垫）
+⑤暗示/深化主旨</p>
+      <h3>🎯 模板三：标题含义与作用</h3>
+      <p class="vtext" style="font-size:15px">含义：表层义（字面）＋深层义（象征/双关/情感）
+作用：全文线索；概括内容；点明主旨；设置悬念吸引读者；一语双关</p>
+      <h3>🎯 模板四：某段（物/事）作用</h3>
+      <p class="vtext" style="font-size:15px">结构：开头（总领/铺垫/照应题目）·中间（承上启下）·结尾（照应开头/升华主旨）
+内容：补充交代……；表现人物……；突出中心……（插叙＝丰富内容＋衬托＋铺垫）</p>
+      <h3>🎯 模板五：古诗情感题</h3>
+      <p class="vtext" style="font-size:15px">通过（描写）……的景象/意象＋运用……手法＋抒发（表达）……的情感</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 冲刺计划 ================= -->
+<section id="plan" class="c-tk">
+  <h2 class="sec">🗓 考前 7 天冲刺计划 <span class="tag">每天 40–60 分钟</span></h2>
+  <div class="card">
+    <table class="t">
+      <tr><th>天</th><th>主题（40–60 分钟）</th><th>过关标准</th></tr>
+      <tr><td><b>D1</b></td><td>字音字形 + 文学常识总表（本页三个清单）</td><td>易错表 3 遍；能闭卷说出每位作者朝代＋代表作</td></tr>
+      <tr><td><b>D2</b></td><td>《春》《济南的冬天》：过五幅图、三组对比、雪景段</td><td>会背"红的像火…"和雪景段赏析要点</td></tr>
+      <tr><td><b>D3</b></td><td>古诗四首 + ★对比专题</td><td>四首全默全对；对比小卷 3 题能口述</td></tr>
+      <tr><td><b>D4</b></td><td>《秋天的怀念》《散步》：三次看花、细节描写、结尾含义</td><td>会写"标题含义"和"整个世界"答案</td></tr>
+      <tr><td><b>D5</b></td><td>《百草园》＋《朝花夕拾》十篇表＋人物长廊</td><td>捕鸟 9 动词默对；10 篇能一句话概括</td></tr>
+      <tr><td><b>D6</b></td><td>《论语》十二章＋《世说新语》＋课外古诗四首</td><td>论语默写全对；两个文言故事能翻译画线句</td></tr>
+      <tr><td><b>D7</b></td><td>做本卷模拟练习 → 对答案 → 错题回看对应模块；作文审题列提纲</td><td>错题弄懂并讲给爸妈听</td></tr>
+    </table>
+    <div class="tips"><b>💡 每日睡前 5 分钟：</b>合上 Atlas，闭眼"放电影"——今天过的是哪几幅图/哪几首诗？画面在脑中过了一遍，记忆会牢很多。</div>
+  </div>
+</section>
+<div class="unit-banner ub-ex" id="exam"><div class="big">🎯 期中模拟练习卷</div><div class="desc">满分 130 分（作文 40 分）· 建议用时 120 分钟 · 独立完成再对答案 ｜ 答案统一在页面最后</div></div>
+
+<section id="exam" class="c-ex">
+  <h2 class="sec">📝 七年级（上）语文期中模拟卷 <span class="tag">先做后看答案</span></h2>
+
+  <div class="card">
+    <h3>一、基础知识（每小题 3 分，共 21 分）</h3>
+    <div class="q"><div class="qh"><span class="no">1</span>下列词语中加点字注音完全正确的一项是（　　）</div>
+      <div class="opts">A. 酝酿（niàng）　应和（hé）　黄晕（yùn）　嘹亮（liáo）<br>B. 澹澹（dàn）　竦峙（sǒng）　憔悴（cuì）　瘫痪（tǎn）<br>C. 贮蓄（chǔ）　发髻（jì）　着落（zháo）　澄清（chéng）<br>D. 确凿（záo）　菜畦（qí）　桑葚（shèn）　倜傥（tì tǎng）</div>
+    </div>
+    <div class="q"><div class="qh"><span class="no">2</span>下列词语中没有错别字的一项是（　　）</div>
+      <div class="opts">A. 翻来复去　喜出望外　花枝招展<br>B. 小心冀冀　各得其所　水波粼粼<br>C. 人声鼎沸　人迹罕至　截然不同<br>D. 憔瘁　诀别　烂漫　絮叨</div>
+    </div>
+    <div class="q"><div class="qh"><span class="no">3</span>下列句子中加点成语使用<b>不恰当</b>的一项是（　　）</div>
+      <div class="opts">A. 春天的公园里百花盛开，赏花的姑娘们个个花枝招展。<br>B. 听说周末去北海看菊花，妹妹喜出望外，立刻去收拾背包。<br>C. 爷爷喜欢清静，对人声鼎沸的集市一向没什么兴趣。<br>D. 面对母亲的善意提醒，他却咄咄逼人地大声反驳。</div>
+    </div>
+    <div class="q"><div class="qh"><span class="no">4</span>下列句子中没有语病的一项是（　　）</div>
+      <div class="opts">A. 通过这次复习，使我的古诗默写正确率大大提高。<br>B. 我们要随时发现并认真克服学习中的缺点。<br>C. 能否熟练背诵四首古诗，是取得默写满分的关键。<br>D. 母亲的眼神里，充满了对我的鼓励和信任。</div>
+    </div>
+    <div class="q"><div class="qh"><span class="no">5</span>将下列句子组成语意连贯的一段话，排序最恰当的一项是（　　）<br><span class="small">①春风轻轻吹绿了柳梢　②连日的阴雨终于停了　③孩子们也走出家门，放飞风筝　④久违的阳光洒满大地</span></div>
+      <div class="opts">A. ②①④③　　B. ②④①③　　C. ④②①③　　D. ②④③①</div>
+    </div>
+    <div class="q"><div class="qh"><span class="no">6</span>下列文学常识表述<b>不正确</b>的一项是（　　）</div>
+      <div class="opts">A. 《观沧海》的作者是东汉末年的曹操，这首诗是乐府诗《步出夏门行》中的一章。<br>B. 《天净沙·秋思》中"天净沙"是曲牌名，"秋思"是题目，作者马致远是元代散曲家。<br>C. 《朝花夕拾》是鲁迅的散文诗集，共十篇，原名《旧事重提》。<br>D. 《论语》是儒家经典，由孔子弟子及再传弟子编纂，记录孔子及其弟子的言行。</div>
+    </div>
+    <div class="q"><div class="qh"><span class="no">7</span>对下列句子的修辞手法判断正确的一项是（　　）<br><span class="small">①小草偷偷地从土里钻出来。②盼望着，盼望着，东风来了。③春天像刚落地的娃娃。④黄色的花淡雅，白色的花高洁，紫红色的花热烈而深沉。</span></div>
+      <div class="opts">A. 拟人　反复　比喻　排比<br>B. 比喻　排比　拟人　反复<br>C. 拟人　排比　比喻　反复<br>D. 比喻　反复　拟人　排比</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>二、古诗文默写（每空 1 分，共 13 分）</h3>
+    <div class="q"><div class="qh"><span class="no">8</span>根据课文默写古诗文。</div>
+      <div class="opts">
+      （1）水何澹澹，<span class="blank">＿＿＿＿＿＿</span>。<br>
+      （2）日月之行，<span class="blank">＿＿＿＿</span>；星汉灿烂，<span class="blank">＿＿＿＿</span>。<br>
+      （3）我寄愁心与明月，<span class="blank">＿＿＿＿＿＿＿＿</span>。<br>
+      （4）《次北固山下》中蕴含"新事物孕育于旧事物之中"哲理的句子是：<span class="blank">＿＿＿＿＿＿＿</span>，<span class="blank">＿＿＿＿＿＿＿</span>。<br>
+      （5）《天净沙·秋思》中直接点明主旨的句子是：<span class="blank">＿＿＿＿＿＿＿</span>，<span class="blank">＿＿＿＿＿＿＿</span>。<br>
+      （6）秋风萧瑟，<span class="blank">＿＿＿＿＿＿</span>。<br>
+      （7）《论语》十二章中强调学习与思考要结合的句子是：<span class="blank">＿＿＿＿＿＿＿</span>，<span class="blank">＿＿＿＿＿＿＿</span>。<br>
+      （8）《夜上受降城闻笛》中写尽征人思乡之情的句子是：<span class="blank">＿＿＿＿＿＿＿＿</span>，<span class="blank">＿＿＿＿＿＿＿＿</span>。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>三、古代诗歌对比鉴赏（共 14 分）</h3>
+    <div class="q">
+      <div class="qh"><span class="no">9</span>阅读下面两首作品，完成题目。（7 分）</div>
+      <p class="vtext" style="font-size:15px">【甲】东临碣石，以观沧海。水何澹澹，山岛竦峙。树木丛生，百草丰茂。秋风萧瑟，洪波涌起。日月之行，若出其中；星汉灿烂，若出其里。（《观沧海》）<br>【乙】枯藤老树昏鸦，小桥流水人家，古道西风瘦马。夕阳西下，断肠人在天涯。（《天净沙·秋思》）</p>
+      <p>（1）两首作品都写到秋天，各自描绘了一幅怎样的画面？请分别用一句话概括。（4 分）</p>
+      <p>（2）同是写秋，为什么【甲】读来豪迈壮阔，【乙】却令人悲凉断肠？请结合具体诗句分析原因。（3 分）</p>
+    </div>
+    <div class="q">
+      <div class="qh"><span class="no">10</span>阅读下面两首诗，完成题目。（7 分）</div>
+      <p class="vtext" style="font-size:15px">【甲】杨花落尽子规啼，闻道龙标过五溪。我寄愁心与明月，随君直到夜郎西。（《闻王昌龄左迁龙标遥有此寄》）<br>【乙】客路青山外，行舟绿水前。潮平两岸阔，风正一帆悬。海日生残夜，江春入旧年。乡书何处达？归雁洛阳边。（《次北固山下》）</p>
+      <p>（1）【甲】诗首句"杨花落尽子规啼"选用"杨花""子规"两个意象，有什么作用？（3 分）</p>
+      <p>（2）【乙】诗"海日生残夜，江春入旧年"中"生""入"二字历来为人称道，请作赏析。（2 分）</p>
+      <p>（3）两首诗都含有"思念"，但思念的对象和寄托方式不同，请简要比较。（2 分）</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>四、文言文阅读（共 12 分）</h3>
+    <div class="q">
+      <div class="qh"><span class="no">11</span>阅读《陈太丘与友期行》，完成题目。</div>
+      <p class="vtext" style="font-size:15px">陈太丘与友期行，期日中。过中不至，太丘舍去，去后乃至。元方时年七岁，门外戏。客问元方："尊君在不？"答曰："待君久不至，已去。"友人便怒曰："非人哉！与人期行，相委而去。"元方曰："君与家君期日中。日中不至，则是无信；对子骂父，则是无礼。"友人惭，下车引之。元方入门不顾。</p>
+      <p>（1）解释下列加点词。（4 分）<br>①陈太丘与友期<b>行</b>（　　）　②太丘舍<b>去</b>（　　）　③去后<b>乃</b>至（　　）　④元方入门不<b>顾</b>（　　）</p>
+      <p>（2）翻译下列句子。（4 分）<br>①非人哉！与人期行，相委而去。<br>②日中不至，则是无信；对子骂父，则是无礼。</p>
+      <p>（3）元方从哪两个方面指责友人？（2 分）</p>
+      <p>（4）有人认为，元方"入门不顾"的做法也有失礼貌。你同意吗？请说明理由。（2 分）</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>五、课内现代文阅读（共 14 分）</h3>
+    <div class="q">
+      <div class="qh"><span class="no">12</span>阅读《济南的冬天》选段，完成题目。（7 分）</div>
+      <p class="vtext" style="font-size:14.5px">最妙的是下点小雪呀。看吧，山上的矮松越发的青黑，树尖上顶着一髻儿白花，好像日本看护妇。山尖全白了，给蓝天镶上一道银边。这样，一道儿白，一道儿暗黄，给山们穿上一件带水纹的花衣；看着看着，这件花衣好像被风儿吹动，叫你希望看见一点更美的山的肌肤。等到快日落的时候，微黄的阳光斜射在山腰上，那点薄雪好像忽然害了羞，微微露出点粉色。就是下小雪吧，济南是受不住大雪的，那些小山太秀气！</p>
+      <p>（1）本段的中心句（总起句）是哪一句？（1 分）</p>
+      <p>（2）品析下列句中加点词的表达效果。（3 分）<br>①树尖上<b>顶</b>着一髻儿白花。　②给蓝天<b>镶</b>上一道银边。　③那点薄雪好像忽然<b>害了羞</b>。</p>
+      <p>（3）本段描写雪后小山是按怎样的顺序写的？请具体说明。（3 分）</p>
+    </div>
+    <div class="q">
+      <div class="qh"><span class="no">13</span>阅读《秋天的怀念》选段，完成题目。（7 分）</div>
+      <p class="vtext" style="font-size:14.5px">又是秋天，妹妹推我去北海看了菊花。黄色的花淡雅，白色的花高洁，紫红色的花热烈而深沉，泼泼洒洒，秋风中正开得烂漫。我懂得母亲没有说完的话。妹妹也懂。我俩在一块儿，要好好儿活……</p>
+      <p>（1）选段写菊花运用了什么修辞手法？有怎样的表达作用？（3 分）</p>
+      <p>（2）"我懂得母亲没有说完的话。"母亲没有说完的话是什么？（2 分）</p>
+      <p>（3）结合全文，谈谈你对结尾"要好好儿活"的理解。（2 分）</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>六、名著阅读《朝花夕拾》（共 6 分）</h3>
+    <div class="q"><div class="qh"><span class="no">14</span>（1）下列关于《朝花夕拾》的说法<b>有误</b>的一项是（　　）（3 分）</div>
+      <div class="opts">A. 《朝花夕拾》原名《旧事重提》，是鲁迅先生回忆童年、少年和青年时期不同生活经历的十篇散文。<br>B. 《五猖会》中，父亲在"我"盼着看迎神赛会时，硬逼"我"背完《鉴略》才许去，写出封建教育对儿童天性的压制。<br>C. 《阿长与〈山海经〉》中，长妈妈为"我"买来了"我"渴慕已久的绘图《山海经》，让"我"对她"发生新的敬意"。<br>D. 《琐记》中的衍太太冬天怂恿孩子们吃冰，还教"我"母亲变卖首饰——她是个真诚关心孩子的好人。</div>
+    </div>
+    <div class="q"><div class="qh"><span class="no">15</span>（2）有人评价《朝花夕拾》是"温馨的回忆与理性的批判"。请从两个角度各举一例加以说明。（3 分）</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>七、课外现代文阅读（共 12 分）</h3>
+    <div class="q">
+      <div class="qh"><span class="no">16</span>阅读下文，完成题目。</div>
+      <p class="vtext" style="font-size:14.5px">门前的灯<br>　　①那盏灯挂在老屋门前，灯罩早已发黄，是外婆亲手装上去的。<br>　　②上初中后我开始上晚自习，回家要穿过一条长长的巷子。巷口拐角处有一块凸起的青石，好几次我都被它绊得踉跄。外婆知道后，什么也没说。第二天傍晚，我远远地就看见老屋门前亮起了一团昏黄的光——外婆搬了把竹椅坐在灯下，膝上摊着针线笸箩，见我进来，眯眼笑了："灯亮着，你就能看清脚下的路了。"<br>　　③从那以后，无论刮风下雨，那盏灯每晚都亮着。一个台风夜，电线被吹断了，外婆竟点起一支蜡烛，用铁丝固定在门框上，自己披着雨衣守在门口。我冲进家门，看见她花白的头发上挂着水珠，手里的蜡烛却握得稳稳的，火苗在风雨里倔强地立着。那一刻，我的眼眶忽然热了。<br>　　④后来我随父母进城读书，老屋空了，外婆也接来同住。搬家那天，外婆踮起脚，把那盏灯小心地拧了下来，用报纸包了三层，放进随身的布包里。<br>　　⑤城里的家亮堂堂的，根本用不上那盏昏黄的旧灯。可外婆还是请人在阳台上装了个挂钩，把灯挂了上去。每晚我伏案做题，一抬头，总能看见阳台方向那团熟悉的暖黄。灯光其实照不进我的书房，可我知道，它在，外婆就在。<br>　　⑥去年外婆回了趟老家，把灯又挂了回去。她在电话里说："灯挂在老屋，你的根就在这儿。走再远，也记得回来的路。"<br>　　⑦如今每次回老家，夜色里一拐进巷口，远远地，就看见那团昏黄的灯光，像一颗温柔的星，一直亮在我的心上。</p>
+      <p>（1）请围绕"灯"，用简洁的语言概括文中写了哪几件事。（4 分）</p>
+      <p>（2）从描写角度赏析第③段画线句："她花白的头发上挂着水珠，手里的蜡烛却握得稳稳的，火苗在风雨里倔强地立着。"（3 分）</p>
+      <p>（3）如何理解第⑤段"灯光其实照不进我的书房，可我知道，它在，外婆就在"？（3 分）</p>
+      <p>（4）结合全文，说说标题"门前的灯"的含义。（2 分）</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>八、写作（40 分）</h3>
+    <div class="q"><div class="qh"><span class="no">17</span>任选一题作文。（不少于 500 字）</div>
+      <p>题一：《那一刻，我读懂了她（他）》<br><span class="small">思路点拨：写亲人或老师、同学。选取一个具体的"那一刻"（一个动作、一句话、一个背影），用细节描写（动作、神态、语言）把"读不懂→读懂"的心理变化写出来；开头宜开门见山，结尾点题升华。</span></p>
+      <p>题二：半命题《＿＿＿＿，伴我成长》<br><span class="small">思路点拨：可填具体事物（一盏灯、一辆旧自行车、一本书），也可填抽象事物（鼓励、书香、陪伴）。以所选事物为<b>线索</b>串起 2—3 件小事，体现"伴我成长"的变化；学《散步》《秋天的怀念》的以小见大。</span></p>
+      <p class="small">⚠ 通用提醒：①题目即文眼，正文和结尾都要回扣；②至少 3 处细节描写；③分段清楚（5—7 段），书写工整；④写完通读一遍查错别字和标点。</p>
+    </div>
+  </div>
+</section>
+<!-- ================= 答案与解析 ================= -->
+<section id="answers" class="c-ex">
+  <h2 class="sec">🔑 答案与解析 <span class="tag">统一放最后 · 做完再看</span></h2>
+  <div class="warn"><b>使用建议：</b>整套卷子做完再对答案；对完把错题回到前面对应模块（字音→易错清单，对比题→对比专题……）再过一遍。点每节可展开答案。</div>
+
+  <details><summary>一、基础知识答案（第 1–7 题）</summary><div class="inner">
+    <p><b>1. D</b>　解析：A 项"应和"读 hè；B 项"瘫痪"读 tān；C 项"贮"读 zhù、"着落"读 zhuó。</p>
+    <p><b>2. C</b>　解析：A 应为翻来<b>覆</b>去；B 应为小心<b>翼翼</b>；D 应为<b>憔悴</b>。</p>
+    <p><b>3. D</b>　解析："咄咄逼人"指说话气势汹汹，用在"面对母亲的善意提醒"的语境中感情色彩和分寸都不当。</p>
+    <p><b>4. D</b>　解析：A 缺主语（"通过……使……"删其一）；B 语序不当，应为"随时发现并认真克服"；C 两面对一面，删"能否"。</p>
+    <p><b>5. B</b>　解析：雨停（②）→阳光洒满（④）→风吹柳梢（①）→孩子放风筝（③），按时间与景致推进。</p>
+    <p><b>6. C</b>　解析：《朝花夕拾》是<b>回忆性散文</b>集；散文诗集是《野草》。</p>
+    <p><b>7. A</b>　解析：①"偷偷地""钻"拟人；②叠用"盼望着"反复；③本体"春天"、喻体"娃娃"，比喻；④三组结构相同的短语并列，排比。</p>
+  </div></details>
+
+  <details><summary>二、古诗文默写答案（第 8 题，错一字该空不得分）</summary><div class="inner">
+    <p>（1）山岛竦峙　（2）若出其中；若出其里　（3）随君直到夜郎西　（4）海日生残夜，江春入旧年　（5）夕阳西下，断肠人在天涯　（6）洪波涌起　（7）学而不思则罔，思而不学则殆　（8）不知何处吹芦管，一夜征人尽望乡</p>
+    <p class="small">易错字提醒：竦峙、澹澹、残夜、归雁、涯、郎、罔、殆、芦管。</p>
+  </div></details>
+
+  <details><summary>三、古代诗歌对比鉴赏答案（第 9–10 题）</summary><div class="inner">
+    <p><b>9（1）（4 分）</b>【甲】描绘了秋风萧瑟中大海波澜壮阔、山岛巍然耸立（草木丰茂、洪波涌起，日月星汉仿佛出自其中）的<b>雄浑壮阔</b>的海景图；【乙】描绘了枯藤缠绕老树、暮鸦归巢、游子牵瘦马顶着西风走在古道上、夕阳西沉的<b>萧瑟苍凉</b>的深秋晚景图。</p>
+    <p><b>9（2）（3 分）</b>①景不同：【甲】"洪波涌起""日月之行，若出其中"，境界宏大有气势；【乙】"枯藤""老树""瘦马""夕阳"皆是衰败残缺之景（"小桥流水人家"还以乐景反衬）。②情不同：曹操心怀统一天下的壮志，借大海抒发<b>博大胸襟与抱负</b>，故豪迈；马致远长期漂泊、思家断肠，借秋景写<b>游子孤寂愁苦</b>，故悲凉。③可见景物本无定情，<b>作者的心境决定景物的基调</b>（言之成理即可）。</p>
+    <p><b>10（1）（3 分）</b>①"杨花"漂泊无定、"子规"啼声哀切，点明<b>暮春时节</b>；②渲染<b>凄凉忧愁</b>的氛围；③融情于景，暗含友人被贬的飘零之感与诗人的<b>同情悲伤</b>。</p>
+    <p><b>10（2）（2 分）</b>"生""入"运用<b>拟人</b>，把"海日""江春"人格化：夜还未尽，红日已迫不及待地从海上升起；旧年未过，江上已透出春意。写出时序交替的不可阻挡，蕴含<b>新事物孕育于旧事物之中、必将取代旧事物</b>的哲理，用笔生动而富有理趣。</p>
+    <p><b>10（3）（2 分）</b>思念对象不同：【甲】思念的是<b>被贬远方的友人</b>，【乙】思念的是<b>故乡（亲人）</b>；寄托方式不同：【甲】把愁心托付<b>明月</b>随友同行（拟人，浪漫），【乙】托<b>北归的大雁</b>捎家书（设问、用典，恳切）。</p>
+  </div></details>
+
+  <details><summary>四、文言文阅读答案（第 11 题）</summary><div class="inner">
+    <p><b>（1）</b>①同行（相约同行）；②离开；③才；④回头看。</p>
+    <p><b>（2）</b>①"真不是人啊！和别人约定同行，却丢下我走了（自己先走了）。"　②"正午您没到，就是不守信用；对着儿子骂他的父亲，就是没有礼貌。"</p>
+    <p><b>（3）</b>①"无信"——约定正午到却"过中不至"；②"无礼"——"对子骂父"。</p>
+    <p><b>（4）</b>示例一（不同意失礼）：友人<b>无信无礼在先</b>，元方以七岁之龄据理反驳，"入门不顾"是孩子率真刚直的表现，情有可原。示例二（同意略有失礼）：批评对方无信无礼已经足够，友人已惭愧下车"引之"（示好），元方可以宽宏地回应，得体原谅更显修养。（观点明确、言之成理即可）</p>
+  </div></details>
+
+  <details><summary>五、课内现代文阅读答案（第 12–13 题）</summary><div class="inner">
+    <p><b>12（1）</b>最妙的是下点小雪呀。</p>
+    <p><b>12（2）</b>①"顶"：准确写出雪小、雪落树尖积成白花的形态，又使矮松有了戴花少女般的娇态，暗含喜爱。②"镶"：写出白雪与蓝天相接处界线分明、如银线镶嵌，精致秀美。③"害了羞"：拟人，夕阳微黄的斜光下薄雪微露粉色，像少女羞红了脸，写出雪景的<b>娇美秀丽</b>和作者的怜爱之情。</p>
+    <p><b>12（3）</b>按<b>空间顺序（自上而下）</b>：山上（矮松）→山尖→山坡（花衣）→山腰（落日薄雪粉色），层次分明，如同给小山层层上色。</p>
+    <p><b>13（1）</b>排比。"淡雅""高洁""热烈而深沉"写出菊花缤纷绚烂、生机勃勃；象征<b>母爱的深沉多彩</b>，也象征"我们"终于走出阴霾、活出各自的精彩，暗含对母亲的怀念与告慰。</p>
+    <p><b>13（2）</b>"你俩（我们娘儿俩）在一块儿，要好好儿活……"（即：无论遭遇什么，都要坚强、好好地活下去。）</p>
+    <p><b>13（3）</b>"好好儿活"是母亲临终的嘱托：不向命运屈服，活出勇气、活出价值（活出个性与尊严）。结尾"我俩在一块儿，要好好儿活"表明兄妹俩已走出悲痛、懂得了母亲的爱与期望，是最好的纪念。</p>
+  </div></details>
+
+  <details><summary>六、名著阅读答案（第 14–15 题）</summary><div class="inner">
+    <p><b>14. D</b>　解析：衍太太表面"和蔼"，实则<b>自私自利、心术不正</b>（怂恿孩子吃冰、打旋子，散布"我"偷家里东西的流言）。</p>
+    <p><b>15.</b>示例：温馨的回忆——如《从百草园到三味书屋》中百草园拔何首乌、雪地捕鸟的自由快乐，《阿长与〈山海经〉》中长妈妈买来"三哼经"的质朴关爱；理性的批判——如《五猖会》中父亲逼"我"背《鉴略》，批判封建教育对儿童天性的压制，《二十四孝图》批判封建孝道的虚伪残酷，《父亲的病》揭露庸医故弄玄虚、勒索钱财。（每角度举例恰当、言之成理即可）</p>
+  </div></details>
+
+  <details><summary>七、课外现代文阅读答案（第 16 题）</summary><div class="inner">
+    <p><b>（1）（4 分）</b>①外婆在门前装灯（亮灯），每晚坐在灯下等"我"下晚自习回家；②台风夜外婆守着蜡烛灯在门口等"我"；③搬家进城时，外婆把旧灯带到城里挂在阳台；④外婆回老家把灯重新挂回老屋，说"灯在，根就在"。</p>
+    <p><b>（2）（3 分）</b>运用<b>细节描写（外貌、动作）＋拟人</b>："花白的头发上挂着水珠"写出外婆风雨中久等的辛苦；蜡烛"握得稳稳的""火苗倔强地立着"，以火苗的倔强象征外婆守护的<b>坚定执着</b>，也侧面烘托这团火光给"我"的温暖力量，抒发"我"的感动。</p>
+    <p><b>（3）（3 分）</b>灯光象征<b>外婆的爱与牵挂</b>；灯光照不进书房，但"灯在，外婆就在"——那盏灯是外婆守望的化身，让"我"在最累的时候感到被爱包围，内心温暖踏实（读懂了这份无声的爱）。</p>
+    <p><b>（4）（2 分）</b>表层：老屋门前那盏为"我"照亮回家路的旧灯。深层：象征外婆的爱与守望（也象征故乡、根与亲情），它一直亮在"我"心里，指引"我"记得爱与归途。</p>
+  </div></details>
+
+  <details><summary>八、作文评分参考（第 17 题）</summary><div class="inner">
+    <p><b>一类卷（34–40）</b>：切题，有具体事件与真挚情感；细节描写生动；线索清晰；结构完整，点题自然；语言流畅，书写工整。<br><b>二类卷（28–33）</b>：中心明确，事件完整，有描写但不够细腻；结构完整，语句通顺。<br><b>三类卷（21–27）</b>：中心基本明确，叙事清楚但流水账；描写少；条理一般。<br><b>四类卷（20 以下）</b>：偏离题意或字数严重不足。</p>
+    <p class="small">⚠ 最常见的失分：①只叙不描（全篇没有一处神态、动作细节）；②开头绕圈不点题；③"那一刻"没写足（题一要放慢镜头，把那一刻的动作、神态、心理写细）；④选物不贯穿（题二所填事物要作为线索反复出现）。</p>
+  </div></details>
+
+  <div class="card" style="margin-top:18px">
+    <h3>🏁 最后的话</h3>
+    <p>Michelle，期中考试考的是这半学期的"熟"而不是"难"：默写一分不丢、诗句赏析按模板稳稳写满、作文写一件真事写细一点，就赢了。愿你像《春》里说的——"一年之计在于春"，也像妈妈们说的——"好好儿活"，好好儿考。加油！🎉</p>
+    <p class="small" style="margin-top:8px">© 2026 期中复习 Atlas · 为 Michelle 定制 · 依据统编版（2024）七年级上册整理，如与课堂讲授有出入，以老师为准。</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<button class="backtop" onclick="window.scrollTo({top:0})" title="回到顶部">↑</button>
+<script>
+function toggleAll(open){document.querySelectorAll('details').forEach(d=>d.open=open)}
+window.addEventListener('beforeprint',()=>toggleAll(true));
+/* sidebar active highlight */
+const links=[...document.querySelectorAll('nav.side a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-15% 0px -70% 0px'});
+secs.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
