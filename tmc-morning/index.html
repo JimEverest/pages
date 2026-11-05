@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>TMC 晨间冲刺</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a single answer-sheet column; red "marker pen" notes the way a TMC supervisor marks in red ink */
+:root{
+  --paper:#f7f8f6; --card:#ffffff; --ink:#1d2a3a; --muted:#5d6878; --rule:#dfe3e6;
+  --blue:#1f4fa0; --blue-soft:#e7eefa; --red:#c4312b; --red-soft:#fbeceb; --green:#2f7a4c;
+  --display:"Noto Serif SC","Songti SC",serif;
+  --body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#141a22; --card:#1b232e; --ink:#e3e8ee; --muted:#9aa6b4; --rule:#2c3644;
+  --blue:#86aef0; --blue-soft:#1f2c42; --red:#f07b72; --red-soft:#3a2224; --green:#7cc79a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#141a22; --card:#1b232e; --ink:#e3e8ee; --muted:#9aa6b4; --rule:#2c3644;
+  --blue:#86aef0; --blue-soft:#1f2c42; --red:#f07b72; --red-soft:#3a2224; --green:#7cc79a; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.75}
+.wrap{max-width:780px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:40px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.3;margin:0}
+h1{font-size:clamp(28px,6vw,40px);font-weight:900}
+h2{font-size:23px;font-weight:900;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+h3{font-size:18px;font-weight:600}
+p{margin:0}
+section{display:grid;gap:16px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:18px}
+.marker{color:var(--red);font-weight:700}
+.thesis{background:var(--card);border:1px solid var(--rule);border-left:5px solid var(--red);padding:18px 20px;display:grid;gap:10px}
+.thesis p{font-size:17px}
+.m{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:700;color:var(--muted);font-size:13px;letter-spacing:.04em}
+.tools{display:grid;gap:12px}
+.tool{background:var(--card);border:1px solid var(--rule);padding:14px 16px;display:grid;gap:6px}
+.tool .f{font-family:var(--mono);background:var(--blue-soft);color:var(--blue);padding:2px 8px;justify-self:start;font-size:15px}
+.tool small{color:var(--muted)}
+ol.rank{margin:0;padding-left:1.4em;display:grid;gap:8px}
+ol.rank b{color:var(--blue)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.box{background:var(--card);border:1px solid var(--rule);padding:12px 14px;min-width:0}
+.box h3{font-size:15px;margin-bottom:4px;font-family:var(--body);font-weight:700}
+.box p{font-family:var(--mono);font-size:13.5px;line-height:1.6;overflow-wrap:anywhere}
+.plan{display:grid;gap:0;border:1px solid var(--rule);background:var(--card)}
+.plan div{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:10px 14px;border-bottom:1px solid var(--rule)}
+.plan div:last-child{border-bottom:0}
+.plan .t{font-family:var(--mono);color:var(--red);font-weight:600}
+.q{background:var(--card);border:1px solid var(--rule);padding:14px 16px;display:grid;gap:8px}
+.q .src{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.q .src.real{color:var(--blue)}
+details{border-top:1px dashed var(--rule);padding-top:8px}
+summary{cursor:pointer;color:var(--red);font-weight:700;font-size:14px}
+summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+details[open] summary{margin-bottom:6px}
+details p{color:var(--ink)}
+.ans{font-family:var(--mono);font-weight:600;color:var(--green)}
+.qs{display:grid;gap:12px}
+.group-label{font-family:var(--mono);font-size:13px;color:var(--blue);margin-top:8px}
+ul{margin:0;padding-left:1.3em;display:grid;gap:6px}
+.vocab{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:6px 16px;font-size:14.5px}
+.vocab span{display:flex;gap:8px;justify-content:space-between;border-bottom:1px dotted var(--rule);padding:3px 0}
+.vocab b{font-family:var(--mono);font-weight:600}
+.note{font-size:14px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header style="display:grid;gap:10px">
+  <span class="eyebrow">UKMT Team Maths Challenge · 选拔赛前 30 分钟</span>
+  <h1>TMC 晨间冲刺</h1>
+  <p class="lead">依据：文件夹里 2016、2017、2024、2025 四届初中组区域/全国决赛真题（小组赛、Shuttle、接力赛、Crossnumber）逐题归类。</p>
+</header>
+
+<section>
+  <h2>一句话看清这个比赛</h2>
+  <div class="thesis">
+    <p>TMC 考的不是难题，是<span class="marker">“不出错的速度”和“团队协作”</span>。题目难度大约相当于国内初一到初二的课内拔高题；中国学生的计算能力完全够用，丢分主要在三处：<b>英文读错题、算对了但格式错、一个人错拖累全队</b>。</p>
+    <p>所以提分最快的办法不是学新知识，而是：<b>认识题型 → 背一张必记表 → 掌握 8 个“一步秒杀”工具 → 养成写完必检查的习惯</b>。</p>
+  </div>
+</section>
+
+<section>
+  <h2>四个环节，各自奖励什么</h2>
+  <div class="tbl"><table>
+    <tr><th>环节</th><th>形式</th><th>计分特点</th><th>真正考的能力</th></tr>
+    <tr><td><b>Group 小组赛</b></td><td>4 人共用 1 张答题卡，45 分钟 10 题</td><td>每题 6 分，常拆成 (a)(b) 各 3 分</td><td>分工：谁做哪题；(a) 往往是 (b) 的提示</td></tr>
+    <tr><td><b>Crossnumber</b></td><td>2 人拿横向提示，2 人拿纵向提示，彼此不能说话</td><td>每个数字格 1 分</td><td>先找“自己能独立算出”的锚点格，再利用交叉格互相约束</td></tr>
+    <tr><td><b>Shuttle</b></td><td>两对轮流，上一题答案 T 是下一题的输入</td><td>第一次就对 3 分，否则 1 分；6 分钟内全对再加 3 分</td><td><span class="marker">准确率</span>，一题错会连锁出错</td></tr>
+    <tr><td><b>Relay 接力</b></td><td>两人一组，答对才拿到下一题</td><td>只有答对才能继续</td><td>快速心算 + 格式正确，答错就要重做，浪费时间</td></tr>
+  </table></div>
+  <p class="note">明天的选拔赛和分组，大概率就是看谁又快又准，以及谁适合搭档做 Crossnumber 和 Relay。</p>
+</section>
+
+<section>
+  <h2>高频考点排行</h2>
+  <p>按 2024、2025 两届区域决赛约 110 道题粗略归类，从高到低：</p>
+  <ol class="rank">
+    <li><b>数论</b>：质数、因数、质因数分解、因数个数、整除规则、数字和，以及<span class="marker">当年年份</span>（每年必考：2024 = 2³×11×23，2025 = 3⁴×5² = 45²）。</li>
+    <li><b>统计</b>：mean、median、mode、range，几乎每套接力题都有“已知平均数、中位数、众数，求最大极差”。</li>
+    <li><b>角度</b>：多边形内角与外角、正三角形/正方形/正五边形拼在一起、等腰三角形，以及<span class="marker">钟表夹角（2024 年考了 2 次，2025 年又考）</span>。</li>
+    <li><b>百分比与比例</b>：连续涨价降价、混合溶液、分数组合。</li>
+    <li><b>行程</b>：平均速度（不是速度的平均）、追及、相对速度、£ 与 mph 等英制单位。</li>
+    <li><b>方程技巧</b>：x+y、y+z、x+z 三式相加（2024、2025 都考了）、和差问题、年龄问题。</li>
+    <li><b>计数</b>：韦恩图容斥、乘法原理（密码、涂色）、淘汰赛场次。</li>
+    <li><b>坐标</b>：平行四边形第四个顶点、三条直线围成的三角形面积。</li>
+  </ol>
+</section>
+
+<section>
+  <h2>8 个一步秒杀工具</h2>
+  <p>每个工具都至少在真题里出现过一次。原则是<span class="marker">先看结构，再动笔算</span>。</p>
+  <div class="tools">
+    <div class="tool"><span class="f">平均数 → 总和</span><p>看到 mean，第一步永远是“平均数 × 个数 = 总和”。几乎所有平均数题都在这一步之后变成小学题。</p></div>
+    <div class="tool"><span class="f">x+y, y+z, x+z → 全加 ÷ 2</span><p>三式相加得 2(x+y+z)。再用总和减去任意一式，就能得到单个未知数。</p></div>
+    <div class="tool"><span class="f">和 s、差 d → 两数 (s±d)/2</span><p>已知和与差，两个数立刻得出；乘积 = (s² − d²)/4。</p></div>
+    <div class="tool"><span class="f">连续百分比 = 乘法</span><p>涨 10% 是 ×1.1，降 20% 是 ×0.8。1.1 × 0.8 = 0.88，所以相当于打 12% 的折扣。不能直接加减百分数。</p></div>
+    <div class="tool"><span class="f">平均速度 = 总路程 ÷ 总时间</span><p>同一段路往返，速度分别为 a 和 b 时，平均速度 = 2ab/(a+b)。速度 3 和 5 的平均是 3.75，不是 4。</p></div>
+    <div class="tool"><span class="f">钟表夹角 = |30H − 5.5M|</span><p>时针每分钟走 0.5°，分针每分钟走 6°。结果大于 180° 就用 360 减。题目问 obtuse 就取钝角。</p></div>
+    <div class="tool"><span class="f">外角 = 360/n，内角 = 180 − 360/n</span><p>多边形问题优先算外角。内角和 = (n − 2) × 180。</p></div>
+    <div class="tool"><span class="f">两者都 = A + B + 都不 − 总数</span><p>两个集合的韦恩图一行就能算完。</p><small>因数个数：把 n 写成 p^a·q^b，因数个数就是 (a+1)(b+1)。因数个数为奇数，当且仅当 n 是平方数。</small></div>
+  </div>
+</section>
+
+<section>
+  <h2>必背清单</h2>
+  <div class="cols">
+    <div class="box"><h3>100 以内质数（25 个）</h3><p>2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97</p></div>
+    <div class="box"><h3>平方数（到 31²）</h3><p>…169 196 225 256 289 324 361 400 441 484 529 576 625 676 729 784 841 900 961</p></div>
+    <div class="box"><h3>立方数与 2 的幂</h3><p>1 8 27 64 125 216 343 512 729 1000 · 2¹⁰ = 1024</p></div>
+    <div class="box"><h3>三角数 n(n+1)/2</h3><p>1 3 6 10 15 21 28 36 45 55 66 78 91</p></div>
+    <div class="box"><h3>斐波那契数</h3><p>1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987</p></div>
+    <div class="box"><h3>正多边形内角</h3><p>3→60 4→90 5→108 6→120 8→135 9→140 10→144 12→150</p></div>
+    <div class="box"><h3>整除规则</h3><p>3/9：数字和 · 4：末两位 · 8：末三位 · 11：奇偶位数字和之差</p></div>
+    <div class="box"><h3>年份数（必备）</h3><p>2024 = 2³×11×23<br>2025 = 3⁴×5² = 45²<br><span class="marker">2026 = 2×1013（1013 是质数）= 45²+1²</span><br>2027 是质数</p></div>
+  </div>
+  <p class="note">上海的比赛在 2026 年举行，“2026”大概率会作为题目素材出现。</p>
+</section>
+
+<section>
+  <h2>英文关键词（最容易丢分）</h2>
+  <div class="vocab">
+    <span>factor<b>因数</b></span><span>multiple<b>倍数</b></span><span>prime<b>质数</b></span><span>product<b>积</b></span>
+    <span>difference<b>差</b></span><span>quotient<b>商</b></span><span>consecutive<b>连续的</b></span><span>digit<b>数字/数位</b></span>
+    <span>palindrome<b>回文数</b></span><span>square number<b>平方数</b></span><span>triangular<b>三角数</b></span><span>integer<b>整数</b></span>
+    <span>mean<b>平均数</b></span><span>median<b>中位数</b></span><span>mode<b>众数</b></span><span>range<b>极差</b></span>
+    <span>regular polygon<b>正多边形</b></span><span>interior angle<b>内角</b></span><span>exterior angle<b>外角</b></span><span>isosceles<b>等腰</b></span>
+    <span>equilateral<b>等边</b></span><span>perpendicular<b>垂直</b></span><span>obtuse / acute / reflex<b>钝/锐/优角</b></span><span>bearing<b>方位角</b></span>
+    <span>lowest terms<b>最简分数</b></span><span>inclusive<b>含两端</b></span><span>exactly<b>恰好</b></span><span>£1 = 100p<b>英镑与便士</b></span>
+    <span>pass on<b>把答案传给队友</b></span><span>write down<b>写在答题卡上</b></span><span>in terms of π<b>结果保留 π</b></span><span>mph<b>英里/小时</b></span>
+  </div>
+  <p class="note">方位角（bearing）的规则：从正北开始，顺时针方向，写成三位数，例如 090°。</p>
+</section>
+
+<section>
+  <h2>明早 30 分钟安排</h2>
+  <div class="plan">
+    <div><span class="t">0–5′</span><p>读“一句话看清这个比赛”和四个环节。告诉她：<b>准确比速度更重要</b>，Shuttle 和 Relay 里错一题的代价比慢 20 秒大得多。</p></div>
+    <div><span class="t">5–12′</span><p>讲 8 个秒杀工具，每个用一道真题演示（下面标“真题”的题）。</p></div>
+    <div><span class="t">12–25′</span><p>计时练习：每题限时 1 分钟，做完再展开答案。错的题只问一句：“哪个工具可以秒杀它？”</p></div>
+    <div><span class="t">25–30′</span><p>快速过一遍英文关键词和年份数，然后看最后的“临场纪律”。</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>练习题</h2>
+  <p class="note">“真题”来自文件夹里的 2024、2025 年区域决赛，“仿题”是同一考点的变式。点击“看答案”展开。</p>
+
+  <div class="qs">
+  <p class="group-label">数论与年份</p>
+
+  <div class="q"><span class="src real">真题 · 2025 小组赛 Q2</span>
+    <p>(a) 恰好有 5 个不同正因数（positive factors）的最小的数是多少？(b) 恰好有 5 个正因数的最大两位数是多少？</p>
+    <details><summary>看答案</summary><p><span class="ans">16，81</span>。5 是质数，所以 (a+1)(b+1) = 5 只能是 a = 4，即 n = p⁴。2⁴ = 16，3⁴ = 81，5⁴ 已经超过两位数。</p></details></div>
+
+  <div class="q"><span class="src">仿题 · 2026</span>
+    <p>(a) 2026 有多少个正因数？(b) 2026² − 2025² 等于多少？</p>
+    <details><summary>看答案</summary><p><span class="ans">4，4051</span>。2026 = 2 × 1013，因数个数 = 2 × 2 = 4。平方差 = (2026 + 2025)(2026 − 2025) = 4051，不需要真的算平方。</p></details></div>
+
+  <div class="q"><span class="src real">真题 · 2025 小组赛 Q5</span>
+    <p>(a) 1/4 + 1/5 + 1/(4×5) = ?　(b) 1/8 + 1/9 + 1/(8×9) = ?</p>
+    <details><summary>看答案</summary><p><span class="ans">1/2，1/4</span>。通分后分子是 (a + b + 1)，b = a + 1 时分子等于 2(a + 1)，结果正好是 2/a。仿题：1/12 + 1/13 + 1/156 = 2/12 = <span class="ans">1/6</span>。这道题的价值在于让她体会“先找规律，(a) 是 (b) 的提示”。</p></details></div>
+
+  <p class="group-label">方程技巧</p>
+
+  <div class="q"><span class="src real">真题 · 2025 接力 B8 · 仿题</span>
+    <p>x + y = 13，y + z = 17，x + z = 20，求 x + y + z，以及 x。</p>
+    <details><summary>看答案</summary><p><span class="ans">25，x = 8</span>。三式相加 = 50，除以 2 得 25。x = 25 − (y + z) = 25 − 17 = 8。（原真题是 11、15、8，答案 17。）</p></details></div>
+
+  <div class="q"><span class="src real">真题 · 2025 接力 A10</span>
+    <p>Last year Alice was three times as old as Fred. Next year she will be twice as old as Fred. How old will Alice be next year?</p>
+    <details><summary>看答案</summary><p><span class="ans">8</span>。设 Fred 去年 f 岁：3f + 2 = 2(f + 2)，得 f = 2。Alice 去年 6 岁，明年 8 岁。注意题目问的是 <b>next year</b>。</p></details></div>
+
+  <p class="group-label">统计</p>
+
+  <div class="q"><span class="src real">真题 · 2025 接力 A6</span>
+    <p>踢了 4 场球后平均每场进 2 球，第 5 场踢完后平均每场 3 球。第 5 场进了几个球？</p>
+    <details><summary>看答案</summary><p><span class="ans">7</span>。平均数转成总和：4 × 2 = 8，5 × 3 = 15，相差 7。</p></details></div>
+
+  <div class="q"><span class="src real">真题 · 2025 接力 B2</span>
+    <p>The mean, the median and the mode of five positive integers is eight. What is the maximum possible range?</p>
+    <details><summary>看答案</summary><p><span class="ans">20</span>。总和 40；排序后中间是 8；众数是 8，所以 8 至少出现两次。前两个数尽量小但不能相同（相同的话 1 也会成为众数）：1, 2, 8, 8, 21。极差 = 21 − 1 = 20。仿题：把 8 换成 10，答案是 1, 2, 10, 10, 27，极差 <span class="ans">26</span>。</p></details></div>
+
+  <p class="group-label">百分比与比例</p>
+
+  <div class="q"><span class="src real">真题 · 2025 接力 A9</span>
+    <p>Pip 误把价格提高了 10%（本应降低 10%），随后又把新价格降低 20%。相对原价，顾客现在得到多少折扣？</p>
+    <details><summary>看答案</summary><p><span class="ans">12%</span>。1.1 × 0.8 = 0.88。仿题：先涨 20% 再降 25%，1.2 × 0.75 = 0.9，即降价 <span class="ans">10%</span>。</p></details></div>
+
+  <div class="q"><span class="src real">真题 · 2025 小组赛 Q8</span>
+    <p>两个班人数相同。一个班 2/3 学法语，另一个班 3/8 学西班牙语（每人只学一门）。两班总人数少于 50。一共有多少人学法语？</p>
+    <details><summary>看答案</summary><p><span class="ans">31</span>。每班人数必须是 3 和 8 的公倍数，即 24（48 太大了）。法语人数 = 16 + 15 = 31。关键是先看出“人数必须能整除”。</p></details></div>
+
+  <p class="group-label">角度</p>
+
+  <div class="q"><span class="src real">真题 · 2024 小组赛 Q8</span>
+    <p>ABCDE 是正五边形，延长 BC 和 ED 交于点 F。求 ∠DFC。</p>
+    <details><summary>看答案</summary><p><span class="ans">36°</span>。在三角形 CDF 中，C 和 D 处的角都是正五边形的外角 360/5 = 72°，所以 180 − 72 − 72 = 36。</p></details></div>
+
+  <div class="q"><span class="src real">真题 · 2025 接力 B15 · 仿题</span>
+    <p>8:25 时时针与分针所成的钝角是多少度？再算 4:50。</p>
+    <details><summary>看答案</summary><p><span class="ans">102.5°，155°</span>。|30 × 8 − 5.5 × 25| = |240 − 137.5| = 102.5。|120 − 275| = 155。注意答案可能有 .5。</p></details></div>
+
+  <p class="group-label">行程与计数</p>
+
+  <div class="q"><span class="src real">真题 · 2024 接力 B12</span>
+    <p>上山速度 3 km/h，沿原路下山速度 5 km/h。全程平均速度是多少？</p>
+    <details><summary>看答案</summary><p><span class="ans">3.75 km/h</span>。2 × 3 × 5 / (3 + 5) = 30/8。最常见的错误答案是 4。</p></details></div>
+
+  <div class="q"><span class="src real">真题 · 2025 接力 B4</span>
+    <p>温布尔登男单 128 人参加淘汰赛，决出冠军一共要打多少场？</p>
+    <details><summary>看答案</summary><p><span class="ans">127</span>。每场比赛恰好淘汰一人，冠军以外的 127 人都要被淘汰。换个角度看，不需要一轮一轮地加。</p></details></div>
+
+  <p class="group-label">Shuttle 连锁演练（体会“一错全错”）</p>
+
+  <div class="q"><span class="src real">真题 · 2025 Shuttle C1 → C2 → C3</span>
+    <p><b>C1</b> K = 99 × 99，把 K 的各位数字之和传下去。<br><b>C2</b> 三角形三个角为 (2T)°、(3T)°、(4T + K)°，把 K 传下去。<br><b>C3</b> 96 人中 51 人喜欢披萨，45 人喜欢薯条，T 人两样都不喜欢，K 人两样都喜欢，把 K 写下来。</p>
+    <details><summary>看答案</summary><p><span class="ans">18 → 18 → 18</span>。99² = 9801，数字和 18。9T + K = 180，代入 T = 18 得 K = 18。两样都喜欢 = 51 + 45 + 18 − 96 = 18。第一步算成 99² = 9810 的话，后面全错。</p></details></div>
+
+  <p class="group-label">Crossnumber 找锚点</p>
+
+  <div class="q"><span class="src real">真题 · 2025 Crossnumber</span>
+    <p>13 Down：√3025。17 Down：第 5 个质数 × 第 4 个三角数 × 第 3 个平方数。26 Across：17 Down ÷ 13 Down。3 Across：边数为 (17 Down − 900) 的正多边形的内角。</p>
+    <details><summary>看答案</summary><p>13 Down = <span class="ans">55</span>；17 Down = 11 × 10 × 9 = <span class="ans">990</span>；26 Across = 990 ÷ 55 = <span class="ans">18</span>；3 Across：90 边形，内角 = 180 − 4 = <span class="ans">176</span>。策略是先找不依赖别人的锚点题，再顺着依赖链往下推。</p></details></div>
+  </div>
+</section>
+
+<section>
+  <h2>选拔赛临场纪律</h2>
+  <ul>
+    <li><b>写完必检查</b>：代回题目验算，或换一种方法估算。尤其要确认问的是哪个量（Alice 还是 Fred？明年还是去年？）。</li>
+    <li><b>格式就是分数</b>：分数写成最简形式，单位用 £ / p / cm² / °，题目要求 in terms of π 就保留 π。</li>
+    <li><b>2 分钟规则</b>：一道题 2 分钟没有思路就先跳过，最后再回来。</li>
+    <li><b>先读完 (a)(b) 再动笔</b>：(a) 经常是 (b) 的提示。</li>
+    <li><b>把思路说出来</b>：分组时老师会观察合作情况。清楚地讲出“我用平均数 × 个数得到总和”，本身就是加分项。</li>
+    <li><b>字迹清楚</b>：1 和 7、4 和 9 要写得容易区分，Shuttle 里队友要读你的答案。</li>
+  </ul>
+</section>
+
+</div>
+</body>
+</html>
