@@ -70,6 +70,14 @@ ul{margin:0;padding-left:1.3em;display:grid;gap:6px}
 .vocab span{display:flex;gap:8px;justify-content:space-between;border-bottom:1px dotted var(--rule);padding:3px 0}
 .vocab b{font-family:var(--mono);font-weight:600}
 .note{font-size:14px;color:var(--muted)}
+.fig{background:var(--paper);border:1px solid var(--rule);padding:10px;display:flex;justify-content:center}
+.fig svg{width:100%;max-width:320px;height:auto;color:var(--ink)}
+.fig .ln{fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round}
+.fig .dash{fill:none;stroke:var(--red);stroke-width:2;stroke-dasharray:6 4}
+.fig .soft{fill:var(--blue-soft);stroke:var(--blue);stroke-width:2}
+.fig .ghost{fill:none;stroke:var(--muted);stroke-width:2;stroke-dasharray:5 4}
+.fig text{fill:currentColor;font-family:var(--mono);font-size:14px}
+.fig text.r{fill:var(--red);font-weight:600}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -253,6 +261,82 @@ ul{margin:0;padding-left:1.3em;display:grid;gap:6px}
   <div class="q"><span class="src real">真题 · 2025 Crossnumber</span>
     <p>13 Down：√3025。17 Down：第 5 个质数 × 第 4 个三角数 × 第 3 个平方数。26 Across：17 Down ÷ 13 Down。3 Across：边数为 (17 Down − 900) 的正多边形的内角。</p>
     <details><summary>看答案</summary><p>13 Down = <span class="ans">55</span>；17 Down = 11 × 10 × 9 = <span class="ans">990</span>；26 Across = 990 ÷ 55 = <span class="ans">18</span>；3 Across：90 边形，内角 = 180 − 4 = <span class="ans">176</span>。策略是先找不依赖别人的锚点题，再顺着依赖链往下推。</p></details></div>
+  </div>
+</section>
+
+<section>
+  <h2>加练 10 题</h2>
+  <p class="note">全部是新编仿题，每题对应前面的一个秒杀工具，建议每题限时 1–2 分钟。</p>
+  <div class="qs">
+
+  <div class="q"><span class="src">仿题 1 · 质因数分解</span>
+    <p>What is the smallest positive integer n such that 1350 × n is a square number?</p>
+    <details><summary>看答案</summary><p><span class="ans">6</span>。1350 = 2 × 3³ × 5²。完全平方数的每个质因数指数都是偶数，所以还缺一个 2 和一个 3，n = 6。验算：1350 × 6 = 8100 = 90²。</p></details></div>
+
+  <div class="q"><span class="src">仿题 2 · 因数个数</span>
+    <p>How many two-digit numbers have exactly three different positive factors?</p>
+    <details><summary>看答案</summary><p><span class="ans">2</span>。因数个数是奇数，说明 n 是平方数；因数个数为 3，说明 n = p²（p 为质数）。两位数中只有 5² = 25 和 7² = 49。</p></details></div>
+
+  <div class="q"><span class="src">仿题 3 · 分数找规律</span>
+    <p>求 1/(1×2) + 1/(2×3) + 1/(3×4) + … + 1/(9×10) 的值。</p>
+    <details><summary>看答案</summary><p><span class="ans">9/10</span>。每一项都能拆开：1/(n(n+1)) = 1/n − 1/(n+1)。相加后中间项全部抵消，剩下 1 − 1/10。</p></details></div>
+
+  <div class="q"><span class="src">仿题 4 · 统计</span>
+    <p>Five positive integers have a mean of 6, a median of 5 and a unique mode of 3. What is the largest possible value of any of the integers?</p>
+    <details><summary>看答案</summary><p><span class="ans">13</span>。总和 30。众数是 3，所以 3 至少出现两次，只能是排在中位数前面的两个数：3, 3, 5, d, e，于是 d + e = 19。d 不能是 5，也不能等于 e，否则会出现另一个出现两次的数，众数就不唯一了。所以 d 最小取 6，e = 13。</p></details></div>
+
+  <div class="q"><span class="src">仿题 5 · 正多边形拼接</span>
+    <p>A regular hexagon and a square share the side BC, as shown. A is a vertex of the hexagon next to B, and E is a vertex of the square next to B. What is the size of ∠BAE?</p>
+    <div class="fig"><svg viewBox="0 0 300 220" role="img" aria-label="正六边形与正方形共用边 BC，连接 A 与 E">
+      <polygon class="ln" points="130,50 190.6,85 190.6,155 130,190 69.4,155 69.4,85"/>
+      <polygon class="ln" points="190.6,85 260.6,85 260.6,155 190.6,155"/>
+      <line class="dash" x1="130" y1="50" x2="260.6" y2="85"/>
+      <text x="124" y="42">A</text><text x="180" y="78">B</text><text x="196" y="172">C</text>
+      <text x="266" y="172">D</text><text x="266" y="82">E</text>
+      <text class="r" x="142" y="72">?</text>
+    </svg></div>
+    <details><summary>看答案</summary><p><span class="ans">15°</span>。B 点周角 360° = 正六边形内角 120° + 正方形内角 90° + ∠ABE，所以 ∠ABE = 150°。BA 和 BE 都等于公共边长，因此三角形 ABE 是等腰三角形，∠BAE = (180 − 150) ÷ 2 = 15°。</p></details></div>
+
+  <div class="q"><span class="src">仿题 6 · 钟表夹角</span>
+    <p>What is the size of the <b>reflex</b> angle between the hands of a clock at 2:30?</p>
+    <details><summary>看答案</summary><p><span class="ans">255°</span>。|30 × 2 − 5.5 × 30| = |60 − 165| = 105°，这是较小的角。reflex（优角）大于 180°，所以答案是 360 − 105 = 255°。这道题主要考 reflex 这个词。</p></details></div>
+
+  <div class="q"><span class="src">仿题 7 · 混合比例</span>
+    <p>Drink P is 1 part juice to 4 parts water. Drink Q is 1 part juice to 2 parts water. 2 litres of P are mixed with 3 litres of Q. What is the ratio of juice to water in the mixture?</p>
+    <details><summary>看答案</summary><p><span class="ans">7 : 18</span>。比例不能直接相加，要先换成实际的量。P 中果汁 2 × 1/5 = 0.4 L，水 1.6 L；Q 中果汁 3 × 1/3 = 1 L，水 2 L。合计 1.4 : 3.6 = 7 : 18。</p></details></div>
+
+  <div class="q"><span class="src">仿题 8 · 火车过隧道</span>
+    <p>A train 120 m long travels at 20 m/s through a tunnel 480 m long. How many seconds pass from the moment the front of the train enters the tunnel until the moment the back of the train leaves it?</p>
+    <div class="fig"><svg viewBox="0 0 340 120" role="img" aria-label="火车车头刚进隧道，以及车尾刚出隧道两个位置">
+      <rect class="soft" x="110" y="34" width="180" height="46"/>
+      <text x="178" y="26">480 m</text>
+      <rect class="ln" x="65" y="50" width="45" height="22"/>
+      <text x="64" y="94">120 m</text>
+      <rect class="ghost" x="290" y="50" width="45" height="22"/>
+      <line class="dash" x1="120" y1="104" x2="320" y2="104"/>
+      <polygon points="320,99 330,104 320,109" fill="var(--red)"/>
+      <text x="14" y="66">开始</text><text x="300" y="44">结束</text>
+    </svg></div>
+    <details><summary>看答案</summary><p><span class="ans">30 秒</span>。盯住车尾：它要走完隧道长度再加上车身长度，480 + 120 = 600 m，600 ÷ 20 = 30 s。常见错误是只算 480 m。</p></details></div>
+
+  <div class="q"><span class="src">仿题 9 · 计数</span>
+    <p>How many three-digit numbers have all three digits odd and are multiples of 5?</p>
+    <details><summary>看答案</summary><p><span class="ans">25</span>。各位数字都是奇数，又是 5 的倍数，所以个位只能是 5。百位和十位各有 5 种选择（1, 3, 5, 7, 9），共 5 × 5 × 1 = 25 个。</p></details></div>
+
+  <div class="q"><span class="src">仿题 10 · 弦图（对应 2025 Shuttle A4）</span>
+    <p>A big square is made from four identical right-angled triangles and a smaller square, as shown. The shortest side of each triangle is 5 cm and the small square has sides of 7 cm. What is the area of the big square, in cm²?</p>
+    <div class="fig"><svg viewBox="0 0 250 245" role="img" aria-label="四个全等直角三角形围出中间的小正方形，组成一个大正方形">
+      <rect class="soft" x="80" y="80" width="84" height="84"/>
+      <polygon class="ln" points="20,80 164,20 224,164 80,224"/>
+      <line class="ln" x1="20" y1="80" x2="164" y2="80"/>
+      <line class="ln" x1="164" y1="20" x2="164" y2="164"/>
+      <line class="ln" x1="224" y1="164" x2="80" y2="164"/>
+      <line class="ln" x1="80" y1="224" x2="80" y2="80"/>
+      <text class="r" x="30" y="100">5</text>
+      <text class="r" x="108" y="128">7</text>
+    </svg></div>
+    <details><summary>看答案</summary><p><span class="ans">169</span>。三角形的长直角边 = 短直角边 + 小正方形边长 = 5 + 7 = 12，所以斜边 = 13（5-12-13 勾股数），大正方形面积 = 13² = 169。也可以用面积相加验算：4 × (½ × 5 × 12) + 7² = 120 + 49 = 169。值得记住的勾股数：3-4-5、5-12-13、8-15-17、7-24-25。</p></details></div>
+
   </div>
 </section>
 
