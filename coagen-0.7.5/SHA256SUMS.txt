@@ -1,0 +1,8 @@
+7081f65664915128e6612cb8437bced8ca4152d86a31885549f9bc37bc8c69c2  coagen-v0.7.5-multi-agent-kit-r13-linux-aarch64-glibc.zip
+7ef69970493b3e3b40f9dce442737ca240520daa71d074a934617731a7734e2b  coagen-v0.7.5-multi-agent-kit-r13-linux-aarch64-musl.zip
+121e63e21c2ebd41b742aa8349d50e3b62b23713a171c2a76c0cf603fbe1bfa4  coagen-v0.7.5-multi-agent-kit-r13-linux-x86_64-glibc.zip
+db773b9d0f350b9042ef61388d9f7f3258a6417b6a9b54253eff95bc2a4e9de4  coagen-v0.7.5-multi-agent-kit-r13-linux-x86_64-musl.zip
+dc7f69c77fcb5d7d4a56ac4080abdbc6fea1825245719551a55125875d050624  coagen-v0.7.5-multi-agent-kit-r13-macos-arm64.zip
+907f542dc3af9c301911c7a8973ea050b5f0d6c3cdcdb015769ddc57896dcd93  coagen-v0.7.5-multi-agent-kit-r13-online.zip
+4a35cf2d24ab911f2a67d402c3a8f0719414846d6965c1b0092ef489c815751c  coagen-v0.7.5-multi-agent-kit-r13-windows-x86_64.zip
+cd66c0f50855630a7c87c6bf9e1fb58350a578731af8c004313f926367fd23d5  coagen_client-0.7.5-py3-none-any.whl
