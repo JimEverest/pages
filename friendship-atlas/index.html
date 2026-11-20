@@ -5,485 +5,678 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Friendship Atlas · Unit 1 Friends & Friendship</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --parch:#f6ecd6; --parch2:#efe0bf; --ink:#2b2a3a; --navy:#1f3b57; --teal:#2a8a8a;
-  --coral:#e2725b; --ochre:#d49a2a; --sage:#7fa36b; --plum:#7b5aa6; --line:#d9c69c;
-  --shadow:0 6px 24px rgba(60,40,10,.18);
-}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{font-family:Nunito,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
-  background:radial-gradient(circle at 20% 0%,#fbf4e3,#ead8b1 70%) fixed;overflow:hidden}
+/* Everything is sized in rem and rem follows the viewport, so one screen always holds one page. */
+html{font-size:min(1.5vh,.86vw)}
+:root{--ac:#f0b75a;--glass:rgba(255,255,255,.11);--glass2:rgba(255,255,255,.18);--edge:rgba(255,255,255,.26);
+  --txt:#fbf7ef;--dim:rgba(251,247,239,.72);--ok:#6fdc9a;--bad:#ff8a7a;--r:1.4rem}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:Nunito,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:#0d1726;font-size:1.05rem}
 h1,h2,h3,.serif{font-family:Fraunces,Georgia,serif}
-button{font:inherit;cursor:pointer}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+input{font:inherit}
+
+/* ---------- backdrop: the current picture, blurred ---------- */
+.bg{position:fixed;inset:-6%;background-size:cover;background-position:center;filter:blur(38px) saturate(1.25) brightness(.62);
+  transition:opacity 1s;opacity:0}
+.bg.on{opacity:1}
+.veil{position:fixed;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.06),transparent 60%),
+  linear-gradient(180deg,rgba(8,14,26,.25),rgba(8,14,26,.6))}
+
+.glass{background:var(--glass);border:1px solid var(--edge);border-radius:var(--r);
+  backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);
+  box-shadow:0 1.2rem 3rem rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25)}
 
 /* ---------- top bar ---------- */
-.topbar{position:fixed;inset:0 0 auto 0;height:64px;display:flex;align-items:center;gap:18px;
-  padding:0 22px;background:rgba(31,59,87,.94);color:#fff;z-index:20;box-shadow:var(--shadow)}
-.brand{font-family:Fraunces,serif;font-weight:800;font-size:22px;letter-spacing:.3px;white-space:nowrap}
-.brand small{display:block;font-family:Nunito;font-weight:600;font-size:12px;opacity:.75;letter-spacing:0}
-.passport{display:flex;gap:8px;margin-left:auto;align-items:center}
-.passport .lbl{font-size:13px;opacity:.8;margin-right:4px}
-.stamp{width:38px;height:38px;border-radius:50%;border:2px dashed rgba(255,255,255,.45);display:grid;
-  place-items:center;font-size:18px;opacity:.45;transition:.4s;background:transparent;color:#fff}
-.stamp.got{opacity:1;border:2px solid var(--ochre);background:var(--ochre);transform:rotate(-8deg);
-  box-shadow:0 0 0 3px rgba(212,154,42,.3)}
-.navbtns{display:flex;gap:6px}
-.navbtns button{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:10px;padding:8px 12px;font-weight:800}
-.navbtns button:hover{background:rgba(255,255,255,.25)}
+.top{position:fixed;left:1.6vw;right:1.6vw;top:1.2vh;height:5.2vh;display:flex;align-items:center;gap:1.4rem;
+  padding:0 1.4rem;z-index:30;border-radius:1.2rem}
+.brand{font-family:Fraunces,serif;font-weight:800;font-size:1.5rem;white-space:nowrap}
+.brand small{font-family:Nunito;font-weight:600;font-size:.8rem;color:var(--dim);margin-left:.8rem}
+.passport{margin-left:auto;display:flex;align-items:center;gap:.5rem}
+.passport .lbl{font-size:.8rem;color:var(--dim);margin-right:.3rem;letter-spacing:.08em;text-transform:uppercase}
+.stamp{width:2.5rem;height:2.5rem;border-radius:50%;border:1.5px dashed rgba(255,255,255,.4);display:grid;place-items:center;
+  font-size:1.2rem;filter:grayscale(1);opacity:.5;transition:.5s}
+.stamp.got{filter:none;opacity:1;border:2px solid var(--ac);background:rgba(240,183,90,.25);transform:rotate(-10deg) scale(1.08);
+  box-shadow:0 0 1rem rgba(240,183,90,.6)}
+.tbtn{padding:.5rem .9rem;border-radius:.8rem;background:rgba(255,255,255,.1);font-weight:800;font-size:.95rem;transition:.2s}
+.tbtn:hover{background:rgba(255,255,255,.22)}
+.tbtn.on{background:var(--ac);color:#1d1606}
+.dots{display:flex;gap:.45rem;margin:0 .6rem}
+.dot{width:.7rem;height:.7rem;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s}
+.dot.on{background:var(--ac);width:1.8rem;border-radius:1rem}
 
-/* ---------- pages ---------- */
-.deck{position:fixed;inset:64px 0 0 0}
-.page{position:absolute;inset:0;overflow-y:auto;padding:18px 28px 90px;opacity:0;pointer-events:none;
-  transform:translateX(40px);transition:opacity .5s, transform .5s}
-.page.on{opacity:1;pointer-events:auto;transform:none}
-.page-head{display:flex;align-items:baseline;gap:14px;margin:4px 0 12px;flex-wrap:wrap}
-.tag{font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;
-  border-radius:20px;color:#fff}
-.page-head h2{margin:0;font-size:30px;color:var(--navy)}
-.page-head .zh{font-size:16px;opacity:.65}
+/* ---------- page layout ---------- */
+.page{position:fixed;top:7.6vh;bottom:2vh;left:1.6vw;right:1.6vw;display:grid;grid-template-columns:auto 1fr;gap:1.4vw;
+  opacity:0;pointer-events:none;transition:opacity .6s}
+.page.on{opacity:1;pointer-events:auto}
+.left{display:flex;flex-direction:column;gap:1.6vh;min-height:0;width:min(118vh,63vw);min-width:0}
+.stage{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;flex:none;
+  box-shadow:0 1.6rem 4rem rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.3);transform:translateY(1.2rem) scale(.985);
+  transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.page.on .stage{transform:none}
+.stage>img{width:100%;height:100%;object-fit:cover;display:block}
+.page.focus{grid-template-columns:1fr}
+.page.focus .left{width:100%}
+.page.focus .stage{width:min(100%,calc((100vh - 9.6vh)*16/9));margin:0 auto}
+.page.focus .banner,.page.focus .panel{display:none}
 
-.stage{position:relative;width:100%;max-width:min(1500px,calc(72vh*16/9));margin:0 auto 18px;
-  border-radius:16px;overflow:hidden;box-shadow:var(--shadow);border:6px solid #fff8e8;cursor:zoom-in;
-  aspect-ratio:16/9;background:var(--parch2)}
-.stage img{width:100%;height:100%;object-fit:cover;display:block}
-.hotspot{position:absolute;transform:translate(-50%,-50%);width:12%;aspect-ratio:1;border-radius:50%;
-  border:3px solid transparent;background:transparent;transition:.25s}
-.hotspot:hover{border-color:#fff;background:rgba(255,255,255,.18);box-shadow:0 0 0 6px rgba(255,255,255,.25)}
-.hotspot span{position:absolute;left:50%;bottom:-6px;transform:translate(-50%,100%);white-space:nowrap;
-  background:var(--navy);color:#fff;padding:3px 10px;border-radius:12px;font-size:13px;opacity:0;transition:.25s}
-.hotspot:hover span{opacity:1}
+/* explore badge + hotspots */
+.explore{position:absolute;left:1rem;bottom:1rem;padding:.45rem .9rem;border-radius:2rem;font-size:.9rem;font-weight:800;z-index:3}
+.hs{position:absolute;transform:translate(-50%,-50%);border-radius:.8rem;z-index:2;transition:.25s;outline:2px solid transparent}
+.hs::after{content:"";position:absolute;right:-.45rem;top:-.45rem;width:1rem;height:1rem;border-radius:50%;
+  background:var(--ac);box-shadow:0 0 0 0 rgba(240,183,90,.8);animation:pulse 1.8s infinite}
+.hs.seen::after{background:var(--ok);animation:none;box-shadow:0 0 .6rem var(--ok)}
+.hs:hover,.hs.act{outline-color:rgba(255,255,255,.9);background:rgba(255,255,255,.14);box-shadow:0 0 1.6rem rgba(255,255,255,.45)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(240,183,90,.8)}80%,100%{box-shadow:0 0 0 .9rem rgba(240,183,90,0)}}
+.hs .tip{position:absolute;left:50%;top:100%;transform:translate(-50%,.4rem);white-space:nowrap;padding:.3rem .8rem;
+  border-radius:1rem;font-size:.9rem;font-weight:800;opacity:0;transition:.2s;pointer-events:none;
+  background:rgba(13,23,38,.75);backdrop-filter:blur(8px)}
+.hs:hover .tip{opacity:1}
+.hs template{display:none}
+.pop{position:absolute;z-index:5;width:32%;padding:1.1rem 1.3rem;border-radius:1.1rem;opacity:0;transform:scale(.92);
+  transition:opacity .25s,transform .25s;pointer-events:none;background:rgba(14,24,40,.72)}
+.pop.on{opacity:1;transform:none;pointer-events:auto}
+.pop h4{font-family:Fraunces,serif;font-size:1.55rem;color:var(--ac);margin-bottom:.3rem;display:flex;align-items:center;gap:.5rem}
+.pop p{font-size:1.05rem;line-height:1.5;margin:.3rem 0}
+.pop .x{position:absolute;right:.7rem;top:.5rem;font-size:1.2rem;opacity:.7}
 
-.story{max-width:1100px;margin:0 auto 16px;background:#fffaf0;border-left:6px solid var(--ochre);
-  border-radius:10px;padding:14px 20px;font-size:18px;line-height:1.6;box-shadow:var(--shadow)}
-.story b{color:var(--coral)}
+/* banner under the picture */
+.banner{flex:1;min-height:0;padding:1.3rem 1.6rem;display:flex;flex-direction:column;justify-content:center;gap:.8rem;
+  position:relative;overflow:hidden}
+.banner .kicker{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ac);font-weight:800}
+.banner .big{font-family:Fraunces,serif;font-size:2.3rem;line-height:1.25;font-weight:700}
+.banner .big em{font-style:normal;color:var(--ac)}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;max-width:1500px;margin:0 auto}
-.card{background:#fffaf0;border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);border-top:6px solid var(--teal)}
-.card h3{margin:0 0 10px;font-size:20px;color:var(--navy);display:flex;gap:8px;align-items:center}
-.card p,.card li{font-size:16.5px;line-height:1.55}
-.card ul{padding-left:20px;margin:6px 0}
-.key{background:#fff3cf;border-radius:8px;padding:2px 6px;font-weight:800}
-.en{font-weight:800;color:var(--navy)}
-.hint{font-size:14px;opacity:.7}
-.wrong{color:#b23a2a;text-decoration:line-through;text-decoration-thickness:2px}
-.right{color:#2f7d4a;font-weight:800}
+/* side panel */
+.panel{display:flex;flex-direction:column;min-height:0;padding:1.5rem 1.6rem 1.2rem;min-width:0}
+.ptag{align-self:flex-start;display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  padding:.3rem .8rem;border-radius:2rem;background:var(--ac);color:#1d1606}
+.panel h2{font-size:2.3rem;line-height:1.1;margin:.7rem 0 .2rem}
+.panel .zh{color:var(--dim);font-size:1rem}
+.tabs{display:flex;gap:.3rem;margin:1.1rem 0 1rem;padding:.3rem;border-radius:1rem;background:rgba(0,0,0,.22)}
+.tab{flex:1;padding:.55rem .3rem;border-radius:.75rem;font-weight:800;font-size:.95rem;color:var(--dim);transition:.25s;white-space:nowrap}
+.tab.on{background:rgba(255,255,255,.92);color:#14202f;box-shadow:0 .3rem 1rem rgba(0,0,0,.25)}
+.tab .tick{color:#2c9b5c}
+.body{position:relative;flex:1;min-height:0}
+.pane{position:absolute;inset:0;opacity:0;transform:translateY(.8rem);transition:.35s;pointer-events:none;overflow:hidden;
+  display:flex;flex-direction:column;gap:.8rem}
+.pane.on{opacity:1;transform:none;pointer-events:auto}
+.pfoot{display:flex;align-items:center;gap:.8rem;margin-top:.8rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.15)}
+.pfoot .hint{font-size:.85rem;color:var(--dim)}
+.claim{margin-left:auto;padding:.6rem 1.1rem;border-radius:2rem;background:var(--ac);color:#1d1606;font-weight:800;font-size:.95rem;
+  box-shadow:0 .4rem 1.2rem rgba(0,0,0,.3);transition:.2s}
+.claim:hover{transform:translateY(-2px)}
+.claim:disabled{background:rgba(255,255,255,.2);color:var(--dim);box-shadow:none;transform:none;cursor:default}
 
-/* teacher notes */
-.teacher{display:none;max-width:1500px;margin:16px auto 0;background:#22303f;color:#e9f1f7;border-radius:12px;
-  padding:12px 18px;font-size:15px;line-height:1.6}
-body.tmode .teacher{display:block}
-.teacher b{color:#ffd27a}
+/* pane content */
+.lead{font-size:1.2rem;line-height:1.6}
+.lead b{color:var(--ac)}
+.box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:1rem;padding:.9rem 1.1rem}
+.box h5{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:.4rem}
+.box p,.box li{font-size:1.05rem;line-height:1.5}
+.box ul,.box ol{padding-left:1.3rem}
+.en{font-family:Fraunces,serif;font-weight:700}
+.hl{color:var(--ac);font-weight:800}
+.wrong{color:var(--bad);text-decoration:line-through;text-decoration-thickness:2px}
+.right{color:var(--ok);font-weight:800}
+.mini{font-size:.9rem;color:var(--dim)}
+.say{display:inline-grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;background:rgba(255,255,255,.14);
+  font-size:.95rem;vertical-align:middle;transition:.2s}
+.say:hover{background:var(--ac)}
+.row{display:flex;gap:.8rem;align-items:stretch}
+.row>*{flex:1}
 
-/* buttons & interactions */
-.chip{display:inline-block;border:2px solid var(--line);background:#fff;border-radius:22px;padding:7px 14px;
-  margin:4px 4px 4px 0;font-weight:700;font-size:15.5px;transition:.2s}
-.chip:hover{border-color:var(--teal)}
-.chip.sel{background:var(--navy);color:#fff;border-color:var(--navy)}
-.chip.ok{background:#dff3e4;border-color:#4c9c66;color:#235c36}
-.chip.no{background:#fbe2dc;border-color:#d0654d;color:#8e2f1b;animation:shake .35s}
-@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-.feedback{min-height:24px;font-weight:700;margin-top:6px;font-size:15.5px}
-.speak{border:0;background:none;font-size:16px;padding:0 4px;opacity:.7}
-.speak:hover{opacity:1}
-.claim{display:block;margin:22px auto 0;background:var(--ochre);color:#fff;border:0;border-radius:30px;
-  padding:12px 26px;font-weight:800;font-size:17px;box-shadow:var(--shadow)}
-.claim:disabled{background:#9aa;cursor:default}
+.chip{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border-radius:2rem;margin:.2rem .3rem .2rem 0;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);font-weight:700;font-size:1rem;transition:.2s;text-align:left}
+.chip:hover{background:rgba(255,255,255,.24);transform:translateY(-1px)}
+.chip.sel{background:rgba(255,255,255,.92);color:#14202f}
+.chip.ok{background:rgba(111,220,154,.28);border-color:var(--ok);box-shadow:0 0 1rem rgba(111,220,154,.35)}
+.chip.no{background:rgba(255,138,122,.25);border-color:var(--bad);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 
-/* rings (concept) */
-.rings{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-.ring{flex:1;min-width:150px;border-radius:14px;padding:10px;min-height:110px;border:3px dashed}
-.ring h4{margin:0 0 6px;font-size:15px}
-.ring.r1{border-color:var(--coral);background:#fdebe5}
-.ring.r2{border-color:var(--ochre);background:#fdf3dc}
-.ring.r3{border-color:var(--teal);background:#e3f2f1}
-.ring .chip{font-size:14px;cursor:default}
+/* one-question-at-a-time quiz */
+.quiz{display:flex;flex-direction:column;gap:.8rem;height:100%}
+.qprog{display:flex;gap:.35rem}
+.qprog i{flex:1;height:.35rem;border-radius:1rem;background:rgba(255,255,255,.18);transition:.3s}
+.qprog i.done{background:var(--ok)}
+.qprog i.cur{background:var(--ac)}
+.qq{font-family:Fraunces,serif;font-size:1.45rem;line-height:1.35;font-weight:700}
+.qopts{display:flex;flex-direction:column;gap:.5rem}
+.qopts .chip{border-radius:1rem;padding:.75rem 1.1rem;font-size:1.08rem;margin:0}
+.qfb{min-height:2.6rem;font-weight:700;font-size:1.02rem;line-height:1.4}
+.qdone{text-align:center;margin:auto;font-size:1.3rem}
+.qdone .medal{font-size:4rem;display:block;animation:pop .6s}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
 
-/* flip cards (words) */
-.flips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
-.flip{perspective:800px;height:118px;cursor:pointer}
-.flip .in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
-.flip.open .in{transform:rotateY(180deg)}
-.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:10px;
-  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.flip .f{background:linear-gradient(160deg,#3c7d5a,#2a5f45);color:#fff}
-.flip .f .w{font-family:Fraunces,serif;font-size:24px;font-weight:800}
-.flip .f .ipa{font-size:13px;opacity:.85}
-.flip .b{background:#fff;border:2px solid var(--sage);transform:rotateY(180deg);font-size:13.5px;line-height:1.35}
-.flip .b .zh{font-weight:800;color:var(--coral);font-size:16px}
+/* concept rings sort */
+.zones{display:flex;flex-direction:column;gap:.5rem}
+.zone{border-radius:1rem;padding:.55rem .8rem;border:1.5px dashed rgba(255,255,255,.35);min-height:3.2rem;transition:.2s;cursor:pointer}
+.zone:hover{background:rgba(255,255,255,.1)}
+.zone b{font-size:.95rem;margin-right:.4rem}
+.zone .chip{font-size:.88rem;padding:.3rem .7rem;cursor:default}
 
-.family{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:17px}
-.family .node{background:#fff;border:2px solid var(--sage);border-radius:10px;padding:6px 10px;text-align:center}
-.family .node small{display:block;font-size:12px;opacity:.7}
-.family .arrow{font-size:20px;color:var(--sage)}
+/* word bank */
+.wbank{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
+.wb{display:flex;align-items:center;gap:.6rem;padding:.45rem .7rem;border-radius:.8rem;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);transition:.2s;cursor:pointer;text-align:left}
+.wb:hover{background:rgba(255,255,255,.18)}
+.wb .w{font-family:Fraunces,serif;font-weight:700;font-size:1.15rem}
+.wb .z{margin-left:auto;color:var(--dim);font-size:.9rem;filter:blur(5px);transition:.3s}
+.wb.open .z,.reveal-all .wb .z{filter:none}
 
-/* bridges (grammar) */
-.bridges{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.bridge{border-radius:12px;padding:12px;color:#fff}
-.bridge.like{background:linear-gradient(160deg,#e2725b,#c55a43)}
-.bridge.look{background:linear-gradient(160deg,#2a8a8a,#1f6b6b)}
-.bridge .q{font-family:Fraunces,serif;font-size:21px;font-weight:800}
-.bridge p{margin:6px 0;font-size:15.5px}
-.qa{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
-.qa .s{flex:1;min-width:220px;font-size:16.5px}
+/* word family in banner */
+.fam{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.node{padding:.6rem 1.1rem;border-radius:1rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);text-align:center}
+.node b{font-family:Fraunces,serif;font-size:1.5rem}
+.node small{display:block;color:var(--dim);font-size:.85rem}
+.node.root{background:var(--ac);color:#1d1606}.node.root small{color:#4a3a14}
+.arr{color:var(--ac);font-weight:800;font-size:1rem}
 
-/* dialogue builder */
-.dlg .line{display:flex;gap:10px;margin:8px 0;align-items:flex-start}
-.dlg .who{font-weight:800;min-width:54px}
-.dlg .bubble{background:#fff;border:2px solid var(--line);border-radius:12px;padding:6px 12px;font-size:16.5px}
-.dlg .me .bubble{border-color:var(--teal);background:#e8f5f4}
+/* two-bridge formula */
+.twin{display:grid;grid-template-columns:1fr 1fr;gap:1rem;height:100%}
+.tw{border-radius:1.1rem;padding:1rem 1.2rem;display:flex;flex-direction:column;justify-content:center;gap:.4rem}
+.tw.l{background:linear-gradient(140deg,rgba(226,114,91,.55),rgba(226,114,91,.2));border:1px solid rgba(255,170,150,.5)}
+.tw.r{background:linear-gradient(140deg,rgba(42,160,160,.55),rgba(42,160,160,.2));border:1px solid rgba(140,230,230,.5)}
+.tw .q{font-family:Fraunces,serif;font-size:1.6rem;font-weight:800}
+.tw p{font-size:1.1rem}
+
+/* stepper */
+.steps{display:flex;gap:.6rem;align-items:stretch}
+.step{flex:1;border-radius:1rem;padding:.7rem .8rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  cursor:pointer;transition:.25s;text-align:left}
+.step:hover{background:rgba(255,255,255,.22);transform:translateY(-3px)}
+.step .n{font-size:.75rem;letter-spacing:.14em;color:var(--ac);font-weight:800;text-transform:uppercase}
+.step .t{font-weight:800;font-size:1.05rem;margin:.1rem 0}
+.step .p{font-family:Fraunces,serif;font-size:1rem;color:var(--dim)}
+
+/* formula cards */
+.forms{display:flex;gap:.9rem}
+.form{flex:1;border-radius:1rem;padding:.9rem 1rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22)}
+.form .f{font-family:Fraunces,serif;font-weight:800;font-size:1.35rem;color:var(--ac)}
+.form .e{font-size:1.05rem;margin-top:.3rem}
+
+/* dialogue */
+.dlg{display:flex;flex-direction:column;gap:.45rem;flex:1;min-height:0;overflow:hidden;justify-content:flex-end}
+.ln{display:flex;gap:.5rem;align-items:flex-end;animation:rise .35s}
+.ln.me{flex-direction:row-reverse}
+.ln .av{font-size:1.4rem}
+.ln .bb{padding:.5rem .9rem;border-radius:1rem 1rem 1rem .3rem;background:rgba(255,255,255,.14);font-size:1.02rem;max-width:80%}
+.ln.me .bb{border-radius:1rem 1rem .3rem 1rem;background:rgba(240,183,90,.32)}
+@keyframes rise{from{transform:translateY(.8rem) scale(.96)}}
+
+/* timer */
+.timer{display:flex;align-items:center;gap:1rem}
+.ring{--p:0;width:5.5rem;height:5.5rem;border-radius:50%;display:grid;place-items:center;font-family:Fraunces,serif;font-size:1.6rem;font-weight:800;
+  background:conic-gradient(var(--ac) calc(var(--p)*1%),rgba(255,255,255,.15) 0)}
+.ring span{width:4.4rem;height:4.4rem;border-radius:50%;display:grid;place-items:center;background:rgba(14,24,40,.85)}
+
+/* proverb carousel */
+.prov{cursor:pointer}
+.prov .big{transition:opacity .3s}
 
 /* writing */
-.writer label{display:block;font-size:15px;margin:6px 0 2px}
-.writer input{width:100%;padding:8px 10px;border:2px solid var(--line);border-radius:8px;font:inherit;background:#fff}
-.postcard{background:repeating-linear-gradient(#fffaf0 0 33px,#e8dcc0 33px 34px);border-radius:12px;
-  padding:16px 20px;font-size:19px;line-height:34px;min-height:220px;border:2px solid var(--line);font-family:Fraunces,serif}
-.checks label{display:block;font-size:16px;margin:4px 0}
-.sign{position:absolute;transform:translate(-50%,-50%);width:9%;text-align:center;font-family:Fraunces,serif;
-  font-weight:800;color:#4a2f14;font-size:clamp(7px,.85vw,15px);line-height:1.1;pointer-events:none}
+.fld label{display:block;font-size:.88rem;color:var(--dim);margin-bottom:.2rem}
+.fld input{width:100%;padding:.6rem .9rem;border-radius:.8rem;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.1);
+  color:var(--txt);outline:none;font-size:1.05rem}
+.fld input:focus{border-color:var(--ac);background:rgba(255,255,255,.16)}
+.fld input::placeholder{color:rgba(255,255,255,.4)}
+.postcard{font-family:Fraunces,serif;font-size:1.3rem;line-height:1.6}
+.postcard b{color:var(--ac);font-weight:700}
+.sign{position:absolute;transform:translate(-50%,-50%);width:9%;text-align:center;font-family:Fraunces,serif;font-weight:800;
+  color:#4a2f14;font-size:.92rem;line-height:1.1;pointer-events:none}
+.checks label{display:flex;gap:.6rem;align-items:center;font-size:1.05rem;padding:.35rem 0;cursor:pointer}
+.checks input{width:1.2rem;height:1.2rem;accent-color:var(--ac)}
 
-/* lightbox */
-.lightbox{position:fixed;inset:0;background:rgba(10,15,25,.92);display:none;place-items:center;z-index:50;cursor:zoom-out}
-.lightbox.on{display:grid}
-.lightbox img{max-width:98vw;max-height:96vh;border-radius:8px}
+/* teacher notes */
+.notes{position:absolute;inset:auto 0 0 0;padding:1rem 1.4rem;border-radius:var(--r);background:rgba(10,16,28,.88);
+  backdrop-filter:blur(14px);font-size:1rem;line-height:1.55;transform:translateY(110%);transition:.4s;z-index:6;border:1px solid var(--edge)}
+.notes b{color:var(--ac)}
+body.tmode .notes{transform:none}
 
-.foot{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:15;
-  background:rgba(255,250,240,.92);padding:7px 12px;border-radius:20px;box-shadow:var(--shadow)}
-.dot{width:12px;height:12px;border-radius:50%;background:rgba(31,59,87,.25);border:0;padding:0}
-.dot.on{background:var(--navy);transform:scale(1.3)}
-.toast{position:fixed;top:80px;left:50%;transform:translate(-50%,-20px);background:var(--ochre);color:#fff;
-  padding:10px 22px;border-radius:30px;font-weight:800;opacity:0;transition:.4s;z-index:40;box-shadow:var(--shadow)}
+/* stamp burst + toast */
+.burst{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;z-index:60}
+.burst span{font-size:12rem;filter:drop-shadow(0 0 2rem rgba(240,183,90,.8));animation:stampin 1.3s forwards}
+@keyframes stampin{0%{transform:scale(3) rotate(-30deg);opacity:0}25%{transform:scale(1) rotate(-12deg);opacity:1}
+  75%{transform:scale(1) rotate(-12deg);opacity:1}100%{transform:translate(35vw,-45vh) scale(.15);opacity:0}}
+.confetti{position:fixed;top:-5vh;font-size:1.8rem;z-index:55;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(540deg)}}
+.toast{position:fixed;top:9vh;left:50%;transform:translate(-50%,-1rem);padding:.7rem 1.6rem;border-radius:2rem;font-weight:800;
+  opacity:0;transition:.4s;z-index:61;background:var(--ac);color:#1d1606;box-shadow:0 1rem 2rem rgba(0,0,0,.35)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
-@media print{.topbar,.foot,.claim,.teacher{display:none!important}body{overflow:visible}.deck{position:static}
-  .page{position:static;opacity:1;transform:none;page-break-after:always}}
+.lightbox{display:none}
 </style>
 </head>
 <body>
+<div class="bg" id="bgA"></div><div class="bg" id="bgB"></div><div class="veil"></div>
 
-<header class="topbar">
+<header class="top glass">
   <div class="brand">The Friendship Atlas<small>Unit 1 · Friends &amp; Friendship · 7A</small></div>
-  <div class="passport" id="passport"><span class="lbl">Explorer's Passport</span></div>
-  <div class="navbtns">
-    <button onclick="go(0)" title="Back to the map">🗺 Map</button>
-    <button onclick="toggleTeacher()" title="Teacher notes (T)">👩‍🏫 Notes</button>
-    <button onclick="go(cur-1)">◀</button><button onclick="go(cur+1)">▶</button>
-  </div>
+  <div class="passport" id="passport"><span class="lbl">Passport</span></div>
+  <div class="dots" id="dots"></div>
+  <button class="tbtn" onclick="go(0)" title="Map">Map</button>
+  <button class="tbtn" id="focusBtn" onclick="toggleFocus()" title="Picture only (F)">Focus</button>
+  <button class="tbtn" id="noteBtn" onclick="toggleTeacher()" title="Teacher notes (T)">Notes</button>
+  <button class="tbtn" onclick="go(cur-1)">◀</button><button class="tbtn" onclick="go(cur+1)">▶</button>
 </header>
 
-<main class="deck" id="deck">
-
-<!-- ============ 0 · ATLAS ============ -->
-<section class="page" data-color="#1f3b57">
-  <div class="page-head"><span class="tag" style="background:#1f3b57">Start</span>
-    <h2>Welcome aboard, explorers!</h2><span class="zh">欢迎登船，小探险家们</span></div>
-  <div class="stage" data-img="images/web/00-atlas-map.jpg">
-    <img src="images/web/00-atlas-map.jpg" alt="The Friendship Atlas map">
-    <button class="hotspot" style="left:11%;top:30%" onclick="event.stopPropagation();go(1)"><span>1 · What is a friend?</span></button>
-    <button class="hotspot" style="left:32%;top:36%" onclick="event.stopPropagation();go(2)"><span>2 · Words</span></button>
-    <button class="hotspot" style="left:49%;top:46%" onclick="event.stopPropagation();go(3)"><span>3 · Grammar</span></button>
-    <button class="hotspot" style="left:69%;top:56%" onclick="event.stopPropagation();go(4)"><span>4 · Expressions</span></button>
-    <button class="hotspot" style="left:71%;top:30%" onclick="event.stopPropagation();go(5)"><span>5 · Fixing problems</span></button>
-    <button class="hotspot" style="left:89%;top:28%" onclick="event.stopPropagation();go(6)"><span>6 · Wisdom</span></button>
-  </div>
-  <div class="story">Meet <b>Pip</b> the red panda. Next term Pip starts at a <b>new school</b> — just like you will start <b>Grade 7</b>!
-    Pip doesn't know anyone yet, so Pip sails to the six islands of <b>The Friendship Atlas</b>.
-    Each island hides one <b>key to friendship</b>. Help Pip collect all six stamps in the <b>Explorer's Passport</b> ↗</div>
-  <div class="grid">
-    <div class="card" style="border-color:var(--coral)">
-      <h3>⚓ Before we sail: How do you feel?</h3>
-      <p>On the first day at a new school, I feel …</p>
-      <div id="feelings"></div>
-      <div class="feedback" id="feelFb"></div>
+<!-- ======================= 0 · ATLAS ======================= -->
+<section class="page" data-img="images/web/00-atlas-map.jpg" data-ac="#f0b75a">
+  <div class="left">
+    <div class="stage">
+      <img src="images/web/00-atlas-map.jpg" alt="The Friendship Atlas">
+      <button class="hs" data-go="1" style="left:13%;top:29%;width:15%;height:24%"><span class="tip">1 · What is a friend?</span></button>
+      <button class="hs" data-go="2" style="left:31%;top:38%;width:17%;height:22%"><span class="tip">2 · Words</span></button>
+      <button class="hs" data-go="3" style="left:49%;top:48%;width:15%;height:22%"><span class="tip">3 · Grammar</span></button>
+      <button class="hs" data-go="4" style="left:70%;top:55%;width:19%;height:26%"><span class="tip">4 · Expressions</span></button>
+      <button class="hs" data-go="5" style="left:71%;top:27%;width:16%;height:20%"><span class="tip">5 · Fixing problems</span></button>
+      <button class="hs" data-go="6" style="left:89%;top:27%;width:15%;height:26%"><span class="tip">6 · Wisdom</span></button>
     </div>
-    <div class="card">
-      <h3>🧭 Our route today</h3>
-      <ul>
-        <li><b>Lighthouse Isle</b> — the <span class="key">concept</span>: What is a friend?</li>
-        <li><b>Word Woods</b> — <span class="key">words</span> that describe a good friend</li>
-        <li><b>Twin Bridges</b> — <span class="key">grammar</span>: <i>like</i> vs <i>look like</i></li>
-        <li><b>Hello Harbour</b> — <span class="key">expressions</span> for making friends</li>
-        <li><b>Storm Cave</b> — <span class="key">problem-solving</span>: sorry &amp; advice</li>
-        <li><b>Treasure Peak</b> — <span class="key">wisdom</span>: proverbs &amp; your own writing</li>
-      </ul>
-      <p class="hint">Tip: click an island on the map, or press → to sail.</p>
+    <div class="banner glass">
+      <div class="kicker">Today's big question</div>
+      <div class="big">What makes a <em>good friend</em> — and how do I <em>make one</em> in English?</div>
+      <div class="mini">Click any island on the map to sail there · ← → to move · F = picture only · T = teacher notes</div>
+      <div class="notes"><b>⏱ 3 min · Hook.</b> “Who will be in a new class next year? How does it feel?” Students pick a feeling in <i>Warm-up</i> (it is read aloud). Show that the six islands = six skills; one passport stamp per island.</div>
     </div>
   </div>
-  <div class="teacher"><b>⏱ 3 min.</b> Hook: “Who will be in a new class next year? How does it feel?” Students tap a feeling chip (each one is read aloud). Point out the six islands = six skills. Introduce the passport: one stamp per island, earned by finishing the island challenge. Keys: ←/→ to move, T for these notes, click a picture to see it full screen.</div>
-</section>
-
-<!-- ============ 1 · LIGHTHOUSE ============ -->
-<section class="page" data-color="#e2725b">
-  <div class="page-head"><span class="tag" style="background:var(--coral)">Island 1 · Concept</span>
-    <h2>What Is a Friend?</h2><span class="zh">什么是朋友？</span></div>
-  <div class="stage" data-img="images/web/01-lighthouse.jpg"><img src="images/web/01-lighthouse.jpg" alt="Lighthouse Isle"></div>
-  <div class="story">The wise owl <b>Professor Hoot</b> keeps the lighthouse. “Look at my three rings of light, Pip.
-    The <b>closer</b> the ring, the <b>fewer</b> people it holds — and the more you <b>trust</b> them.”</div>
-  <div class="grid">
-    <div class="card" style="border-color:var(--coral)">
-      <h3>💡 The big idea</h3>
-      <p class="en" style="font-size:19px">A friend is someone you know well, like, and <span class="key">trust</span>.</p>
-      <ul>
-        <li><b style="color:var(--coral)">Best friends</b> — very close; you share secrets and help each other. 挚友</li>
-        <li><b style="color:var(--ochre)">Friends</b> — you enjoy spending time together. 朋友</li>
-        <li><b style="color:var(--teal)">Acquaintances</b> /əˈkweɪntənsɪz/ — people you know only a little. 熟人</li>
-      </ul>
-      <p class="hint">Friendships can move between the rings — an acquaintance today can be a best friend next year!</p>
-    </div>
-    <div class="card" style="border-color:var(--coral)">
-      <h3>🎯 Challenge: Which ring?</h3>
-      <p>Tap a person, then tap a ring.</p>
-      <div id="people"></div>
-      <div class="rings">
-        <div class="ring r1" data-ring="1"><h4>❤️ Best friends</h4></div>
-        <div class="ring r2" data-ring="2"><h4>😊 Friends</h4></div>
-        <div class="ring r3" data-ring="3"><h4>👋 Acquaintances</h4></div>
+  <aside class="panel glass">
+    <span class="ptag">Start</span>
+    <h2>Welcome aboard, explorers!</h2><div class="zh">欢迎登船，小探险家们</div>
+    <div class="tabs"></div>
+    <div class="body">
+      <div class="pane" data-tab="Story">
+        <p class="lead">Meet <b>Pip</b> the red panda. Next term Pip starts at a <b>new school</b> — just like you will start <b>Grade 7</b>!</p>
+        <p class="lead">Pip doesn't know anyone yet, so Pip sails to the six islands of <b>The Friendship Atlas</b>. Each island hides one <b>key to friendship</b>.</p>
+        <div class="box"><h5>Your mission</h5><p>Help Pip win all <b>6 stamps</b> in the passport ↗ by finishing each island's challenge.</p></div>
+        <div class="box"><h5>Friends you will meet</h5>
+          <div class="row" style="text-align:center;font-size:.95rem">
+            <div><div style="font-size:2.4rem">🐼</div><b>Pip</b><div class="mini">the new student</div></div>
+            <div><div style="font-size:2.4rem">🦉</div><b>Professor Hoot</b><div class="mini">Lighthouse Isle</div></div>
+            <div><div style="font-size:2.4rem">🦊</div><b>Kiko</b><div class="mini">Word Woods</div></div>
+            <div><div style="font-size:2.4rem">🦦</div><b>Bea</b><div class="mini">Hello Harbour</div></div></div></div>
       </div>
-      <div class="feedback" id="ringFb"></div>
+      <div class="pane" data-tab="Warm-up">
+        <p class="lead">On the first day at a new school, I feel …</p>
+        <div id="feelings"></div>
+        <div class="box" id="feelFb"><p class="mini">Tap a feeling to hear the sentence.</p></div>
+      </div>
+      <div class="pane" data-tab="Route">
+        <div class="steps" style="flex-direction:column;gap:.45rem" id="route"></div>
+      </div>
     </div>
-    <div class="card" style="border-color:var(--coral)">
-      <h3>🗣 Say it!</h3>
-      <p>Finish the sentence with a partner:</p>
-      <p class="en">“To me, a friend is someone who ______.”</p>
-      <p class="hint">e.g. … who <b>listens</b> to me / … who <b>helps</b> me when I'm in trouble / … who makes me <b>laugh</b>.</p>
-      <p>Notice: <b>someone who + verb<span class="key">-s</span></b> → someone who <b>helps</b>, who <b>listens</b>.</p>
-    </div>
-  </div>
-  <button class="claim" data-stamp="1">Collect the Lighthouse stamp 🏮</button>
-  <div class="teacher"><b>⏱ 5 min.</b> Elicit “friend vs classmate”. The sorting has suggested answers but accept reasons (“my desk mate could be a friend <i>if</i> …”). Push the language point: <i>someone who + verb-s</i> (3rd person singular), which comes back at Twin Bridges.</div>
+    <div class="pfoot"><span class="hint">↑ ↓ switch tabs</span></div>
+  </aside>
 </section>
 
-<!-- ============ 2 · WORD WOODS ============ -->
-<section class="page" data-color="#3c7d5a">
-  <div class="page-head"><span class="tag" style="background:#3c7d5a">Island 2 · Words</span>
-    <h2>Word Woods</h2><span class="zh">好朋友的品质词</span></div>
-  <div class="stage" data-img="images/web/02-word-woods.jpg"><img src="images/web/02-word-woods.jpg" alt="Word Woods"></div>
-  <div class="story">In the woods Pip meets <b>Kiko</b> the fox. “Every tree here is named after a quality of a good friend,” says Kiko.
-    “And the giant tree in the middle? It shows how one word can grow into a whole <b>word family</b>.”</div>
-  <div class="grid">
-    <div class="card" style="border-color:var(--sage);grid-column:1/-1">
-      <h3>🌳 Ten trees, ten qualities <span class="hint">(tap a card to flip · 🔊 to listen)</span></h3>
-      <div class="flips" id="flips"></div>
+<!-- ======================= 1 · LIGHTHOUSE ======================= -->
+<section class="page" data-img="images/web/01-lighthouse.jpg" data-ac="#ff9a80">
+  <div class="left">
+    <div class="stage">
+      <img src="images/web/01-lighthouse.jpg" alt="Lighthouse Isle">
+      <button class="hs" style="left:38.8%;top:34.2%;width:15%;height:6.5%"><span class="tip">Best friends</span><template>
+        <h4>Best friends <span class="say" data-say="best friends">🔊</span></h4><p>挚友 · very close; you share secrets and always help each other.</p>
+        <p class="en">“Lily is my best friend. I can tell her anything.”</p></template></button>
+      <button class="hs" style="left:59.5%;top:37%;width:10%;height:6%"><span class="tip">Friends</span><template>
+        <h4>Friends <span class="say" data-say="friends">🔊</span></h4><p>朋友 · people you like and enjoy spending time with.</p>
+        <p class="en">“We play football together every weekend.”</p></template></button>
+      <button class="hs" style="left:81.3%;top:29.8%;width:14%;height:6%"><span class="tip">Acquaintances</span><template>
+        <h4>Acquaintances <span class="say" data-say="acquaintances">🔊</span></h4><p>/əˈkweɪntənsɪz/ 熟人 · people you know only a little.</p>
+        <p class="en">“I say hi to him, but I don't really know him.”</p></template></button>
+      <button class="hs" style="left:14.8%;top:24%;width:7%;height:13%"><span class="tip">Professor Hoot</span><template>
+        <h4>Professor Hoot 🦉</h4><p class="en">“Look at my rings, Pip. The closer the ring, the fewer the boats — and the deeper the trust.”</p></template></button>
+      <button class="hs" style="left:17%;top:70%;width:13%;height:25%"><span class="tip">Pip</span><template>
+        <h4>Pip 🐼</h4><p class="en">“At my new school, everyone starts in the outer ring. But rings can change!”</p>
+        <p class="mini">An acquaintance today can be a best friend next year.</p></template></button>
+      <div class="explore glass"></div>
     </div>
-    <div class="card" style="border-color:var(--sage)">
-      <h3>🌱 The word-family tree</h3>
-      <div class="family">
-        <div class="node"><b>friend</b><small>n. 朋友</small></div><span class="arrow">→ +ly →</span>
-        <div class="node"><b>friendly</b><small>adj. 友好的</small></div><span class="arrow">→ un+ →</span>
+    <div class="banner glass">
+      <div class="kicker">Key sentence <span class="say" data-say="A friend is someone you know well, like, and trust.">🔊</span></div>
+      <div class="big">A friend is <em>someone who</em> you know well, like, and <em>trust</em>.</div>
+      <div class="mini">The closer the ring → the fewer the people → the deeper the trust.</div>
+      <div class="notes"><b>⏱ 5 min · Concept.</b> Click the three ring labels in the picture first. Then the <i>Challenge</i> tab: sorting has suggested answers, but accept good reasons (“my desk mate could be a friend <i>if</i>…”). Finish with <i>Say it</i>: <i>someone who + verb-s</i> — it comes back at Twin Bridges.</div>
+    </div>
+  </div>
+  <aside class="panel glass">
+    <span class="ptag">Island 1 · Concept</span>
+    <h2>What Is a Friend?</h2><div class="zh">什么是朋友？朋友的三个圈</div>
+    <div class="tabs"></div>
+    <div class="body">
+      <div class="pane" data-tab="Story">
+        <p class="lead">The wise owl <b>Professor Hoot</b> keeps the lighthouse. From its lamp, <b>three rings of light</b> spread over the sea.</p>
+        <p class="lead">“Not everyone you know is the same kind of friend,” says Hoot. “Click my rings and find out why.”</p>
+        <div class="box"><h5>Look &amp; think</h5><p>Count the boats in each ring. Which ring has the <b>fewest</b>? Why?</p></div>
+      </div>
+      <div class="pane" data-tab="Challenge">
+        <p class="mini">Tap a person, then tap the ring where they belong.</p>
+        <div id="people"></div>
+        <div class="zones">
+          <div class="zone" data-ring="1"><b>❤️ Best friends</b></div>
+          <div class="zone" data-ring="2"><b>😊 Friends</b></div>
+          <div class="zone" data-ring="3"><b>👋 Acquaintances</b></div>
+        </div>
+        <div class="qfb" id="ringFb"></div>
+      </div>
+      <div class="pane" data-tab="Say it">
+        <div class="box"><h5>Your turn · with a partner</h5><p class="en" style="font-size:1.35rem">“To me, a friend is someone who ______.”</p></div>
+        <div id="sayChips"></div>
+        <div class="box"><h5>Grammar spotlight</h5><p><span class="hl">someone who + verb-s</span> → someone who <b>helps</b> · who <b>listens</b> · who <b>makes</b> me laugh</p>
+          <p class="mini"><i>someone</i> = one person → the verb takes <b>-s</b>.</p></div>
+      </div>
+    </div>
+    <div class="pfoot"><span class="hint">↑ ↓ switch tabs</span><button class="claim" data-stamp="1">Collect stamp 🏮</button></div>
+  </aside>
+</section>
+
+<!-- ======================= 2 · WORD WOODS ======================= -->
+<section class="page" data-img="images/web/02-word-woods.jpg" data-ac="#9fd87f">
+  <div class="left">
+    <div class="stage" id="woods">
+      <img src="images/web/02-word-woods.jpg" alt="Word Woods">
+      <div class="explore glass"></div>
+    </div>
+    <div class="banner glass">
+      <div class="kicker">The word-family tree · 一词变多词</div>
+      <div class="fam">
+        <div class="node root"><b>friend</b><small>n. 朋友</small></div><span class="arr">+ly →</span>
+        <div class="node"><b>friendly</b><small>adj. 友好的</small></div><span class="arr">un+ →</span>
         <div class="node"><b>unfriendly</b><small>adj. 不友好的</small></div>
-      </div>
-      <div class="family" style="margin-top:8px">
-        <div class="node"><b>friend</b><small>n.</small></div><span class="arrow">→ +ship →</span>
+        <span class="arr" style="margin-left:.6rem">friend +ship →</span>
         <div class="node"><b>friendship</b><small>n. 友谊</small></div>
       </div>
-      <ul>
-        <li><span class="key">-ship</span> turns a person into an idea: member → membership, leader → leadership.</li>
-        <li><span class="key">un-</span> means “not”: unkind, unhelpful, impolite (<i>im-</i> before <i>p</i>!), dishonest (<i>dis-</i>!).</li>
-        <li>⚠️ <b>friendly</b> is an <b>adjective</b>, not an adverb: <span class="right">She is friendly.</span> <span class="wrong">She talks friendly.</span></li>
-      </ul>
-    </div>
-    <div class="card" style="border-color:var(--sage)">
-      <h3>🔍 Challenge: Who is it?</h3>
-      <div id="whoQuiz"></div>
-      <div class="feedback" id="whoFb"></div>
+      <div class="notes"><b>⏱ 7 min · Words.</b> Students call out a sign, you click it (pronunciation + meaning + example). Pairs test each other in <i>Word bank</i> (Chinese is blurred until tapped). <i>Build</i>: un-/im-/dis- is a classic Grade 7 test point. Quiz: students vote A/B/C with fingers before you click.</div>
     </div>
   </div>
-  <button class="claim" data-stamp="2">Collect the Word Woods stamp 🌳</button>
-  <div class="teacher"><b>⏱ 7 min.</b> Choral-read 3–4 cards (🔊 uses the browser voice). Pairs flip the rest and test each other. Highlight prefixes: un-/im-/dis- — a classic Grade 7 test point. Quiz: students vote with fingers (A/B/C) before you click.</div>
-</section>
-
-<!-- ============ 3 · TWIN BRIDGES ============ -->
-<section class="page" data-color="#2a8a8a">
-  <div class="page-head"><span class="tag" style="background:var(--teal)">Island 3 · Grammar</span>
-    <h2>Twin Bridges</h2><span class="zh">What is she like? 还是 What does she look like?</span></div>
-  <div class="stage" data-img="images/web/03-twin-bridges.jpg"><img src="images/web/03-twin-bridges.jpg" alt="Twin Bridges"></div>
-  <div class="story">Two bridges cross the river. Kiko says: “Choose carefully, Pip! One bridge asks about a friend's <b>inside</b> (personality),
-    the other asks about the <b>outside</b> (appearance). Cross the wrong one and you'll answer the wrong question!”</div>
-  <div class="grid">
-    <div class="card" style="border-color:var(--teal);grid-column:1/-1">
-      <h3>🌉 The two bridges</h3>
-      <div class="bridges">
-        <div class="bridge like"><div class="q">What is she like?</div>
-          <p>= What kind of person is she? (性格 · inside)</p>
-          <p>➜ She <b>is</b> kind / funny / honest.</p>
-          <p>➜ She <b>is</b> always ready to help.</p></div>
-        <div class="bridge look"><div class="q">What does she look like?</div>
-          <p>= How does she look? (外貌 · outside)</p>
-          <p>➜ She <b>is</b> tall / short / slim.</p>
-          <p>➜ She <b>has</b> long hair. She <b>wears</b> glasses.</p></div>
+  <aside class="panel glass">
+    <span class="ptag">Island 2 · Words</span>
+    <h2>Word Woods</h2><div class="zh">描述好朋友的品质词</div>
+    <div class="tabs"></div>
+    <div class="body">
+      <div class="pane" data-tab="Story">
+        <p class="lead">In the woods Pip meets <b>Kiko</b> the fox. “Every tree here is named after a <b>quality</b> of a good friend,” says Kiko.</p>
+        <p class="lead">“And the giant tree in the middle shows how one word grows into a whole <b>word family</b>.”</p>
+        <div class="box"><h5>Explore</h5><p>Click every <b>sign</b> in the woods. Can you find all 14?</p></div>
       </div>
-      <p style="margin-top:10px">🔑 Here <b>like</b> is a <b>preposition</b> meaning “similar to” (像), <b>not</b> the verb “喜欢”.
-        Compare: <i>What does she <b>like</b>?</i> = What things does she enjoy? → She likes music.</p>
+      <div class="pane" data-tab="Word bank">
+        <p class="mini">Tap a word to hear it and reveal its meaning.</p>
+        <div class="wbank" id="wbank"></div>
+      </div>
+      <div class="pane" data-tab="Build">
+        <div class="box"><h5>-ship = an idea / a relationship</h5><p>friend → friend<b>ship</b> · member → member<b>ship</b> · leader → leader<b>ship</b></p></div>
+        <div class="box"><h5>un- / im- / dis- = not</h5><p><b>un</b>kind · <b>un</b>friendly · <b>un</b>helpful · <b>im</b>polite · <b>im</b>patient · <b>dis</b>honest · <b>dis</b>loyal</p></div>
+        <div class="box"><h5>⚠️ Trap</h5><p><b>friendly</b> is an adjective, not an adverb:<br><span class="right">She is friendly.</span> &nbsp; <span class="wrong">She talks friendly.</span></p></div>
+      </div>
+      <div class="pane" data-tab="Challenge"><div class="quiz" id="q2"></div></div>
     </div>
-    <div class="card" style="border-color:var(--teal)">
-      <h3>🎯 Challenge: Which bridge?</h3>
-      <p class="hint">Read the answer. Which question was asked?</p>
-      <div id="bridgeQuiz"></div>
-      <div class="feedback" id="bridgeFb"></div>
-    </div>
-    <div class="card" style="border-color:var(--teal)">
-      <h3>🚧 Don't fall into the river!</h3>
-      <p><span class="wrong">What is she look like?</span> → <span class="right">What does she look like?</span></p>
-      <p><span class="wrong">She has kind.</span> → <span class="right">She is kind.</span> <span class="hint">(adjective → be)</span></p>
-      <p><span class="wrong">He have short hair.</span> → <span class="right">He has short hair.</span> <span class="hint">(he/she → has)</span></p>
-      <p><span class="wrong">What does he like? — He is funny.</span> → <span class="right">What is he like? — He is funny.</span></p>
-    </div>
-  </div>
-  <button class="claim" data-stamp="3">Collect the Twin Bridges stamp 🌉</button>
-  <div class="teacher"><b>⏱ 7 min.</b> Physical game option: left side of room = “like” bridge, right side = “look like” bridge; read an answer, students lean/point. Then describe a famous cartoon character with both questions. Watch for <i>be</i> + adjective vs <i>has</i> + noun.</div>
+    <div class="pfoot"><span class="hint">↑ ↓ switch tabs</span><button class="claim" data-stamp="2">Collect stamp 🌳</button></div>
+  </aside>
 </section>
 
-<!-- ============ 4 · HELLO HARBOUR ============ -->
-<section class="page" data-color="#d49a2a">
-  <div class="page-head"><span class="tag" style="background:var(--ochre)">Island 4 · Expressions</span>
-    <h2>Hello Harbour</h2><span class="zh">交朋友的常用表达</span></div>
-  <div class="stage" data-img="images/web/04-hello-harbour.jpg"><img src="images/web/04-hello-harbour.jpg" alt="Hello Harbour"></div>
-  <div class="story">At the busy market, every stall “sells” a useful phrase. Pip wants to talk to <b>Bea</b> the otter —
-    but which phrase comes first? Making a friend has <b>five steps</b>.</div>
-  <div class="grid">
-    <div class="card" style="border-color:var(--ochre)">
-      <h3>🪜 Five steps to a new friend</h3>
-      <ol>
-        <li><b>Greet</b> — Hi! / Hello! <span class="speak" data-say="Hi! Hello!">🔊</span></li>
-        <li><b>Introduce</b> — I'm Pip. Nice to meet you! <span class="speak" data-say="I'm Pip. Nice to meet you!">🔊</span></li>
-        <li><b>Ask</b> — What do you like doing? / Where are you from? <span class="speak" data-say="What do you like doing? Where are you from?">🔊</span></li>
-        <li><b>Find something in common</b> — Me too! / So do I! <span class="speak" data-say="Me too! So do I!">🔊</span></li>
-        <li><b>Invite</b> — Do you want to join us? / Let's … together! <span class="speak" data-say="Do you want to join us? Let's play together!">🔊</span></li>
-      </ol>
+<!-- ======================= 3 · TWIN BRIDGES ======================= -->
+<section class="page" data-img="images/web/03-twin-bridges.jpg" data-ac="#6fd6d0">
+  <div class="left">
+    <div class="stage">
+      <img src="images/web/03-twin-bridges.jpg" alt="Twin Bridges">
+      <button class="hs" style="left:35.6%;top:40.6%;width:18%;height:7%"><span class="tip">Bridge 1</span><template>
+        <h4>What is she like? <span class="say" data-say="What is she like?">🔊</span></h4><p>= What kind of person is she? 她是个怎样的人？(性格)</p>
+        <p class="en">→ She <span class="hl">is</span> kind / funny / honest.</p></template></button>
+      <button class="hs" style="left:64.2%;top:42.2%;width:20%;height:7%"><span class="tip">Bridge 2</span><template>
+        <h4>What does she look like? <span class="say" data-say="What does she look like?">🔊</span></h4><p>= How does she look? 她长什么样？(外貌)</p>
+        <p class="en">→ She <span class="hl">is</span> tall. She <span class="hl">has</span> long hair. She <span class="hl">wears</span> glasses.</p></template></button>
+      <button class="hs" style="left:10.2%;top:31.2%;width:6%;height:7%"><span class="tip">kind</span><template>
+        <h4>kind <span class="say" data-say="She is kind.">🔊</span></h4><p class="en">She <span class="hl">is</span> kind.</p><p class="mini">personality → <b>be</b> + adjective</p></template></button>
+      <button class="hs" style="left:18.6%;top:29.8%;width:6%;height:7%"><span class="tip">funny</span><template>
+        <h4>funny <span class="say" data-say="He is funny.">🔊</span></h4><p class="en">He <span class="hl">is</span> funny.</p><p class="mini">personality → <b>be</b> + adjective</p></template></button>
+      <button class="hs" style="left:26.1%;top:29.8%;width:6%;height:7%"><span class="tip">honest</span><template>
+        <h4>honest <span class="say" data-say="She is honest.">🔊</span></h4><p class="en">She <span class="hl">is</span> honest.</p><p class="mini">personality → <b>be</b> + adjective</p></template></button>
+      <button class="hs" style="left:73.5%;top:30%;width:5.5%;height:7%"><span class="tip">tall</span><template>
+        <h4>tall <span class="say" data-say="He is tall.">🔊</span></h4><p class="en">He <span class="hl">is</span> tall.</p><p class="mini">height / build → <b>be</b> + adjective</p></template></button>
+      <button class="hs" style="left:81%;top:30%;width:6%;height:8%"><span class="tip">long hair</span><template>
+        <h4>long hair <span class="say" data-say="She has long hair.">🔊</span></h4><p class="en">She <span class="hl">has</span> long hair.</p><p class="mini">body parts → <b>have / has</b> + noun · <span class="wrong">She is long hair.</span></p></template></button>
+      <button class="hs" style="left:89.4%;top:31.6%;width:6%;height:7%"><span class="tip">glasses</span><template>
+        <h4>glasses <span class="say" data-say="She wears glasses.">🔊</span></h4><p class="en">She <span class="hl">wears</span> glasses.</p><p class="mini">things on you → <b>wear(s)</b> + noun</p></template></button>
+      <div class="explore glass"></div>
     </div>
-    <div class="card" style="border-color:var(--ochre)">
-      <h3>🧺 Friendship phrases (collocations)</h3>
-      <ul>
-        <li><b>make friends with</b> sb. 和…交朋友</li>
-        <li><b>get along (well) with</b> sb. 与…相处(融洽)</li>
-        <li><b>have … in common</b> 有…共同点 — We have a lot in common.</li>
-        <li><b>share</b> sth. <b>with</b> sb. 与…分享</li>
-        <li><b>help each other</b> 互相帮助</li>
-        <li><b>keep in touch</b> 保持联系</li>
-      </ul>
-      <p class="hint">⚠️ make friend<b>s</b> with — always plural <b>friends</b>!</p>
-    </div>
-    <div class="card" style="border-color:var(--ochre)">
-      <h3>💬 Challenge: Help Pip talk to Bea</h3>
-      <div class="dlg" id="dlg"></div>
-      <div id="dlgChoices"></div>
-      <div class="feedback" id="dlgFb"></div>
+    <div class="banner glass">
+      <div class="twin">
+        <div class="tw l"><div class="q">What is she like?</div><p>性格 · inside → She <b>is</b> + kind / funny / honest.</p></div>
+        <div class="tw r"><div class="q">What does she look like?</div><p>外貌 · outside → She <b>is</b> tall · <b>has</b> long hair · <b>wears</b> glasses.</p></div>
+      </div>
+      <div class="notes"><b>⏱ 7 min · Grammar.</b> Body game: left side of the room = coral bridge, right side = teal bridge; read a sentence, students point. Click the flower signs to show <i>be</i> + adj vs <i>has</i> + noun vs <i>wears</i>. Then describe a cartoon character with both questions.</div>
     </div>
   </div>
-  <button class="claim" data-stamp="4">Collect the Harbour stamp ⚓</button>
-  <div class="teacher"><b>⏱ 6 min.</b> Build the dialogue together, then pairs role-play it with their own names and hobbies. Strong pairs: add a follow-up question (“How often do you…?”). Point at the stall signs in the picture as you go.</div>
+  <aside class="panel glass">
+    <span class="ptag">Island 3 · Grammar</span>
+    <h2>Twin Bridges</h2><div class="zh">like 和 look like 的区别</div>
+    <div class="tabs"></div>
+    <div class="body">
+      <div class="pane" data-tab="Story">
+        <p class="lead">Two bridges cross the river. Kiko warns: “Choose carefully, Pip! One bridge asks about a friend's <b>inside</b>, the other about the <b>outside</b>.”</p>
+        <p class="lead">“Cross the wrong one and you'll answer the wrong question!”</p>
+        <div class="box"><h5>Explore</h5><p>Click both bridges and all six flower signs.</p></div>
+      </div>
+      <div class="pane" data-tab="Rule">
+        <div class="box"><h5>Why “like”?</h5><p>Here <b>like</b> is a <b>preposition</b> = “similar to / 像”, not the verb “喜欢”.</p></div>
+        <div class="box"><h5>Don't mix them up</h5>
+          <p><span class="hl">What is he like?</span> → He is funny. (性格)</p>
+          <p><span class="hl">What does he look like?</span> → He has short hair. (外貌)</p>
+          <p><span class="hl">What does he like?</span> → He likes music. (喜好)</p></div>
+      </div>
+      <div class="pane" data-tab="Traps">
+        <div class="box"><p><span class="wrong">What is she look like?</span><br><span class="right">What does she look like?</span></p></div>
+        <div class="box"><p><span class="wrong">She has kind.</span> → <span class="right">She is kind.</span> <span class="mini">adjective → be</span></p></div>
+        <div class="box"><p><span class="wrong">He have short hair.</span> → <span class="right">He has short hair.</span> <span class="mini">he / she → has</span></p></div>
+        <div class="box"><p><span class="wrong">She is long hair.</span> → <span class="right">She has long hair.</span></p></div>
+      </div>
+      <div class="pane" data-tab="Challenge"><div class="quiz" id="q3"></div></div>
+    </div>
+    <div class="pfoot"><span class="hint">↑ ↓ switch tabs</span><button class="claim" data-stamp="3">Collect stamp 🌉</button></div>
+  </aside>
 </section>
 
-<!-- ============ 5 · STORM CAVE ============ -->
-<section class="page" data-color="#5b6c8f">
-  <div class="page-head"><span class="tag" style="background:#5b6c8f">Island 5 · Problem-solving</span>
-    <h2>Storm Cave</h2><span class="zh">朋友闹矛盾怎么办？</span></div>
-  <div class="stage" data-img="images/web/05-storm-cave.jpg"><img src="images/web/05-storm-cave.jpg" alt="Storm Cave"></div>
-  <div class="story">Oh no! Pip borrowed Kiko's favourite book and <b>lost</b> it. Now Kiko is upset and a crack has opened in the cave.
-    Only four glowing stepping-stones can bring the friends back together: <b>Listen · Say sorry · Talk it out · Forgive</b>.</div>
-  <div class="grid">
-    <div class="card" style="border-color:#5b6c8f">
-      <h3>🙏 Saying sorry &amp; answering</h3>
-      <p><b>Say sorry:</b> I'm sorry I lost your book. / It was my fault. / I'll buy you a new one.</p>
-      <p><b>Answer:</b> That's OK. / Never mind. / Don't worry about it.</p>
-      <p class="hint">⚠️ “Never mind” answers <b>“Sorry”</b>. To answer <b>“Thank you”</b>, say “You're welcome.”</p>
+<!-- ======================= 4 · HELLO HARBOUR ======================= -->
+<section class="page" data-img="images/web/04-hello-harbour.jpg" data-ac="#ffcf5c">
+  <div class="left">
+    <div class="stage">
+      <img src="images/web/04-hello-harbour.jpg" alt="Hello Harbour">
+      <button class="hs" style="left:23.8%;top:41%;width:10%;height:8%"><span class="tip">Stall 1</span><template>
+        <h4>Hi, I'm Pip. <span class="say" data-say="Hi, I'm Pip.">🔊</span></h4><p>Step 1–2 · <b>Greet</b> and <b>introduce</b> yourself.</p><p class="mini">Also: Hello! My name is … · I'm new here.</p></template></button>
+      <button class="hs" style="left:35.8%;top:37%;width:9%;height:10%"><span class="tip">Stall 2</span><template>
+        <h4>Nice to meet you! <span class="say" data-say="Nice to meet you! Nice to meet you, too!">🔊</span></h4><p>Answer with: <span class="en">Nice to meet you, <span class="hl">too</span>!</span></p></template></button>
+      <button class="hs" style="left:45.5%;top:37.5%;width:9%;height:10%"><span class="tip">Stall 3</span><template>
+        <h4>What do you like doing? <span class="say" data-say="What do you like doing? I like reading.">🔊</span></h4><p>Step 3 · <b>Ask</b>. → I like <span class="hl">reading</span> / to read.</p><p class="mini">like + doing / like + to do — <span class="wrong">like to doing</span></p></template></button>
+      <button class="hs" style="left:56%;top:37.5%;width:9%;height:7%"><span class="tip">Stall 4</span><template>
+        <h4>Me too! <span class="say" data-say="Me too! So do I!">🔊</span></h4><p>Step 4 · Find something <b>in common</b>.</p><p class="en">“We have a lot in common!”</p></template></button>
+      <button class="hs" style="left:66.6%;top:38%;width:10%;height:10%"><span class="tip">Stall 5</span><template>
+        <h4>Do you want to join us? <span class="say" data-say="Do you want to join us? Sure, I'd love to!">🔊</span></h4><p>Step 5 · <b>Invite</b>. → Sure, I'd love to!</p></template></button>
+      <button class="hs" style="left:77%;top:40.5%;width:9%;height:10%"><span class="tip">Stall 6</span><template>
+        <h4>Let's be friends! <span class="say" data-say="Let's be friends!">🔊</span></h4><p>Let's + base verb: Let's <b>be</b> friends · Let's <b>play</b> together.</p></template></button>
+      <button class="hs" style="left:52%;top:72%;width:20%;height:24%"><span class="tip">Pip &amp; Bea</span><template>
+        <h4>Pip 🐼 &amp; Bea 🦦</h4><p class="en">Pip <span class="hl">made friends with</span> Bea in five minutes!</p><p class="mini">make friend<b>s</b> with sb. — always plural.</p></template></button>
+      <div class="explore glass"></div>
     </div>
-    <div class="card" style="border-color:#5b6c8f">
-      <h3>🩹 Giving advice</h3>
-      <p><span class="key">should + base verb</span> — You <b>should</b> say sorry. <span class="wrong">You should to say sorry.</span></p>
-      <p><span class="key">Why not + base verb?</span> — <b>Why not</b> talk to her?</p>
-      <p><span class="key">How about + verb-ing?</span> — <b>How about</b> writ<b>ing</b> him a card?</p>
-    </div>
-    <div class="card" style="border-color:#5b6c8f">
-      <h3>🎯 Challenge: The advice clinic</h3>
-      <div id="adviceQuiz"></div>
-      <div class="feedback" id="adviceFb"></div>
+    <div class="banner glass">
+      <div class="kicker">Five steps to a new friend · click to hear</div>
+      <div class="steps" id="steps"></div>
+      <div class="notes"><b>⏱ 6 min · Expressions.</b> Click the stalls left → right: they are the five steps in order. <i>Challenge</i>: wrong options are typical mistakes. <i>Role-play</i>: 60-second timer — pairs use their own names and hobbies; strong pairs add a follow-up question.</div>
     </div>
   </div>
-  <button class="claim" data-stamp="5">Collect the Storm Cave stamp ⛈</button>
-  <div class="teacher"><b>⏱ 5 min.</b> Ask: “Has a friend ever been angry with you? What did you do?” (no names). The quiz checks both meaning and form: <i>should + V</i>, <i>Why not + V</i>, <i>How about + V-ing</i>.</div>
+  <aside class="panel glass">
+    <span class="ptag">Island 4 · Expressions</span>
+    <h2>Hello Harbour</h2><div class="zh">交朋友的常用表达</div>
+    <div class="tabs"></div>
+    <div class="body">
+      <div class="pane" data-tab="Story">
+        <p class="lead">At the busy market every stall “sells” a useful phrase. Pip wants to talk to <b>Bea</b> the otter — but which phrase comes first?</p>
+        <div class="box"><h5>Explore</h5><p>Click the six stalls. They are in the right order!</p></div>
+      </div>
+      <div class="pane" data-tab="Phrases">
+        <div class="box"><ul>
+          <li><b>make friends with</b> sb. 和…交朋友</li>
+          <li><b>get along (well) with</b> sb. 与…相处(融洽)</li>
+          <li><b>have … in common</b> 有共同点</li>
+          <li><b>share</b> sth. <b>with</b> sb. 与…分享</li>
+          <li><b>help each other</b> 互相帮助</li>
+          <li><b>keep in touch</b> 保持联系</li></ul></div>
+      </div>
+      <div class="pane" data-tab="Challenge">
+        <div class="dlg" id="dlg"></div>
+        <div id="dlgChoices" class="qopts"></div>
+        <div class="qfb" id="dlgFb"></div>
+      </div>
+      <div class="pane" data-tab="Role-play">
+        <div class="box"><h5>Pair work · 60 seconds</h5><p>A is new at school. B says hello. Use all five steps — and one phrase from <i>Phrases</i>.</p></div>
+        <div class="timer"><div class="ring" id="ring"><span id="tsec">60</span></div>
+          <button class="chip" onclick="startTimer()">▶ Start</button><button class="chip" onclick="resetTimer()">↺</button></div>
+        <p class="mini">Try: “Hi, I'm … · Nice to meet you · What do you like doing? · Me too! · Do you want to join us?”</p>
+      </div>
+    </div>
+    <div class="pfoot"><span class="hint">↑ ↓ switch tabs</span><button class="claim" data-stamp="4">Collect stamp ⚓</button></div>
+  </aside>
 </section>
 
-<!-- ============ 6 · TREASURE PEAK ============ -->
-<section class="page" data-color="#7b5aa6">
-  <div class="page-head"><span class="tag" style="background:var(--plum)">Island 6 · Wisdom</span>
-    <h2>Treasure Peak</h2><span class="zh">关于友谊的名言</span></div>
-  <div class="stage" data-img="images/web/06-treasure-peak.jpg"><img src="images/web/06-treasure-peak.jpg" alt="Treasure Peak"></div>
-  <div class="story">At the top, all of Pip's new friends are waiting: Professor Hoot, Kiko and Bea. The treasure isn't gold —
-    it's a scroll of <b>wisdom about friendship</b> that people around the world have shared for hundreds of years.</div>
-  <div class="grid">
-    <div class="card" style="border-color:var(--plum)">
-      <h3>📜 The scroll</h3>
-      <p class="en">“A friend in need is a friend indeed.” <span class="speak" data-say="A friend in need is a friend indeed.">🔊</span></p>
-      <p class="hint">A friend who helps you when you are in trouble is a true friend. 患难见真情</p>
-      <p class="en">“Birds of a feather flock together.” <span class="speak" data-say="Birds of a feather flock together.">🔊</span></p>
-      <p class="en">“Make new friends, but keep the old; one is silver and the other gold.” <span class="speak" data-say="Make new friends, but keep the old. One is silver and the other gold.">🔊</span></p>
-      <p class="en">海内存知己，天涯若比邻。<span class="hint">— 王勃</span></p>
+<!-- ======================= 5 · STORM CAVE ======================= -->
+<section class="page" data-img="images/web/05-storm-cave.jpg" data-ac="#a9b8ff">
+  <div class="left">
+    <div class="stage">
+      <img src="images/web/05-storm-cave.jpg" alt="Storm Cave">
+      <button class="hs" style="left:29.1%;top:62.6%;width:12%;height:9%"><span class="tip">Stone 1</span><template>
+        <h4>Listen <span class="say" data-say="Tell me what happened. I understand how you feel.">🔊</span></h4><p class="en">“Tell me what happened.”<br>“I understand how you feel.”</p></template></button>
+      <button class="hs" style="left:42.5%;top:63.2%;width:12%;height:9%"><span class="tip">Stone 2</span><template>
+        <h4>Say sorry <span class="say" data-say="I'm sorry I lost your book. It was my fault.">🔊</span></h4><p class="en">“I'm sorry I lost your book. It was my fault.”</p><p class="mini">I'm sorry + (that) + sentence · I'm sorry <b>for</b> + noun/-ing</p></template></button>
+      <button class="hs" style="left:56.4%;top:62.5%;width:12%;height:9%"><span class="tip">Stone 3</span><template>
+        <h4>Talk it out <span class="say" data-say="Can we talk about it? How about I buy you a new one?">🔊</span></h4><p class="en">“Can we talk about it?”<br>“How about I buy you a new one?”</p></template></button>
+      <button class="hs" style="left:69.6%;top:61.5%;width:12%;height:9%"><span class="tip">Stone 4</span><template>
+        <h4>Forgive <span class="say" data-say="That's OK. Never mind. Let's be friends again.">🔊</span></h4><p class="en">“That's OK. / Never mind. Let's be friends again.”</p></template></button>
+      <button class="hs" style="left:16%;top:47%;width:13%;height:32%"><span class="tip">Pip</span><template>
+        <h4>Pip feels sorry 🐼</h4><p class="en">“I borrowed Kiko's favourite book… and I lost it.”</p></template></button>
+      <button class="hs" style="left:85%;top:47%;width:12%;height:32%"><span class="tip">Kiko</span><template>
+        <h4>Kiko is upset 🦊</h4><p class="en">“That was my favourite book!”</p><p class="mini">How can Pip cross the four stones?</p></template></button>
+      <div class="explore glass"></div>
     </div>
-    <div class="card" style="border-color:var(--plum)">
-      <h3>🎯 Challenge: Match the wisdom</h3>
-      <div id="proverbQuiz"></div>
-      <div class="feedback" id="proverbFb"></div>
+    <div class="banner glass">
+      <div class="kicker">Giving advice · 提建议的三种句型</div>
+      <div class="forms">
+        <div class="form"><div class="f">should + do</div><div class="e">You should say sorry.</div></div>
+        <div class="form"><div class="f">Why not + do?</div><div class="e">Why not talk to him?</div></div>
+        <div class="form"><div class="f">How about + doing?</div><div class="e">How about writing a card?</div></div>
+      </div>
+      <div class="notes"><b>⏱ 5 min · Problem-solving.</b> Ask: “Has a friend ever been angry with you? What did you do?” (no names). Cross the stones left → right in the picture. The quiz checks meaning <i>and</i> form: should + V · Why not + V · How about + V-ing.</div>
     </div>
   </div>
-  <button class="claim" data-stamp="6">Collect the Treasure Peak stamp 💎</button>
-  <div class="teacher"><b>⏱ 3 min.</b> Ask students to translate 海内存知己 into simple English (“Even if a good friend is far away, he/she feels close.”). Link “Make new friends, but keep the old” to moving up to Grade 7.</div>
+  <aside class="panel glass">
+    <span class="ptag">Island 5 · Problem-solving</span>
+    <h2>Storm Cave</h2><div class="zh">朋友闹矛盾，怎么办？</div>
+    <div class="tabs"></div>
+    <div class="body">
+      <div class="pane" data-tab="Story">
+        <p class="lead">Oh no! Pip borrowed Kiko's favourite book and <b>lost</b> it. Kiko is upset, and a crack has opened in the cave.</p>
+        <p class="lead">Only four glowing stones can bring the friends back together.</p>
+        <div class="box"><h5>Explore</h5><p>Click the stones from left to right to cross the crack.</p></div>
+      </div>
+      <div class="pane" data-tab="Sorry">
+        <div class="box"><h5>Say sorry</h5><p class="en">I'm sorry I lost your book. · It was my fault. · I'll buy you a new one.</p></div>
+        <div class="box"><h5>Answer</h5><p class="en">That's OK. · Never mind. · Don't worry about it.</p></div>
+        <div class="box"><h5>⚠️ Trap</h5><p>“Never mind” answers <b>“Sorry”</b>. To answer <b>“Thank you”</b>, say “You're welcome.”</p></div>
+      </div>
+      <div class="pane" data-tab="Challenge"><div class="quiz" id="q5"></div></div>
+    </div>
+    <div class="pfoot"><span class="hint">↑ ↓ switch tabs</span><button class="claim" data-stamp="5">Collect stamp ⛈</button></div>
+  </aside>
 </section>
 
-<!-- ============ 7 · MY ISLAND ============ -->
-<section class="page" data-color="#1f3b57">
-  <div class="page-head"><span class="tag" style="background:var(--navy)">Your turn · Writing</span>
-    <h2>My Friendship Island</h2><span class="zh">用今天的钥匙，写写你的朋友</span></div>
-  <div class="stage" data-img="images/web/07-your-island.jpg"><img src="images/web/07-your-island.jpg" alt="My Friendship Island">
-    <div class="sign" id="s1" style="left:50%;top:23.6%"></div>
-    <div class="sign" id="s2" style="left:29.5%;top:35.8%"></div>
-    <div class="sign" id="s3" style="left:73.1%;top:37%"></div>
-    <div class="sign" id="s4" style="left:43.1%;top:58.4%"></div>
-    <div class="sign" id="s5" style="left:73.2%;top:61.6%"></div>
-  </div>
-  <div class="story">Pip has filled the whole passport. Now it's <b>your</b> island! Use all six keys to describe a friend —
-    and take the atlas home in your head.</div>
-  <div class="grid">
-    <div class="card writer">
-      <h3>✍️ Build your paragraph</h3>
-      <label>My friend's name</label><input id="w1" placeholder="Lily">
-      <label>What is he/she like? (two adjectives)</label><input id="w2" placeholder="kind and funny">
-      <label>What does he/she look like?</label><input id="w3" placeholder="has short hair and wears glasses">
-      <label>We have … in common: we both like …</label><input id="w4" placeholder="drawing">
-      <label>A time he/she helped you</label><input id="w5" placeholder="helped me with my maths homework">
+<!-- ======================= 6 · TREASURE PEAK ======================= -->
+<section class="page" data-img="images/web/06-treasure-peak.jpg" data-ac="#d9b3ff">
+  <div class="left">
+    <div class="stage">
+      <img src="images/web/06-treasure-peak.jpg" alt="Treasure Peak">
+      <button class="hs" style="left:65.5%;top:17%;width:17%;height:20%"><span class="tip">The scroll</span><template>
+        <h4>The treasure <span class="say" data-say="A friend in need is a friend indeed.">🔊</span></h4><p class="en">“A friend in need is a friend indeed.”</p><p>A friend who helps you when you are in trouble is a true friend. 患难见真情</p></template></button>
+      <button class="hs" style="left:83.5%;top:30%;width:9%;height:22%"><span class="tip">Hoot remembers…</span><template>
+        <h4>Hoot 🦉 · Island 1</h4><p class="en">“Remember my rings: best friends, friends, acquaintances.”</p></template></button>
+      <button class="hs" style="left:73%;top:33%;width:7%;height:22%"><span class="tip">Kiko remembers…</span><template>
+        <h4>Kiko 🦊 · Islands 2 &amp; 5</h4><p class="en">“A good friend is kind, honest and loyal — and says sorry when they're wrong.”</p></template></button>
+      <button class="hs" style="left:78%;top:53%;width:9%;height:22%"><span class="tip">Bea remembers…</span><template>
+        <h4>Bea 🦦 · Island 4</h4><p class="en">“Hi, I'm Bea. Nice to meet you! We have a lot in common.”</p></template></button>
+      <button class="hs" style="left:52%;top:40%;width:10%;height:24%"><span class="tip">Pip remembers…</span><template>
+        <h4>Pip 🐼 · Island 3</h4><p class="en">“What is she like? She's funny. What does she look like? She has long hair.”</p></template></button>
+      <div class="explore glass"></div>
     </div>
-    <div class="card">
-      <h3>🏝 My friendship postcard</h3>
+    <div class="banner glass prov" id="prov" title="Click for the next saying">
+      <div class="kicker">Wisdom from around the world · click for the next one <span class="say" id="provSay">🔊</span></div>
+      <div class="big" id="provText"></div>
+      <div class="mini" id="provMean"></div>
+      <div class="notes"><b>⏱ 3 min · Wisdom.</b> Click each friend in the picture: each one recaps an island. Ask students to say 海内存知己 in simple English (“Even if a good friend is far away, he/she feels close.”). Link “Make new friends, but keep the old” to moving up to Grade 7.</div>
+    </div>
+  </div>
+  <aside class="panel glass">
+    <span class="ptag">Island 6 · Wisdom</span>
+    <h2>Treasure Peak</h2><div class="zh">关于友谊的名言</div>
+    <div class="tabs"></div>
+    <div class="body">
+      <div class="pane" data-tab="Story">
+        <p class="lead">At the top, all of Pip's new friends are waiting: <b>Professor Hoot</b>, <b>Kiko</b> and <b>Bea</b>.</p>
+        <p class="lead">The treasure isn't gold — it's <b>wisdom about friendship</b> that people have shared for hundreds of years.</p>
+        <div class="box"><h5>Explore</h5><p>Click each friend: what does each one remember from the journey?</p></div>
+      </div>
+      <div class="pane" data-tab="Challenge"><div class="quiz" id="q6"></div></div>
+    </div>
+    <div class="pfoot"><span class="hint">↑ ↓ switch tabs</span><button class="claim" data-stamp="6">Collect stamp 💎</button></div>
+  </aside>
+</section>
+
+<!-- ======================= 7 · MY ISLAND ======================= -->
+<section class="page" data-img="images/web/07-your-island.jpg" data-ac="#f0b75a">
+  <div class="left">
+    <div class="stage">
+      <img src="images/web/07-your-island.jpg" alt="My Friendship Island">
+      <div class="sign" id="s1" style="left:50%;top:23.6%"></div>
+      <div class="sign" id="s2" style="left:29.5%;top:35.8%"></div>
+      <div class="sign" id="s3" style="left:73.1%;top:37%"></div>
+      <div class="sign" id="s4" style="left:43.1%;top:58.4%"></div>
+      <div class="sign" id="s5" style="left:73.2%;top:61.6%"></div>
+    </div>
+    <div class="banner glass">
+      <div class="kicker">My friendship postcard <button class="chip" id="readCard" style="margin-left:.8rem;font-size:.85rem;padding:.25rem .8rem">🔊 Read it aloud</button></div>
       <div class="postcard" id="postcard"></div>
-      <div class="checks" style="margin-top:10px">
-        <label><input type="checkbox"> I used <b>is</b> + adjectives (personality)</label>
-        <label><input type="checkbox"> I used <b>has / wears</b> (appearance)</label>
-        <label><input type="checkbox"> I used a phrase: <i>have … in common / get along with</i></label>
-        <label><input type="checkbox"> I added <b>-s</b> for he/she verbs</label>
-      </div>
-    </div>
-    <div class="card" style="border-color:var(--ochre)">
-      <h3>🎒 Take home: the 6 keys</h3>
-      <ol>
-        <li><b>Concept</b> — best friends · friends · acquaintances</li>
-        <li><b>Words</b> — kind, honest, loyal… · friend → friendly → friendship</li>
-        <li><b>Grammar</b> — What is she <u>like</u>? vs What does she <u>look like</u>?</li>
-        <li><b>Expressions</b> — make friends with · get along with · have … in common</li>
-        <li><b>Problems</b> — I'm sorry… · You should… · How about …ing?</li>
-        <li><b>Wisdom</b> — A friend in need is a friend indeed.</li>
-      </ol>
-      <p><b>Exit ticket 3-2-1:</b> 3 quality words · 2 friendship phrases · 1 sentence about your friend.</p>
-      <button class="chip" onclick="window.print()">🖨 Print the atlas</button>
+      <div class="notes"><b>⏱ 5 min · Writing.</b> Students type (or write on paper); the signposts and postcard fill in live. Read one or two aloud with 🔊. Close with the 3-2-1 exit ticket and “Make new friends, but keep the old.” Welcome to Grade 7!</div>
     </div>
   </div>
-  <div class="teacher"><b>⏱ 5 min.</b> Students type (or write on paper) — the postcard builds live; read one or two aloud. Close with the 3-2-1 exit ticket and the line “Make new friends, but keep the old.” Welcome to Grade 7!</div>
+  <aside class="panel glass">
+    <span class="ptag">Your turn · Writing</span>
+    <h2>My Friendship Island</h2><div class="zh">用六把钥匙，写写你的朋友</div>
+    <div class="tabs"></div>
+    <div class="body">
+      <div class="pane" data-tab="Write">
+        <div class="fld"><label>My friend's name</label><input id="w1" placeholder="Lily"></div>
+        <div class="fld"><label>What is he/she like? (two adjectives)</label><input id="w2" placeholder="kind and funny"></div>
+        <div class="fld"><label>What does he/she look like?</label><input id="w3" placeholder="has short hair and wears glasses"></div>
+        <div class="fld"><label>We both like …</label><input id="w4" placeholder="drawing"></div>
+        <div class="fld"><label>Once, he/she …</label><input id="w5" placeholder="helped me with my maths homework"></div>
+      </div>
+      <div class="pane" data-tab="Check">
+        <div class="checks box">
+          <label><input type="checkbox"> I used <b>is</b> + adjectives (personality)</label>
+          <label><input type="checkbox"> I used <b>has / wears</b> (appearance)</label>
+          <label><input type="checkbox"> I used <i>have … in common / get along with</i></label>
+          <label><input type="checkbox"> I added <b>-s</b> to he/she verbs</label>
+        </div>
+        <div class="box"><h5>Exit ticket · 3-2-1</h5><p><b>3</b> quality words · <b>2</b> friendship phrases · <b>1</b> sentence about your friend</p></div>
+      </div>
+      <div class="pane" data-tab="Take home">
+        <div class="box"><h5>The six keys</h5><ol>
+          <li><b>Concept</b> — best friends · friends · acquaintances</li>
+          <li><b>Words</b> — kind, honest, loyal · friend → friendly → friendship</li>
+          <li><b>Grammar</b> — What is she <u>like</u>? / What does she <u>look like</u>?</li>
+          <li><b>Expressions</b> — make friends with · have … in common</li>
+          <li><b>Problems</b> — I'm sorry… · You should… · How about …ing?</li>
+          <li><b>Wisdom</b> — A friend in need is a friend indeed.</li></ol></div>
+      </div>
+    </div>
+    <div class="pfoot"><span class="hint">↑ ↓ switch tabs</span></div>
+  </aside>
 </section>
 
-</main>
-
-<nav class="foot" id="dots"></nav>
-<div class="lightbox" id="lightbox" onclick="this.classList.remove('on')"><img alt=""></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -491,178 +684,283 @@ const pages=[...document.querySelectorAll('.page')];
 let cur=0;
 const stampIcons=['🏮','🌳','🌉','⚓','⛈','💎'];
 const got=new Set();
-
-/* ---------- navigation ---------- */
-const dots=document.getElementById('dots');
-pages.forEach((_,i)=>{const b=document.createElement('button');b.className='dot';b.onclick=()=>go(i);dots.appendChild(b)});
-function go(i){
-  if(i<0||i>=pages.length)return;
-  pages[cur].classList.remove('on');cur=i;pages[cur].classList.add('on');pages[cur].scrollTop=0;
-  [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===cur));
-  history.replaceState(null,'','#'+cur);
-}
-document.addEventListener('keydown',e=>{
-  if(e.target.tagName==='INPUT')return;
-  if(e.key==='ArrowRight'||e.key==='PageDown')go(cur+1);
-  if(e.key==='ArrowLeft'||e.key==='PageUp')go(cur-1);
-  if(e.key==='t'||e.key==='T')toggleTeacher();
-  if(e.key==='Escape')document.getElementById('lightbox').classList.remove('on');
-});
-function toggleTeacher(){document.body.classList.toggle('tmode')}
-document.querySelectorAll('.stage').forEach(s=>s.addEventListener('click',()=>{
-  const lb=document.getElementById('lightbox');lb.querySelector('img').src=s.dataset.img;lb.classList.add('on')}));
-
-/* ---------- passport ---------- */
-const pp=document.getElementById('passport');
-stampIcons.forEach((ic,i)=>{const s=document.createElement('button');s.className='stamp';s.textContent=ic;
-  s.title='Island '+(i+1);s.onclick=()=>go(i+1);pp.appendChild(s)});
-function stamp(n){
-  if(got.has(n))return;got.add(n);
-  pp.querySelectorAll('.stamp')[n-1].classList.add('got');
-  const b=document.querySelector(`.claim[data-stamp="${n}"]`);if(b){b.disabled=true;b.textContent='Stamp collected ✓'}
-  toast(got.size===6?'🎉 All 6 stamps! You are a Friendship Explorer!':`Stamp ${got.size}/6 collected!`);
-}
-document.querySelectorAll('.claim').forEach(b=>b.onclick=()=>stamp(+b.dataset.stamp));
-function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('on');
-  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),2200)}
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 
 /* ---------- speech ---------- */
 function say(t){if(!window.speechSynthesis)return;speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.9;speechSynthesis.speak(u)}
+  const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.88;speechSynthesis.speak(u)}
 document.addEventListener('click',e=>{const s=e.target.closest('[data-say]');if(s){e.stopPropagation();say(s.dataset.say)}});
 
-/* ---------- generic multiple-choice quiz ---------- */
-function quiz(boxId,fbId,items,stampNo){
-  const box=document.getElementById(boxId),fb=document.getElementById(fbId);let done=0;
-  items.forEach(it=>{
-    const d=document.createElement('div');d.className='qa';
-    d.innerHTML=`<div class="s">${it.q}</div>`;
-    const opts=document.createElement('div');
-    it.opts.forEach(o=>{const c=document.createElement('button');c.className='chip';c.textContent=o;
-      c.onclick=()=>{
-        if(d.dataset.done)return;
-        if(o===it.a){c.classList.add('ok');d.dataset.done=1;done++;fb.textContent='✓ '+(it.why||'Correct!');fb.style.color='#2f7d4a';
-          if(done===items.length){fb.textContent='🌟 All correct! '+(it.why||'');if(stampNo)stamp(stampNo)}}
-        else{c.classList.add('no');fb.textContent='✗ Try again — '+(it.tip||'think again!');fb.style.color='#b23a2a';
-          setTimeout(()=>c.classList.remove('no'),600)}
-      };opts.appendChild(c)});
-    d.appendChild(opts);box.appendChild(d);
-  });
+/* ---------- pages, backdrop, dots ---------- */
+const dots=$('#dots');
+pages.forEach((_,i)=>{const b=document.createElement('button');b.className='dot';b.onclick=()=>go(i);dots.appendChild(b)});
+let bgFlip=false;
+function go(i){
+  if(i<0||i>=pages.length)return;
+  closePop();pages[cur].classList.remove('on','focus');$('#focusBtn').classList.remove('on');
+  cur=i;const p=pages[cur];p.classList.add('on');
+  document.documentElement.style.setProperty('--ac',p.dataset.ac);
+  const [a,b]=bgFlip?[$('#bgA'),$('#bgB')]:[$('#bgB'),$('#bgA')];bgFlip=!bgFlip;
+  a.style.backgroundImage=`url(${p.dataset.img})`;a.classList.add('on');b.classList.remove('on');
+  $$('.dot',dots).forEach((d,k)=>d.classList.toggle('on',k===cur));
+  history.replaceState(null,'','#'+cur);
 }
 
-/* 0 feelings */
+/* ---------- tabs ---------- */
+pages.forEach(p=>{
+  const tabs=$('.tabs',p),panes=$$('.pane',p);if(!tabs)return;
+  panes.forEach((pn,i)=>{const t=document.createElement('button');t.className='tab';t.textContent=pn.dataset.tab;
+    t.onclick=()=>showTab(p,i);tabs.appendChild(t)});
+  showTab(p,0);
+});
+function showTab(p,i){const panes=$$('.pane',p),tabs=$$('.tab',p);if(!panes.length)return;
+  i=(i+panes.length)%panes.length;p._tab=i;
+  panes.forEach((x,k)=>x.classList.toggle('on',k===i));tabs.forEach((x,k)=>x.classList.toggle('on',k===i))}
+function tabByName(p,name){const i=$$('.pane',p).findIndex(x=>x.dataset.tab===name);if(i>=0)showTab(p,i)}
+
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT')return;
+  const p=pages[cur];
+  if(e.key==='ArrowRight'||e.key==='PageDown')go(cur+1);
+  else if(e.key==='ArrowLeft'||e.key==='PageUp')go(cur-1);
+  else if(e.key==='ArrowDown'){e.preventDefault();showTab(p,(p._tab||0)+1)}
+  else if(e.key==='ArrowUp'){e.preventDefault();showTab(p,(p._tab||0)-1)}
+  else if(e.key==='t'||e.key==='T')toggleTeacher();
+  else if(e.key==='f'||e.key==='F')toggleFocus();
+  else if(e.key==='Escape'){closePop();pages[cur].classList.remove('focus')}
+});
+function toggleTeacher(){document.body.classList.toggle('tmode');$('#noteBtn').classList.toggle('on')}
+function toggleFocus(){closePop();pages[cur].classList.toggle('focus');$('#focusBtn').classList.toggle('on',pages[cur].classList.contains('focus'))}
+
+/* ---------- hotspots + popover ---------- */
+let popEl=null;
+function closePop(){if(popEl){popEl.classList.remove('on');$$('.hs.act').forEach(h=>h.classList.remove('act'))}}
+function openPop(hs){
+  const stage=hs.closest('.stage');let pop=$('.pop',stage);
+  if(!pop){pop=document.createElement('div');pop.className='pop glass';stage.appendChild(pop)}
+  pop.innerHTML='<button class="x" onclick="closePop()">✕</button>'+hs.querySelector('template').innerHTML;
+  const x=parseFloat(hs.style.left),y=parseFloat(hs.style.top),h=parseFloat(hs.style.height)/2;
+  pop.style.top=pop.style.bottom='';
+  pop.style.left=Math.max(2,Math.min(x-16,66))+'%';
+  if(y<50)pop.style.top=(y+h+2)+'%';else pop.style.bottom=(100-y+h+2)+'%';
+  closePop();hs.classList.add('act','seen');popEl=pop;requestAnimationFrame(()=>pop.classList.add('on'));
+  const say1=$('[data-say]',pop);if(say1)say(say1.dataset.say);
+  updateExplore(stage);
+}
+function wireHotspots(root){
+  $$('.hs',root).forEach(hs=>hs.onclick=e=>{e.stopPropagation();
+    if(hs.dataset.go){go(+hs.dataset.go);return}
+    if(hs.classList.contains('act')){closePop();return}openPop(hs)});
+}
+function updateExplore(stage){const b=$('.explore',stage);if(!b)return;const all=$$('.hs',stage),seen=all.filter(h=>h.classList.contains('seen')).length;
+  b.textContent=seen===all.length?`✨ All ${all.length} explored!`:`🔍 Explore ${seen}/${all.length}`}
+document.addEventListener('click',e=>{if(popEl&&!e.target.closest('.pop')&&!e.target.closest('.hs'))closePop()});
+
+/* ---------- passport / stamps / celebration ---------- */
+const pp=$('#passport');
+stampIcons.forEach((ic,i)=>{const s=document.createElement('button');s.className='stamp';s.textContent=ic;s.title='Island '+(i+1);
+  s.onclick=()=>go(i+1);pp.appendChild(s)});
+function stamp(n){
+  if(got.has(n))return;got.add(n);
+  const b=document.createElement('div');b.className='burst';b.innerHTML=`<span>${stampIcons[n-1]}</span>`;document.body.appendChild(b);
+  setTimeout(()=>{b.remove();$$('.stamp',pp)[n-1].classList.add('got')},1250);
+  const c=$(`.claim[data-stamp="${n}"]`);if(c){c.disabled=true;c.textContent='Stamp collected ✓'}
+  toast(got.size===6?'🎉 All 6 stamps! You are a Friendship Explorer!':`Stamp ${got.size} / 6 collected!`);
+  if(got.size===6)confetti(60);
+}
+$$('.claim').forEach(b=>b.onclick=()=>stamp(+b.dataset.stamp));
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),2400)}
+function confetti(n=30){const em=['✨','⭐','🎉','💛','🌟'];
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='confetti';s.textContent=em[i%em.length];
+    s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.6+Math.random()*1.6)+'s';s.style.animationDelay=Math.random()*.5+'s';
+    document.body.appendChild(s);setTimeout(()=>s.remove(),4000)}}
+
+/* ---------- one-question-at-a-time quiz ---------- */
+function quiz(id,items,stampNo){
+  const box=$('#'+id);let i=0;
+  function render(){
+    if(i>=items.length){box.innerHTML=`<div class="qdone"><span class="medal">🏅</span>All ${items.length} correct!<br><span class="mini">Collect your stamp.</span></div>`;
+      confetti(24);if(stampNo)stamp(stampNo);return}
+    const it=items[i];
+    box.innerHTML=`<div class="qprog">${items.map((_,k)=>`<i class="${k<i?'done':k===i?'cur':''}"></i>`).join('')}</div>
+      <div class="mini">Question ${i+1} of ${items.length}</div><div class="qq">${it.q}</div><div class="qopts"></div><div class="qfb"></div>`;
+    const opts=$('.qopts',box),fb=$('.qfb',box);
+    it.opts.forEach(o=>{const c=document.createElement('button');c.className='chip';c.textContent=o;
+      c.onclick=()=>{if(box._lock)return;
+        if(o===it.a){c.classList.add('ok');fb.style.color='var(--ok)';fb.textContent='✓ '+(it.why||'Correct!');say(o);box._lock=1;
+          setTimeout(()=>{box._lock=0;i++;render()},1500)}
+        else{c.classList.add('no');fb.style.color='var(--bad)';fb.textContent='✗ '+(it.tip||'Try again!');setTimeout(()=>c.classList.remove('no'),500)}};
+      opts.appendChild(c)});
+  }
+  render();
+}
+
+/* 0 ---- warm-up + route */
 ['excited','nervous','curious','shy','happy','a little worried'].forEach(f=>{
   const c=document.createElement('button');c.className='chip';c.textContent=f;
-  c.onclick=()=>{document.querySelectorAll('#feelings .chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');
+  c.onclick=()=>{$$('#feelings .chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');
     say('On the first day at a new school, I feel '+f+'.');
-    document.getElementById('feelFb').textContent=`“I feel ${f}.” — Pip feels ${f} too. Let's find some friends!`};
-  document.getElementById('feelings').appendChild(c)});
+    $('#feelFb').innerHTML=`<p class="en" style="font-size:1.3rem">“I feel ${f}.”</p><p class="mini">Pip feels ${f} too. Let's sail and find some friends!</p>`};
+  $('#feelings').appendChild(c)});
+[['🏮','Lighthouse Isle','Concept · What is a friend?'],['🌳','Word Woods','Words · qualities of a friend'],
+ ['🌉','Twin Bridges','Grammar · like vs look like'],['⚓','Hello Harbour','Expressions · making friends'],
+ ['⛈','Storm Cave','Problem-solving · sorry & advice'],['💎','Treasure Peak','Wisdom · proverbs']].forEach(([ic,n,s],i)=>{
+  const b=document.createElement('button');b.className='step';b.style.display='flex';b.style.gap='.8rem';b.style.alignItems='center';
+  b.innerHTML=`<span style="font-size:1.5rem">${ic}</span><span><span class="n">Island ${i+1}</span><div class="t">${n}</div><div class="p">${s}</div></span>`;
+  b.onclick=()=>go(i+1);$('#route').appendChild(b)});
 
-/* 1 rings */
+/* 1 ---- rings sort + say-it chips */
 const people=[
   {t:'someone you share secrets with',r:1,why:'You trust them the most.'},
-  {t:'a teammate you play football with every week',r:2,why:'You enjoy time together.'},
-  {t:'the guard you say "hi" to at the school gate',r:3,why:'You know him only a little.'},
-  {t:'a pen pal who writes to you every week',r:2,why:'You know each other well — a pen pal can become a best friend!'},
-  {t:'a new classmate you met today',r:3,why:'Today an acquaintance — maybe a friend tomorrow!'},
+  {t:'a teammate you play football with',r:2,why:'You enjoy time together.'},
+  {t:'the guard at the school gate',r:3,why:'You know him only a little.'},
+  {t:'a pen pal who writes every week',r:2,why:'A pen pal can even become a best friend!'},
+  {t:'a classmate you met today',r:3,why:'Today an acquaintance — maybe a friend tomorrow!'},
 ];
 let picked=null,placed=0;
 people.forEach((p,i)=>{const c=document.createElement('button');c.className='chip';c.textContent=p.t;c.dataset.i=i;
-  c.onclick=()=>{document.querySelectorAll('#people .chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');picked=c};
-  document.getElementById('people').appendChild(c)});
-document.querySelectorAll('.ring').forEach(r=>r.onclick=()=>{
-  if(!picked)return;const p=people[picked.dataset.i],fb=document.getElementById('ringFb');
-  if(+r.dataset.ring===p.r){picked.classList.remove('sel');picked.classList.add('ok');picked.onclick=null;r.appendChild(picked);
-    picked=null;placed++;fb.style.color='#2f7d4a';fb.textContent='✓ '+p.why;if(placed===people.length){fb.textContent='🌟 Great sorting! '+p.why;stamp(1)}}
-  else{fb.style.color='#b23a2a';fb.textContent='Hmm… how well do you know this person? How much do you trust them?'}});
+  c.onclick=()=>{$$('#people .chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');picked=c};$('#people').appendChild(c)});
+$$('.zone').forEach(z=>z.onclick=()=>{
+  if(!picked)return;const p=people[picked.dataset.i],fb=$('#ringFb');
+  if(+z.dataset.ring===p.r){picked.classList.remove('sel');picked.classList.add('ok');picked.onclick=null;z.appendChild(picked);picked=null;placed++;
+    fb.style.color='var(--ok)';fb.textContent='✓ '+p.why;if(placed===people.length){fb.textContent='🌟 Great sorting! '+p.why;confetti(20);stamp(1)}}
+  else{fb.style.color='var(--bad)';fb.textContent='Hmm… how well do you know this person? How much do you trust them?'}});
+['listens to me','helps me when I\'m in trouble','makes me laugh','tells me the truth','shares things with me'].forEach(t=>{
+  const c=document.createElement('button');c.className='chip';c.textContent='… who '+t;c.onclick=()=>say('To me, a friend is someone who '+t+'.');$('#sayChips').appendChild(c)});
 
-/* 2 words */
+/* 2 ---- word woods: sign hotspots + word bank + quiz */
 const words=[
- ['kind','/kaɪnd/','友善的','She is kind to everyone.'],
- ['honest','/ˈɒnɪst/','诚实的','An honest friend tells you the truth.'],
- ['helpful','/ˈhelpfl/','乐于助人的','He is helpful when I have problems.'],
- ['friendly','/ˈfrendli/','友好的','The new students are very friendly.'],
- ['generous','/ˈdʒenərəs/','慷慨的','She is generous — she shares her snacks.'],
- ['patient','/ˈpeɪʃnt/','耐心的','He is patient and never gets angry.'],
- ['loyal','/ˈlɔɪəl/','忠诚的','A loyal friend always stands by you.'],
- ['funny','/ˈfʌni/','有趣的','My friend is funny. He makes me laugh.'],
- ['caring','/ˈkeərɪŋ/','体贴的','She is caring. She looks after me when I\'m ill.'],
- ['polite','/pəˈlaɪt/','有礼貌的','He is polite — he always says "please".'],
+ ['kind','/kaɪnd/','友善的','She is kind to everyone.',25,25],
+ ['honest','/ˈɒnɪst/','诚实的','An honest friend tells you the truth.',15.6,34.2],
+ ['helpful','/ˈhelpfl/','乐于助人的','He is helpful when I have problems.',18.1,52.5],
+ ['friendly','/ˈfrendli/','友好的','The new students are very friendly.',25.9,67.8],
+ ['generous','/ˈdʒenərəs/','慷慨的','She is generous. She shares her snacks.',80.6,19.6],
+ ['patient','/ˈpeɪʃnt/','耐心的','He is patient and never gets angry.',88.4,32.1],
+ ['loyal','/ˈlɔɪəl/','忠诚的','A loyal friend always stands by you.',81.6,45],
+ ['funny','/ˈfʌni/','有趣的','My friend is funny. He makes me laugh.',75.2,62.2],
+ ['caring','/ˈkeərɪŋ/','体贴的','She is caring. She looks after me when I am ill.',63.1,74.8],
+ ['polite','/pəˈlaɪt/','有礼貌的','He is polite. He always says please.',48.6,83.8],
 ];
-words.forEach(([w,ipa,zh,ex])=>{const f=document.createElement('div');f.className='flip';
-  f.innerHTML=`<div class="in"><div class="f"><div class="w">${w}</div><div class="ipa">${ipa} <span class="speak" data-say="${w}">🔊</span></div></div>
-  <div class="b"><div class="zh">${zh}</div><div>${ex}</div><span class="speak" data-say="${ex.replace(/"/g,'')}">🔊</span></div></div>`;
-  f.onclick=()=>f.classList.toggle('open');document.getElementById('flips').appendChild(f)});
-quiz('whoQuiz','whoFb',[
- {q:'Mia always tells the truth, even when it is hard.',opts:['honest','funny','polite'],a:'honest',why:'Telling the truth = honest.'},
- {q:'Tom shares his snacks and toys with everyone.',opts:['patient','generous','loyal'],a:'generous',why:'Sharing a lot = generous.'},
- {q:'Amy waits for me and never gets angry when I am slow.',opts:['patient','helpful','friendly'],a:'patient',why:'Waiting calmly = patient.'},
- {q:'Leo always stands by me, even when others don\'t.',opts:['kind','loyal','caring'],a:'loyal',why:'Standing by a friend = loyal.'},
- {q:'Which word means “NOT friendly”?',opts:['disfriendly','unfriendly','imfriendly'],a:'unfriendly',why:'un- + friendly = unfriendly.'},
+const family=[
+ ['friend','n. 朋友 · the root of the family','A friend is someone you trust.',52.1,43.7,11,7],
+ ['friendly','adj. 友好的 · friend + ly','Kiko is friendly to everyone.',39.6,20.6,10,6],
+ ['friendship','n. 友谊 · friend + ship','Our friendship is important to me.',51.5,14,12,6],
+ ['unfriendly','adj. 不友好的 · un + friendly','Don\'t be unfriendly to new students.',63.9,20.6,11,6],
+];
+const woods=$('#woods');
+words.forEach(([w,ipa,zh,ex,x,y])=>woods.insertAdjacentHTML('beforeend',
+  `<button class="hs" style="left:${x}%;top:${y}%;width:8%;height:6%"><span class="tip">${w}</span><template>
+   <h4>${w} <span class="say" data-say="${w}. ${ex}">🔊</span></h4><p>${ipa} · <b>${zh}</b></p><p class="en">“${ex}”</p></template></button>`));
+family.forEach(([w,m,ex,x,y,ww,hh])=>woods.insertAdjacentHTML('beforeend',
+  `<button class="hs" style="left:${x}%;top:${y}%;width:${ww}%;height:${hh}%"><span class="tip">${w}</span><template>
+   <h4>${w} <span class="say" data-say="${w}. ${ex.replace(/'/g,'’')}">🔊</span></h4><p>${m}</p><p class="en">“${ex}”</p></template></button>`));
+words.forEach(([w,ipa,zh,ex])=>{const b=document.createElement('button');b.className='wb';
+  b.innerHTML=`<span class="w">${w}</span><span class="mini">${ipa}</span><span class="z">${zh}</span>`;
+  b.onclick=()=>{b.classList.add('open');say(w+'. '+ex)};$('#wbank').appendChild(b)});
+quiz('q2',[
+ {q:'Mia always tells the truth, even when it is hard. She is …',opts:['honest','funny','polite'],a:'honest',why:'Telling the truth = honest.'},
+ {q:'Tom shares his snacks and toys with everyone. He is …',opts:['patient','generous','loyal'],a:'generous',why:'Sharing a lot = generous.'},
+ {q:'Amy waits for me and never gets angry when I am slow. She is …',opts:['patient','helpful','friendly'],a:'patient',why:'Waiting calmly = patient.'},
+ {q:'Leo always stands by me, even when others don\'t. He is …',opts:['kind','loyal','caring'],a:'loyal',why:'Standing by a friend = loyal.'},
+ {q:'Which word means “NOT polite”?',opts:['unpolite','impolite','dispolite'],a:'impolite',why:'Before p we use im-: impolite, impatient.',tip:'Before p, the prefix changes!'},
 ],2);
 
-/* 3 bridges */
+/* 3 ---- bridges quiz */
 const L='What is she like?',K='What does she look like?';
-quiz('bridgeQuiz','bridgeFb',[
- {q:'“She is shy but very helpful.”',opts:[L,K],a:L,tip:'shy & helpful are about personality.'},
- {q:'“She is short with curly hair.”',opts:[L,K],a:K,tip:'short & curly hair are about appearance.'},
- {q:'“She is honest and patient.”',opts:[L,K],a:L,tip:'honest & patient describe the inside.'},
- {q:'“She has big brown eyes and wears a red cap.”',opts:[L,K],a:K,tip:'eyes & cap are what you can see.'},
+quiz('q3',[
+ {q:'“She is shy but very helpful.”<br><span class="mini">Which question was asked?</span>',opts:[L,K],a:L,why:'shy & helpful = personality.',tip:'shy & helpful are about the inside.'},
+ {q:'“She is short with curly hair.”<br><span class="mini">Which question was asked?</span>',opts:[L,K],a:K,why:'short & curly hair = appearance.',tip:'You can see height and hair.'},
+ {q:'“She has big brown eyes and wears a red cap.”<br><span class="mini">Which question was asked?</span>',opts:[L,K],a:K,why:'eyes & cap = appearance.',tip:'Eyes and a cap are what you can see.'},
+ {q:'Choose the correct sentence.',opts:['She has kind.','She is kind.','She kind.'],a:'She is kind.',why:'be + adjective.',tip:'kind is an adjective → use be.'},
+ {q:'Choose the correct question.',opts:['What is he look like?','What does he looks like?','What does he look like?'],a:'What does he look like?',why:'does + base verb look.',tip:'does + base verb (no -s).'},
 ],3);
 
-/* 4 dialogue */
+/* 4 ---- steps + dialogue + timer */
+[['Greet','Hi! / Hello!'],['Introduce','I\'m Pip. Nice to meet you!'],['Ask','What do you like doing?'],
+ ['Find common ground','Me too! / So do I!'],['Invite','Do you want to join us?']].forEach(([t,p],i)=>{
+  const b=document.createElement('button');b.className='step';
+  b.innerHTML=`<div class="n">Step ${i+1}</div><div class="t">${t}</div><div class="p">${p}</div>`;b.onclick=()=>say(p.replace(/\//g,'.'));$('#steps').appendChild(b)});
 const script=[
  {who:'Bea',say:'Hi! I\'m Bea. Are you new here?'},
  {me:['Yes, I\'m Pip. Nice to meet you!','Yes, I\'m fine, thank you.'],a:0,tip:'Bea introduced herself — introduce yourself too.'},
  {who:'Bea',say:'Nice to meet you too, Pip! What do you like doing?'},
- {me:['I like reading and swimming.','I like to doing sports.'],a:0,tip:'like + doing / like + to do — not “to doing”.'},
+ {me:['I like to doing sports.','I like reading and swimming.'],a:1,tip:'like + doing / like + to do — not “to doing”.'},
  {who:'Bea',say:'Really? I love swimming too!'},
- {me:['Me too! We have a lot in common.','We have a lot of common.'],a:0,tip:'The phrase is “have … in common”.'},
- {who:'Bea',say:'We\'re going to the beach this afternoon.'},
- {me:['Can I join? I\'d love to make friends with you all.','Can I join? I\'d love to make friend with you all.'],a:0,tip:'make friends with — always plural!'},
- {who:'Bea',say:'Of course! Let\'s be friends!'},
+ {me:['We have a lot of common.','Me too! We have a lot in common.'],a:1,tip:'The phrase is “have … in common”.'},
+ {who:'Bea',say:'We\'re going to the beach this afternoon. Do you want to join us?'},
+ {me:['Sure! I\'d love to make friends with you all.','Sure! I\'d love to make friend with you all.'],a:0,tip:'make friends with — always plural!'},
+ {who:'Bea',say:'Great! Let\'s be friends!'},
 ];
 let step=0;
 function dlgNext(){
-  const box=document.getElementById('dlg'),ch=document.getElementById('dlgChoices'),fb=document.getElementById('dlgFb');ch.innerHTML='';
+  const box=$('#dlg'),ch=$('#dlgChoices'),fb=$('#dlgFb');ch.innerHTML='';
   while(step<script.length&&script[step].who){const s=script[step++];
-    box.insertAdjacentHTML('beforeend',`<div class="line"><span class="who">🦦 ${s.who}</span><span class="bubble">${s.say}</span></div>`)}
-  if(step>=script.length){fb.style.color='#2f7d4a';fb.textContent='🌟 Pip made a new friend! Now role-play it with your partner.';stamp(4);return}
+    box.insertAdjacentHTML('beforeend',`<div class="ln"><span class="av">🦦</span><span class="bb">${s.say}</span></div>`)}
+  while(box.children.length>5)box.firstChild.remove();
+  if(step>=script.length){fb.style.color='var(--ok)';fb.textContent='🌟 Pip made a new friend! Now role-play it with your partner.';confetti(20);stamp(4);return}
   const s=script[step];
   s.me.forEach((o,i)=>{const c=document.createElement('button');c.className='chip';c.textContent=o;
-    c.onclick=()=>{if(i===s.a){box.insertAdjacentHTML('beforeend',`<div class="line me"><span class="who">🐼 Pip</span><span class="bubble">${o}</span></div>`);
-      say(o);fb.textContent='';step++;dlgNext()}else{c.classList.add('no');fb.style.color='#b23a2a';fb.textContent='✗ '+s.tip}};
+    c.onclick=()=>{if(i===s.a){box.insertAdjacentHTML('beforeend',`<div class="ln me"><span class="av">🐼</span><span class="bb">${o}</span></div>`);
+      say(o);fb.textContent='';step++;setTimeout(dlgNext,500)}else{c.classList.add('no');fb.style.color='var(--bad)';fb.textContent='✗ '+s.tip}};
     ch.appendChild(c)});
 }
 dlgNext();
+let tmr=null,left=60;
+function drawTimer(){$('#tsec').textContent=left;$('#ring').style.setProperty('--p',(60-left)/60*100)}
+function startTimer(){if(tmr)return;tmr=setInterval(()=>{left--;drawTimer();if(left<=0){clearInterval(tmr);tmr=null;toast('⏰ Time! Swap roles.');}},1000)}
+function resetTimer(){clearInterval(tmr);tmr=null;left=60;drawTimer()}
+drawTimer();
 
-/* 5 advice */
-quiz('adviceQuiz','adviceFb',[
- {q:'Kiko: “Pip lost my book and I\'m still angry.” — Best advice?',opts:['You should talk to Pip about it.','You should to ignore Pip.','How about shout at Pip?'],a:'You should talk to Pip about it.',why:'should + base verb, and talking it out helps.',tip:'look at meaning AND grammar.'},
- {q:'Pip: “I want to say sorry but I\'m too shy.”',opts:['Why not writing a card?','How about writing a card?','You should writing a card.'],a:'How about writing a card?',why:'How about + verb-ing.',tip:'How about + V-ing; Why not / should + base verb.'},
- {q:'Bea: “My best friend moved to another city.”',opts:['Why not keep in touch online?','Why not keeping in touch?','You should forgot her.'],a:'Why not keep in touch online?',why:'Why not + base verb.',tip:'Why not + base verb.'},
+/* 5 ---- advice quiz */
+quiz('q5',[
+ {q:'Kiko: “Pip lost my book and I\'m still angry.”<br><span class="mini">Best advice?</span>',opts:['You should talk to Pip about it.','You should to ignore Pip.','How about shout at Pip?'],a:'You should talk to Pip about it.',why:'should + base verb — and talking helps.',tip:'Check the meaning AND the grammar.'},
+ {q:'Pip: “I want to say sorry, but I\'m too shy.”',opts:['Why not writing a card?','How about writing a card?','You should writing a card.'],a:'How about writing a card?',why:'How about + verb-ing.',tip:'How about + V-ing; Why not / should + base verb.'},
+ {q:'Bea: “My best friend moved to another city.”',opts:['Why not keep in touch online?','Why not keeping in touch?','You should forget her.'],a:'Why not keep in touch online?',why:'Why not + base verb.',tip:'Why not + base verb.'},
+ {q:'Kiko: “Thank you for the new book, Pip!” — Pip says …',opts:['Never mind.','You\'re welcome.','That\'s OK, I forgive you.'],a:'You\'re welcome.',why:'Answer “Thank you” with “You\'re welcome”.',tip:'“Never mind” answers “Sorry”.'},
 ],5);
 
-/* 6 proverbs */
-quiz('proverbQuiz','proverbFb',[
- {q:'“A friend in need is a friend indeed.”',opts:['True friends help you in hard times.','Friends always need money.'],a:'True friends help you in hard times.'},
- {q:'“Birds of a feather flock together.”',opts:['Birds like to fly in groups.','People who are alike often become friends.'],a:'People who are alike often become friends.'},
- {q:'“Make new friends, but keep the old.”',opts:['Old friends are as precious as new ones.','Forget your old friends at a new school.'],a:'Old friends are as precious as new ones.',why:'One is silver and the other gold!'},
+/* 6 ---- proverbs + quiz */
+const provs=[
+ ['A friend in need is a friend indeed.','A friend who helps you in hard times is a true friend. 患难见真情'],
+ ['Birds of a feather flock together.','People who are alike often become friends. 物以类聚，人以群分'],
+ ['Make new friends, but keep the old; one is silver and the other gold.','New friends are precious, old friends are precious too. 新朋友是银，老朋友是金'],
+ ['海内存知己，天涯若比邻。','— 王勃 · A true friend far away still feels close.'],
+];
+let pv=0;
+function showProv(){$('#provText').textContent=provs[pv][0];$('#provMean').textContent=provs[pv][1];$('#provSay').dataset.say=provs[pv][0].includes('海')?'':provs[pv][0]}
+$('#prov').onclick=e=>{if(e.target.closest('[data-say]'))return;pv=(pv+1)%provs.length;showProv()};showProv();
+quiz('q6',[
+ {q:'“A friend in need is a friend indeed.” means …',opts:['True friends help you in hard times.','Friends always need money.'],a:'True friends help you in hard times.'},
+ {q:'“Birds of a feather flock together.” means …',opts:['Birds like to fly in groups.','People who are alike often become friends.'],a:'People who are alike often become friends.'},
+ {q:'Starting Grade 7, you should …',opts:['make new friends and keep the old ones.','forget your old friends.'],a:'make new friends and keep the old ones.',why:'One is silver and the other gold!'},
 ],6);
 
-/* 7 postcard */
-function render(){
-  const v=i=>document.getElementById('w'+i).value.trim()||document.getElementById('w'+i).placeholder;
-  const n=v(1);
-  document.getElementById('postcard').innerHTML=
-   `My friend <b>${n}</b> is <b>${v(2)}</b>. ${n} <b>${v(3)}</b>. We have a lot in common — we both like <b>${v(4)}</b>. `+
-   `${n} once <b>${v(5)}</b>. We get along well with each other. A friend in need is a friend indeed!`;
-  const signs=[n,v(2),v(3),'we both like '+v(4),v(5)];
-  signs.forEach((t,i)=>{document.getElementById('s'+(i+1)).textContent=t.length>22?t.slice(0,20).trim()+'…':t});
+/* 7 ---- writing */
+function render7(){
+  const v=i=>$('#w'+i).value.trim()||$('#w'+i).placeholder,n=v(1);
+  const he=/^(he|she)\b/i;
+  $('#postcard').innerHTML=`My friend <b>${n}</b> is <b>${v(2)}</b>. ${n} <b>${v(3)}</b>. We have a lot in common — we both like <b>${v(4)}</b>. `+
+    `Once, ${n} <b>${v(5)}</b>. We get along well with each other. A friend in need is a friend indeed!`;
+  [n,v(2),v(3),'we both like '+v(4),v(5)].forEach((t,i)=>$('#s'+(i+1)).textContent=t.length>22?t.slice(0,20).trim()+'…':t);
 }
-document.querySelectorAll('.writer input').forEach(i=>i.addEventListener('input',render));render();
+$$('.fld input').forEach(i=>i.addEventListener('input',render7));render7();
+$('#readCard').onclick=e=>{e.stopPropagation();say($('#postcard').textContent)};
 
+pages.forEach(p=>{wireHotspots(p);const s=$('.stage',p);if(s)updateExplore(s)});
 go(+(location.hash.slice(1))||0);
+
+/* review hooks: ?tab=N opens a tab, ?hs=N opens hotspot N, ?notes shows teacher notes */
+{const q=new URLSearchParams(location.search),p=pages[cur];
+  if(q.has('tab'))showTab(p,+q.get('tab'));
+  if(q.has('notes'))toggleTeacher();
+  if(q.has('hs'))setTimeout(()=>openPop($$('.hs',p)[+q.get('hs')]),300);}
+/* layout self-check: ?check lists anything that overflows its box */
+if(location.search.includes('check')){setTimeout(()=>{const bad=[];
+  pages.forEach((p,pi)=>{p.classList.add('on');$$('.pane',p).forEach(pn=>{pn.classList.add('on');
+    if(pn.scrollHeight>pn.clientHeight+2)bad.push(`p${pi}/${pn.dataset.tab}: ${pn.scrollHeight}>${pn.clientHeight}`);pn.classList.remove('on')});
+    const bn=$('.banner',p),nt=bn&&$('.notes',bn);if(nt)nt.style.display='none';if(bn&&bn.scrollHeight>bn.clientHeight+2)bad.push(`p${pi}/banner: ${bn.scrollHeight}>${bn.clientHeight}`);
+    if(pi!==cur)p.classList.remove('on')});
+  const pre=document.createElement('pre');pre.id='report';pre.textContent='OVERFLOW:'+(bad.join('\n')||'none');document.body.appendChild(pre)},800)}
 </script>
 </body>
 </html>
