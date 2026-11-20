@@ -2,1270 +2,667 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Friendship Atlas · 友谊图集 — Unit 1 Friendship (沪教牛津版 7A)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Friendship Atlas · Unit 1 Friends & Friendship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --parch:#f9efd8; --parch2:#f3e3bd; --ink:#3a2d1b; --ink2:#6b5a41;
-    --gold:#c9962e; --gold2:#a87c1f; --line:#d9c493;
-    --green:#2e5d4b; --red:#c0504d; --blue:#3f6fae;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html,body{height:100%;}
-  body{
-    font-family:'Segoe UI','Microsoft YaHei',system-ui,-apple-system,sans-serif;
-    background:#1c1610; color:var(--ink); overflow:hidden;
-  }
+:root{
+  --parch:#f6ecd6; --parch2:#efe0bf; --ink:#2b2a3a; --navy:#1f3b57; --teal:#2a8a8a;
+  --coral:#e2725b; --ochre:#d49a2a; --sage:#7fa36b; --plum:#7b5aa6; --line:#d9c69c;
+  --shadow:0 6px 24px rgba(60,40,10,.18);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:Nunito,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
+  background:radial-gradient(circle at 20% 0%,#fbf4e3,#ead8b1 70%) fixed;overflow:hidden}
+h1,h2,h3,.serif{font-family:Fraunces,Georgia,serif}
+button{font:inherit;cursor:pointer}
 
-  /* ══════════ slides ══════════ */
-  .slide{position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .6s ease, visibility .6s;}
-  .slide.on{opacity:1; visibility:visible;}
-  .art{position:absolute; inset:0; background-size:cover; background-position:center; animation:kenburns 26s ease-in-out infinite alternate;}
-  @keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.045)}}
-  .art::after{content:''; position:absolute; inset:0;
-    background:linear-gradient(180deg,rgba(20,14,6,.42) 0%,rgba(20,14,6,.05) 26%,rgba(20,14,6,.05) 55%,rgba(20,14,6,.58) 100%);}
+/* ---------- top bar ---------- */
+.topbar{position:fixed;inset:0 0 auto 0;height:64px;display:flex;align-items:center;gap:18px;
+  padding:0 22px;background:rgba(31,59,87,.94);color:#fff;z-index:20;box-shadow:var(--shadow)}
+.brand{font-family:Fraunces,serif;font-weight:800;font-size:22px;letter-spacing:.3px;white-space:nowrap}
+.brand small{display:block;font-family:Nunito;font-weight:600;font-size:12px;opacity:.75;letter-spacing:0}
+.passport{display:flex;gap:8px;margin-left:auto;align-items:center}
+.passport .lbl{font-size:13px;opacity:.8;margin-right:4px}
+.stamp{width:38px;height:38px;border-radius:50%;border:2px dashed rgba(255,255,255,.45);display:grid;
+  place-items:center;font-size:18px;opacity:.45;transition:.4s;background:transparent;color:#fff}
+.stamp.got{opacity:1;border:2px solid var(--ochre);background:var(--ochre);transform:rotate(-8deg);
+  box-shadow:0 0 0 3px rgba(212,154,42,.3)}
+.navbtns{display:flex;gap:6px}
+.navbtns button{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:10px;padding:8px 12px;font-weight:800}
+.navbtns button:hover{background:rgba(255,255,255,.25)}
 
-  .art-title{position:absolute; top:26px; left:34px; z-index:5; max-width:42vw;
-    text-shadow:0 2px 14px rgba(0,0,0,.6), 0 1px 3px rgba(0,0,0,.65); color:#fdf6e3;}
-  .art-title .stn{display:inline-block; font-size:13.5px; letter-spacing:.26em; text-transform:uppercase;
-    color:#ffd98a; border-bottom:1px solid rgba(255,217,138,.6); padding-bottom:4px; margin-bottom:8px; font-weight:600;}
-  .art-title h1{font-family:Georgia,'Times New Roman','STZhongsong',serif; font-weight:700;
-    font-size:clamp(26px,3.4vw,50px); line-height:1.08;}
-  .art-title h1 i{font-style:normal; display:block; font-size:.5em; font-weight:400; color:#f2e3bb;
-    letter-spacing:.14em; margin-top:6px; font-family:'Microsoft YaHei','Segoe UI',sans-serif;}
+/* ---------- pages ---------- */
+.deck{position:fixed;inset:64px 0 0 0}
+.page{position:absolute;inset:0;overflow-y:auto;padding:18px 28px 90px;opacity:0;pointer-events:none;
+  transform:translateX(40px);transition:opacity .5s, transform .5s}
+.page.on{opacity:1;pointer-events:auto;transform:none}
+.page-head{display:flex;align-items:baseline;gap:14px;margin:4px 0 12px;flex-wrap:wrap}
+.tag{font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;
+  border-radius:20px;color:#fff}
+.page-head h2{margin:0;font-size:30px;color:var(--navy)}
+.page-head .zh{font-size:16px;opacity:.65}
 
-  /* ══════════ journal (right panel) ══════════ */
-  .journal{position:absolute; right:26px; top:92px; bottom:92px; width:min(500px,48vw); z-index:6;
-    background:linear-gradient(165deg,#fbf3e0 0%,var(--parch) 40%,var(--parch2) 100%);
-    border-radius:16px; padding:0 0 14px; display:flex; flex-direction:column;
-    box-shadow:0 20px 60px rgba(0,0,0,.55), inset 0 0 70px rgba(190,150,80,.16);
-    border:1px solid #e8d5a8; overflow:hidden;}
-  .journal::before{content:''; position:absolute; left:11px; top:14px; bottom:14px; width:1px;
-    background:repeating-linear-gradient(180deg,#d96 0,#d96 4px,transparent 4px,transparent 9px); opacity:.35;}
-  .jbody{flex:1; overflow-y:auto; overscroll-behavior:contain; padding:16px 22px 10px;}
-  .jbody::-webkit-scrollbar{width:9px}
-  .jbody::-webkit-scrollbar-thumb{background:#cbb27f; border-radius:8px; border:2px solid var(--parch)}
+.stage{position:relative;width:100%;max-width:min(1500px,calc(72vh*16/9));margin:0 auto 18px;
+  border-radius:16px;overflow:hidden;box-shadow:var(--shadow);border:6px solid #fff8e8;cursor:zoom-in;
+  aspect-ratio:16/9;background:var(--parch2)}
+.stage img{width:100%;height:100%;object-fit:cover;display:block}
+.hotspot{position:absolute;transform:translate(-50%,-50%);width:12%;aspect-ratio:1;border-radius:50%;
+  border:3px solid transparent;background:transparent;transition:.25s}
+.hotspot:hover{border-color:#fff;background:rgba(255,255,255,.18);box-shadow:0 0 0 6px rgba(255,255,255,.25)}
+.hotspot span{position:absolute;left:50%;bottom:-6px;transform:translate(-50%,100%);white-space:nowrap;
+  background:var(--navy);color:#fff;padding:3px 10px;border-radius:12px;font-size:13px;opacity:0;transition:.25s}
+.hotspot:hover span{opacity:1}
 
-  /* journal header + tabs */
-  .jhead{display:flex; align-items:center; gap:11px; padding:13px 18px 0; flex-wrap:wrap;}
-  .jicon{width:42px; height:42px; border-radius:12px; background:linear-gradient(140deg,var(--ac,#c9962e),#8f6a1a);
-    display:flex; align-items:center; justify-content:center; font-size:21px; box-shadow:0 3px 8px rgba(0,0,0,.25);}
-  .jtitle{flex:1; min-width:130px;}
-  .jtitle b{font-family:Georgia,serif; font-size:18px; display:block; color:#4a3410;}
-  .jtitle span{font-size:11.5px; color:var(--ink2); letter-spacing:.12em;}
-  .jtabs{display:flex; gap:5px; width:100%; margin-top:9px;}
-  .jtab{flex:1; font-size:13px; font-weight:600; padding:7px 4px; border:none; cursor:pointer; color:#7c6845;
-    background:rgba(222,199,150,.35); border-radius:9px 9px 0 0; letter-spacing:.04em; transition:all .2s; font-family:inherit;}
-  .jtab:hover{background:rgba(222,199,150,.65);}
-  .jtab.on{background:var(--parch); color:var(--gold2); box-shadow:0 -3px 0 var(--ac,#c9962e) inset;}
-  .tabpanel{display:none;}
-  .tabpanel.on{display:block;}
-  .tabpanel.on > *{animation:rise .45s both;}
-  .tabpanel.on > *:nth-child(2){animation-delay:.06s}
-  .tabpanel.on > *:nth-child(3){animation-delay:.12s}
-  .tabpanel.on > *:nth-child(4){animation-delay:.18s}
-  .tabpanel.on > *:nth-child(5){animation-delay:.24s}
-  .tabpanel.on > *:nth-child(6){animation-delay:.3s}
-  .tabpanel.on > *:nth-child(n+7){animation-delay:.36s}
-  @keyframes rise{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
+.story{max-width:1100px;margin:0 auto 16px;background:#fffaf0;border-left:6px solid var(--ochre);
+  border-radius:10px;padding:14px 20px;font-size:18px;line-height:1.6;box-shadow:var(--shadow)}
+.story b{color:var(--coral)}
 
-  /* narrator + story */
-  .say{display:flex; gap:12px; align-items:flex-start; margin-bottom:12px;}
-  .cat{flex:0 0 54px; filter:drop-shadow(0 3px 5px rgba(0,0,0,.25));}
-  .say p{font-size:16px; line-height:1.6; color:#4a3a24; background:rgba(255,255,255,.58);
-    border-radius:12px 12px 12px 3px; padding:10px 13px; border:1px solid #e5d5ab;}
-  .say b{color:var(--gold2);}
-  .story{font-family:Georgia,'STZhongsong',serif; font-size:16.5px; line-height:1.75; color:#463521;
-    background:rgba(255,252,244,.6); border:1px solid #ead9ae; border-radius:12px; padding:14px 16px 12px;}
-  .story::first-letter{font-size:2.5em; float:left; line-height:.85; padding:2px 7px 0 0; color:var(--gold2); font-family:Georgia,serif;}
-  .story b{color:#8a5a10;}
-  .storybeat{margin-top:9px; padding-top:9px; border-top:1px dashed #d9c493; font-size:14.5px; color:var(--ink2); line-height:1.6;}
-  .storybeat b{color:#9a6a10;}
-  .hinttab{margin-top:10px; font-size:13px; color:#8a744c; text-align:center; font-style:italic;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;max-width:1500px;margin:0 auto}
+.card{background:#fffaf0;border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);border-top:6px solid var(--teal)}
+.card h3{margin:0 0 10px;font-size:20px;color:var(--navy);display:flex;gap:8px;align-items:center}
+.card p,.card li{font-size:16.5px;line-height:1.55}
+.card ul{padding-left:20px;margin:6px 0}
+.key{background:#fff3cf;border-radius:8px;padding:2px 6px;font-weight:800}
+.en{font-weight:800;color:var(--navy)}
+.hint{font-size:14px;opacity:.7}
+.wrong{color:#b23a2a;text-decoration:line-through;text-decoration-thickness:2px}
+.right{color:#2f7d4a;font-weight:800}
 
-  /* knowledge cards (notes) */
-  .kcard{margin:12px 0; padding:13px 15px; background:rgba(255,252,244,.78); border:1px solid var(--line);
-    border-radius:12px; border-left:4px solid var(--ac,#c9962e);}
-  .kcard h3{font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold2);
-    margin-bottom:9px; font-weight:700; display:flex; align-items:center; gap:7px;}
-  .kcard h3 .zh{letter-spacing:.03em; text-transform:none; color:var(--ink2); font-weight:600; font-size:12px;}
-  .ktable{width:100%; border-collapse:collapse; font-size:13.5px; margin-top:4px;}
-  .ktable th{background:rgba(201,150,46,.15); color:#7a5a14; font-size:12px; letter-spacing:.06em; padding:6px 8px; text-align:left; border:1px solid #e3d2a4;}
-  .ktable td{padding:6.5px 8px; border:1px solid #e9dcba; line-height:1.45; vertical-align:top;}
-  .ktable td.en{font-family:Georgia,serif; font-size:14.5px;}
-  .formula{font-family:Georgia,serif; font-size:17px; text-align:center; color:#23430f; background:#eef5e2;
-    border:1.5px solid #b7ce96; border-radius:10px; padding:8px 10px; margin:7px 0; line-height:1.5;}
-  .formula .zh{font-family:'Microsoft YaHei',sans-serif; font-size:12px; color:#5c6e4a; display:block;}
-  .pat{font-family:Georgia,serif; font-size:17px; color:#23430f; background:#eef5e2;
-    border-left:4px solid var(--green); padding:8px 12px; border-radius:0 8px 8px 0; margin:7px 0; line-height:1.45;}
-  .pat .zh{font-family:'Microsoft YaHei',sans-serif; font-size:12.5px; color:#5c6e4a; display:block;}
-  .trap{background:#fdeeee; border:1px solid #e3b6b4; border-left:4px solid var(--red); border-radius:10px;
-    padding:9px 12px; margin:8px 0; font-size:13.5px; line-height:1.55; color:#6d3532;}
-  .trap b{color:var(--red);}
-  .trap .ok{color:#2e7d4f; font-weight:700;}
-  .note{font-size:13.5px; color:var(--ink2); line-height:1.55; margin-top:6px;}
-  .note b{color:var(--red);}
-  .deeper{background:rgba(79,111,174,.09); border:1px solid #c4d0e6; border-radius:10px; padding:9px 12px;
-    margin:8px 0; font-size:13.5px; line-height:1.6; color:#3c4c66;}
-  .deeper b{color:var(--blue);}
+/* teacher notes */
+.teacher{display:none;max-width:1500px;margin:16px auto 0;background:#22303f;color:#e9f1f7;border-radius:12px;
+  padding:12px 18px;font-size:15px;line-height:1.6}
+body.tmode .teacher{display:block}
+.teacher b{color:#ffd27a}
 
-  /* chips + builders */
-  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;}
-  .chip{font-family:Georgia,serif; font-size:15px; padding:6px 13px; border-radius:999px; background:#fff;
-    border:1.6px solid #cfa957; color:#4a3410; cursor:pointer; transition:all .18s; box-shadow:0 2px 5px rgba(120,90,30,.15); user-select:none;}
-  .chip:hover{transform:translateY(-2px); box-shadow:0 5px 12px rgba(120,90,30,.25);}
-  .chip.picked{background:var(--ac,#c9962e); border-color:var(--ac,#c9962e); color:#fff;}
-  .sayline{font-family:Georgia,serif; font-size:18.5px; color:#1f3a10; margin-top:10px;
-    background:#f2f7e8; border:1.5px dashed #9db87f; border-radius:10px; padding:10px 12px; line-height:1.5; min-height:44px;}
-  .sayline .blank{color:#b3924a; border-bottom:2px dotted #b3924a; padding:0 4px;}
+/* buttons & interactions */
+.chip{display:inline-block;border:2px solid var(--line);background:#fff;border-radius:22px;padding:7px 14px;
+  margin:4px 4px 4px 0;font-weight:700;font-size:15.5px;transition:.2s}
+.chip:hover{border-color:var(--teal)}
+.chip.sel{background:var(--navy);color:#fff;border-color:var(--navy)}
+.chip.ok{background:#dff3e4;border-color:#4c9c66;color:#235c36}
+.chip.no{background:#fbe2dc;border-color:#d0654d;color:#8e2f1b;animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.feedback{min-height:24px;font-weight:700;margin-top:6px;font-size:15.5px}
+.speak{border:0;background:none;font-size:16px;padding:0 4px;opacity:.7}
+.speak:hover{opacity:1}
+.claim{display:block;margin:22px auto 0;background:var(--ochre);color:#fff;border:0;border-radius:30px;
+  padding:12px 26px;font-weight:800;font-size:17px;box-shadow:var(--shadow)}
+.claim:disabled{background:#9aa;cursor:default}
 
-  /* flashcards */
-  .flashrow{display:flex; flex-wrap:wrap; gap:8px;}
-  .flash{flex:1 1 88px; min-height:96px; perspective:600px; cursor:pointer;}
-  .flash .in{position:relative; width:100%; height:100%; min-height:96px; transition:transform .5s; transform-style:preserve-3d;}
-  .flash.flip .in{transform:rotateY(180deg);}
-  .flash .f,.flash .b{position:absolute; inset:0; backface-visibility:hidden; border-radius:11px;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; padding:8px 6px; text-align:center;}
-  .flash .f{background:linear-gradient(150deg,#fff,#f7ecd2); border:1.6px solid #cfa957;
-    font-family:Georgia,serif; font-size:15px; color:#4a3410; font-weight:700;}
-  .flash .f small{font-size:10px; color:#a08850; letter-spacing:.1em; font-weight:400;}
-  .flash .b{background:linear-gradient(150deg,#4a3d22,#2e2513); border:1.6px solid #1f1809; transform:rotateY(180deg);
-    color:#f4e6c2; font-size:12px; line-height:1.4;}
-  .flash .b b{font-family:Georgia,serif; font-size:13px; color:#ffd98a;}
+/* rings (concept) */
+.rings{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.ring{flex:1;min-width:150px;border-radius:14px;padding:10px;min-height:110px;border:3px dashed}
+.ring h4{margin:0 0 6px;font-size:15px}
+.ring.r1{border-color:var(--coral);background:#fdebe5}
+.ring.r2{border-color:var(--ochre);background:#fdf3dc}
+.ring.r3{border-color:var(--teal);background:#e3f2f1}
+.ring .chip{font-size:14px;cursor:default}
 
-  /* quiz */
-  .q{margin:10px 0; padding:9px 12px; background:#fff; border:1px solid var(--line); border-radius:10px; position:relative;}
-  .q p.qq{font-family:Georgia,serif; font-size:16px; margin-bottom:7px; padding-right:26px;}
-  .q .qq .miss{color:var(--red); font-weight:700; border-bottom:2px solid var(--red); padding:0 3px; letter-spacing:2px;}
-  .q .qq .done-mark{position:absolute; right:10px; top:8px; font-size:13px; color:#3d8b57; font-weight:700;}
-  .opts{display:flex; gap:8px; flex-wrap:wrap;}
-  .opt{font-family:Georgia,serif; font-size:15px; padding:5px 16px; border-radius:8px; cursor:pointer;
-    background:#f6efdc; border:1.6px solid #b99b5c; color:#4a3410; transition:all .15s;}
-  .opt:hover{background:#fff3d6;}
-  .opt.right{background:#3d8b57; border-color:#3d8b57; color:#fff;}
-  .opt.right::after{content:' ✓';}
-  .opt.wrong{background:#d6605c; border-color:#d6605c; color:#fff; animation:shake .3s;}
-  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-  .q .hint{font-size:12.5px; color:var(--ink2); margin-top:6px; display:none;}
-  .q.done .hint{display:block;}
-  .scorebar{display:flex; align-items:center; gap:10px; margin:4px 0 8px;}
-  .scorebar .sc{font-family:Georgia,serif; font-size:15px; font-weight:700; color:var(--gold2);
-    background:#fdf3d8; border:1.4px solid #e0c37a; padding:3px 13px; border-radius:999px;}
+/* flip cards (words) */
+.flips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.flip{perspective:800px;height:118px;cursor:pointer}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip.open .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:10px;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.flip .f{background:linear-gradient(160deg,#3c7d5a,#2a5f45);color:#fff}
+.flip .f .w{font-family:Fraunces,serif;font-size:24px;font-weight:800}
+.flip .f .ipa{font-size:13px;opacity:.85}
+.flip .b{background:#fff;border:2px solid var(--sage);transform:rotateY(180deg);font-size:13.5px;line-height:1.35}
+.flip .b .zh{font-weight:800;color:var(--coral);font-size:16px}
 
-  /* bridge stones */
-  .stones{display:flex; gap:6px; margin:8px 0;}
-  .stone{flex:1; height:34px; border-radius:8px 8px 14px 14px; background:linear-gradient(180deg,#b8b0a0,#8d8676);
-    border:1.4px solid #6f6a5c; display:flex; align-items:center; justify-content:center;
-    font-family:Georgia,serif; font-size:12px; color:#f2ead6; text-shadow:0 1px 2px rgba(0,0,0,.4); transition:all .35s;}
-  .stone.lit{background:linear-gradient(180deg,#ffd98a,#e2a93c); color:#5a3c05; text-shadow:none; box-shadow:0 0 10px rgba(255,200,90,.7); transform:translateY(-4px);}
+.family{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:17px}
+.family .node{background:#fff;border:2px solid var(--sage);border-radius:10px;padding:6px 10px;text-align:center}
+.family .node small{display:block;font-size:12px;opacity:.7}
+.family .arrow{font-size:20px;color:var(--sage)}
 
-  /* spelling */
-  .spell{display:flex; gap:8px; align-items:center; margin:7px 0; flex-wrap:wrap;}
-  .spell .word{font-family:Georgia,serif; font-size:16.5px; min-width:86px; color:#4a3410;}
-  .spell .arrow{color:var(--gold2); font-weight:700;}
-  .spell input{width:120px; font-family:Georgia,serif; font-size:16px; padding:6px 10px; border-radius:8px;
-    border:1.6px solid #c9ae6e; background:#fffdf6;}
-  .spell input:focus{outline:2px solid var(--gold);}
-  .spell input.ok{border-color:#3d8b57; background:#eef7ee; color:#2e6b45;}
-  .spell input.no{border-color:var(--red); background:#fdeeee;}
-  .spell .res{font-size:13px; font-weight:700;}
+/* bridges (grammar) */
+.bridges{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bridge{border-radius:12px;padding:12px;color:#fff}
+.bridge.like{background:linear-gradient(160deg,#e2725b,#c55a43)}
+.bridge.look{background:linear-gradient(160deg,#2a8a8a,#1f6b6b)}
+.bridge .q{font-family:Fraunces,serif;font-size:21px;font-weight:800}
+.bridge p{margin:6px 0;font-size:15.5px}
+.qa{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
+.qa .s{flex:1;min-width:220px;font-size:16.5px}
 
-  /* votes / poem */
-  .votes{display:flex; gap:8px; flex-wrap:wrap;}
-  .vote{flex:1 1 100px; text-align:center; background:#fff; border:1.6px solid #cfa957; border-radius:10px;
-    padding:9px 6px; cursor:pointer; transition:all .18s;}
-  .vote:hover{transform:translateY(-2px);}
-  .vote .n{font-family:Georgia,serif; font-size:14px; display:block;}
-  .vote .cnt{font-size:12px; color:#fff; background:var(--gold); border-radius:999px; padding:1px 8px; display:inline-block; margin-top:5px;}
-  .poem{background:linear-gradient(160deg,#fffdf6,#f6ecd2); border:1.5px solid #d9c493; border-radius:12px;
-    padding:12px 16px; margin-top:9px; min-height:64px;}
-  .poem .pl{font-family:Georgia,serif; font-size:15.5px; color:#5a4520; line-height:1.75; animation:rise .4s both;}
-  .poem .pl em{color:#a87c1f; font-style:normal;}
-  .poem .empty{font-size:13px; color:#a08850; font-style:italic;}
+/* dialogue builder */
+.dlg .line{display:flex;gap:10px;margin:8px 0;align-items:flex-start}
+.dlg .who{font-weight:800;min-width:54px}
+.dlg .bubble{background:#fff;border:2px solid var(--line);border-radius:12px;padding:6px 12px;font-size:16.5px}
+.dlg .me .bubble{border-color:var(--teal);background:#e8f5f4}
 
-  /* generator */
-  .gen label{font-size:12.5px; color:var(--ink2); display:block; margin:8px 0 3px; font-weight:600;}
-  .gen input[type=text],.gen select{width:100%; font-size:16px; padding:7px 10px; border-radius:8px;
-    border:1.6px solid #c9ae6e; background:#fffdf6; color:var(--ink); font-family:Georgia,serif;}
-  .gen input:focus,.gen select:focus{outline:2px solid var(--gold);}
-  .postcard{margin-top:14px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 16px;
-    box-shadow:0 6px 16px rgba(120,90,30,.18); position:relative;}
-  .postcard .ph{display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee3c8; padding-bottom:7px; margin-bottom:9px;}
-  .postcard .ph b{font-family:Georgia,serif; font-size:15px; color:var(--gold2);}
-  .likebtn{font-size:12.5px; border:1.4px solid #d09a9a; color:#b05555; background:#fdf3f3; border-radius:999px; padding:3px 11px; cursor:pointer;}
-  .likebtn.on{background:#e2666d; color:#fff; border-color:#e2666d;}
-  #postOut{font-family:Georgia,serif; font-size:17px; line-height:1.65; color:#33270f; white-space:pre-wrap;}
+/* writing */
+.writer label{display:block;font-size:15px;margin:6px 0 2px}
+.writer input{width:100%;padding:8px 10px;border:2px solid var(--line);border-radius:8px;font:inherit;background:#fff}
+.postcard{background:repeating-linear-gradient(#fffaf0 0 33px,#e8dcc0 33px 34px);border-radius:12px;
+  padding:16px 20px;font-size:19px;line-height:34px;min-height:220px;border:2px solid var(--line);font-family:Fraunces,serif}
+.checks label{display:block;font-size:16px;margin:4px 0}
+.sign{position:absolute;transform:translate(-50%,-50%);width:9%;text-align:center;font-family:Fraunces,serif;
+  font-weight:800;color:#4a2f14;font-size:clamp(7px,.85vw,15px);line-height:1.1;pointer-events:none}
 
-  /* buttons + next row */
-  .btn{display:inline-block; font-size:15px; font-weight:600; letter-spacing:.04em; padding:10px 22px; border-radius:999px;
-    border:none; cursor:pointer; color:#fff; background:linear-gradient(135deg,var(--gold),#b3801f);
-    box-shadow:0 4px 14px rgba(160,110,20,.4); transition:transform .15s, box-shadow .15s; font-family:inherit;}
-  .btn:hover{transform:translateY(-2px); box-shadow:0 7px 18px rgba(160,110,20,.5);}
-  .btn.ghost{background:#6b5a41; box-shadow:none;}
-  .nextrow{margin:14px 0 2px; display:flex; justify-content:space-between; align-items:center; gap:10px;}
-  .journey-on{font-size:12.5px; color:var(--ink2);}
-  .journey-on b{color:var(--gold2);}
+/* lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(10,15,25,.92);display:none;place-items:center;z-index:50;cursor:zoom-out}
+.lightbox.on{display:grid}
+.lightbox img{max-width:98vw;max-height:96vh;border-radius:8px}
 
-  /* gem bar */
-  .gembar{position:absolute; top:22px; left:50%; transform:translateX(-50%); z-index:8; display:flex; align-items:center;
-    gap:9px; background:rgba(28,20,10,.62); padding:9px 18px; border-radius:999px; backdrop-filter:blur(4px);
-    border:1px solid rgba(255,225,160,.25);}
-  .gemslot{display:flex; flex-direction:column; align-items:center; gap:3px; width:52px;}
-  .gem{width:15px; height:15px; transform:rotate(45deg); border-radius:3px; background:#4d4230; border:1.5px solid #6b5c40; transition:all .5s;}
-  .gemslot.seen .gem{background:#7a6a4a; border-color:#a08c60;}
-  .gemslot.earned .gem{box-shadow:0 0 14px 3px var(--gc); background:var(--gc); border-color:#fff8; animation:gempulse 1.8s ease-in-out infinite;}
-  @keyframes gempulse{0%,100%{box-shadow:0 0 10px 2px var(--gc)}50%{box-shadow:0 0 18px 5px var(--gc)}}
-  .gemslot span{font-size:9.5px; color:#cbb98d; letter-spacing:.03em; white-space:nowrap;}
-  .gemslot.seen span{color:#e8d6a8;}
-  .gemslot.earned span{color:#ffe9ad;}
-  .gemslot.heart .gem{border-radius:50% 50% 50% 0; transform:rotate(-45deg); width:14px; height:14px;}
-  .gembar .sep{width:14px; height:1.5px; background:linear-gradient(90deg,transparent,#a38a55,transparent);}
-
-  /* controls */
-  .ctrl{position:absolute; bottom:22px; left:50%; transform:translateX(-50%); z-index:8; display:flex; align-items:center;
-    gap:14px; background:rgba(28,20,10,.62); padding:8px 16px; border-radius:999px; backdrop-filter:blur(4px);
-    border:1px solid rgba(255,225,160,.25);}
-  .navbtn{width:38px; height:38px; border-radius:50%; border:1.6px solid rgba(255,230,170,.5); background:rgba(255,240,200,.12);
-    color:#ffe9ad; font-size:17px; cursor:pointer; transition:all .15s;}
-  .navbtn:hover{background:rgba(255,240,200,.3);}
-  .dots{display:flex; gap:7px;}
-  .dot{width:9px; height:9px; border-radius:50%; background:#6b5c40; cursor:pointer; transition:all .3s; border:none; padding:0;}
-  .dot.on{background:#ffd98a; transform:scale(1.35);}
-  .pgno{font-size:12.5px; color:#e8d6a8; letter-spacing:.1em; min-width:74px; text-align:center;}
-  .tools{display:flex; gap:7px;}
-  .tool{font-size:11.5px; color:#e8d6a8; background:transparent; border:1.2px solid rgba(255,230,170,.4); border-radius:999px;
-    padding:4px 10px; cursor:pointer; letter-spacing:.05em;}
-  .tool:hover,.tool.on{background:rgba(255,230,170,.22);}
-
-  /* toast + confetti */
-  #toast{position:fixed; left:50%; bottom:86px; transform:translateX(-50%) translateY(20px); z-index:50;
-    background:linear-gradient(140deg,#2e5d4b,#1f4136); color:#eaf6ec; padding:11px 22px; border-radius:999px;
-    font-size:14.5px; letter-spacing:.03em; box-shadow:0 10px 30px rgba(0,0,0,.5); opacity:0; pointer-events:none;
-    transition:all .35s; border:1px solid rgba(170,220,180,.35);}
-  #toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
-  #toast b{color:#ffd98a;}
-  .spark{position:fixed; z-index:49; width:9px; height:9px; border-radius:2px; pointer-events:none; animation:fly 1s ease-out forwards;}
-  @keyframes fly{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot)); opacity:0;}}
-
-  /* teacher notes */
-  .tnote{position:absolute; left:34px; bottom:92px; z-index:7; max-width:430px; background:rgba(46,61,75,.93); color:#dce8f2;
-    border-radius:12px; padding:13px 16px; font-size:13.5px; line-height:1.6; display:none; border:1px solid #5d7891;
-    box-shadow:0 10px 28px rgba(0,0,0,.4);}
-  .tnode-on .tnote{display:block;}
-  .tnote b{color:#ffd98a;}
-
-  /* cover */
-  #s0 .journal{width:min(560px,52vw); top:80px;}
-  .badge{display:flex; gap:10px; align-items:flex-start; padding:8px 10px; border-radius:10px;
-    background:rgba(255,255,255,.6); border:1px solid #e5d5ab; margin:7px 0;}
-  .badge .no{flex:0 0 26px; height:26px; border-radius:50%; background:var(--gold); color:#fff;
-    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; margin-top:2px;}
-  .badge p{font-size:14.5px; line-height:1.4;}
-  .badge p .zh{color:var(--ink2); font-size:12.5px;}
-  .keyq{font-family:Georgia,serif; font-size:21px; text-align:center; color:#7a3d12;
-    background:linear-gradient(140deg,#fdf3d8,#f7e2ae); border:2px solid var(--gold); border-radius:12px;
-    padding:13px 10px; margin:4px 0 12px; line-height:1.4; box-shadow:inset 0 0 24px rgba(200,150,60,.2);}
-  .keyq .zh{display:block; font-family:'Microsoft YaHei',sans-serif; font-size:13px; color:#9a7430; margin-top:5px;}
-  .route{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 2px;}
-  .route span{font-size:12px; background:#efe2bd; border:1px solid #d9c493; border-radius:999px; padding:4px 11px; color:#5c4a26; cursor:pointer; transition:all .15s;}
-  .route span:hover{background:var(--gold); color:#fff;}
-
-  /* mindmap */
-  .mindmap{display:flex; flex-direction:column; gap:6px; margin-top:6px;}
-  .mmnode{background:#fff; border:1.4px solid var(--line); border-left:4px solid var(--mm,#c9962e);
-    border-radius:8px; padding:6px 11px; font-size:13.5px; line-height:1.45;}
-  .mmnode b{font-family:Georgia,serif; font-size:14.5px; color:#4a3410;}
-
-  /* responsive + print */
-  @media (max-width:980px){
-    .journal{left:14px; right:14px; width:auto; top:auto; bottom:76px; max-height:58vh;}
-    .art-title{max-width:92vw; top:60px;}
-    .gembar{display:none;}
-    .tnote{bottom:auto; top:60px; left:14px; right:14px; max-width:none;}
-  }
-  @media print{
-    body *{visibility:hidden;}
-    #postCard, #postCard *{visibility:visible;}
-    #postCard{position:fixed; inset:0; margin:auto; width:86vw; height:auto; box-shadow:none;}
-  }
+.foot{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:15;
+  background:rgba(255,250,240,.92);padding:7px 12px;border-radius:20px;box-shadow:var(--shadow)}
+.dot{width:12px;height:12px;border-radius:50%;background:rgba(31,59,87,.25);border:0;padding:0}
+.dot.on{background:var(--navy);transform:scale(1.3)}
+.toast{position:fixed;top:80px;left:50%;transform:translate(-50%,-20px);background:var(--ochre);color:#fff;
+  padding:10px 22px;border-radius:30px;font-weight:800;opacity:0;transition:.4s;z-index:40;box-shadow:var(--shadow)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media print{.topbar,.foot,.claim,.teacher{display:none!important}body{overflow:visible}.deck{position:static}
+  .page{position:static;opacity:1;transform:none;page-break-after:always}}
 </style>
 </head>
 <body>
 
-<!-- ══════════ SLIDE 0 · COVER ══════════ -->
-<section class="slide on" id="s0">
-  <div class="art" style="background-image:url('images/00-cover.jpg')"></div>
-  <header class="art-title">
-    <span class="stn">An Open-Day Expedition · 诺德安达开放日</span>
-    <h1>The Friendship Atlas<i>友 谊 图 集 · 一 场 关 于 朋 友 的 探 险</i></h1>
-  </header>
-  <aside class="journal">
-    <div class="jbody">
-      <div class="say">
-        <svg class="cat" viewBox="0 0 64 64" width="54" height="54"><path d="M14 20 L10 6 L24 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><path d="M50 20 L54 6 L40 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><circle cx="32" cy="34" r="22" fill="#f0a44b" stroke="#b06a1e" stroke-width="1.5"/><circle cx="24" cy="31" r="3" fill="#3a2d1b"/><circle cx="40" cy="31" r="3" fill="#3a2d1b"/><path d="M29 39 Q32 42 35 39" stroke="#3a2d1b" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M18 36 L6 34 M18 40 L7 43 M46 36 L58 34 M46 40 L57 43" stroke="#b06a1e" stroke-width="1.4" stroke-linecap="round"/></svg>
-        <p>Meow! I'm <b>Winston</b> — a little cat, a big atlas, and a rumor about treasure. Last night the atlas came alive…<br>喵！我是温斯顿。昨晚图集突然亮起：友谊之岛藏着宝物，但只有集齐 <b>6 颗友谊宝石</b>的人才能打开。</p>
-      </div>
-      <div class="story">Every island keeps one question at its heart, and Friendship Isle keeps the hardest one. The lighthouse-keeper whispered it to me before I sailed:<br><b>"What makes a strong friendship?"</b>
-        <div class="storybeat">沿途的每个站点都会掉落一颗宝石——但宝石从不白给：<b>要靠说出、问出、写出真正的英语</b>才能带走。你，敢跟我上岛吗？</div>
-      </div>
-      <div class="keyq">Key Question · 单元核心问题<br><span style="font-size:24px; font-weight:700;">What makes a strong friendship?</span><span class="zh">什么，让一段友谊真正牢固？（答案在山顶宝箱）</span></div>
-      <div class="kcard">
-        <h3>Expedition Badges <span class="zh">· 探险任务（下课前你就能…）</span></h3>
-        <div class="badge"><div class="no">1</div><p>Talk about what you and your friend like doing.<span class="zh">聊聊你和朋友喜欢做什么</span></p></div>
-        <div class="badge"><div class="no">2</div><p>Describe your friend's qualities &amp; appearance.<span class="zh">描述朋友的品质与外貌</span></p></div>
-        <div class="badge"><div class="no">3</div><p>Ask Wh-questions to make a new friend.<span class="zh">用特殊疑问句认识新朋友</span></p></div>
-        <div class="badge"><div class="no">4</div><p>Understand what makes a strong friendship.<span class="zh">理解友谊为什么牢固</span></p></div>
-      </div>
-      <div class="kcard">
-        <h3>Our Route <span class="zh">· 航线（点击可直达）</span></h3>
-        <div class="route">
-          <span onclick="goTo(1)">⚓ 爱好之港</span><span onclick="goTo(2)">🌸 品质花园</span><span onclick="goTo(3)">🌉 疑问之桥</span>
-          <span onclick="goTo(4)">🌙 镜湖</span><span onclick="goTo(5)">🕯️ 消息林</span><span onclick="goTo(6)">🕸️ 蛛网森林</span><span onclick="goTo(7)">🏔️ 山顶</span>
-        </div>
-      </div>
-      <div class="nextrow">
-        <span class="journey-on">沪教牛津版 2024 · 7A · Unit 1 · by <b>Maggie</b></span>
-        <button class="btn" onclick="goTo(1)">⛵ Open the Atlas 出发</button>
-      </div>
-    </div>
-  </aside>
-  <div class="tnote"><b>Teacher · 开场 2 min：</b>只展示画面，问 "What can you see on this map?" 收集 2-3 个回答；抛出 Key Question，把学生猜想写在白板（课末山顶回扣对照）。介绍 Winston 是"课本里走出来的猫"（教材 P7）。提示学生：每站三个标签页 📖故事 → 📝笔记 → 🎯挑战，挑战完成宝石才会点亮。</div>
-</section>
-
-<!-- ══════════ SLIDE 1 · HARBOUR ══════════ -->
-<section class="slide" id="s1" style="--ac:#e8933c">
-  <div class="art" style="background-image:url('images/01-harbour.jpg')"></div>
-  <header class="art-title">
-    <span class="stn">Station 1 · Gem of Hobbies 爱好之石</span>
-    <h1>The Harbour of Hobbies<i>爱 好 之 港</i></h1>
-  </header>
-  <aside class="journal">
-    <div class="jhead">
-      <div class="jicon">⚓</div>
-      <div class="jtitle"><b>Harbour of Hobbies</b><span>爱好之港 · VILLAGE DOCK</span></div>
-      <div class="jtabs">
-        <button class="jtab on" data-t="story">📖 故事</button>
-        <button class="jtab" data-t="notes">📝 笔记</button>
-        <button class="jtab" data-t="quest">🎯 挑战</button>
-      </div>
-    </div>
-    <div class="jbody">
-      <div class="tabpanel on" data-p="story">
-        <div class="say">
-          <svg class="cat" viewBox="0 0 64 64" width="54" height="54"><path d="M14 20 L10 6 L24 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><path d="M50 20 L54 6 L40 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><circle cx="32" cy="34" r="22" fill="#f0a44b" stroke="#b06a1e" stroke-width="1.5"/><circle cx="24" cy="31" r="3" fill="#3a2d1b"/><circle cx="40" cy="31" r="3" fill="#3a2d1b"/><path d="M29 39 Q32 42 35 39" stroke="#3a2d1b" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M18 36 L6 34 M18 40 L7 43 M46 36 L58 34 M46 40 L57 43" stroke="#b06a1e" stroke-width="1.4" stroke-linecap="round"/></svg>
-          <p>My paper boat bumps against the dock. A pelican in a captain's hat leans down: <b>"Strangers pass through this harbour — friends belong to it. To stay, you must talk about what you love."</b></p>
-        </div>
-        <div class="story">And so I asked. The girl on the dock loves <b>swimming</b>. The boy under the umbrella would rather <b>read</b> than eat. Two twins are arguing over <b>ping-pong</b>, and someone's guitar is louder than the seagulls.
-          <div class="storybeat">港口的规矩很简单：<b>说出你热爱的事，你就是自己人</b>。第一颗宝石在桅杆顶端等着——但佩利坎船长说，它只认"聊得来"的人。</div>
-        </div>
-        <div class="hinttab">Winston 学到了什么？翻开 📝 笔记 →</div>
-      </div>
-      <div class="tabpanel" data-p="notes">
-        <div class="kcard">
-          <h3>Word Bank <span class="zh">· 爱好词库（9 · 按类记）</span></h3>
-          <table class="ktable">
-            <tr><th>运动系 ⚽</th><th>文艺系 🎨</th><th>益智系 🧩</th></tr>
-            <tr>
-              <td class="en">swim 游泳<br>play basketball<br>play football<br>play ping-pong</td>
-              <td class="en">paint pictures<br>read books<br>play the guitar</td>
-              <td class="en">do crossword puzzles<br>ride a bicycle</td>
-            </tr>
-          </table>
-          <div class="trap"><b>冠词陷阱：</b>球类前不加 the（play <b>∅</b> basketball ✓），乐器前必须加 the（play <b>the</b> guitar ✓）。这是最爱考的一个 the！</div>
-        </div>
-        <div class="kcard">
-          <h3>Grammar Seed <span class="zh">· like / love + V-ing</span></h3>
-          <div class="formula">like / love / enjoy + <b>doing</b><span class="zh">表达"喜欢做某事"，三个词后面的动词都要用 -ing 形式</span></div>
-          <div class="pat">I like swimming a lot. · I love playing ping-pong. · She enjoys reading.<span class="zh">第三人称：He likes / She loves（动词加 s）</span></div>
-          <p class="note">问爱好：<b>What do you like doing?</b> · 谈朋友：<b>He / She likes + doing</b> · 爱好相同：<b>We share the same hobbies!</b></p>
-        </div>
-        <div class="kcard">
-          <h3>Spelling Rules <span class="zh">· V-ing 三条变形规则</span></h3>
-          <table class="ktable">
-            <tr><th>规则</th><th>例</th></tr>
-            <tr><td>一般动词 → 直接 +ing</td><td class="en">paint→painting, sing→singing</td></tr>
-            <tr><td>不发音 e 结尾 → 去 e +ing</td><td class="en">ride→riding, dance→dancing</td></tr>
-            <tr><td>重读闭音节 → 双写末字母 +ing</td><td class="en">swim→swimming, run→running</td></tr>
-          </table>
-        </div>
-      </div>
-      <div class="tabpanel" data-p="quest">
-        <div class="kcard">
-          <h3>Task 1 <span class="zh">· 港口采访（点两个爱好组句）</span></h3>
-          <div class="chips" id="hobbyChips">
-            <button class="chip">swim</button>
-            <button class="chip">play basketball</button>
-            <button class="chip">play football</button>
-            <button class="chip">play ping-pong</button>
-            <button class="chip">paint pictures</button>
-            <button class="chip">read books</button>
-            <button class="chip">ride a bicycle</button>
-            <button class="chip">play the guitar</button>
-            <button class="chip">do crossword puzzles</button>
-          </div>
-          <div class="sayline" id="hobbyLine">I like <span class="blank">…</span> and <span class="blank">…</span>.</div>
-        </div>
-        <div class="kcard">
-          <h3>Task 2 <span class="zh">· 船长的拼写关（输入 V-ing，回车判定）</span></h3>
-          <div class="spell"><span class="word">swim</span><span class="arrow">→</span><input data-ans="swimming" placeholder="?"><span class="res"></span></div>
-          <div class="spell"><span class="word">ride</span><span class="arrow">→</span><input data-ans="riding" placeholder="?"><span class="res"></span></div>
-          <div class="spell"><span class="word">dance</span><span class="arrow">→</span><input data-ans="dancing" placeholder="?"><span class="res"></span></div>
-          <p class="note">全对后，桅杆顶上的<b>爱好之石</b>就会点亮 ⚓</p>
-        </div>
-        <div class="nextrow">
-          <span class="journey-on">Gem <b>1/6</b></span>
-          <button class="btn" onclick="goTo(2)">To the garden →</button>
-        </div>
-      </div>
-    </div>
-  </aside>
-  <div class="tnote"><b>Teacher · 5 min：</b>📖 读故事引出 "What do you like doing?"；📝 重点讲 the 的陷阱和 V-ing 三条拼写规则（表格）；🎯 Task1 全班开火车问答（盯 swim→swimming），Task2 请 3 名学生上台输入拼写。宝石点亮瞬间给全班一个仪式感。</div>
-</section>
-
-<!-- ══════════ SLIDE 2 · GARDEN ══════════ -->
-<section class="slide" id="s2" style="--ac:#e2668d">
-  <div class="art" style="background-image:url('images/02-garden.jpg')"></div>
-  <header class="art-title">
-    <span class="stn">Station 2 · Gem of Qualities 品质之石</span>
-    <h1>The Garden of Qualities<i>品 质 花 园</i></h1>
-  </header>
-  <aside class="journal">
-    <div class="jhead">
-      <div class="jicon">🌸</div>
-      <div class="jtitle"><b>Garden of Qualities</b><span>品质花园 · WALLED GARDEN</span></div>
-      <div class="jtabs">
-        <button class="jtab on" data-t="story">📖 故事</button>
-        <button class="jtab" data-t="notes">📝 笔记</button>
-        <button class="jtab" data-t="quest">🎯 挑战</button>
-      </div>
-    </div>
-    <div class="jbody">
-      <div class="tabpanel on" data-p="story">
-        <div class="say">
-          <svg class="cat" viewBox="0 0 64 64" width="54" height="54"><path d="M14 20 L10 6 L24 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><path d="M50 20 L54 6 L40 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><circle cx="32" cy="34" r="22" fill="#f0a44b" stroke="#b06a1e" stroke-width="1.5"/><circle cx="24" cy="31" r="3" fill="#3a2d1b"/><circle cx="40" cy="31" r="3" fill="#3a2d1b"/><path d="M29 39 Q32 42 35 39" stroke="#3a2d1b" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M18 36 L6 34 M18 40 L7 43 M46 36 L58 34 M46 40 L57 43" stroke="#b06a1e" stroke-width="1.4" stroke-linecap="round"/></svg>
-          <p>Inside the hedge, eleven flowers glow. An old owl gardener prunes them slowly: <b>"Beautiful faces are everywhere, little cat. These flowers only bloom for what's inside a friend."</b></p>
-        </div>
-        <div class="story">Each flower keeps one <b>quality</b> — the invisible things that make a friend a friend. The owl says the garden has seen a thousand travellers, and every one of them picked a different three.
-          <div class="storybeat">花园的考题：<b>如果你的朋友是一束花，TA 由哪三朵组成？</b>选对了，第二颗宝石才会从花心里浮出来。</div>
-        </div>
-        <div class="hinttab">十一朵花里都藏着什么？翻开 📝 笔记 →</div>
-      </div>
-      <div class="tabpanel" data-p="notes">
-        <div class="kcard">
-          <h3>Word Bank <span class="zh">· 品质形容词（11 朵花 · 分三簇记）</span></h3>
-          <table class="ktable">
-            <tr><th>暖心簇 💗</th><th>靠谱簇 🛡️</th><th>开心簇 ☀️</th></tr>
-            <tr>
-              <td class="en">kind 善良<br>caring 关心人的<br>understanding 善解人意<br>supportive 给人支持</td>
-              <td class="en">honest 诚实<br>patient 耐心<br>helpful 乐于助人<br>hard-working 勤奋</td>
-              <td class="en">friendly 友好<br>funny 有趣<br>polite 有礼貌</td>
-            </tr>
-          </table>
-          <p class="note">记忆法：像挑花束一样<b>按簇选</b>——描述朋友时一簇挑一个，句子立刻有层次。</p>
-        </div>
-        <div class="kcard">
-          <h3>Key Pattern <span class="zh">· 问性格的两把钥匙</span></h3>
-          <div class="pat">Ask: <b>What is your friend like?</b><span class="zh">你的朋友是个怎样的人？（问性格品质）</span></div>
-          <div class="pat">Say: He / She is <b>kind and caring</b>. · He is <b>good at</b> maths.<span class="zh">be good at + 名词 / 动词-ing = 擅长</span></div>
-          <div class="trap"><b>高频考点：</b>What <b>is</b> he like?（问性格）≠ What does he <b>look like</b>?（只问外貌）。<br>答性格：He is helpful. ✓ ／ 答外貌：He is tall with short hair. ✓ —— 问法换了，答的方向就要换。</div>
-        </div>
-        <div class="kcard">
-          <h3>Sentence Craft <span class="zh">· 让句子更高级</span></h3>
-          <table class="ktable">
-            <tr><th>普通 ⭯</th><th>升级 ✓</th></tr>
-            <tr><td class="en">She is kind.</td><td class="en">She is <b>kind and always there for me</b>.</td></tr>
-            <tr><td class="en">He is funny.</td><td class="en">He is <b>so funny that everyone laughs</b>.</td></tr>
-          </table>
-          <div class="deeper"><b>分析：</b>品质形容词 + 一个小例子/小场景 = 说服力。写作文时每个品质都跟一个 "when…" 的小瞬间，老师的印象分立刻不同。</div>
-        </div>
-      </div>
-      <div class="tabpanel" data-p="quest">
-        <div class="kcard">
-          <h3>Task 1 <span class="zh">· 翻花卡（点击翻面看含义+例句）</span></h3>
-          <div class="flashrow" id="flash2">
-            <div class="flash"><div class="in"><div class="f">helpful<small>点击翻面</small></div><div class="b"><b>乐于助人的</b>He helps me with maths.</div></div></div>
-            <div class="flash"><div class="in"><div class="f">honest<small>点击翻面</small></div><div class="b"><b>诚实的</b>He never tells lies.</div></div></div>
-            <div class="flash"><div class="in"><div class="f">patient<small>点击翻面</small></div><div class="b"><b>耐心的</b>She waits and explains again.</div></div></div>
-            <div class="flash"><div class="in"><div class="f">caring<small>点击翻面</small></div><div class="b"><b>关心人的</b>She asks "Are you OK?"</div></div></div>
-            <div class="flash"><div class="in"><div class="f">supportive<small>点击翻面</small></div><div class="b"><b>给人支持的</b>He cheers me up.</div></div></div>
-            <div class="flash"><div class="in"><div class="f">understanding<small>点击翻面</small></div><div class="b"><b>善解人意的</b>She knows how I feel.</div></div></div>
-          </div>
-        </div>
-        <div class="kcard">
-          <h3>Task 2 <span class="zh">· 为你最好的朋友挑三朵花</span></h3>
-          <div class="chips" id="qualChips">
-            <button class="chip">helpful</button><button class="chip">kind</button><button class="chip">honest</button>
-            <button class="chip">patient</button><button class="chip">caring</button><button class="chip">supportive</button>
-            <button class="chip">friendly</button><button class="chip">funny</button><button class="chip">polite</button>
-            <button class="chip">hard-working</button><button class="chip">understanding</button>
-          </div>
-          <div class="sayline" id="qualLine">My best friend is <span class="blank">…</span>, <span class="blank">…</span> and <span class="blank">…</span>.</div>
-          <p class="note">选满 3 朵 → 花心浮出<b>品质之石</b> 🌸（试着再加一句 He/She is good at…）</p>
-        </div>
-        <div class="nextrow">
-          <span class="journey-on">Gem <b>2/6</b></span>
-          <button class="btn" onclick="goTo(3)">Cross the bridge →</button>
-        </div>
-      </div>
-    </div>
-  </aside>
-  <div class="tnote"><b>Teacher · 5 min：</b>📖 用猫头鹰的话引出"内在美"主题；📝 重点讲 What is he like vs What does he look like（高频考点）+ 三簇记忆法；🎯 Task1 翻卡快过（点 3-4 张即可），Task2 请 2 名学生上台选花并朗读整句。</div>
-</section>
-
-<!-- ══════════ SLIDE 3 · BRIDGE ══════════ -->
-<section class="slide" id="s3" style="--ac:#4f86c6">
-  <div class="art" style="background-image:url('images/03-bridge.jpg')"></div>
-  <header class="art-title">
-    <span class="stn">Station 3 · Gem of Questions 疑问之石</span>
-    <h1>The Bridge of Wh-Questions<i>疑 问 之 桥 · 老 龟 只 放 行 会 提 问 的 旅 人</i></h1>
-  </header>
-  <aside class="journal">
-    <div class="jhead">
-      <div class="jicon">🌉</div>
-      <div class="jtitle"><b>Bridge of Wh-Questions</b><span>疑问之桥 · SEVEN STONES</span></div>
-      <div class="jtabs">
-        <button class="jtab on" data-t="story">📖 故事</button>
-        <button class="jtab" data-t="notes">📝 笔记</button>
-        <button class="jtab" data-t="quest">🎯 挑战</button>
-      </div>
-    </div>
-    <div class="jbody">
-      <div class="tabpanel on" data-p="story">
-        <div class="say">
-          <svg class="cat" viewBox="0 0 64 64" width="54" height="54"><path d="M14 20 L10 6 L24 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><path d="M50 20 L54 6 L40 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><circle cx="32" cy="34" r="22" fill="#f0a44b" stroke="#b06a1e" stroke-width="1.5"/><circle cx="24" cy="31" r="3" fill="#3a2d1b"/><circle cx="40" cy="31" r="3" fill="#3a2d1b"/><path d="M29 39 Q32 42 35 39" stroke="#3a2d1b" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M18 36 L6 34 M18 40 L7 43 M46 36 L58 34 M46 40 L57 43" stroke="#b06a1e" stroke-width="1.4" stroke-linecap="round"/></svg>
-          <p>The river is wide and the bridge is old. A turtle in tiny spectacles lifts his lantern: <b>"On this bridge, walking is forbidden. It carries only those who ASK."</b></p>
-        </div>
-        <div class="story">He taps the stones with his lantern, one by one — <b>What. Who. When. Where. Why. How.</b> With every good question I ask, one stone lights up and the bridge grows stronger under my paws.
-          <div class="storybeat">我这才明白岛的规矩：<b>在这里，提问不是打扰，是搭桥</b>。不会问问题的人，只能站在这岸羡慕对岸的火光。第六块石头亮起时老龟笑了——第七个问题，由<b>你</b>来问。</div>
-        </div>
-        <div class="hinttab">七块问路石怎么用？翻开 📝 笔记 →</div>
-      </div>
-      <div class="tabpanel" data-p="notes">
-        <div class="kcard">
-          <h3>Seven Stones <span class="zh">· 七块问路石</span></h3>
-          <table class="ktable">
-            <tr><th>Wh-word</th><th>问什么</th><th>教材例句</th></tr>
-            <tr><td class="en"><b>What</b> 什么</td><td>事物 / 爱好</td><td class="en">What is your favourite book?</td></tr>
-            <tr><td class="en"><b>Who</b> 谁</td><td>人物 / 榜样</td><td class="en">Who is your role model?</td></tr>
-            <tr><td class="en"><b>When</b> 何时</td><td>时间 / 生日</td><td class="en">When is your birthday?</td></tr>
-            <tr><td class="en"><b>Where</b> 何地</td><td>地点 / 住址</td><td class="en">Where does your friend live?</td></tr>
-            <tr><td class="en"><b>Why</b> 为何</td><td>原因</td><td class="en">Why does she like it?</td></tr>
-            <tr><td class="en"><b>How</b> 怎样</td><td>方式 / 交通</td><td class="en">How do you get to school?</td></tr>
-            <tr><td class="en"><b>How old</b> 几岁</td><td>年龄</td><td class="en">How old is your friend?</td></tr>
-          </table>
-        </div>
-        <div class="kcard">
-          <h3>Two Rules <span class="zh">· 两条造句公式</span></h3>
-          <div class="formula">Rule 1: Wh-word + <b>am / is / are</b> + …?<span class="zh">句子里有 be 动词时，直接把 be 提到疑问词后面</span></div>
-          <div class="pat">Where <b>are</b> you now? · What <b>is</b> your favourite book?<span class="zh">教材 P9 原句</span></div>
-          <div class="formula">Rule 2: Wh-word + <b>do / does</b> + 主语 + <b>动词原形</b>?<span class="zh">没有 be 动词时借 do/does——三单用 does，动词必须还原</span></div>
-          <div class="pat">What <b>does</b> he like doing? · How <b>do</b> you get to school?<span class="zh">教材 P9 原句</span></div>
-          <div class="trap"><b>两大易错：</b>① What does he <s>likes</s> ✗ → What does he <span class="ok">like</span> ✓（does 一出场，动词就还原）② 忘了三单：Where <s>do</s> she live ✗ → Where <span class="ok">does</span> she live ✓</div>
-        </div>
-        <div class="kcard">
-          <h3>Why It Matters <span class="zh">· 提问=社交货币</span></h3>
-          <div class="deeper"><b>分析：</b>教材 P10 的采访任务就是"用提问交朋友"：年龄、生日、爱书、榜样、梦想职业。记住这份问题清单，新学期第一天你就能和任何陌生人聊起来——这就是七块石头的真正用途。</div>
-        </div>
-      </div>
-      <div class="tabpanel" data-p="quest">
-        <div class="kcard">
-          <h3>Gatekeeper's Quiz <span class="zh">· 过桥考题（is 还是 does？）</span></h3>
-          <div class="stones" id="stones">
-            <div class="stone">What</div><div class="stone">Who</div><div class="stone">When</div><div class="stone">Where</div><div class="stone">Why</div><div class="stone">How</div><div class="stone">★</div>
-          </div>
-          <div class="scorebar"><span class="sc" id="quiz3score">0 / 6</span><span class="note" style="margin:0">答对一块，亮一块石头</span></div>
-          <div class="q"><p class="qq">1. How old <span class="miss">____</span> your friend?</p><div class="opts"><button class="opt">is</button><button class="opt">does</button></div><p class="hint">is — How old 后接 be：How old <b>is</b> your friend?</p></div>
-          <div class="q"><p class="qq">2. When <span class="miss">____</span> your friend's birthday?</p><div class="opts"><button class="opt">is</button><button class="opt">does</button></div><p class="hint">is — 生日是时间，用 be：When <b>is</b> the birthday?</p></div>
-          <div class="q"><p class="qq">3. Where <span class="miss">____</span> your friend live?</p><div class="opts"><button class="opt">does</button><button class="opt">is</button></div><p class="hint">does — live 是实义动词，三单借 does</p></div>
-          <div class="q"><p class="qq">4. What <span class="miss">____</span> your friend's favourite book?</p><div class="opts"><button class="opt">is</button><button class="opt">does</button></div><p class="hint">is — What is your favourite book?（教材原句）</p></div>
-          <div class="q"><p class="qq">5. Why <span class="miss">____</span> your friend like it?</p><div class="opts"><button class="opt">does</button><button class="opt">is</button></div><p class="hint">does — like 是实义动词</p></div>
-          <div class="q"><p class="qq">6. Who <span class="miss">____</span> your friend's role model?</p><div class="opts"><button class="opt">is</button><button class="opt">does</button></div><p class="hint">is — 榜样是"谁"，用 be</p></div>
-          <p class="note">🎵 Bridge Chant：<b>What does he like? Where does she go? When is your birthday? Ask me — I know!</b>（六题全对，疑问之石到手）</p>
-        </div>
-        <div class="nextrow">
-          <span class="journey-on">Gem <b>3/6</b></span>
-          <button class="btn" onclick="goTo(4)">To the lake →</button>
-        </div>
-      </div>
-    </div>
-  </aside>
-  <div class="tnote"><b>Teacher · 6 min（语法主站）：</b>📖 故事立规矩"提问=搭桥"；📝 七块石头表 + 两条公式齐读，重点敲 trap 里的两个易错；🎯 六题抢答（请学生上台点选，答错正好讲判断法），全对后全班起立齐诵 Bridge Chant 收尾。教材 P9 语法框 + P10 采访任务。</div>
-</section>
-
-<!-- ══════════ SLIDE 4 · MIRROR LAKE ══════════ -->
-<section class="slide" id="s4" style="--ac:#8f7bd6">
-  <div class="art" style="background-image:url('images/04-lake.jpg')"></div>
-  <header class="art-title">
-    <span class="stn">Station 4 · Moon Gem 外貌之石</span>
-    <h1>The Mirror Lake<i>镜 湖 · 湖 面 浮 现 的 不 是 自 己</i></h1>
-  </header>
-  <aside class="journal">
-    <div class="jhead">
-      <div class="jicon">🌙</div>
-      <div class="jtitle"><b>Mirror Lake</b><span>镜湖 · CRESCENT BAY</span></div>
-      <div class="jtabs">
-        <button class="jtab on" data-t="story">📖 故事</button>
-        <button class="jtab" data-t="notes">📝 笔记</button>
-        <button class="jtab" data-t="quest">🎯 挑战</button>
-      </div>
-    </div>
-    <div class="jbody">
-      <div class="tabpanel on" data-p="story">
-        <div class="say">
-          <svg class="cat" viewBox="0 0 64 64" width="54" height="54"><path d="M14 20 L10 6 L24 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><path d="M50 20 L54 6 L40 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><circle cx="32" cy="34" r="22" fill="#f0a44b" stroke="#b06a1e" stroke-width="1.5"/><circle cx="24" cy="31" r="3" fill="#3a2d1b"/><circle cx="40" cy="31" r="3" fill="#3a2d1b"/><path d="M29 39 Q32 42 35 39" stroke="#3a2d1b" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M18 36 L6 34 M18 40 L7 43 M46 36 L58 34 M46 40 L57 43" stroke="#b06a1e" stroke-width="1.4" stroke-linecap="round"/></svg>
-          <p>The lake is still as glass. I lean over the dock to see my own face — but the water shows <b>someone else</b>: a grey cat with round glasses, smiling up at me.</p>
-        </div>
-        <div class="story">"Hello, Winston," says the reflection. "My name is <b>Misty</b>. I've been watching your journey from the other shore." The moon gem hums: <i>the lake shows not your face, but the friend you haven't met yet.</i>
-          <div class="storybeat">镜湖的魔法：<b>它照出的不是你，而是你即将遇见的朋友</b>。Misty 把爪子搭上木板——从这一刻起，我的探险不再是一个人的了。（山顶的篝火旁，她还会出现。）</div>
-        </div>
-        <div class="hinttab">如何"照实描述"一个朋友？翻开 📝 笔记 →</div>
-      </div>
-      <div class="tabpanel" data-p="notes">
-        <div class="kcard">
-          <h3>Word Bank <span class="zh">· 外貌词汇（分类记）</span></h3>
-          <table class="ktable">
-            <tr><th>Body 身形</th><th>Hair 头发</th><th>Eyes / Face</th></tr>
-            <tr>
-              <td class="en">tall<br>medium height<br>short</td>
-              <td class="en">long / short<br>straight / curly<br>black / brown</td>
-              <td class="en">big, dark eyes<br>bright eyes · round face</td>
-            </tr>
-          </table>
-        </div>
-        <div class="kcard">
-          <h3>Two Verbs <span class="zh">· be 与 have 的分工</span></h3>
-          <div class="formula">身形 → 用 <b>be</b>：She <b>is</b> tall.<span class="zh">高矮是"状态"</span></div>
-          <div class="formula">头发眼睛 → 用 <b>have / has</b>：She <b>has</b> long hair.<span class="zh">"长着"什么用 have；三单要用 has！</span></div>
-          <div class="pat">She is tall. She has long, straight hair and big, dark eyes.<span class="zh">教材 P11 口语示范句</span></div>
-          <div class="trap"><b>顺序陷阱：</b>多个形容词修饰 hair 时按 <b>长短 → 直卷 → 颜色</b> 排：long straight <b>black</b> hair ✓ ／ black straight long hair ✗</div>
-        </div>
-        <div class="kcard">
-          <h3>Model Paragraph <span class="zh">· 描写朋友的样子</span></h3>
-          <div class="pat">My best friend Zhou Jing is tall. She has long, straight hair. <b>Her smile is always bright, and it makes everyone around her happy.</b><span class="zh">最后这句是"神来之笔"——从外貌滑进性格</span></div>
-          <div class="deeper"><b>分析：</b>外貌描写三步结构 = ①身形(be) → ②头发眼睛(have) → ③一个带感情的细节(smile/eyes)。第三步是别人抄不走的部分，因为只有你了解 TA。</div>
-        </div>
-        <div class="kcard">
-          <h3>Pronunciation Dock <span class="zh">· 发音小码头</span></h3>
-          <p class="note en" style="font-size:15px; line-height:1.8;">
-            /iː/ m<b>ee</b>t · /ɪ/ h<b>i</b>s, th<b>i</b>n · /æ/ h<b>a</b>ve, m<b>a</b>ths · /e/ m<b>a</b>ny, t<b>e</b>ll · /p/ <b>p</b>owerful · /b/ <b>b</b>asketball<br>
-            🎺 绕口令：<b>Cat, cat! Catch that fat rat stealing bread and eggs!</b>
-          </p>
-        </div>
-      </div>
-      <div class="tabpanel" data-p="quest">
-        <div class="kcard">
-          <h3>Task 1 <span class="zh">· 镜湖造句（三组各选一个）</span></h3>
-          <div class="chips" data-group="h">
-            <button class="chip" data-s="tall">tall 高</button><button class="chip" data-s="medium height">medium height 中等</button><button class="chip" data-s="short">short 矮</button>
-          </div>
-          <div class="chips" data-group="r" style="margin-top:6px;">
-            <button class="chip" data-s="long, straight hair">long straight hair 长直发</button><button class="chip" data-s="short, curly hair">short curly hair 短卷发</button><button class="chip" data-s="long, curly hair">long curly hair 长卷发</button><button class="chip" data-s="short, black hair">short black hair 黑色短发</button>
-          </div>
-          <div class="chips" data-group="e" style="margin-top:6px;">
-            <button class="chip" data-s="big, dark eyes">big dark eyes 大而黑的眼睛</button><button class="chip" data-s="bright, smiling eyes">bright smiling eyes 明亮爱笑的眼睛</button>
-          </div>
-          <div class="sayline" id="lookLine">My friend is <span class="blank">…</span>. He / She has <span class="blank">…</span> and <span class="blank">…</span>.</div>
-        </div>
-        <div class="kcard">
-          <h3>Task 2 <span class="zh">· 老龟的加试题：哪个顺序对？</span></h3>
-          <div class="q" id="orderQ"><p class="qq">She has ______ hair.</p>
-            <div class="opts">
-              <button class="opt" data-order="1">long straight black</button>
-              <button class="opt" data-order="0">black straight long</button>
-              <button class="opt" data-order="0">straight long black</button>
-            </div>
-            <p class="hint">长短 → 直卷 → 颜色：long straight black hair ✓</p>
-          </div>
-          <p class="note">三组选满 + 加试题答对 → <b>外貌之石</b>浮出湖面 🌙</p>
-        </div>
-        <div class="nextrow">
-          <span class="journey-on">Gem <b>4/6</b> · Misty 加入队伍</span>
-          <button class="btn" onclick="goTo(5)">Into the glade →</button>
-        </div>
-      </div>
-    </div>
-  </aside>
-  <div class="tnote"><b>Teacher · 5 min：</b>📖 Misty 登场是剧情转折（山顶呼应），读完问"湖里为什么不是他自己？"；📝 核心对比 be/have + 形容词顺序；🎯 Task1 请学生上台点选、全班齐读生成句；Task2 抢答。绕口令机动使用。</div>
-</section>
-
-<!-- ══════════ SLIDE 5 · GLADE ══════════ -->
-<section class="slide" id="s5" style="--ac:#d4a72c">
-  <div class="art" style="background-image:url('images/05-glade.jpg')"></div>
-  <header class="art-title">
-    <span class="stn">Station 5 · Gem of Words 言语之石</span>
-    <h1>The Glade of Messages<i>消 息 林 · 每 只 瓶 子 都 是 一 封 情 书</i></h1>
-  </header>
-  <aside class="journal">
-    <div class="jhead">
-      <div class="jicon">🕯️</div>
-      <div class="jtitle"><b>Glade of Messages</b><span>消息林 · ANCIENT OAK</span></div>
-      <div class="jtabs">
-        <button class="jtab on" data-t="story">📖 故事</button>
-        <button class="jtab" data-t="notes">📝 笔记</button>
-        <button class="jtab" data-t="quest">🎯 挑战</button>
-      </div>
-    </div>
-    <div class="jbody">
-      <div class="tabpanel on" data-p="story">
-        <div class="say">
-          <svg class="cat" viewBox="0 0 64 64" width="54" height="54"><path d="M14 20 L10 6 L24 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><path d="M50 20 L54 6 L40 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><circle cx="32" cy="34" r="22" fill="#f0a44b" stroke="#b06a1e" stroke-width="1.5"/><circle cx="24" cy="31" r="3" fill="#3a2d1b"/><circle cx="40" cy="31" r="3" fill="#3a2d1b"/><path d="M29 39 Q32 42 35 39" stroke="#3a2d1b" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M18 36 L6 34 M18 40 L7 43 M46 36 L58 34 M46 40 L57 43" stroke="#b06a1e" stroke-width="1.4" stroke-linecap="round"/></svg>
-          <p>Hundreds of bottles glow on the great oak — every one a message left by a traveller. One burns brightest of all. Misty reads the ribbon aloud: <b>"To my new friend, from Chen Ming."</b></p>
-        </div>
-        <div class="story">It's a post about a boy named Li Hua — helpful, patient, good at maths. As I read, Misty points at the words: "Look — <b>he, him, his</b>… pronouns are footprints in the snow of a story. Follow them, and they always lead back to a name."
-          <div class="storybeat">老橡树的规矩：读得懂别人的友情故事的人，才配留下自己的。读懂这一只瓶子，<b>言语之石</b>就会从树洞里滚出来。</div>
-        </div>
-        <div class="hinttab">如何跟着代词脚印读故事？翻开 📝 笔记 →</div>
-      </div>
-      <div class="tabpanel" data-p="notes">
-        <div class="kcard">
-          <h3>Reading Strategy <span class="zh">· 代词脚印（教材 P5）</span></h3>
-          <p class="note en" style="font-size:15px; line-height:1.7;">"Li Hua is helpful and patient. <b>He</b> is also good at maths. When I meet difficult problems, I turn to <b>him</b> for help… With <b>his</b> help, my maths has improved a lot."</p>
-          <div class="formula">He / him / his → 向前找 → <b>Li Hua</b>　｜　I / my → 写信人 → <b>Chen Ming</b><span class="zh">人称代词通常指前文出现过的名词——先出现的名字，管后面的代词</span></div>
-          <div class="deeper"><b>分析：</b>长难句读到"晕"时，先把代词圈出来、连回名字，句子骨架立刻清晰。这是阅读理解的第一基本功。</div>
-        </div>
-        <div class="kcard">
-          <h3>5 Power Phrases <span class="zh">· 五个力量短语（教材 P7）</span></h3>
-          <table class="ktable">
-            <tr><th>短语</th><th>含义</th><th>课文例句</th></tr>
-            <tr><td class="en"><b>be good at</b></td><td>擅长</td><td class="en">He is good at maths.</td></tr>
-            <tr><td class="en"><b>turn to (sb for help)</b></td><td>求助于</td><td class="en">I turn to him for help.</td></tr>
-            <tr><td class="en"><b>improve</b></td><td>提高 v.</td><td class="en">My maths has improved a lot.</td></tr>
-            <tr><td class="en"><b>confident</b></td><td>自信的 adj.</td><td class="en">I am more confident now.</td></tr>
-            <tr><td class="en"><b>count on (sb)</b></td><td>信赖，依靠</td><td class="en">I can always count on my friends.</td></tr>
-          </table>
-          <div class="trap"><b>近义辨析：</b>count on sb <b>to do</b> sth（指望某人做…）；be good at 后接名词或 doing（good at <s>swim</s> → good at <span class="ok">swimming</span>）。</div>
-        </div>
-        <div class="kcard">
-          <h3>Word Forge <span class="zh">· 词汇锻造炉 -er</span></h3>
-          <div class="formula">动词 + <b>-er</b> = 做…的人<span class="zh">play→player 运动员 · sing→singer 歌手 · teach→teacher 教师 · dance→dancer 舞者</span></div>
-          <div class="trap">拼写小坑：以 e 结尾去 e（dance→danc<span class="ok">er</span>）；重读闭音节双写（run→run<span class="ok">ner</span>）。</div>
-        </div>
-      </div>
-      <div class="tabpanel" data-p="quest">
-        <div class="kcard">
-          <h3>Task 1 <span class="zh">· 代词寻踪（He/him/my 各指谁？）</span></h3>
-          <div class="q"><p class="qq">"Li Hua is patient. <b>He</b> helps me a lot." — He = ?</p><div class="opts"><button class="opt" data-ok="1">Li Hua</button><button class="opt">Chen Ming</button></div><p class="hint">He 向前指先出现的 Li Hua ✓</p></div>
-          <div class="q"><p class="qq">"I turn to <b>him</b> for help." — him = ?</p><div class="opts"><button class="opt" data-ok="1">Li Hua</button><button class="opt">Chen Ming</button></div><p class="hint">求助的对象 = Li Hua ✓</p></div>
-          <div class="q"><p class="qq">"<b>My</b> maths has improved." — my = 谁的？</p><div class="opts"><button class="opt" data-ok="1">Chen Ming 的</button><button class="opt">Li Hua 的</button></div><p class="hint">发帖人是 Chen Ming，my 指他 ✓</p></div>
-        </div>
-        <div class="kcard">
-          <h3>Task 2 <span class="zh">· Winston 的填空故事（教材 P7 原题）</span></h3>
-          <div class="q"><p class="qq">1. Jenny ____________ singing, and she sings every day.</p><div class="opts"><button class="opt">is good at</button><button class="opt">counts on</button></div><p class="hint">is good at — 擅长唱歌 ✓</p></div>
-          <div class="q"><p class="qq">2. She is very ____________ and sings in front of lots of people!</p><div class="opts"><button class="opt">confident</button><button class="opt">patient</button></div><p class="hint">confident — 敢在人前唱，是"自信"</p></div>
-          <div class="q"><p class="qq">3. Jake always ____________ Jenny for advice on how to play.</p><div class="opts"><button class="opt">turns to</button><button class="opt">turns on</button></div><p class="hint">turn to sb for advice（三单 +s）</p></div>
-          <div class="q"><p class="qq">4. He ____________ a bit more each day and he is quite good now.</p><div class="opts"><button class="opt">improves</button><button class="opt">increases</button></div><p class="hint">improves — 每天进步一点点</p></div>
-          <div class="q"><p class="qq">5. I know I can always ____________ them to look after me!</p><div class="opts"><button class="opt">count on</button><button class="opt">count down</button></div><p class="hint">count on — 依靠、信赖</p></div>
-          <p class="note">8 题全对 → 树洞交出<b>言语之石</b> 🕯️</p>
-        </div>
-        <div class="nextrow">
-          <span class="journey-on">Gem <b>5/6</b></span>
-          <button class="btn" onclick="goTo(6)">Into the deep forest →</button>
-        </div>
-      </div>
-    </div>
-  </aside>
-  <div class="tnote"><b>Teacher · 6 min：</b>📖 用"脚印"比喻讲代词回指；📝 5 短语配动作（turn to 转身求助 / count on 扳手指数）+ -er 词炉抢答扩词；🎯 Task1 三题全班口答，Task2 快问快答（可分组比赛，8 题全对组"通关"）。</div>
-</section>
-
-<!-- ══════════ SLIDE 6 · WEB FOREST ══════════ -->
-<section class="slide" id="s6" style="--ac:#4da87a">
-  <div class="art" style="background-image:url('images/06-web.jpg')"></div>
-  <header class="art-title">
-    <span class="stn">Station 6 · Gem of True Friendship 真谊之石</span>
-    <h1>The Web Forest<i>蛛 网 森 林 · 夏 洛 的 网</i></h1>
-  </header>
-  <aside class="journal">
-    <div class="jhead">
-      <div class="jicon">🕸️</div>
-      <div class="jtitle"><b>Web Forest</b><span>蛛网森林 · THE RED BARN</span></div>
-      <div class="jtabs">
-        <button class="jtab on" data-t="story">📖 故事</button>
-        <button class="jtab" data-t="notes">📝 笔记</button>
-        <button class="jtab" data-t="quest">🎯 挑战</button>
-      </div>
-    </div>
-    <div class="jbody">
-      <div class="tabpanel on" data-p="story">
-        <div class="say">
-          <svg class="cat" viewBox="0 0 64 64" width="54" height="54"><path d="M14 20 L10 6 L24 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><path d="M50 20 L54 6 L40 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><circle cx="32" cy="34" r="22" fill="#f0a44b" stroke="#b06a1e" stroke-width="1.5"/><circle cx="24" cy="31" r="3" fill="#3a2d1b"/><circle cx="40" cy="31" r="3" fill="#3a2d1b"/><path d="M29 39 Q32 42 35 39" stroke="#3a2d1b" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M18 36 L6 34 M18 40 L7 43 M46 36 L58 34 M46 40 L57 43" stroke="#b06a1e" stroke-width="1.4" stroke-linecap="round"/></svg>
-          <p>The forest holds its breath. In a red barn, between two beams, hangs the oldest message on the island — not in a bottle, but <b>woven in silk</b>. Misty whispers: "This one is famous."</p>
-        </div>
-        <div class="story">A pig named <b>Wilbur</b> was going to be dinner. A spider named <b>Charlotte</b> wove words into her web and saved his life. When she was dying, Wilbur promised to <b>watch over</b> her children — and he did, all winter, waiting for the big day.
-          <div class="storybeat">故事结尾，小蜘蛛们乘着暖风离开，威尔伯哭了——但有三只留下来："We like this place, <b>and we like you</b>." 夏洛留下的不只有孩子，还有一句话：<b>真正的朋友，一生难求。</b>第六颗宝石，在蛛网的露光里亮起。</div>
-        </div>
-        <div class="hinttab">这个故事教我们什么？翻开 📝 笔记 →</div>
-      </div>
-      <div class="tabpanel" data-p="notes">
-        <div class="kcard">
-          <h3>Story Map <span class="zh">· 三个瞬间（教材 P14）</span></h3>
-          <table class="ktable">
-            <tr><th>瞬间</th><th>发生了什么</th></tr>
-            <tr><td>🪄 拯救</td><td>Charlotte has a clever plan and <b>saves Wilbur's life</b>. 夏洛织网救友</td></tr>
-            <tr><td>❄️ 守护</td><td>Wilbur <b>watches over</b> her children all winter. 威尔伯守护一冬</td></tr>
-            <tr><td>🌬️ 传承</td><td>Baby spiders float away; three stay: "We like this place, and we like you." 友谊延续</td></tr>
-          </table>
-        </div>
-        <div class="kcard">
-          <h3>4 Words to Keep <span class="zh">· 本站关键词（教材 P15）</span></h3>
-          <table class="ktable">
-            <tr><th>词</th><th>课文原句</th></tr>
-            <tr><td class="en"><b>watch over</b> 守护</td><td class="en">Sam always watches over his little sister.</td></tr>
-            <tr><td class="en"><b>glad</b> 高兴的</td><td class="en">Every school day I am glad to see my friends.</td></tr>
-            <tr><td class="en"><b>heart</b> 心</td><td class="en">My heart is full of joy.</td></tr>
-            <tr><td class="en"><b>rise</b> 升起</td><td class="en">She likes to watch the sun rise.</td></tr>
-          </table>
-        </div>
-        <div class="kcard">
-          <h3>Theme Analysis <span class="zh">· 主题分析</span></h3>
-          <div class="deeper"><b>分析：</b>Charlotte's Web 里友谊的三层：①<b>付出</b>（为朋友动用全部聪明）；②<b>守护</b>（承诺之后整个冬天的等待）；③<b>传承</b>（友谊传给下一代）。对照本单元：Chen Ming 说 friendship = love, honesty, understanding, trust——夏洛的故事就是这四个词的小说版。</div>
-          <div class="keyq" style="margin-top:8px;">"Friends show their love <b>in times of trouble</b>, not in happiness."<span class="zh">患难见真情。—— Euripides 欧里庇得斯（教材 P17）</span></div>
-        </div>
-      </div>
-      <div class="tabpanel" data-p="quest">
-        <div class="kcard">
-          <h3>Task 1 <span class="zh">· 全班共建一首诗：《A True Friend…》</span></h3>
-          <div class="votes">
-            <button class="vote" data-line="…helps in times of trouble.|患难时伸出援手"><span class="n">helps in trouble</span><span class="cnt">0</span></button>
-            <button class="vote" data-line="…never gives up on you.|永不放弃你"><span class="n">never gives up</span><span class="cnt">0</span></button>
-            <button class="vote" data-line="…makes you a better you.|让你成为更好的自己"><span class="n">makes you better</span><span class="cnt">0</span></button>
-            <button class="vote" data-line="…shares your happiness, too.|也分享你的快乐"><span class="n">shares happiness</span><span class="cnt">0</span></button>
-          </div>
-          <div class="poem" id="poem"><span class="empty">点击上方句子，我们一起把诗"织"出来（每点一行加一票）——像夏洛织网一样。</span></div>
-          <p class="note">诗织到 <b>2 行以上</b>，蛛网露光里的<b>真谊之石</b>出现 🕸️</p>
-        </div>
-        <div class="nextrow">
-          <span class="journey-on">Gem <b>6/6</b> · 集齐！去山顶</span>
-          <button class="btn" onclick="goTo(7)">To the summit 🏔️</button>
-        </div>
-      </div>
-    </div>
-  </aside>
-  <div class="tnote"><b>Teacher · 5 min：</b>📖 30 秒讲清三幕（拯救→守护→传承），语速放慢做情感高点；📝 主题分析把故事接回单元四个词；🎯 建诗环节每人投票+可口头补充自己的句子，最后全班齐读织好的诗和 Euripides 名言。</div>
-</section>
-
-<!-- ══════════ SLIDE 7 · SUMMIT ══════════ -->
-<section class="slide" id="s7" style="--ac:#e05c5c">
-  <div class="art" style="background-image:url('images/07-summit.jpg')"></div>
-  <header class="art-title">
-    <span class="stn">The Summit · The Treasure 宝箱开启</span>
-    <h1>The Summit of Friendship<i>友 谊 之 巅 · 六 石 合 一</i></h1>
-  </header>
-  <aside class="journal">
-    <div class="jhead">
-      <div class="jicon">🏔️</div>
-      <div class="jtitle"><b>Summit of Friendship</b><span>友谊之巅 · SUNRISE FIRE</span></div>
-      <div class="jtabs">
-        <button class="jtab on" data-t="story">📖 故事</button>
-        <button class="jtab" data-t="notes">📝 笔记</button>
-        <button class="jtab" data-t="quest">🎯 挑战</button>
-      </div>
-    </div>
-    <div class="jbody">
-      <div class="tabpanel on" data-p="story">
-        <div class="say">
-          <svg class="cat" viewBox="0 0 64 64" width="54" height="54"><path d="M14 20 L10 6 L24 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><path d="M50 20 L54 6 L40 12 Z" fill="#e8963c" stroke="#b06a1e" stroke-width="1.5"/><circle cx="32" cy="34" r="22" fill="#f0a44b" stroke="#b06a1e" stroke-width="1.5"/><circle cx="24" cy="31" r="3" fill="#3a2d1b"/><circle cx="40" cy="31" r="3" fill="#3a2d1b"/><path d="M29 39 Q32 42 35 39" stroke="#3a2d1b" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M18 36 L6 34 M18 40 L7 43 M46 36 L58 34 M46 40 L57 43" stroke="#b06a1e" stroke-width="1.4" stroke-linecap="round"/></svg>
-          <p>Six gems rise from my backpack, circle the campfire, and melt into one heart of light. Beside me sit <b>Misty</b>, the rabbit, the turtle, the owl, the hedgehog — and a small pink pig with a spider on his shoulder. The chest opens…</p>
-        </div>
-        <div class="story">No gold. No jewels. Just the answer to the question I carried all the way up the mountain —<br><b>"Friendships are not only about having fun, but also about love, honesty, understanding and trust."</b>
-          <div class="storybeat">回头看：港口教会我<b>开口</b>，花园教会我<b>看心</b>，桥教会我<b>提问</b>，镜湖送我<b>同伴</b>，消息林教我<b>读懂别人的故事</b>，蛛网森林教我<b>患难与共</b>。现在，轮到你把自己的故事挂上老橡树了——</div>
-        </div>
-        <div class="hinttab">怎样写好自己的 friendship post？翻开 📝 笔记 →</div>
-      </div>
-      <div class="tabpanel" data-p="notes">
-        <div class="kcard">
-          <h3>Writer's Map <span class="zh">· 五段式写作思维图（教材 P12）</span></h3>
-          <div class="mindmap">
-            <div class="mmnode" style="--mm:#4f86c6"><b>① Basic information</b> — name, age（我的朋友是谁）</div>
-            <div class="mmnode" style="--mm:#8f7bd6"><b>② Appearance</b> — She is tall. She has long, straight hair…（长什么样）</div>
-            <div class="mmnode" style="--mm:#e8933c"><b>③ Hobbies</b> — She is good at dancing.（擅长与爱好）</div>
-            <div class="mmnode" style="--mm:#e2668d"><b>④ Personal qualities</b> — kind, helpful + 一个 when… 的小事例（最重要的一段！）</div>
-            <div class="mmnode" style="--mm:#4da87a"><b>⑤ Feeling</b> — It is wonderful to have such a good friend.（感受收尾）</div>
-          </div>
-          <div class="deeper"><b>分析：</b>④ 是得分段：品质词 + 事例（When I feel sad, she is always there to cheer me up.）。⑤ 用课文原句收尾既安全又漂亮。</div>
-        </div>
-        <div class="kcard">
-          <h3>Sentence Frames <span class="zh">· 每段的万能句式</span></h3>
-          <table class="ktable">
-            <tr><th>段</th><th>句式</th></tr>
-            <tr><td>①</td><td class="en">____ is my best friend. He / She is 12 years old.</td></tr>
-            <tr><td>②</td><td class="en">He / She is … . He / She has … hair and … eyes.</td></tr>
-            <tr><td>③</td><td class="en">He / She is good at … . We like … together.</td></tr>
-            <tr><td>④</td><td class="en">He / She is … and … . When I …, he / she always … .</td></tr>
-            <tr><td>⑤</td><td class="en">It is wonderful to have such a good friend.</td></tr>
-          </table>
-        </div>
-      </div>
-      <div class="tabpanel" data-p="quest">
-        <div class="kcard gen">
-          <h3>Post Generator <span class="zh">· 把你的瓶子挂上老橡树</span></h3>
-          <label>My friend's name 朋友的名字</label>
-          <input type="text" id="gName" placeholder="e.g. Michelle" maxlength="20">
-          <div style="display:flex; gap:10px;">
-            <div style="flex:1"><label>He / She</label>
-              <select id="gPron"><option value="She">She（她）</option><option value="He">He（他）</option></select></div>
-            <div style="flex:1"><label>Age 年龄（可选）</label>
-              <select id="gAge"><option value="">—</option><option>11</option><option>12</option><option>13</option><option>14</option></select></div>
-          </div>
-          <label>3 qualities 三个品质（逗号分隔）</label>
-          <input type="text" id="gQual" placeholder="e.g. kind, helpful, funny" maxlength="60">
-          <label>He / She is good at… 擅长</label>
-          <select id="gHobby">
-            <option value="dancing">dancing 跳舞</option><option value="swimming">swimming 游泳</option>
-            <option value="playing basketball">playing basketball 篮球</option><option value="painting">painting 画画</option>
-            <option value="playing the guitar">playing the guitar 吉他</option><option value="reading">reading 阅读</option>
-            <option value="playing chess">playing chess 国际象棋</option><option value="solving maths puzzles">solving maths puzzles 数学谜题</option>
-          </select>
-          <label>We like … together 喜欢一起做什么</label>
-          <select id="gTogether">
-            <option value="playing ping-pong after school">playing ping-pong after school</option>
-            <option value="riding our bicycles">riding our bicycles</option>
-            <option value="reading and sharing stories">reading and sharing stories</option>
-            <option value="doing crossword puzzles">doing crossword puzzles</option>
-            <option value="singing favourite songs">singing our favourite songs</option>
-          </select>
-          <div class="postcard" id="postCard">
-            <div class="ph"><b>🌟 My best friend · by ME</b><button class="likebtn" id="likeBtn" onclick="likePost()">♥ Like</button></div>
-            <div id="postOut">填写信息，你的"友谊瓶子"就会在这里亮起来……</div>
-          </div>
-          <div style="margin-top:10px; display:flex; gap:10px;">
-            <button class="btn" onclick="buildPost()" style="flex:1">✨ Make my post 生成帖子</button>
-            <button class="btn ghost" onclick="window.print()">🖨 Print 打印</button>
-          </div>
-          <p class="note">生成成功 = 第 7 颗<b>心形宝石</b>点亮，老橡树上多一只发光的瓶子。</p>
-        </div>
-        <div class="nextrow">
-          <span class="journey-on">A demo lesson by <b>Maggie</b> · for tomorrow's Grade 7 adventurers</span>
-          <button class="btn" onclick="goTo(0)">⟲ Journey again</button>
-        </div>
-      </div>
-    </div>
-  </aside>
-  <div class="tnote"><b>Teacher · 8-10 min（输出主站）：</b>📖 开宝箱回扣开场 Key Question（对照白板上的学生猜想，让他们发现"我们猜的和答案重合了多少"）；📝 讲五段式+得分段；🎯 学生两人一组用生成器产出 post，2-3 组上台朗读（Like 按钮做点赞），打印功能留作业。</div>
-</section>
-
-<!-- ══════════ CHROME ══════════ -->
-<nav class="gembar" id="gembar">
-  <div class="gemslot" data-gem="1" style="--gc:#e8933c"><div class="gem"></div><span>Hobbies</span></div><div class="sep"></div>
-  <div class="gemslot" data-gem="2" style="--gc:#e2668d"><div class="gem"></div><span>Qualities</span></div><div class="sep"></div>
-  <div class="gemslot" data-gem="3" style="--gc:#4f86c6"><div class="gem"></div><span>Questions</span></div><div class="sep"></div>
-  <div class="gemslot" data-gem="4" style="--gc:#8f7bd6"><div class="gem"></div><span>Looks</span></div><div class="sep"></div>
-  <div class="gemslot" data-gem="5" style="--gc:#d4a72c"><div class="gem"></div><span>Words</span></div><div class="sep"></div>
-  <div class="gemslot" data-gem="6" style="--gc:#4da87a"><div class="gem"></div><span>True Friend</span></div><div class="sep"></div>
-  <div class="gemslot heart" data-gem="7" style="--gc:#e05c5c"><div class="gem"></div><span>♥ Treasure</span></div>
-</nav>
-
-<nav class="ctrl">
-  <button class="navbtn" onclick="go(cur-1)" aria-label="previous">‹</button>
-  <div class="dots" id="dots"></div>
-  <button class="navbtn" onclick="go(cur+1)" aria-label="next">›</button>
-  <span class="pgno" id="pgno"></span>
-  <div class="tools">
-    <button class="tool" id="tbtn" onclick="toggleTeacher()">T · 教师注</button>
-    <button class="tool" onclick="toggleFS()">⛶ Fullscreen</button>
+<header class="topbar">
+  <div class="brand">The Friendship Atlas<small>Unit 1 · Friends &amp; Friendship · 7A</small></div>
+  <div class="passport" id="passport"><span class="lbl">Explorer's Passport</span></div>
+  <div class="navbtns">
+    <button onclick="go(0)" title="Back to the map">🗺 Map</button>
+    <button onclick="toggleTeacher()" title="Teacher notes (T)">👩‍🏫 Notes</button>
+    <button onclick="go(cur-1)">◀</button><button onclick="go(cur+1)">▶</button>
   </div>
-</nav>
+</header>
 
-<div id="toast"></div>
+<main class="deck" id="deck">
+
+<!-- ============ 0 · ATLAS ============ -->
+<section class="page" data-color="#1f3b57">
+  <div class="page-head"><span class="tag" style="background:#1f3b57">Start</span>
+    <h2>Welcome aboard, explorers!</h2><span class="zh">欢迎登船，小探险家们</span></div>
+  <div class="stage" data-img="images/web/00-atlas-map.jpg">
+    <img src="images/web/00-atlas-map.jpg" alt="The Friendship Atlas map">
+    <button class="hotspot" style="left:11%;top:30%" onclick="event.stopPropagation();go(1)"><span>1 · What is a friend?</span></button>
+    <button class="hotspot" style="left:32%;top:36%" onclick="event.stopPropagation();go(2)"><span>2 · Words</span></button>
+    <button class="hotspot" style="left:49%;top:46%" onclick="event.stopPropagation();go(3)"><span>3 · Grammar</span></button>
+    <button class="hotspot" style="left:69%;top:56%" onclick="event.stopPropagation();go(4)"><span>4 · Expressions</span></button>
+    <button class="hotspot" style="left:71%;top:30%" onclick="event.stopPropagation();go(5)"><span>5 · Fixing problems</span></button>
+    <button class="hotspot" style="left:89%;top:28%" onclick="event.stopPropagation();go(6)"><span>6 · Wisdom</span></button>
+  </div>
+  <div class="story">Meet <b>Pip</b> the red panda. Next term Pip starts at a <b>new school</b> — just like you will start <b>Grade 7</b>!
+    Pip doesn't know anyone yet, so Pip sails to the six islands of <b>The Friendship Atlas</b>.
+    Each island hides one <b>key to friendship</b>. Help Pip collect all six stamps in the <b>Explorer's Passport</b> ↗</div>
+  <div class="grid">
+    <div class="card" style="border-color:var(--coral)">
+      <h3>⚓ Before we sail: How do you feel?</h3>
+      <p>On the first day at a new school, I feel …</p>
+      <div id="feelings"></div>
+      <div class="feedback" id="feelFb"></div>
+    </div>
+    <div class="card">
+      <h3>🧭 Our route today</h3>
+      <ul>
+        <li><b>Lighthouse Isle</b> — the <span class="key">concept</span>: What is a friend?</li>
+        <li><b>Word Woods</b> — <span class="key">words</span> that describe a good friend</li>
+        <li><b>Twin Bridges</b> — <span class="key">grammar</span>: <i>like</i> vs <i>look like</i></li>
+        <li><b>Hello Harbour</b> — <span class="key">expressions</span> for making friends</li>
+        <li><b>Storm Cave</b> — <span class="key">problem-solving</span>: sorry &amp; advice</li>
+        <li><b>Treasure Peak</b> — <span class="key">wisdom</span>: proverbs &amp; your own writing</li>
+      </ul>
+      <p class="hint">Tip: click an island on the map, or press → to sail.</p>
+    </div>
+  </div>
+  <div class="teacher"><b>⏱ 3 min.</b> Hook: “Who will be in a new class next year? How does it feel?” Students tap a feeling chip (each one is read aloud). Point out the six islands = six skills. Introduce the passport: one stamp per island, earned by finishing the island challenge. Keys: ←/→ to move, T for these notes, click a picture to see it full screen.</div>
+</section>
+
+<!-- ============ 1 · LIGHTHOUSE ============ -->
+<section class="page" data-color="#e2725b">
+  <div class="page-head"><span class="tag" style="background:var(--coral)">Island 1 · Concept</span>
+    <h2>What Is a Friend?</h2><span class="zh">什么是朋友？</span></div>
+  <div class="stage" data-img="images/web/01-lighthouse.jpg"><img src="images/web/01-lighthouse.jpg" alt="Lighthouse Isle"></div>
+  <div class="story">The wise owl <b>Professor Hoot</b> keeps the lighthouse. “Look at my three rings of light, Pip.
+    The <b>closer</b> the ring, the <b>fewer</b> people it holds — and the more you <b>trust</b> them.”</div>
+  <div class="grid">
+    <div class="card" style="border-color:var(--coral)">
+      <h3>💡 The big idea</h3>
+      <p class="en" style="font-size:19px">A friend is someone you know well, like, and <span class="key">trust</span>.</p>
+      <ul>
+        <li><b style="color:var(--coral)">Best friends</b> — very close; you share secrets and help each other. 挚友</li>
+        <li><b style="color:var(--ochre)">Friends</b> — you enjoy spending time together. 朋友</li>
+        <li><b style="color:var(--teal)">Acquaintances</b> /əˈkweɪntənsɪz/ — people you know only a little. 熟人</li>
+      </ul>
+      <p class="hint">Friendships can move between the rings — an acquaintance today can be a best friend next year!</p>
+    </div>
+    <div class="card" style="border-color:var(--coral)">
+      <h3>🎯 Challenge: Which ring?</h3>
+      <p>Tap a person, then tap a ring.</p>
+      <div id="people"></div>
+      <div class="rings">
+        <div class="ring r1" data-ring="1"><h4>❤️ Best friends</h4></div>
+        <div class="ring r2" data-ring="2"><h4>😊 Friends</h4></div>
+        <div class="ring r3" data-ring="3"><h4>👋 Acquaintances</h4></div>
+      </div>
+      <div class="feedback" id="ringFb"></div>
+    </div>
+    <div class="card" style="border-color:var(--coral)">
+      <h3>🗣 Say it!</h3>
+      <p>Finish the sentence with a partner:</p>
+      <p class="en">“To me, a friend is someone who ______.”</p>
+      <p class="hint">e.g. … who <b>listens</b> to me / … who <b>helps</b> me when I'm in trouble / … who makes me <b>laugh</b>.</p>
+      <p>Notice: <b>someone who + verb<span class="key">-s</span></b> → someone who <b>helps</b>, who <b>listens</b>.</p>
+    </div>
+  </div>
+  <button class="claim" data-stamp="1">Collect the Lighthouse stamp 🏮</button>
+  <div class="teacher"><b>⏱ 5 min.</b> Elicit “friend vs classmate”. The sorting has suggested answers but accept reasons (“my desk mate could be a friend <i>if</i> …”). Push the language point: <i>someone who + verb-s</i> (3rd person singular), which comes back at Twin Bridges.</div>
+</section>
+
+<!-- ============ 2 · WORD WOODS ============ -->
+<section class="page" data-color="#3c7d5a">
+  <div class="page-head"><span class="tag" style="background:#3c7d5a">Island 2 · Words</span>
+    <h2>Word Woods</h2><span class="zh">好朋友的品质词</span></div>
+  <div class="stage" data-img="images/web/02-word-woods.jpg"><img src="images/web/02-word-woods.jpg" alt="Word Woods"></div>
+  <div class="story">In the woods Pip meets <b>Kiko</b> the fox. “Every tree here is named after a quality of a good friend,” says Kiko.
+    “And the giant tree in the middle? It shows how one word can grow into a whole <b>word family</b>.”</div>
+  <div class="grid">
+    <div class="card" style="border-color:var(--sage);grid-column:1/-1">
+      <h3>🌳 Ten trees, ten qualities <span class="hint">(tap a card to flip · 🔊 to listen)</span></h3>
+      <div class="flips" id="flips"></div>
+    </div>
+    <div class="card" style="border-color:var(--sage)">
+      <h3>🌱 The word-family tree</h3>
+      <div class="family">
+        <div class="node"><b>friend</b><small>n. 朋友</small></div><span class="arrow">→ +ly →</span>
+        <div class="node"><b>friendly</b><small>adj. 友好的</small></div><span class="arrow">→ un+ →</span>
+        <div class="node"><b>unfriendly</b><small>adj. 不友好的</small></div>
+      </div>
+      <div class="family" style="margin-top:8px">
+        <div class="node"><b>friend</b><small>n.</small></div><span class="arrow">→ +ship →</span>
+        <div class="node"><b>friendship</b><small>n. 友谊</small></div>
+      </div>
+      <ul>
+        <li><span class="key">-ship</span> turns a person into an idea: member → membership, leader → leadership.</li>
+        <li><span class="key">un-</span> means “not”: unkind, unhelpful, impolite (<i>im-</i> before <i>p</i>!), dishonest (<i>dis-</i>!).</li>
+        <li>⚠️ <b>friendly</b> is an <b>adjective</b>, not an adverb: <span class="right">She is friendly.</span> <span class="wrong">She talks friendly.</span></li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:var(--sage)">
+      <h3>🔍 Challenge: Who is it?</h3>
+      <div id="whoQuiz"></div>
+      <div class="feedback" id="whoFb"></div>
+    </div>
+  </div>
+  <button class="claim" data-stamp="2">Collect the Word Woods stamp 🌳</button>
+  <div class="teacher"><b>⏱ 7 min.</b> Choral-read 3–4 cards (🔊 uses the browser voice). Pairs flip the rest and test each other. Highlight prefixes: un-/im-/dis- — a classic Grade 7 test point. Quiz: students vote with fingers (A/B/C) before you click.</div>
+</section>
+
+<!-- ============ 3 · TWIN BRIDGES ============ -->
+<section class="page" data-color="#2a8a8a">
+  <div class="page-head"><span class="tag" style="background:var(--teal)">Island 3 · Grammar</span>
+    <h2>Twin Bridges</h2><span class="zh">What is she like? 还是 What does she look like?</span></div>
+  <div class="stage" data-img="images/web/03-twin-bridges.jpg"><img src="images/web/03-twin-bridges.jpg" alt="Twin Bridges"></div>
+  <div class="story">Two bridges cross the river. Kiko says: “Choose carefully, Pip! One bridge asks about a friend's <b>inside</b> (personality),
+    the other asks about the <b>outside</b> (appearance). Cross the wrong one and you'll answer the wrong question!”</div>
+  <div class="grid">
+    <div class="card" style="border-color:var(--teal);grid-column:1/-1">
+      <h3>🌉 The two bridges</h3>
+      <div class="bridges">
+        <div class="bridge like"><div class="q">What is she like?</div>
+          <p>= What kind of person is she? (性格 · inside)</p>
+          <p>➜ She <b>is</b> kind / funny / honest.</p>
+          <p>➜ She <b>is</b> always ready to help.</p></div>
+        <div class="bridge look"><div class="q">What does she look like?</div>
+          <p>= How does she look? (外貌 · outside)</p>
+          <p>➜ She <b>is</b> tall / short / slim.</p>
+          <p>➜ She <b>has</b> long hair. She <b>wears</b> glasses.</p></div>
+      </div>
+      <p style="margin-top:10px">🔑 Here <b>like</b> is a <b>preposition</b> meaning “similar to” (像), <b>not</b> the verb “喜欢”.
+        Compare: <i>What does she <b>like</b>?</i> = What things does she enjoy? → She likes music.</p>
+    </div>
+    <div class="card" style="border-color:var(--teal)">
+      <h3>🎯 Challenge: Which bridge?</h3>
+      <p class="hint">Read the answer. Which question was asked?</p>
+      <div id="bridgeQuiz"></div>
+      <div class="feedback" id="bridgeFb"></div>
+    </div>
+    <div class="card" style="border-color:var(--teal)">
+      <h3>🚧 Don't fall into the river!</h3>
+      <p><span class="wrong">What is she look like?</span> → <span class="right">What does she look like?</span></p>
+      <p><span class="wrong">She has kind.</span> → <span class="right">She is kind.</span> <span class="hint">(adjective → be)</span></p>
+      <p><span class="wrong">He have short hair.</span> → <span class="right">He has short hair.</span> <span class="hint">(he/she → has)</span></p>
+      <p><span class="wrong">What does he like? — He is funny.</span> → <span class="right">What is he like? — He is funny.</span></p>
+    </div>
+  </div>
+  <button class="claim" data-stamp="3">Collect the Twin Bridges stamp 🌉</button>
+  <div class="teacher"><b>⏱ 7 min.</b> Physical game option: left side of room = “like” bridge, right side = “look like” bridge; read an answer, students lean/point. Then describe a famous cartoon character with both questions. Watch for <i>be</i> + adjective vs <i>has</i> + noun.</div>
+</section>
+
+<!-- ============ 4 · HELLO HARBOUR ============ -->
+<section class="page" data-color="#d49a2a">
+  <div class="page-head"><span class="tag" style="background:var(--ochre)">Island 4 · Expressions</span>
+    <h2>Hello Harbour</h2><span class="zh">交朋友的常用表达</span></div>
+  <div class="stage" data-img="images/web/04-hello-harbour.jpg"><img src="images/web/04-hello-harbour.jpg" alt="Hello Harbour"></div>
+  <div class="story">At the busy market, every stall “sells” a useful phrase. Pip wants to talk to <b>Bea</b> the otter —
+    but which phrase comes first? Making a friend has <b>five steps</b>.</div>
+  <div class="grid">
+    <div class="card" style="border-color:var(--ochre)">
+      <h3>🪜 Five steps to a new friend</h3>
+      <ol>
+        <li><b>Greet</b> — Hi! / Hello! <span class="speak" data-say="Hi! Hello!">🔊</span></li>
+        <li><b>Introduce</b> — I'm Pip. Nice to meet you! <span class="speak" data-say="I'm Pip. Nice to meet you!">🔊</span></li>
+        <li><b>Ask</b> — What do you like doing? / Where are you from? <span class="speak" data-say="What do you like doing? Where are you from?">🔊</span></li>
+        <li><b>Find something in common</b> — Me too! / So do I! <span class="speak" data-say="Me too! So do I!">🔊</span></li>
+        <li><b>Invite</b> — Do you want to join us? / Let's … together! <span class="speak" data-say="Do you want to join us? Let's play together!">🔊</span></li>
+      </ol>
+    </div>
+    <div class="card" style="border-color:var(--ochre)">
+      <h3>🧺 Friendship phrases (collocations)</h3>
+      <ul>
+        <li><b>make friends with</b> sb. 和…交朋友</li>
+        <li><b>get along (well) with</b> sb. 与…相处(融洽)</li>
+        <li><b>have … in common</b> 有…共同点 — We have a lot in common.</li>
+        <li><b>share</b> sth. <b>with</b> sb. 与…分享</li>
+        <li><b>help each other</b> 互相帮助</li>
+        <li><b>keep in touch</b> 保持联系</li>
+      </ul>
+      <p class="hint">⚠️ make friend<b>s</b> with — always plural <b>friends</b>!</p>
+    </div>
+    <div class="card" style="border-color:var(--ochre)">
+      <h3>💬 Challenge: Help Pip talk to Bea</h3>
+      <div class="dlg" id="dlg"></div>
+      <div id="dlgChoices"></div>
+      <div class="feedback" id="dlgFb"></div>
+    </div>
+  </div>
+  <button class="claim" data-stamp="4">Collect the Harbour stamp ⚓</button>
+  <div class="teacher"><b>⏱ 6 min.</b> Build the dialogue together, then pairs role-play it with their own names and hobbies. Strong pairs: add a follow-up question (“How often do you…?”). Point at the stall signs in the picture as you go.</div>
+</section>
+
+<!-- ============ 5 · STORM CAVE ============ -->
+<section class="page" data-color="#5b6c8f">
+  <div class="page-head"><span class="tag" style="background:#5b6c8f">Island 5 · Problem-solving</span>
+    <h2>Storm Cave</h2><span class="zh">朋友闹矛盾怎么办？</span></div>
+  <div class="stage" data-img="images/web/05-storm-cave.jpg"><img src="images/web/05-storm-cave.jpg" alt="Storm Cave"></div>
+  <div class="story">Oh no! Pip borrowed Kiko's favourite book and <b>lost</b> it. Now Kiko is upset and a crack has opened in the cave.
+    Only four glowing stepping-stones can bring the friends back together: <b>Listen · Say sorry · Talk it out · Forgive</b>.</div>
+  <div class="grid">
+    <div class="card" style="border-color:#5b6c8f">
+      <h3>🙏 Saying sorry &amp; answering</h3>
+      <p><b>Say sorry:</b> I'm sorry I lost your book. / It was my fault. / I'll buy you a new one.</p>
+      <p><b>Answer:</b> That's OK. / Never mind. / Don't worry about it.</p>
+      <p class="hint">⚠️ “Never mind” answers <b>“Sorry”</b>. To answer <b>“Thank you”</b>, say “You're welcome.”</p>
+    </div>
+    <div class="card" style="border-color:#5b6c8f">
+      <h3>🩹 Giving advice</h3>
+      <p><span class="key">should + base verb</span> — You <b>should</b> say sorry. <span class="wrong">You should to say sorry.</span></p>
+      <p><span class="key">Why not + base verb?</span> — <b>Why not</b> talk to her?</p>
+      <p><span class="key">How about + verb-ing?</span> — <b>How about</b> writ<b>ing</b> him a card?</p>
+    </div>
+    <div class="card" style="border-color:#5b6c8f">
+      <h3>🎯 Challenge: The advice clinic</h3>
+      <div id="adviceQuiz"></div>
+      <div class="feedback" id="adviceFb"></div>
+    </div>
+  </div>
+  <button class="claim" data-stamp="5">Collect the Storm Cave stamp ⛈</button>
+  <div class="teacher"><b>⏱ 5 min.</b> Ask: “Has a friend ever been angry with you? What did you do?” (no names). The quiz checks both meaning and form: <i>should + V</i>, <i>Why not + V</i>, <i>How about + V-ing</i>.</div>
+</section>
+
+<!-- ============ 6 · TREASURE PEAK ============ -->
+<section class="page" data-color="#7b5aa6">
+  <div class="page-head"><span class="tag" style="background:var(--plum)">Island 6 · Wisdom</span>
+    <h2>Treasure Peak</h2><span class="zh">关于友谊的名言</span></div>
+  <div class="stage" data-img="images/web/06-treasure-peak.jpg"><img src="images/web/06-treasure-peak.jpg" alt="Treasure Peak"></div>
+  <div class="story">At the top, all of Pip's new friends are waiting: Professor Hoot, Kiko and Bea. The treasure isn't gold —
+    it's a scroll of <b>wisdom about friendship</b> that people around the world have shared for hundreds of years.</div>
+  <div class="grid">
+    <div class="card" style="border-color:var(--plum)">
+      <h3>📜 The scroll</h3>
+      <p class="en">“A friend in need is a friend indeed.” <span class="speak" data-say="A friend in need is a friend indeed.">🔊</span></p>
+      <p class="hint">A friend who helps you when you are in trouble is a true friend. 患难见真情</p>
+      <p class="en">“Birds of a feather flock together.” <span class="speak" data-say="Birds of a feather flock together.">🔊</span></p>
+      <p class="en">“Make new friends, but keep the old; one is silver and the other gold.” <span class="speak" data-say="Make new friends, but keep the old. One is silver and the other gold.">🔊</span></p>
+      <p class="en">海内存知己，天涯若比邻。<span class="hint">— 王勃</span></p>
+    </div>
+    <div class="card" style="border-color:var(--plum)">
+      <h3>🎯 Challenge: Match the wisdom</h3>
+      <div id="proverbQuiz"></div>
+      <div class="feedback" id="proverbFb"></div>
+    </div>
+  </div>
+  <button class="claim" data-stamp="6">Collect the Treasure Peak stamp 💎</button>
+  <div class="teacher"><b>⏱ 3 min.</b> Ask students to translate 海内存知己 into simple English (“Even if a good friend is far away, he/she feels close.”). Link “Make new friends, but keep the old” to moving up to Grade 7.</div>
+</section>
+
+<!-- ============ 7 · MY ISLAND ============ -->
+<section class="page" data-color="#1f3b57">
+  <div class="page-head"><span class="tag" style="background:var(--navy)">Your turn · Writing</span>
+    <h2>My Friendship Island</h2><span class="zh">用今天的钥匙，写写你的朋友</span></div>
+  <div class="stage" data-img="images/web/07-your-island.jpg"><img src="images/web/07-your-island.jpg" alt="My Friendship Island">
+    <div class="sign" id="s1" style="left:50%;top:23.6%"></div>
+    <div class="sign" id="s2" style="left:29.5%;top:35.8%"></div>
+    <div class="sign" id="s3" style="left:73.1%;top:37%"></div>
+    <div class="sign" id="s4" style="left:43.1%;top:58.4%"></div>
+    <div class="sign" id="s5" style="left:73.2%;top:61.6%"></div>
+  </div>
+  <div class="story">Pip has filled the whole passport. Now it's <b>your</b> island! Use all six keys to describe a friend —
+    and take the atlas home in your head.</div>
+  <div class="grid">
+    <div class="card writer">
+      <h3>✍️ Build your paragraph</h3>
+      <label>My friend's name</label><input id="w1" placeholder="Lily">
+      <label>What is he/she like? (two adjectives)</label><input id="w2" placeholder="kind and funny">
+      <label>What does he/she look like?</label><input id="w3" placeholder="has short hair and wears glasses">
+      <label>We have … in common: we both like …</label><input id="w4" placeholder="drawing">
+      <label>A time he/she helped you</label><input id="w5" placeholder="helped me with my maths homework">
+    </div>
+    <div class="card">
+      <h3>🏝 My friendship postcard</h3>
+      <div class="postcard" id="postcard"></div>
+      <div class="checks" style="margin-top:10px">
+        <label><input type="checkbox"> I used <b>is</b> + adjectives (personality)</label>
+        <label><input type="checkbox"> I used <b>has / wears</b> (appearance)</label>
+        <label><input type="checkbox"> I used a phrase: <i>have … in common / get along with</i></label>
+        <label><input type="checkbox"> I added <b>-s</b> for he/she verbs</label>
+      </div>
+    </div>
+    <div class="card" style="border-color:var(--ochre)">
+      <h3>🎒 Take home: the 6 keys</h3>
+      <ol>
+        <li><b>Concept</b> — best friends · friends · acquaintances</li>
+        <li><b>Words</b> — kind, honest, loyal… · friend → friendly → friendship</li>
+        <li><b>Grammar</b> — What is she <u>like</u>? vs What does she <u>look like</u>?</li>
+        <li><b>Expressions</b> — make friends with · get along with · have … in common</li>
+        <li><b>Problems</b> — I'm sorry… · You should… · How about …ing?</li>
+        <li><b>Wisdom</b> — A friend in need is a friend indeed.</li>
+      </ol>
+      <p><b>Exit ticket 3-2-1:</b> 3 quality words · 2 friendship phrases · 1 sentence about your friend.</p>
+      <button class="chip" onclick="window.print()">🖨 Print the atlas</button>
+    </div>
+  </div>
+  <div class="teacher"><b>⏱ 5 min.</b> Students type (or write on paper) — the postcard builds live; read one or two aloud. Close with the 3-2-1 exit ticket and the line “Make new friends, but keep the old.” Welcome to Grade 7!</div>
+</section>
+
+</main>
+
+<nav class="foot" id="dots"></nav>
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('on')"><img alt=""></div>
+<div class="toast" id="toast"></div>
 
 <script>
-/* ═══════════ navigation ═══════════ */
-var cur = 0, N = 8;
-var slides = document.querySelectorAll('.slide');
-var dotsBox = document.getElementById('dots');
-for (var i = 0; i < N; i++) {
-  var d = document.createElement('button');
-  d.className = 'dot'; d.setAttribute('aria-label', 'page ' + i);
-  d.onclick = (function(k){ return function(){ go(k); }; })(i);
-  dotsBox.appendChild(d);
+const pages=[...document.querySelectorAll('.page')];
+let cur=0;
+const stampIcons=['🏮','🌳','🌉','⚓','⛈','💎'];
+const got=new Set();
+
+/* ---------- navigation ---------- */
+const dots=document.getElementById('dots');
+pages.forEach((_,i)=>{const b=document.createElement('button');b.className='dot';b.onclick=()=>go(i);dots.appendChild(b)});
+function go(i){
+  if(i<0||i>=pages.length)return;
+  pages[cur].classList.remove('on');cur=i;pages[cur].classList.add('on');pages[cur].scrollTop=0;
+  [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===cur));
+  history.replaceState(null,'','#'+cur);
 }
-function go(n){
-  if (n < 0 || n >= N) return;
-  slides[cur].classList.remove('on');
-  cur = n;
-  slides[cur].classList.add('on');
-  document.querySelectorAll('.dot').forEach(function(d, k){ d.classList.toggle('on', k === cur); });
-  document.getElementById('pgno').textContent = (cur === 0 ? 'Cover' : 'Station ' + cur + ' / 7');
-  seeGems(cur);
-  var b = slides[cur].querySelector('.jbody'); if (b) b.scrollTop = 0;
-}
-function goTo(n){ go(n); }
-document.addEventListener('keydown', function(e){
-  if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
-  if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(cur + 1); }
-  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(cur - 1); }
-  if (e.key === 't' || e.key === 'T') toggleTeacher();
-  if (e.key === 'f' || e.key === 'F') toggleFS();
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowRight'||e.key==='PageDown')go(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='PageUp')go(cur-1);
+  if(e.key==='t'||e.key==='T')toggleTeacher();
+  if(e.key==='Escape')document.getElementById('lightbox').classList.remove('on');
 });
-function seeGems(slideIdx){
-  document.querySelectorAll('.gemslot').forEach(function(g){
-    var gm = +g.getAttribute('data-gem');
-    if (gm <= slideIdx) g.classList.add('seen');
+function toggleTeacher(){document.body.classList.toggle('tmode')}
+document.querySelectorAll('.stage').forEach(s=>s.addEventListener('click',()=>{
+  const lb=document.getElementById('lightbox');lb.querySelector('img').src=s.dataset.img;lb.classList.add('on')}));
+
+/* ---------- passport ---------- */
+const pp=document.getElementById('passport');
+stampIcons.forEach((ic,i)=>{const s=document.createElement('button');s.className='stamp';s.textContent=ic;
+  s.title='Island '+(i+1);s.onclick=()=>go(i+1);pp.appendChild(s)});
+function stamp(n){
+  if(got.has(n))return;got.add(n);
+  pp.querySelectorAll('.stamp')[n-1].classList.add('got');
+  const b=document.querySelector(`.claim[data-stamp="${n}"]`);if(b){b.disabled=true;b.textContent='Stamp collected ✓'}
+  toast(got.size===6?'🎉 All 6 stamps! You are a Friendship Explorer!':`Stamp ${got.size}/6 collected!`);
+}
+document.querySelectorAll('.claim').forEach(b=>b.onclick=()=>stamp(+b.dataset.stamp));
+function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('on');
+  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),2200)}
+
+/* ---------- speech ---------- */
+function say(t){if(!window.speechSynthesis)return;speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.9;speechSynthesis.speak(u)}
+document.addEventListener('click',e=>{const s=e.target.closest('[data-say]');if(s){e.stopPropagation();say(s.dataset.say)}});
+
+/* ---------- generic multiple-choice quiz ---------- */
+function quiz(boxId,fbId,items,stampNo){
+  const box=document.getElementById(boxId),fb=document.getElementById(fbId);let done=0;
+  items.forEach(it=>{
+    const d=document.createElement('div');d.className='qa';
+    d.innerHTML=`<div class="s">${it.q}</div>`;
+    const opts=document.createElement('div');
+    it.opts.forEach(o=>{const c=document.createElement('button');c.className='chip';c.textContent=o;
+      c.onclick=()=>{
+        if(d.dataset.done)return;
+        if(o===it.a){c.classList.add('ok');d.dataset.done=1;done++;fb.textContent='✓ '+(it.why||'Correct!');fb.style.color='#2f7d4a';
+          if(done===items.length){fb.textContent='🌟 All correct! '+(it.why||'');if(stampNo)stamp(stampNo)}}
+        else{c.classList.add('no');fb.textContent='✗ Try again — '+(it.tip||'think again!');fb.style.color='#b23a2a';
+          setTimeout(()=>c.classList.remove('no'),600)}
+      };opts.appendChild(c)});
+    d.appendChild(opts);box.appendChild(d);
   });
 }
-function toggleTeacher(){ document.body.classList.toggle('tnode-on'); document.getElementById('tbtn').classList.toggle('on'); }
-function toggleFS(){
-  if (!document.fullscreenElement) { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
-  else { document.exitFullscreen && document.exitFullscreen(); }
+
+/* 0 feelings */
+['excited','nervous','curious','shy','happy','a little worried'].forEach(f=>{
+  const c=document.createElement('button');c.className='chip';c.textContent=f;
+  c.onclick=()=>{document.querySelectorAll('#feelings .chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');
+    say('On the first day at a new school, I feel '+f+'.');
+    document.getElementById('feelFb').textContent=`“I feel ${f}.” — Pip feels ${f} too. Let's find some friends!`};
+  document.getElementById('feelings').appendChild(c)});
+
+/* 1 rings */
+const people=[
+  {t:'someone you share secrets with',r:1,why:'You trust them the most.'},
+  {t:'a teammate you play football with every week',r:2,why:'You enjoy time together.'},
+  {t:'the guard you say "hi" to at the school gate',r:3,why:'You know him only a little.'},
+  {t:'a pen pal who writes to you every week',r:2,why:'You know each other well — a pen pal can become a best friend!'},
+  {t:'a new classmate you met today',r:3,why:'Today an acquaintance — maybe a friend tomorrow!'},
+];
+let picked=null,placed=0;
+people.forEach((p,i)=>{const c=document.createElement('button');c.className='chip';c.textContent=p.t;c.dataset.i=i;
+  c.onclick=()=>{document.querySelectorAll('#people .chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');picked=c};
+  document.getElementById('people').appendChild(c)});
+document.querySelectorAll('.ring').forEach(r=>r.onclick=()=>{
+  if(!picked)return;const p=people[picked.dataset.i],fb=document.getElementById('ringFb');
+  if(+r.dataset.ring===p.r){picked.classList.remove('sel');picked.classList.add('ok');picked.onclick=null;r.appendChild(picked);
+    picked=null;placed++;fb.style.color='#2f7d4a';fb.textContent='✓ '+p.why;if(placed===people.length){fb.textContent='🌟 Great sorting! '+p.why;stamp(1)}}
+  else{fb.style.color='#b23a2a';fb.textContent='Hmm… how well do you know this person? How much do you trust them?'}});
+
+/* 2 words */
+const words=[
+ ['kind','/kaɪnd/','友善的','She is kind to everyone.'],
+ ['honest','/ˈɒnɪst/','诚实的','An honest friend tells you the truth.'],
+ ['helpful','/ˈhelpfl/','乐于助人的','He is helpful when I have problems.'],
+ ['friendly','/ˈfrendli/','友好的','The new students are very friendly.'],
+ ['generous','/ˈdʒenərəs/','慷慨的','She is generous — she shares her snacks.'],
+ ['patient','/ˈpeɪʃnt/','耐心的','He is patient and never gets angry.'],
+ ['loyal','/ˈlɔɪəl/','忠诚的','A loyal friend always stands by you.'],
+ ['funny','/ˈfʌni/','有趣的','My friend is funny. He makes me laugh.'],
+ ['caring','/ˈkeərɪŋ/','体贴的','She is caring. She looks after me when I\'m ill.'],
+ ['polite','/pəˈlaɪt/','有礼貌的','He is polite — he always says "please".'],
+];
+words.forEach(([w,ipa,zh,ex])=>{const f=document.createElement('div');f.className='flip';
+  f.innerHTML=`<div class="in"><div class="f"><div class="w">${w}</div><div class="ipa">${ipa} <span class="speak" data-say="${w}">🔊</span></div></div>
+  <div class="b"><div class="zh">${zh}</div><div>${ex}</div><span class="speak" data-say="${ex.replace(/"/g,'')}">🔊</span></div></div>`;
+  f.onclick=()=>f.classList.toggle('open');document.getElementById('flips').appendChild(f)});
+quiz('whoQuiz','whoFb',[
+ {q:'Mia always tells the truth, even when it is hard.',opts:['honest','funny','polite'],a:'honest',why:'Telling the truth = honest.'},
+ {q:'Tom shares his snacks and toys with everyone.',opts:['patient','generous','loyal'],a:'generous',why:'Sharing a lot = generous.'},
+ {q:'Amy waits for me and never gets angry when I am slow.',opts:['patient','helpful','friendly'],a:'patient',why:'Waiting calmly = patient.'},
+ {q:'Leo always stands by me, even when others don\'t.',opts:['kind','loyal','caring'],a:'loyal',why:'Standing by a friend = loyal.'},
+ {q:'Which word means “NOT friendly”?',opts:['disfriendly','unfriendly','imfriendly'],a:'unfriendly',why:'un- + friendly = unfriendly.'},
+],2);
+
+/* 3 bridges */
+const L='What is she like?',K='What does she look like?';
+quiz('bridgeQuiz','bridgeFb',[
+ {q:'“She is shy but very helpful.”',opts:[L,K],a:L,tip:'shy & helpful are about personality.'},
+ {q:'“She is short with curly hair.”',opts:[L,K],a:K,tip:'short & curly hair are about appearance.'},
+ {q:'“She is honest and patient.”',opts:[L,K],a:L,tip:'honest & patient describe the inside.'},
+ {q:'“She has big brown eyes and wears a red cap.”',opts:[L,K],a:K,tip:'eyes & cap are what you can see.'},
+],3);
+
+/* 4 dialogue */
+const script=[
+ {who:'Bea',say:'Hi! I\'m Bea. Are you new here?'},
+ {me:['Yes, I\'m Pip. Nice to meet you!','Yes, I\'m fine, thank you.'],a:0,tip:'Bea introduced herself — introduce yourself too.'},
+ {who:'Bea',say:'Nice to meet you too, Pip! What do you like doing?'},
+ {me:['I like reading and swimming.','I like to doing sports.'],a:0,tip:'like + doing / like + to do — not “to doing”.'},
+ {who:'Bea',say:'Really? I love swimming too!'},
+ {me:['Me too! We have a lot in common.','We have a lot of common.'],a:0,tip:'The phrase is “have … in common”.'},
+ {who:'Bea',say:'We\'re going to the beach this afternoon.'},
+ {me:['Can I join? I\'d love to make friends with you all.','Can I join? I\'d love to make friend with you all.'],a:0,tip:'make friends with — always plural!'},
+ {who:'Bea',say:'Of course! Let\'s be friends!'},
+];
+let step=0;
+function dlgNext(){
+  const box=document.getElementById('dlg'),ch=document.getElementById('dlgChoices'),fb=document.getElementById('dlgFb');ch.innerHTML='';
+  while(step<script.length&&script[step].who){const s=script[step++];
+    box.insertAdjacentHTML('beforeend',`<div class="line"><span class="who">🦦 ${s.who}</span><span class="bubble">${s.say}</span></div>`)}
+  if(step>=script.length){fb.style.color='#2f7d4a';fb.textContent='🌟 Pip made a new friend! Now role-play it with your partner.';stamp(4);return}
+  const s=script[step];
+  s.me.forEach((o,i)=>{const c=document.createElement('button');c.className='chip';c.textContent=o;
+    c.onclick=()=>{if(i===s.a){box.insertAdjacentHTML('beforeend',`<div class="line me"><span class="who">🐼 Pip</span><span class="bubble">${o}</span></div>`);
+      say(o);fb.textContent='';step++;dlgNext()}else{c.classList.add('no');fb.style.color='#b23a2a';fb.textContent='✗ '+s.tip}};
+    ch.appendChild(c)});
 }
-go(0);
+dlgNext();
 
-/* ═══════════ tabs ═══════════ */
-document.querySelectorAll('.journal').forEach(function(j){
-  j.querySelectorAll('.jtab').forEach(function(t){
-    t.onclick = function(){
-      j.querySelectorAll('.jtab').forEach(function(x){ x.classList.toggle('on', x === t); });
-      j.querySelectorAll('.tabpanel').forEach(function(p){
-        p.classList.toggle('on', p.getAttribute('data-p') === t.getAttribute('data-t'));
-      });
-    };
-  });
-});
+/* 5 advice */
+quiz('adviceQuiz','adviceFb',[
+ {q:'Kiko: “Pip lost my book and I\'m still angry.” — Best advice?',opts:['You should talk to Pip about it.','You should to ignore Pip.','How about shout at Pip?'],a:'You should talk to Pip about it.',why:'should + base verb, and talking it out helps.',tip:'look at meaning AND grammar.'},
+ {q:'Pip: “I want to say sorry but I\'m too shy.”',opts:['Why not writing a card?','How about writing a card?','You should writing a card.'],a:'How about writing a card?',why:'How about + verb-ing.',tip:'How about + V-ing; Why not / should + base verb.'},
+ {q:'Bea: “My best friend moved to another city.”',opts:['Why not keep in touch online?','Why not keeping in touch?','You should forgot her.'],a:'Why not keep in touch online?',why:'Why not + base verb.',tip:'Why not + base verb.'},
+],5);
 
-/* ═══════════ gem earning + fx ═══════════ */
-var gemNames = {1:'Gem of Hobbies 爱好之石', 2:'Gem of Qualities 品质之石', 3:'Gem of Questions 疑问之石',
-  4:'Moon Gem 外貌之石', 5:'Gem of Words 言语之石', 6:'Gem of True Friendship 真谊之石', 7:'The Heart of Friendship 友谊之心'};
-function earnGem(n){
-  var slot = document.querySelector('.gemslot[data-gem="' + n + '"]');
-  if (!slot || slot.classList.contains('earned')) return;
-  slot.classList.add('earned');
-  var r = slot.getBoundingClientRect();
-  burst(r.left + r.width/2, r.top + r.height/2);
-  toast('💎 <b>' + gemNames[n] + '</b> earned! 收入背包');
+/* 6 proverbs */
+quiz('proverbQuiz','proverbFb',[
+ {q:'“A friend in need is a friend indeed.”',opts:['True friends help you in hard times.','Friends always need money.'],a:'True friends help you in hard times.'},
+ {q:'“Birds of a feather flock together.”',opts:['Birds like to fly in groups.','People who are alike often become friends.'],a:'People who are alike often become friends.'},
+ {q:'“Make new friends, but keep the old.”',opts:['Old friends are as precious as new ones.','Forget your old friends at a new school.'],a:'Old friends are as precious as new ones.',why:'One is silver and the other gold!'},
+],6);
+
+/* 7 postcard */
+function render(){
+  const v=i=>document.getElementById('w'+i).value.trim()||document.getElementById('w'+i).placeholder;
+  const n=v(1);
+  document.getElementById('postcard').innerHTML=
+   `My friend <b>${n}</b> is <b>${v(2)}</b>. ${n} <b>${v(3)}</b>. We have a lot in common — we both like <b>${v(4)}</b>. `+
+   `${n} once <b>${v(5)}</b>. We get along well with each other. A friend in need is a friend indeed!`;
+  const signs=[n,v(2),v(3),'we both like '+v(4),v(5)];
+  signs.forEach((t,i)=>{document.getElementById('s'+(i+1)).textContent=t.length>22?t.slice(0,20).trim()+'…':t});
 }
-var toastTimer = null;
-function toast(html){
-  var t = document.getElementById('toast');
-  t.innerHTML = html; t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2600);
-}
-function burst(x, y){
-  var colors = ['#ffd98a','#e8933c','#e2668d','#4f86c6','#8f7bd6','#4da87a','#e05c5c'];
-  for (var i = 0; i < 26; i++){
-    var s = document.createElement('span');
-    s.className = 'spark';
-    var ang = Math.random() * Math.PI * 2, dist = 40 + Math.random() * 90;
-    s.style.left = x + 'px'; s.style.top = y + 'px';
-    s.style.background = colors[i % colors.length];
-    s.style.setProperty('--dx', Math.cos(ang) * dist + 'px');
-    s.style.setProperty('--dy', Math.sin(ang) * dist - 30 + 'px');
-    s.style.setProperty('--rot', (Math.random()*360) + 'deg');
-    document.body.appendChild(s);
-    setTimeout(function(el){ return function(){ el.remove(); }; }(s), 1100);
-  }
-}
+document.querySelectorAll('.writer input').forEach(i=>i.addEventListener('input',render));render();
 
-/* ═══════════ S1: hobby builder + spelling ═══════════ */
-var hMap = {'swim':'swimming','play basketball':'playing basketball','play football':'playing football',
-  'play ping-pong':'playing ping-pong','paint pictures':'painting pictures','read books':'reading books',
-  'ride a bicycle':'riding a bicycle','play the guitar':'playing the guitar','do crossword puzzles':'doing crossword puzzles'};
-var hPicks = [];
-document.querySelectorAll('#hobbyChips .chip').forEach(function(c){
-  c.onclick = function(){
-    var v = c.textContent.trim();
-    var at = hPicks.indexOf(v);
-    if (at >= 0) { hPicks.splice(at, 1); c.classList.remove('picked'); }
-    else {
-      if (hPicks.length >= 2) {
-        var old = hPicks.shift();
-        document.querySelectorAll('#hobbyChips .chip').forEach(function(o){ if (o.textContent.trim() === old) o.classList.remove('picked'); });
-      }
-      hPicks.push(v); c.classList.add('picked');
-    }
-    var line = document.getElementById('hobbyLine');
-    var b1 = function(i){ return hPicks[i] ? '<b style="color:#c96a10">' + hMap[hPicks[i]] + '</b>' : '<span class="blank">…</span>'; };
-    line.innerHTML = 'I like ' + b1(0) + ' and ' + b1(1) + '.';
-    if (hPicks.length === 2) line.innerHTML += ' <span style="font-size:14px;color:#5c6e4a">— We share the same hobbies! 🎉</span>';
-  };
-});
-(function(){
-  var okN = 0, fired = false;
-  document.querySelectorAll('#s1 .spell input').forEach(function(inp){
-    inp.addEventListener('keydown', function(e){ if (e.key === 'Enter') check(inp); });
-    inp.addEventListener('blur', function(){ if (inp.value.trim()) check(inp); });
-  });
-  function check(inp){
-    var res = inp.parentElement.querySelector('.res');
-    var v = inp.value.trim().toLowerCase();
-    if (!v) return;
-    if (v === inp.getAttribute('data-ans')) {
-      if (!inp.classList.contains('ok')) {
-        inp.classList.remove('no'); inp.classList.add('ok');
-        res.textContent = '✓'; res.style.color = '#2e7d4f'; okN++;
-        if (!fired && okN >= 3) { fired = true; earnGem(1); }
-      }
-    } else { inp.classList.remove('ok'); inp.classList.add('no'); res.textContent = '✗ 再想想拼写规则'; res.style.color = '#c0504d'; }
-  }
-})();
-
-/* ═══════════ S2: flashcards + quality builder ═══════════ */
-document.querySelectorAll('#flash2 .flash').forEach(function(f){
-  f.onclick = function(){ f.classList.toggle('flip'); };
-});
-var qPicks = [];
-document.querySelectorAll('#qualChips .chip').forEach(function(c){
-  c.onclick = function(){
-    var t = c.textContent.trim(), at = qPicks.indexOf(t);
-    if (at >= 0) { qPicks.splice(at, 1); c.classList.remove('picked'); }
-    else {
-      if (qPicks.length >= 3) {
-        var old = qPicks.shift();
-        document.querySelectorAll('#qualChips .chip').forEach(function(o){ if (o.textContent.trim() === old) o.classList.remove('picked'); });
-      }
-      qPicks.push(t); c.classList.add('picked');
-    }
-    var line = document.getElementById('qualLine');
-    var fill = function(i){ return qPicks[i] ? '<b style="color:#b04a74">' + qPicks[i] + '</b>' : '<span class="blank">…</span>'; };
-    line.innerHTML = 'My best friend is ' + fill(0) + ', ' + fill(1) + ' and ' + fill(2) + '.';
-    if (qPicks.length === 3) { line.innerHTML += ' 🌸'; earnGem(2); }
-  };
-});
-
-/* ═══════════ generic quiz engine ═══════════ */
-document.querySelectorAll('.q').forEach(function(q){
-  var opts = q.querySelectorAll('.opt');
-  if (!q.querySelector('.opt[data-ok]') && opts.length) opts[0].setAttribute('data-ok', '1');
-  opts.forEach(function(o){
-    o.onclick = function(){
-      if (q.classList.contains('done')) return;
-      if (o.getAttribute('data-ok') === '1') {
-        o.classList.add('right'); q.classList.add('done');
-        var m = document.createElement('span'); m.className = 'done-mark'; m.textContent = '✓';
-        q.querySelector('.qq').appendChild(m);
-        try { q.dispatchEvent(new Event('quizright')); } catch(e) {}
-      } else {
-        o.classList.add('wrong'); var w = o;
-        setTimeout(function(){ w.classList.remove('wrong'); }, 600);
-      }
-    };
-  });
-});
-
-/* S3: score + stones + gem */
-(function(){
-  var right = 0, total = document.querySelectorAll('#s3 .q').length, fired = false;
-  document.querySelectorAll('#s3 .q').forEach(function(q, idx){
-    q.addEventListener('quizright', function(){
-      right++;
-      var sc = document.getElementById('quiz3score');
-      if (sc) sc.textContent = right + ' / ' + total;
-      var st = document.querySelectorAll('#stones .stone')[idx];
-      if (st) st.classList.add('lit');
-      if (!fired && right >= total) {
-        fired = true;
-        var last = document.querySelectorAll('#stones .stone')[6];
-        if (last) last.classList.add('lit');
-        setTimeout(function(){ earnGem(3); }, 500);
-      }
-    });
-  });
-})();
-
-/* ═══════════ S4: look builder + order quiz + gem ═══════════ */
-var lookSel = {}, lookDone = false;
-function maybeGem4(){
-  var orderQ = document.getElementById('orderQ');
-  if (!lookDone && lookSel.h && lookSel.r && lookSel.e && orderQ && orderQ.classList.contains('done')) {
-    lookDone = true; earnGem(4);
-  }
-}
-document.querySelectorAll('#s4 .chips[data-group] .chip').forEach(function(c){
-  c.onclick = function(){
-    var grp = c.parentElement.getAttribute('data-group');
-    c.parentElement.querySelectorAll('.chip').forEach(function(o){ o.classList.remove('picked'); });
-    c.classList.add('picked'); lookSel[grp] = c.getAttribute('data-s');
-    var line = document.getElementById('lookLine');
-    line.innerHTML = 'My friend is <b style="color:#6a4fb0">' + (lookSel.h || '…') + '</b>. ' +
-      'He / She has <b style="color:#6a4fb0">' + (lookSel.r || '…') + '</b> and <b style="color:#6a4fb0">' + (lookSel.e || '…') + '</b>.' +
-      ' <span style="font-size:14px;color:#5c6e4a">His / Her smile is always bright. 🌙</span>';
-    maybeGem4();
-  };
-});
-(function(){
-  var oq = document.getElementById('orderQ');
-  if (!oq) return;
-  oq.querySelectorAll('.opt').forEach(function(o){
-    o.onclick = function(){
-      if (oq.classList.contains('done')) return;
-      if (o.getAttribute('data-order') === '1') {
-        o.classList.add('right'); oq.classList.add('done');
-        maybeGem4();
-      } else { o.classList.add('wrong'); var w = o; setTimeout(function(){ w.classList.remove('wrong'); }, 600); }
-    };
-  });
-})();
-
-/* ═══════════ S5: hunt + cloze + gem ═══════════ */
-(function(){
-  var total = document.querySelectorAll('#s5 .q').length, right = 0, fired = false;
-  document.querySelectorAll('#s5 .q').forEach(function(q){
-    q.addEventListener('quizright', function(){
-      right++;
-      if (!fired && right >= total) { fired = true; setTimeout(function(){ earnGem(5); }, 400); }
-    });
-  });
-})();
-
-/* ═══════════ S6: poem votes + gem ═══════════ */
-(function(){
-  var lines = 0, fired = false;
-  document.querySelectorAll('#s6 .vote').forEach(function(v){
-    v.onclick = function(){
-      var c = v.querySelector('.cnt');
-      c.textContent = +c.textContent + 1;
-      v.style.borderColor = '#4da87a';
-      var raw = v.getAttribute('data-line');
-      var parts = raw.split('|');
-      var en = parts[0] || '', zh = parts[1] || '';
-      var poem = document.getElementById('poem');
-      var em = poem.querySelector('.empty'); if (em) em.remove();
-      var div = document.createElement('div');
-      div.className = 'pl';
-      div.innerHTML = 'A true friend <em>' + en.replace('…','') + '</em> <span style="font-size:12px;color:#9a8256">' + zh + '</span>';
-      poem.appendChild(div);
-      lines++;
-      if (!fired && lines >= 2) { fired = true; setTimeout(function(){ earnGem(6); }, 400); }
-    };
-  });
-})();
-
-/* ═══════════ S7: post generator ═══════════ */
-function cap(s){ return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
-function buildPost(){
-  var name = (document.getElementById('gName').value || '').trim();
-  var pron = document.getElementById('gPron').value;
-  var obj = pron === 'She' ? 'her' : 'him';
-  var age = document.getElementById('gAge').value;
-  var qual = (document.getElementById('gQual').value || '').trim();
-  var hobby = document.getElementById('gHobby').value;
-  var together = document.getElementById('gTogether').value;
-  var out = document.getElementById('postOut');
-  if (!name || !qual) { out.textContent = '还差一点：请至少填「朋友的名字」和「三个品质」哦！(name + qualities, please!)'; return; }
-  var quals = qual.split(/[,，]/).map(function(s){ return s.trim(); }).filter(Boolean);
-  while (quals.length < 3) quals.push(quals[quals.length - 1] || 'kind');
-  var txt = cap(name) + ' is my best friend.';
-  if (age) txt += ' ' + pron + ' is ' + age + ' years old.';
-  txt += '\n' + pron + ' is very ' + quals[0] + ', ' + quals[1] + ' and ' + quals[2] + '. '
-       + pron + ' is good at ' + hobby + '.'
-       + '\nWe like ' + together + '. When I feel sad, ' + pron + ' is always there to cheer me up.'
-       + '\nWhen I am with ' + obj + ', I can truly be myself.'
-       + '\nIt is wonderful to have such a good friend!';
-  out.textContent = txt;
-  earnGem(7);
-}
-['gName','gPron','gAge','gQual','gHobby','gTogether'].forEach(function(id){
-  var el = document.getElementById(id);
-  if (!el) return;
-  el.addEventListener('input', function(){ buildPost(false); });
-  el.addEventListener('change', function(){ buildPost(false); });
-});
-var likes = 0, liked = false;
-function likePost(){
-  var b = document.getElementById('likeBtn');
-  liked = !liked; likes += liked ? 1 : -1;
-  b.classList.toggle('on', liked);
-  b.textContent = liked ? '♥ ' + (128 + likes) : '♥ Like';
-}
+go(+(location.hash.slice(1))||0);
 </script>
 </body>
 </html>
